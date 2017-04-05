@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Lab1</string>
+    <string name="action_about">About</string>
+    <string name="about_text">Lab 1, Fall 2016, Lars B Benedetto</string>
+    <string name="enter_name">Please enter your name</string>
+    <string name="hello">Hello</string>
+    <string name="must_enter_age">You must enter your age first</string>
+    <string name="invalid_age">Invalid age</string>
+    <string name="under_40">You\'re under 40, so you\'re trustworthy</string>
+    <string name="over_40">You\'re NOT under 40, so you\'re NOT trustworthy</string>
+    <string name="create_no_state">onCreate NO state</string>
+    <string name="create_with_state">onCreate WITH state</string>
+</resources>

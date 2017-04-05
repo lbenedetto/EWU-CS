@@ -1,0 +1,42 @@
+3
+10
+Al
+Cal
+Carl
+Chris
+Dan
+Dean
+Fay
+Dot
+Ed
+Elle
+Ann Art Ayn Bay Bo Bou Belle Bo Bob Brad
+Ayn Bob Ann Bou Art Belle Bo Bo Bay Brad
+Bob Art Ann Bou Bo Belle Bay Brad Ayn Bo
+Bay Belle Bou Brad Bob Art Bo Bo Ayn Ann
+Bo Bou Bo Ayn Belle Art Ann Bay Bob Brad
+Bo Ann Bou Brad Art Bay Ayn Bo Bob Belle
+Brad Art Bay Bo Ayn Ann Bou Bob Bo Belle
+Ann Art Bob Belle Bay Ayn Bo Bo Brad Bou
+Bob Ayn Bou Brad Bo Ann Belle Bay Bo Art
+Ann Belle Bo Brad Art Bo Bou Ayn Bay Bob
+Ann
+Bo
+Ayn
+Bou
+Art
+Belle
+Brad
+Bob
+Bay
+Bo
+Cal Dean Elle Fay Ed Al Chris Dan Carl Dot
+Cal Al Carl Dean Fay Chris Ed Dan Elle Dot
+Dean Cal Dan Fay Dot Carl Ed Al Chris Elle
+Dean Elle Carl Al Ed Dot Fay Chris Cal Dan
+Elle Dot Dean Chris Al Fay Carl Dan Ed Cal
+Cal Al Dan Ed Elle Chris Dean Fay Carl Dot
+Elle Fay Dot Dean Cal Al Carl Dan Chris Ed
+Fay Elle Cal Al Ed Chris Dot Dan Carl Dean
+Ed Carl Dot Fay Dean Cal Al Dan Elle Chris
+Dan Dot Fay Al Cal Elle Carl Ed Dean Chris

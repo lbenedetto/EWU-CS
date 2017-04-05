@@ -1,0 +1,1 @@
+File with other extension to test reading only java files

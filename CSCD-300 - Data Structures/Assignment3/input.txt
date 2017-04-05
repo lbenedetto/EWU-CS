@@ -1,0 +1,32 @@
+VALID
+A*(B*(C*D))
+(((A)))
+A+B*C
+A/B+C
+(A+B)-C
+(A)
+NOT VALID
+
+A*(B*C)*(D*E))
+A*(B*C)(D*E))
+(A(B))
+NOT
+GR8 B8 M8
+)(
+()
+*
++
+-+
+*/
+**
+A+
+A*
+A+B-C
+A*B/C
+(A-B-C)
+(A)-(B)-(C)
+(AB)
+AB
+AB*C
+(AB)(C)
+AB/C

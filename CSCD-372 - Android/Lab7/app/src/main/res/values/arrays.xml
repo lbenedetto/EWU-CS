@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mass_shapes">
+        <item>Rectangle</item>
+        <item>Rounded Rectangle</item>
+        <item>Circle</item>
+        <item>Picture</item>
+    </string-array>
+</resources>

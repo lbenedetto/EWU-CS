@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>actbs</OriginalElement>
+  <nodes>
+    <node x="1458.375" y="725.0">actbs.system.trip.Trip</node>
+    <node x="846.3750000000001" y="957.5">actbs.system.location.Seaport</node>
+    <node x="768.3827083333334" y="2335.0">actbs.CustomerUI</node>
+    <node x="2468.6952083333335" y="335.5">actbs.system.trip.sections.berths.Seat</node>
+    <node x="2803.5702083333335" y="358.0">actbs.system.trip.sections.berths.Cabin</node>
+    <node x="269.375" y="1636.0">actbs.managers.SystemManager</node>
+    <node x="706.1327083333334" y="2167.5">actbs.managers.SeaportSystemManager</node>
+    <node x="219.6327083333333" y="2167.0">actbs.managers.AirportSystemManager</node>
+    <node x="2641.5702083333335" y="602.5">actbs.system.trip.sections.CruiseSection</node>
+    <node x="2462.3246875" y="1367.5">actbs.system.trip.Cruise</node>
+    <node x="0.0" y="957.5">actbs.system.location.Airport</node>
+    <node x="1803.875" y="591.0">actbs.system.trip.ITrip</node>
+    <node x="2167.875" y="591.0">actbs.system.trip.sections.FlightSection</node>
+    <node x="2474.053854166667" y="11.0">actbs.system.trip.sections.berths.Berth</node>
+    <node x="721.9217708333334" y="591.0">actbs.system.location.Location</node>
+    <node x="0.0" y="2453.0">actbs.Reader</node>
+    <node x="2017.7577083333333" y="236.0">actbs.system.trip.sections.TripSection</node>
+    <node x="237.8827083333333" y="2335.0">actbs.AdminUI</node>
+    <node x="1171.7916666666667" y="1291.0">actbs.system.company.Company</node>
+    <node x="1771.288125" y="1379.0">actbs.system.trip.Flight</node>
+    <node x="480.10000000000014" y="1324.0">actbs.system.AMSParser</node>
+    <node x="150.875" y="1402.0">actbs.managers.IManager</node>
+    <node x="1001.3750000000001" y="935.0">actbs.system.company.ICompany</node>
+    <node x="2068.1327083333335" y="0.0">actbs.system.trip.sections.SectionType</node>
+    <node x="1500.1631250000003" y="1767.5">actbs.system.company.Airline</node>
+    <node x="2352.1996875" y="1712.5">actbs.system.company.Cruiseline</node>
+    <node x="1884.1327083333333" y="1.5">actbs.system.trip.sections.berths.BerthClass</node>
+    <node x="2528.491354166667" y="901.5">actbs.system.vehicle.Ship</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="actbs.system.vehicle.Ship" target="actbs.system.trip.sections.TripSection">
+      <point x="-54.5" y="-81.5" />
+      <point x="2582.991354166667" y="705.0" />
+      <point x="2533.842916666667" y="705.0" />
+      <point x="2533.842916666667" y="561.0" />
+      <point x="2238.3827083333335" y="561.0" />
+      <point x="44.125" y="147.5" />
+    </edge>
+    <edge source="actbs.system.company.Company" target="actbs.system.trip.Trip">
+      <point x="106.0" y="-147.5" />
+      <point x="1489.7916666666667" y="1271.0" />
+      <point x="1547.7083333333335" y="1271.0" />
+      <point x="-178.66666666666674" y="258.0" />
+    </edge>
+    <edge source="actbs.system.company.Cruiseline" target="actbs.system.company.Company">
+      <point x="-200.625" y="-159.0" />
+      <point x="2419.0746875" y="1606.0" />
+      <point x="1525.125" y="1606.0" />
+      <point x="141.33333333333326" y="147.5" />
+    </edge>
+    <edge source="actbs.system.company.Company" target="actbs.system.company.ICompany">
+      <point x="-106.0" y="-147.5" />
+      <point x="1277.7916666666667" y="1271.0" />
+      <point x="1219.875" y="1271.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="actbs.system.company.Airline" target="actbs.system.trip.Flight">
+      <point x="112.5" y="-104.0" />
+      <point x="1837.663125" y="1616.0" />
+      <point x="1976.788125" y="1616.0" />
+      <point x="0.0" y="59.5" />
+    </edge>
+    <edge source="actbs.system.trip.sections.FlightSection" target="actbs.system.trip.sections.berths.Seat">
+      <point x="79.75" y="-37.0" />
+      <point x="2407.125" y="571.0" />
+      <point x="2597.6952083333335" y="571.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="actbs.managers.AirportSystemManager" target="actbs.system.company.Airline">
+      <point x="92.25" y="-59.0" />
+      <point x="434.8827083333333" y="2137.0" />
+      <point x="1725.1631250000003" y="2137.0" />
+      <point x="0.0" y="104.0" />
+    </edge>
+    <edge source="actbs.system.company.Cruiseline" target="actbs.system.vehicle.Ship">
+      <point x="200.625" y="-159.0" />
+      <point x="2820.3246875" y="1606.0" />
+      <point x="2664.8246875" y="1606.0" />
+      <point x="2664.8246875" y="1271.0" />
+      <point x="2719.241354166667" y="1271.0" />
+      <point x="81.75" y="81.5" />
+    </edge>
+    <edge source="actbs.system.trip.Trip" target="actbs.system.trip.ITrip">
+      <point x="201.0" y="-258.0" />
+      <point x="1927.375" y="705.0" />
+      <point x="1975.875" y="705.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="actbs.system.trip.Flight" target="actbs.system.trip.sections.FlightSection">
+      <point x="102.75" y="-59.5" />
+      <point x="2079.538125" y="1271.0" />
+      <point x="2327.375" y="1271.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="actbs.managers.SeaportSystemManager" target="actbs.managers.IManager">
+      <point x="-96.0" y="-58.5" />
+      <point x="738.1327083333334" y="2127.0" />
+      <point x="258.875" y="2127.0" />
+      <point x="0.0" y="36.5" />
+    </edge>
+    <edge source="actbs.system.trip.Cruise" target="actbs.system.vehicle.Ship">
+      <point x="0.0" y="-71.0" />
+      <point x="2552.8246875" y="1271.0" />
+      <point x="2555.741354166667" y="1271.0" />
+      <point x="-81.75" y="81.5" />
+    </edge>
+    <edge source="actbs.system.company.Cruiseline" target="actbs.system.trip.Cruise">
+      <point x="-66.875" y="-159.0" />
+      <point x="0.0" y="71.0" />
+    </edge>
+    <edge source="actbs.managers.SeaportSystemManager" target="actbs.system.location.Seaport">
+      <point x="32.0" y="-58.5" />
+      <point x="866.1327083333334" y="2127.0" />
+      <point x="913.8750000000001" y="2127.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="actbs.managers.AirportSystemManager" target="actbs.system.location.Airport">
+      <point x="-92.25" y="-59.0" />
+      <point x="250.3827083333333" y="2147.0" />
+      <point x="66.0" y="2147.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="actbs.system.trip.Trip" target="actbs.system.trip.sections.TripSection">
+      <point x="67.0" y="-258.0" />
+      <point x="1793.375" y="571.0" />
+      <point x="2061.8827083333335" y="571.0" />
+      <point x="-132.375" y="147.5" />
+    </edge>
+    <edge source="actbs.system.trip.sections.berths.Cabin" target="actbs.system.trip.sections.berths.Berth">
+      <point x="0.0" y="-25.5" />
+      <point x="2868.0702083333335" y="216.0" />
+      <point x="2647.303854166667" y="216.0" />
+      <point x="74.25" y="82.0" />
+    </edge>
+    <edge source="actbs.system.trip.sections.CruiseSection" target="actbs.system.trip.sections.TripSection">
+      <point x="-75.5" y="-25.5" />
+      <point x="2717.0702083333335" y="551.0" />
+      <point x="2326.6327083333335" y="551.0" />
+      <point x="132.375" y="147.5" />
+    </edge>
+    <edge source="actbs.managers.AirportSystemManager" target="actbs.managers.SystemManager">
+      <point x="30.75" y="-59.0" />
+      <point x="373.3827083333333" y="2147.0" />
+      <point x="427.875" y="2147.0" />
+      <point x="-158.5" y="235.5" />
+    </edge>
+    <edge source="actbs.AdminUI" target="actbs.managers.AirportSystemManager">
+      <point x="-43.25" y="-36.5" />
+      <point x="-61.5" y="59.0" />
+    </edge>
+    <edge source="actbs.CustomerUI" target="actbs.managers.SeaportSystemManager">
+      <point x="43.25" y="-36.5" />
+      <point x="64.0" y="58.5" />
+    </edge>
+    <edge source="actbs.system.location.Airport" target="actbs.system.location.Location">
+      <point x="0.0" y="-25.5" />
+      <point x="66.0" y="695.0" />
+      <point x="738.0217708333334" y="695.0" />
+      <point x="-64.39999999999998" y="37.0" />
+    </edge>
+    <edge source="actbs.system.trip.Cruise" target="actbs.system.trip.Trip">
+      <point x="-60.333333333333485" y="-71.0" />
+      <point x="2492.4913541666665" y="1261.0" />
+      <point x="1905.0416666666665" y="1261.0" />
+      <point x="178.66666666666652" y="258.0" />
+    </edge>
+    <edge source="actbs.system.vehicle.Ship" target="actbs.system.trip.Cruise">
+      <point x="-27.25" y="81.5" />
+      <point x="2610.241354166667" y="1271.0" />
+      <point x="2613.1580208333335" y="1271.0" />
+      <point x="60.333333333333485" y="-71.0" />
+    </edge>
+    <edge source="actbs.system.trip.sections.FlightSection" target="actbs.system.trip.sections.TripSection">
+      <point x="-79.75" y="-37.0" />
+      <point x="2247.625" y="571.0" />
+      <point x="2150.1327083333335" y="571.0" />
+      <point x="-44.125" y="147.5" />
+    </edge>
+    <edge source="actbs.managers.SystemManager" target="actbs.system.location.Location">
+      <point x="-126.79999999999995" y="-235.5" />
+      <point x="459.57500000000005" y="1616.0" />
+      <point x="463.7577083333333" y="1616.0" />
+      <point x="463.7577083333333" y="705.0" />
+      <point x="770.2217708333334" y="705.0" />
+      <point x="-32.200000000000045" y="37.0" />
+    </edge>
+    <edge source="actbs.managers.AirportSystemManager" target="actbs.managers.IManager">
+      <point x="-30.75" y="-59.0" />
+      <point x="311.8827083333333" y="2137.0" />
+      <point x="136.42177083333354" y="2137.0" />
+      <point x="136.42177083333354" y="1616.0" />
+      <point x="186.875" y="1616.0" />
+      <point x="-72.0" y="36.5" />
+    </edge>
+    <edge source="actbs.system.company.Airline" target="actbs.system.company.Company">
+      <point x="-112.5" y="-104.0" />
+      <point x="1612.6631250000003" y="1616.0" />
+      <point x="1383.7916666666667" y="1616.0" />
+      <point x="0.0" y="147.5" />
+    </edge>
+    <edge source="actbs.managers.SeaportSystemManager" target="actbs.managers.SystemManager">
+      <point x="-32.0" y="-58.5" />
+      <point x="802.1327083333334" y="2127.0" />
+      <point x="744.875" y="2127.0" />
+      <point x="158.5" y="235.5" />
+    </edge>
+    <edge source="actbs.system.trip.Trip" target="actbs.system.location.Location">
+      <point x="-67.0" y="-258.0" />
+      <point x="1659.375" y="685.0" />
+      <point x="866.8217708333334" y="685.0" />
+      <point x="64.39999999999998" y="37.0" />
+    </edge>
+    <edge source="actbs.system.vehicle.Ship" target="actbs.system.trip.sections.CruiseSection">
+      <point x="54.5" y="-81.5" />
+      <point x="2691.991354166667" y="705.0" />
+      <point x="2792.5702083333335" y="705.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="actbs.system.location.Seaport" target="actbs.system.location.Location">
+      <point x="0.0" y="-25.5" />
+      <point x="913.8750000000001" y="705.0" />
+      <point x="802.4217708333334" y="705.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="actbs.system.trip.sections.berths.Seat" target="actbs.system.trip.sections.berths.Berth">
+      <point x="0.0" y="-48.0" />
+      <point x="24.75" y="82.0" />
+    </edge>
+    <edge source="actbs.system.AMSParser" target="actbs.managers.SystemManager">
+      <point x="96.25" y="114.5" />
+      <point x="768.8500000000001" y="1616.0" />
+      <point x="713.175" y="1616.0" />
+      <point x="126.79999999999995" y="-235.5" />
+    </edge>
+    <edge source="actbs.system.trip.Flight" target="actbs.system.trip.Trip">
+      <point x="-102.75" y="-59.5" />
+      <point x="1874.038125" y="1271.0" />
+      <point x="1726.375" y="1271.0" />
+      <point x="0.0" y="258.0" />
+    </edge>
+    <edge source="actbs.system.trip.sections.CruiseSection" target="actbs.system.trip.sections.berths.Cabin">
+      <point x="75.5" y="-25.5" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="actbs.managers.SeaportSystemManager" target="actbs.system.company.Cruiseline">
+      <point x="96.0" y="-58.5" />
+      <point x="930.1327083333334" y="2147.0" />
+      <point x="2619.6996875" y="2147.0" />
+      <point x="0.0" y="159.0" />
+    </edge>
+    <edge source="actbs.managers.SystemManager" target="actbs.system.AMSParser">
+      <point x="0.0" y="-235.5" />
+      <point x="586.375" y="1616.0" />
+      <point x="576.3500000000001" y="1616.0" />
+      <point x="-96.25" y="114.5" />
+    </edge>
+    <edge source="actbs.managers.SystemManager" target="actbs.managers.IManager">
+      <point x="-253.60000000000002" y="-235.5" />
+      <point x="332.7750000000001" y="1616.0" />
+      <point x="330.875" y="1616.0" />
+      <point x="72.0" y="36.5" />
+    </edge>
+    <edge source="actbs.system.trip.sections.TripSection" target="actbs.system.trip.sections.berths.BerthClass">
+      <point x="-132.375" y="-147.5" />
+      <point x="2061.8827083333335" y="216.0" />
+      <point x="1966.1327083333333" y="216.0" />
+      <point x="0.0" y="91.5" />
+    </edge>
+    <edge source="actbs.CustomerUI" target="actbs.managers.AirportSystemManager">
+      <point x="-43.25" y="-36.5" />
+      <point x="811.6327083333334" y="2305.0" />
+      <point x="404.1327083333333" y="2305.0" />
+      <point x="61.5" y="59.0" />
+    </edge>
+    <edge source="actbs.AdminUI" target="actbs.managers.SeaportSystemManager">
+      <point x="43.25" y="-36.5" />
+      <point x="367.6327083333333" y="2315.0" />
+      <point x="770.1327083333334" y="2315.0" />
+      <point x="-64.0" y="58.5" />
+    </edge>
+    <edge source="actbs.managers.SystemManager" target="actbs.system.company.Company">
+      <point x="253.60000000000002" y="-235.5" />
+      <point x="839.975" y="1616.0" />
+      <point x="1242.4583333333335" y="1616.0" />
+      <point x="-141.33333333333326" y="147.5" />
+    </edge>
+    <edge source="actbs.system.trip.sections.TripSection" target="actbs.system.trip.sections.SectionType">
+      <point x="-44.125" y="-147.5" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="actbs.system.trip.sections.TripSection" target="actbs.system.trip.sections.berths.Berth">
+      <point x="132.375" y="-147.5" />
+      <point x="2326.6327083333335" y="216.0" />
+      <point x="2548.303854166667" y="216.0" />
+      <point x="-24.75" y="82.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6087869085734614" x="1032.6610662488492" y="1681.6966404588195" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

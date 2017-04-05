@@ -1,0 +1,26 @@
+Contents of the list:
+Simmons
+Hamel
+Clark
+Rolfe
+Bickerstaff
+Inoue
+Steele
+Schimpf
+Imamura
+Putnam
+Taylor
+Capaul
+Steiner
+Lemelin
+Pickett
+Peters
+Kamp
+Call with negative index:
+-1 is invalid for a size 17 list
+Returned null reference.
+Call with too large an index.
+17 is invalid for a size 17 list
+Returned null reference.
+
+Finished with Driver1

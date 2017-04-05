@@ -1,0 +1,217 @@
+Airport System Management
+1. Load airport system from file.
+2. Save airport system to file.
+3. Display details of the airport system.
+4. Display detailed report of current state of airport system.
+5. Create airport.
+6. Create airline.
+7. Create flight.
+8. Create flight section.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+9. Load seaport system from file.
+10. Save airport system to file.
+11. Display details of the seaport system.
+12. Display detailed report of current state of seaport system.
+13. Create seaport.
+14. Create cruiseline.
+15. Create cruise.
+16. Create cruise section.
+17. Create ship.
+18. Exit.
+
+Enter choice: 1
+Enter filename: airport.ams
+Airport System Management
+1. Load airport system from file.
+2. Save airport system to file.
+3. Display details of the airport system.
+4. Display detailed report of current state of airport system.
+5. Create airport.
+6. Create airline.
+7. Create flight.
+8. Create flight section.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+9. Load seaport system from file.
+10. Save airport system to file.
+11. Display details of the seaport system.
+12. Display detailed report of current state of seaport system.
+13. Create seaport.
+14. Create cruiseline.
+15. Create cruise.
+16. Create cruise section.
+17. Create ship.
+18. Exit.
+
+Enter choice: 9
+Enter filename: seaport.ams
+Airport System Management
+1. Load airport system from file.
+2. Save airport system to file.
+3. Display details of the airport system.
+4. Display detailed report of current state of airport system.
+5. Create airport.
+6. Create airline.
+7. Create flight.
+8. Create flight section.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+9. Load seaport system from file.
+10. Save airport system to file.
+11. Display details of the seaport system.
+12. Display detailed report of current state of seaport system.
+13. Create seaport.
+14. Create cruiseline.
+15. Create cruise.
+16. Create cruise section.
+17. Create ship.
+18. Exit.
+
+Enter choice: 3
+[LAX,NYC,DEN,SEA]{AMER[AA1|2011,10,8,16,30|2011,10,8,22,30|DEN|LAX[E:200:S:4,F:500:S:2],AA2|2011,8,9,7,30|2011,8,9,13,30|LAX|DEN[E:200:S:5,F:500:S:3]],USAIR[],FRONT[],UNTD[UA12|2011,8,9,7,30|2011,8,9,11,30|SEA|DEN[B:700:S:5,F:1200:S:2],UA21|2011,11,8,12,30|2011,11,8,18,30|NYC|SEA[E:300:S:6,F:800:S:3]]}
+Airport System Management
+1. Load airport system from file.
+2. Save airport system to file.
+3. Display details of the airport system.
+4. Display detailed report of current state of airport system.
+5. Create airport.
+6. Create airline.
+7. Create flight.
+8. Create flight section.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+9. Load seaport system from file.
+10. Save airport system to file.
+11. Display details of the seaport system.
+12. Display detailed report of current state of seaport system.
+13. Create seaport.
+14. Create cruiseline.
+15. Create cruise.
+16. Create cruise section.
+17. Create ship.
+18. Exit.
+
+Enter choice: 11
+[LOS,SAN,LAH,HAL,JUN,HON,HIL]{PRINC(SS1[FA:550:W:12,DF:650:M:6,C:650:M:6,DC:1050:S:3])[CC3|2016,10,9,17,45|2016,10,10,17,45|LOS|JUN,SAN|SS1,BB3|2016,9,10,8,45|2016,9,11,8,45|JUN|LOS,SAN|SS1],NORW()[],CARN()[],ZARN()[],ROYAL(SS2[FA:500:W:12,DF:600:M:6,C:600:M:6,DC:1000:S:3])[BB2|2016,10,9,17,45|2016,10,10,17,45|HON|HIL,LAH|SS2,BB3|2016,9,10,8,45|2016,9,11,8,45|JUN|LOS,SAN|SS2]}
+Airport System Management
+1. Load airport system from file.
+2. Save airport system to file.
+3. Display details of the airport system.
+4. Display detailed report of current state of airport system.
+5. Create airport.
+6. Create airline.
+7. Create flight.
+8. Create flight section.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+9. Load seaport system from file.
+10. Save airport system to file.
+11. Display details of the seaport system.
+12. Display detailed report of current state of seaport system.
+13. Create seaport.
+14. Create cruiseline.
+15. Create cruise.
+16. Create cruise section.
+17. Create ship.
+18. Exit.
+
+Enter choice: 5
+Enter airport: LOL
+Airport System Management
+1. Load airport system from file.
+2. Save airport system to file.
+3. Display details of the airport system.
+4. Display detailed report of current state of airport system.
+5. Create airport.
+6. Create airline.
+7. Create flight.
+8. Create flight section.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+9. Load seaport system from file.
+10. Save airport system to file.
+11. Display details of the seaport system.
+12. Display detailed report of current state of seaport system.
+13. Create seaport.
+14. Create cruiseline.
+15. Create cruise.
+16. Create cruise section.
+17. Create ship.
+18. Exit.
+
+Enter choice: 13
+Enter seaport name: PLS
+Airport System Management
+1. Load airport system from file.
+2. Save airport system to file.
+3. Display details of the airport system.
+4. Display detailed report of current state of airport system.
+5. Create airport.
+6. Create airline.
+7. Create flight.
+8. Create flight section.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+9. Load seaport system from file.
+10. Save airport system to file.
+11. Display details of the seaport system.
+12. Display detailed report of current state of seaport system.
+13. Create seaport.
+14. Create cruiseline.
+15. Create cruise.
+16. Create cruise section.
+17. Create ship.
+18. Exit.
+
+Enter choice: 2
+Enter filename: airport2.ams
+Airport System Management
+1. Load airport system from file.
+2. Save airport system to file.
+3. Display details of the airport system.
+4. Display detailed report of current state of airport system.
+5. Create airport.
+6. Create airline.
+7. Create flight.
+8. Create flight section.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+9. Load seaport system from file.
+10. Save airport system to file.
+11. Display details of the seaport system.
+12. Display detailed report of current state of seaport system.
+13. Create seaport.
+14. Create cruiseline.
+15. Create cruise.
+16. Create cruise section.
+17. Create ship.
+18. Exit.
+
+Enter choice: 10
+Enter filename: seaport2.ams
+Airport System Management
+1. Load airport system from file.
+2. Save airport system to file.
+3. Display details of the airport system.
+4. Display detailed report of current state of airport system.
+5. Create airport.
+6. Create airline.
+7. Create flight.
+8. Create flight section.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+9. Load seaport system from file.
+10. Save airport system to file.
+11. Display details of the seaport system.
+12. Display detailed report of current state of seaport system.
+13. Create seaport.
+14. Create cruiseline.
+15. Create cruise.
+16. Create cruise section.
+17. Create ship.
+18. Exit.
+
+Enter choice: 18
+
+Process finished with exit code 0

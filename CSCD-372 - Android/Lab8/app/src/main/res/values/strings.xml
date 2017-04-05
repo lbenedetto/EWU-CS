@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lab8</string>
+    <string name="action_about">About</string>
+    <string name="vertical_bar">Vertical Bar</string>
+    <string name="horizontal_bar">Horizontal Bar</string>
+    <string name="background">Background</string>
+    <string name="reset">Reset</string>
+    <string name="letter">Letter</string>
+</resources>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Lab2</string>
+    <string name="action_about">About</string>
+    <string name="drawer_open">Select a Page</string>
+    <string name="drawer_closed">Lab2 Main Page</string>
+
+    <string-array name="photo_names">
+        <item>Cindy</item>
+        <item>Fred</item>
+        <item>Kate</item>
+        <item>Keith</item>
+        <item>Logo</item>
+        <item>Matt</item>
+        <item>Rickey</item>
+    </string-array>
+
+    <integer-array name="photo_ids">
+        <item>@drawable/cindy</item>
+        <item>@drawable/fred</item>
+        <item>@drawable/kate</item>
+        <item>@drawable/keith</item>
+        <item>@drawable/logo</item>
+        <item>@drawable/matt</item>
+        <item>@drawable/rickey</item>
+    </integer-array>
+</resources>

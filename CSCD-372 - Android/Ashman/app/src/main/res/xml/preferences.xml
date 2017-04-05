@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+    <com.benedetto.lars.ashman.NumberPickerPreference
+        android:defaultValue="2"
+        android:key="startGhosts"
+        android:summary="2 Ghosts on Level 1"
+        android:title="Level 1 Ghosts"
+        custom:max="4"
+        custom:min="1"
+        custom:wrap="false" />
+    <com.benedetto.lars.ashman.NumberPickerPreference
+        android:defaultValue="2"
+        android:key="ghostsPerLevel"
+        android:summary="Add 2 Ghosts at each level"
+        android:title="Ghosts Added per Level"
+        custom:max="4"
+        custom:min="0"
+        custom:wrap="false" />
+</PreferenceScreen>

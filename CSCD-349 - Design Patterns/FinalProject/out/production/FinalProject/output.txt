@@ -1,0 +1,15 @@
+Could not create airport with name DEN. Airport with that name already exists.
+Could not create airport with name DENW. Airport name must be 3 characters.
+Could not create airline with name FRONTIER. Airline name must be less than 6 characters.
+Could not create airline with name FRONT. Airline already exists.
+Could not create flight. Airline "DEL" does not exist.
+Could not create flight. Airport "LON33" does not exist.
+Could not create flight. Date was invalid
+Could not create flight. Date was invalid
+Could not create flight section. Section of that type already exists on flight
+Could not create section in non-existent airline
+Could not book seat in non-existent airline
+Cannot book seat on non-existent flight
+Could not book seat. Seat is already booked
+[DFW, LON, DEN]{DELTA[123|2013, 9, 10, 0, 0|DEN|LON[E:500:2:2, F:500:2:3], 567abc|2013, 7, 8, 0, 0|DEN|DFW[]], AMER[], FRONT[]}
+123|2013, 9, 10, 0, 0|DEN|LON[E:500:2:2, F:500:2:3]

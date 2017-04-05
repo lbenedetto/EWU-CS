@@ -1,0 +1,35 @@
+Initial list
+Simmons
+Hamel
+Clark
+Rolfe
+Bickerstaff
+Inoue
+Steele
+Schimpf
+
+Testing remove middle
+Success in position 4 (Bickerstaff)
+Success in position 3 (Rolfe)
+
+Remove from the front.
+Success in position 0 (Simmons)
+
+Remove from the back.
+Success in position 4 (Schimpf)
+
+Remaining list of size 4:
+Hamel
+Clark
+Inoue
+Steele
+
+Looking for Love in one of the wrong places
+
+Final state of size 4:
+Hamel
+Clark
+Inoue
+Steele
+
+Finished with Driver4

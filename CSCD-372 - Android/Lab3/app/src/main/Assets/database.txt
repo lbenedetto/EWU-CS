@@ -1,0 +1,6 @@
+Buick,GTX,Gran Sport
+Chevrolet,Camaro,Chevelle,Corvette,El Camino,Impala,Nova
+Dodge,Challenger,Charger,Dart,Super Bee,Viper
+Ford,Galaxy,GT,Mercury Cougar,Mustang,Thunderbird
+Plymouth,Barracuda,Duster,GTX,Road Runner
+Pontiac,GTO,Olds 442

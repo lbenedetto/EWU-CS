@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <EditTextPreference
+        android:defaultValue="1.5"
+        android:key="stiffness"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="1.5"
+        android:title="Spring Stiffness (.5 - 10 N/m)" />
+    <com.benedetto.lars.lab7.NumberPickerPreference
+        android:defaultValue="11"
+        android:key="coils"
+        android:summary="11"
+        android:title="Number of Coils (8-14)"
+        custom:max="14"
+        custom:min="8"
+        custom:wrap="false" />
+    <com.benedetto.lars.lab7.NumberPickerPreference
+        android:defaultValue="0"
+        android:key="displacement"
+        android:summary="0"
+        android:title="Initial Displacement in Meters (0-16)"
+        custom:max="16"
+        custom:min="0"
+        custom:wrap="false" />
+    <ListPreference
+        android:defaultValue="Rectangle"
+        android:entries="@array/mass_shapes"
+        android:entryValues="@array/mass_shapes"
+        android:key="shape"
+        android:summary="%s"
+        android:title="Mass Shapes" />
+</PreferenceScreen>

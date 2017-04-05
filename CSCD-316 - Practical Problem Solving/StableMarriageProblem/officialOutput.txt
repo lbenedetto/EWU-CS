@@ -1,0 +1,16 @@
+Case 1
+Ann is employed by Dean
+Art is employed by Dot
+Ayn is employed by Cal
+Bay is employed by Al
+Belle is employed by Elle
+Bo is employed by Dan
+Bob is employed by Ed
+Bou is employed by Carl
+Brad is employed by Fay
+Case 2
+3 is employed by 1
+4 is employed by 2
+Case 3
+3 is employed by 1
+4 is employed by 2

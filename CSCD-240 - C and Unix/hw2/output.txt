@@ -1,0 +1,93 @@
+http://i.imgur.com/roBg30V.png
+
+lbenedetto@cslinux:~/cscd240/hw2$ make
+make: `hw2' is up to date.
+lbenedetto@cslinux:~/cscd240/hw2$ valgrind --leak-check=full -v ./hw2
+==23911== Memcheck, a memory error detector
+==23911== Copyright (C) 2002-2011, and GNU GPL'd, by Julian Seward et al.
+==23911== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info
+==23911== Command: ./hw2
+==23911== 
+--23911-- Valgrind options:
+--23911--    --suppressions=/usr/lib/valgrind/debian-libc6-dbg.supp
+--23911--    --leak-check=full
+--23911--    -v
+--23911-- Contents of /proc/version:
+--23911--   Linux version 3.13.0-85-generic (buildd@lgw01-24) (gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) ) #129~precise1-Ubuntu SMP Fri Mar 18 17:38:08 UTC 2016
+--23911-- Arch and hwcaps: AMD64, amd64-sse3-cx16
+--23911-- Page sizes: currently 4096, max supported 4096
+--23911-- Valgrind library directory: /usr/lib/valgrind
+--23911-- Reading syms from /home/EASTERN/lbenedetto/cscd240/hw2/hw2 (0x400000)
+--23911-- Reading syms from /lib/x86_64-linux-gnu/ld-2.15.so (0x4000000)
+--23911--   Considering /lib/x86_64-linux-gnu/ld-2.15.so ..
+--23911--   .. CRC mismatch (computed 77f2e1a3 wanted e955a26b)
+--23911--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.15.so ..
+--23911--   .. CRC is valid
+--23911-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux (0x38000000)
+--23911--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--23911--   .. CRC mismatch (computed fd32bc40 wanted 1b1bde8c)
+--23911--    object doesn't have a symbol table
+--23911--    object doesn't have a dynamic symbol table
+--23911-- Reading suppressions file: /usr/lib/valgrind/debian-libc6-dbg.supp
+--23911-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==23911== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-23911-by-lbenedetto-on-???
+==23911== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-23911-by-lbenedetto-on-???
+==23911== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-23911-by-lbenedetto-on-???
+==23911== 
+==23911== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==23911== don't want to do, unless you know exactly what you're doing,
+==23911== or are doing some strange experiment):
+==23911==   /usr/lib/valgrind/../../bin/vgdb --pid=23911 ...command...
+==23911== 
+==23911== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==23911==   /path/to/gdb ./hw2
+==23911== and then give GDB the following command
+==23911==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=23911
+==23911== --pid is optional if only one valgrind process is running
+==23911== 
+--23911-- REDIR: 0x40189e0 (strlen) redirected to 0x380625c7 (???)
+--23911-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so (0x4a25000)
+--23911--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--23911--   .. CRC mismatch (computed 8f05ac98 wanted c6d0ab1a)
+--23911--    object doesn't have a symbol table
+--23911-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so (0x4c27000)
+--23911--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--23911--   .. CRC mismatch (computed fc059af4 wanted ffc668e8)
+--23911--    object doesn't have a symbol table
+--23911-- REDIR: 0x4018850 (index) redirected to 0x4c2bc60 (index)
+--23911-- REDIR: 0x40188d0 (strcmp) redirected to 0x4c2cc20 (strcmp)
+--23911-- Reading syms from /lib/x86_64-linux-gnu/libc-2.15.so (0x4e32000)
+--23911--   Considering /lib/x86_64-linux-gnu/libc-2.15.so ..
+--23911--   .. CRC mismatch (computed 5f8fdc5e wanted 6bd1008c)
+--23911--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.15.so ..
+--23911--   .. CRC is valid
+--23911-- REDIR: 0x4ebde60 (strcasecmp) redirected to 0x4a25610 (_vgnU_ifunc_wrapper)
+--23911-- REDIR: 0x4eba200 (strnlen) redirected to 0x4a25610 (_vgnU_ifunc_wrapper)
+--23911-- REDIR: 0x4ec0130 (strncasecmp) redirected to 0x4a25610 (_vgnU_ifunc_wrapper)
+--23911-- REDIR: 0x4ebbbf0 (__GI_strrchr) redirected to 0x4c2ba80 (__GI_strrchr)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+-1
+--23911-- REDIR: 0x4eb3f10 (malloc) redirected to 0x4c2b660 (malloc)
+--23911-- REDIR: 0x4ec3d30 (strchrnul) redirected to 0x4c2e3b0 (strchrnul)
+The median for the group of numbers you input is: 5 
+--23911-- REDIR: 0x4eb4520 (free) redirected to 0x4c2a7c0 (free)
+==23911== 
+==23911== HEAP SUMMARY:
+==23911==     in use at exit: 0 bytes in 0 blocks
+==23911==   total heap usage: 1 allocs, 1 frees, 36 bytes allocated
+==23911== 
+==23911== All heap blocks were freed -- no leaks are possible
+==23911== 
+==23911== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 2)
+--23911-- 
+--23911-- used_suppression:      2 dl-hack3-cond-1
+==23911== 
+==23911== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 2)

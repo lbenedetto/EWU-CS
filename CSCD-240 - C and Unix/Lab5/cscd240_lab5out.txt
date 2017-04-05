@@ -1,0 +1,81 @@
+Please enter a number greater than 99 for A, the upbound: 100
+Answer is: 35
+You have 15 guesses remaining.
+ Please enter a guess between 1 & 100 inclusive: 50
+Too High
+You have 14 guesses remaining.
+ Please enter a guess between 1 & 100 inclusive: 35
+You got it in 1 guesses
+Would you like to play again? (y/n) j
+Would you like to play again? (y/n) n
+
+Process finished with exit code 0
+
+
+Please enter a number greater than 99 for A, the upbound: 1000
+Answer is: 690
+You have 15 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 1
+Too Low
+You have 14 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 2
+Too Low
+You have 13 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 3
+Too Low
+You have 12 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 4
+Too Low
+You have 11 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 5
+Too Low
+You have 10 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 6
+Too Low
+You have 9 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 7
+Too Low
+You have 8 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 8
+Too Low
+You have 7 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 9
+Too Low
+You have 6 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 10
+Too Low
+You have 5 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 11
+Too Low
+You have 4 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 12
+Too Low
+You have 3 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 13
+Too Low
+You have 2 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 14
+Too Low
+You have 1 guesses remaining.
+ Please enter a guess between 1 & 1000 inclusive: 15
+Too Low
+Would you like to play again? (y/n) y
+Please enter a number greater than 99 for A, the upbound: 100
+Answer is: 15
+You have 15 guesses remaining.
+ Please enter a guess between 1 & 100 inclusive: 15
+You got it in 0 guesses
+Would you like to play again? (y/n) n
+
+
+
+
+Please enter a number greater than 99 for A, the upbound: 20000
+Answer is: 4384
+You have 15 guesses remaining.
+ Please enter a guess between 1 & 20000 inclusive: 4345
+Too Low
+You have 14 guesses remaining.
+ Please enter a guess between 1 & 20000 inclusive: 4384
+You got it in 1 guesses
+Would you like to play again? (y/n) n

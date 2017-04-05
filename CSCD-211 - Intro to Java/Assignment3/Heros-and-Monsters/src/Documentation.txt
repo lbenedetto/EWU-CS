@@ -1,0 +1,9 @@
+Got everything working, as far as I can tell.
+
+I did both of the extra credit pieces.
+1. Added "ForgetfulIdiot" class, available by not selecting any of the options given at the character selection screen
+2. Added a special ability to each monster
+
+Don't think I copied anything from anywhere (maybe the randInt and randDouble method).
+
+I did model most of the messages to the user after the ones in the example program.

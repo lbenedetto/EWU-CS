@@ -1,0 +1,80 @@
+Airport System Management
+1. Load airport system from file.
+2. Display details of the airport system.
+3. Find a flight based on origin, destination, departure date and desired seat class
+4. Book a specific seat on a specific flight.
+5. Book any seat on a specific flight
+6. Book a seat on a flight given only a seating preference
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+7. Load seaport system from file.
+8. Display details of the seaport system.
+9. Find a cruise based on origin, destination, departure date and desired cabin class
+10. Book a specific cabin on a cruise.
+11. Book any cabin on a specific cruise.
+12. Exit.
+
+Enter choice: 1
+Enter filename: airport2.ams
+Airport System Management
+1. Load airport system from file.
+2. Display details of the airport system.
+3. Find a flight based on origin, destination, departure date and desired seat class
+4. Book a specific seat on a specific flight.
+5. Book any seat on a specific flight
+6. Book a seat on a flight given only a seating preference
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+7. Load seaport system from file.
+8. Display details of the seaport system.
+9. Find a cruise based on origin, destination, departure date and desired cabin class
+10. Book a specific cabin on a cruise.
+11. Book any cabin on a specific cruise.
+12. Exit.
+
+Enter choice: 7
+Enter filename: seaport2.ams
+Airport System Management
+1. Load airport system from file.
+2. Display details of the airport system.
+3. Find a flight based on origin, destination, departure date and desired seat class
+4. Book a specific seat on a specific flight.
+5. Book any seat on a specific flight
+6. Book a seat on a flight given only a seating preference
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+7. Load seaport system from file.
+8. Display details of the seaport system.
+9. Find a cruise based on origin, destination, departure date and desired cabin class
+10. Book a specific cabin on a cruise.
+11. Book any cabin on a specific cruise.
+12. Exit.
+
+Enter choice: 9
+Enter origin: LOS
+Type "DONE" to stop entering destinations
+Enter destination: JUN
+Enter destination: SAN
+Enter destination: done
+Enter departure date (yyyy,mm,dd,HH,MM): 2016,10,9,17,45
+Enter berth class (FA,DF,C,DC): FA
+CC3|2016,10,9,17,45|2016,10,10,17,45|LOS|JUN,SAN|SS1
+Airport System Management
+1. Load airport system from file.
+2. Display details of the airport system.
+3. Find a flight based on origin, destination, departure date and desired seat class
+4. Book a specific seat on a specific flight.
+5. Book any seat on a specific flight
+6. Book a seat on a flight given only a seating preference
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Seaport System Management
+7. Load seaport system from file.
+8. Display details of the seaport system.
+9. Find a cruise based on origin, destination, departure date and desired cabin class
+10. Book a specific cabin on a cruise.
+11. Book any cabin on a specific cruise.
+12. Exit.
+
+Enter choice: 12
+
+Process finished with exit code 0
