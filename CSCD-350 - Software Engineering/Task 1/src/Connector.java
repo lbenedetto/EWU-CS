@@ -11,7 +11,7 @@ public class Connector implements Cloneable {
 	}
 
 	public Connector clone() throws CloneNotSupportedException {
-		Connector c  = (Connector) super.clone();
+		Connector c = (Connector) super.clone();
 		c.offset = new Point2D(offset.getX(), offset.getY());
 		c.parentBox = parentBox.clone();
 		c.childBox = childBox.clone();
@@ -23,7 +23,9 @@ public class Connector implements Cloneable {
 	}
 
 	public Point2D getOffsetFromParentBox() {
-		return offset;
+		if (hasParentBox())
+			return offset;
+		return null;
 	}
 
 	public Box getParentBox() {

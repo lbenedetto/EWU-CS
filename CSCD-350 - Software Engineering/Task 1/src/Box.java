@@ -27,7 +27,7 @@ public class Box implements Cloneable {
 		box.id = id;
 		box.size = new Dimension2D(size.getWidth(), size.getHeight());
 		box.isRoot = isRoot;
-		box.parent = parent.clone();
+		box.setConnectorToParent(parent.clone());
 		ArrayList<Connector> children = new ArrayList<>();
 		for (Connector c : this.children)
 			children.add(c.clone());
@@ -42,8 +42,10 @@ public class Box implements Cloneable {
 
 	public Point2D getAbsoluteCenterPosition() {
 		Point2D p = new Point2D(0, 0);
-		if (hasConnectorToParent())
+		if (hasConnectorToParent()) {
 			p.add(parent.getOffsetFromParentBox());
+			p.add(parent.getParentBox().getAbsoluteCenterPosition());
+		}
 		return p;
 	}
 
