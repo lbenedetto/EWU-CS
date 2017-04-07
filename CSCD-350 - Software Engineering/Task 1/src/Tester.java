@@ -26,6 +26,9 @@ public class Tester {
 			e.printStackTrace();
 		}
 		Box1.getDescendantBoxes().forEach(System.out::println);
+		System.out.println(Box1.getAbsoluteCenterPosition());
+		System.out.println(Box2.getAbsoluteCenterPosition());
+		System.out.println(Box4.getAbsoluteCenterPosition());
 	}
 
 	public static void connectBoxes(Box b1, Box b2) {

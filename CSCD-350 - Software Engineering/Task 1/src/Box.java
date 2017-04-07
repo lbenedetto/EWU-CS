@@ -28,10 +28,8 @@ public class Box implements Cloneable {
 		Box box = (Box) super.clone();
 		box.size = new Dimension2D(size.getWidth(), size.getHeight());
 		box.children = new ArrayList<>();
-		for (Connector c : this.children) {
-			Connector t = c.clone();
-			box.connectChild(t);
-		}
+		for (Connector c : this.children)
+			box.connectChild(c.clone());
 		return box;
 	}
 
@@ -42,10 +40,8 @@ public class Box implements Cloneable {
 
 	public Point2D getAbsoluteCenterPosition() {
 		Point2D p = new Point2D(0, 0);
-		if (hasConnectorToParent()) {
-			p.add(parent.getOffsetFromParentBox());
-			p.add(parent.getParentBox().getAbsoluteCenterPosition());
-		}
+		if (hasConnectorToParent())
+			p = p.add(parent.getOffsetFromParentBox()).add(parent.getParentBox().getAbsoluteCenterPosition());
 		return p;
 	}
 
@@ -114,20 +110,13 @@ public class Box implements Cloneable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (getClass() != o.getClass())
-			return false;
+		if (o == null || getClass() != o.getClass()) return false;
 		Box box = (Box) o;
-		if (isRoot != box.isRoot)
-			return false;
-		if (!id.equals(box.id))
-			return false;
-		if (!size.equals(box.size))
-			return false;
-		if(!children.equals(box.children))
-			return false;
-		return true;
+		return isRoot == box.isRoot &&
+				id.equals(box.id) &&
+				size.equals(box.size) &&
+				children.equals(box.children);
 	}
-
 
 	private class BoxComparator implements Comparator<Box> {
 		@Override

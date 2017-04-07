@@ -8,6 +8,7 @@ public class Connector implements Cloneable {
 	public Connector(Box childBox, Point2D offset) {
 		this.childBox = childBox;
 		this.offset = offset;
+		childBox.setConnectorToParent(this);
 	}
 
 	public Connector clone() throws CloneNotSupportedException {
@@ -49,15 +50,10 @@ public class Connector implements Cloneable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null || getClass() != o.getClass())
-			return false;
+		if (o == null || getClass() != o.getClass()) return false;
 		Connector connector = (Connector) o;
-		if (!childBox.equals(connector.childBox))
-			return false;
-		if (!childBox.equals(connector.childBox))
-			return false;
-		if (!offset.equals(connector.offset))
-			return false;
-		return true;
+		return childBox.equals(connector.childBox) &&
+				childBox.equals(connector.childBox) &&
+				offset.equals(connector.offset);
 	}
 }
