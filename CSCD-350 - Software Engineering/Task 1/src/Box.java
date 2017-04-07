@@ -2,6 +2,7 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Box implements Cloneable {
@@ -20,18 +21,17 @@ public class Box implements Cloneable {
 	public Box(String id, Dimension2D size, boolean isRoot) {
 		this(id, size);
 		this.isRoot = isRoot;
+		children = new ArrayList<>();
 	}
 
 	public Box clone() throws CloneNotSupportedException {
 		Box box = (Box) super.clone();
-		box.id = id;
 		box.size = new Dimension2D(size.getWidth(), size.getHeight());
-		box.isRoot = isRoot;
-		box.setConnectorToParent(parent.clone());
-		ArrayList<Connector> children = new ArrayList<>();
-		for (Connector c : this.children)
-			children.add(c.clone());
-		box.children = children;
+		box.children = new ArrayList<>();
+		for (Connector c : this.children) {
+			Connector t = c.clone();
+			box.connectChild(t);
+		}
 		return box;
 	}
 
@@ -100,5 +100,39 @@ public class Box implements Cloneable {
 
 	public boolean isRoot() {
 		return isRoot;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder("");
+		s.append(getId());
+		for (Connector c : children) {
+			s.append(c.toString());
+		}
+		return s.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (getClass() != o.getClass())
+			return false;
+		Box box = (Box) o;
+		if (isRoot != box.isRoot)
+			return false;
+		if (!id.equals(box.id))
+			return false;
+		if (!size.equals(box.size))
+			return false;
+		if(!children.equals(box.children))
+			return false;
+		return true;
+	}
+
+
+	private class BoxComparator implements Comparator<Box> {
+		@Override
+		public int compare(Box o1, Box o2) {
+			return o1.id.compareTo(o2.id);
+		}
 	}
 }

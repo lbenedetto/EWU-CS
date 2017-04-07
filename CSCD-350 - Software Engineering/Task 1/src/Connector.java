@@ -13,8 +13,8 @@ public class Connector implements Cloneable {
 	public Connector clone() throws CloneNotSupportedException {
 		Connector c = (Connector) super.clone();
 		c.offset = new Point2D(offset.getX(), offset.getY());
-		c.parentBox = parentBox.clone();
 		c.childBox = childBox.clone();
+		c.childBox.setConnectorToParent(c);
 		return c;
 	}
 
@@ -44,6 +44,20 @@ public class Connector implements Cloneable {
 
 	@Override
 	public String toString() {
-		return childBox.toString() + offset.toString();
+		return "->" + childBox.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Connector connector = (Connector) o;
+		if (!childBox.equals(connector.childBox))
+			return false;
+		if (!childBox.equals(connector.childBox))
+			return false;
+		if (!offset.equals(connector.offset))
+			return false;
+		return true;
 	}
 }
