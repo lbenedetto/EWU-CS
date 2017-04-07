@@ -120,7 +120,7 @@ public class Box implements Cloneable {
 				children.equals(box.children);
 	}
 
-	private class BoxComparator implements Comparator<Box> {
+	public static class BoxComparator implements Comparator<Box> {
 		@Override
 		public int compare(Box o1, Box o2) {
 			return o1.id.compareTo(o2.id);
