@@ -1,5 +1,7 @@
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
+import s17cs350task1.Box;
+import s17cs350task1.Connector;
 
 public class Tester {
 	public static void main(String[] args) {

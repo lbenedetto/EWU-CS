@@ -1,3 +1,5 @@
+package s17cs350task1;
+
 import javafx.geometry.Point2D;
 
 public class Connector implements Cloneable {

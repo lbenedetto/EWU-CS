@@ -1,3 +1,5 @@
+package s17cs350task1;
+
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
