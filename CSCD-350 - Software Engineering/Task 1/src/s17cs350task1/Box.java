@@ -84,7 +84,7 @@ public class Box implements Cloneable {
 		return boxes;
 	}
 
-	public String getId() {
+	public String getID() {
 		return id;
 	}
 
@@ -103,7 +103,7 @@ public class Box implements Cloneable {
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder("");
-		s.append(getId());
+		s.append(getID());
 		for (Connector c : children) {
 			s.append(c.toString());
 		}
