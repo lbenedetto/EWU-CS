@@ -2,6 +2,7 @@
 //I used CLion which uses CMake
 #include <iostream>
 #include <sstream>
+#include <climits>
 
 using namespace std;
 
@@ -10,14 +11,15 @@ int readInt(string prompt) {
 	string str;
 	while (true) {
 		cout << prompt;
-		getline(cin, str);
-		stringstream stream(str);
-		if (stream >> i) {
-			if (i >= 1)
+		if (cin >> i && cin.get() == '\n') {
+			if (i >= 1) {
 				return i;
+			}
 			cout << "Number is outside of valid range" << endl;
 		} else {
 			cout << "Invalid number, try again" << endl;
+			cin.clear();
+			cin.ignore(10000, '\n');
 		}
 	}
 }
@@ -27,15 +29,15 @@ float readFloat(string prompt, int upperBound, int lowerBound) {
 	string str;
 	while (true) {
 		cout << prompt;
-		getline(cin, str);
-		stringstream stream(str);
-		if (stream >> i) {
+		if (cin >> i && cin.get() == '\n') {
 			if (i <= upperBound && i >= lowerBound) {
 				return i;
 			}
 			cout << "Number does not fit within bounds" << endl;
 		} else {
 			cout << "Invalid number, try again" << endl;
+			cin.clear();
+			cin.ignore(10000, '\n');
 		}
 	}
 }

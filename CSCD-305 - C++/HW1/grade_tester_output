@@ -1,0 +1,20 @@
+Enter number of students: -1
+Number is outside of valid range
+Enter number of students: 1d
+Invalid number, try again
+Enter number of students: 5
+Enter scores for students:
+Enter score for student #1: -1
+Number does not fit within bounds
+Enter score for student #1: 101
+Number does not fit within bounds
+Enter score for student #1: 1.1d
+Invalid number, try again
+Enter score for student #1: 99.9
+Enter score for student #2: 99.9
+Enter score for student #3: 75
+Enter score for student #4: 50.1
+Enter score for student #5: 50.2
+Min score: 50.1
+Max score: 99.9
+Average score: 75.02
