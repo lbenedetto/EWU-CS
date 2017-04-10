@@ -1,8 +1,6 @@
 //Lars Benedetto
 //I used CLion which uses CMake
 #include <iostream>
-#include <sstream>
-#include <climits>
 
 using namespace std;
 
