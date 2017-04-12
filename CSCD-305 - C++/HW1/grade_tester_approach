@@ -1,0 +1,11 @@
+My approach to getting input is to print an input prompt
+then get a line of input and put it in a string stream, then
+try to put the string stream into a float/int
+if it fails, retry. If it succeeds, make sure the next char is a new line,
+then check if it is in range.
+If it is in range, return. Else, retry.
+
+My program first gets the number of students and then uses that
+number in a for loop to prompt for the grades of n students
+Grades are stored in an array
+When its done, calculate the required values and print.
