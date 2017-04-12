@@ -54,6 +54,7 @@ public class Box implements Cloneable {
 	public List<Box> getChildBoxes() {
 		ArrayList<Box> boxes = new ArrayList<>();
 		children.forEach(x -> boxes.add(x.getChildBox()));
+		boxes.sort(new BoxComparator());
 		return boxes;
 	}
 
@@ -76,11 +77,11 @@ public class Box implements Cloneable {
 
 	public List<Box> getDescendantBoxes() {
 		ArrayList<Box> boxes = new ArrayList<>();
-		for (Connector c : children) {
-			Box child = c.getChildBox();
+		for (Box child : getChildBoxes()) {
 			boxes.add(child);
-			boxes.addAll(child.getChildBoxes());
+			boxes.addAll(child.getDescendantBoxes());
 		}
+		boxes.sort(new BoxComparator());
 		return boxes;
 	}
 

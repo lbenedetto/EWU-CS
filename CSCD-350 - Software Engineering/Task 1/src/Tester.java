@@ -31,6 +31,9 @@ public class Tester {
 		System.out.println(Box1.getAbsoluteCenterPosition());
 		System.out.println(Box2.getAbsoluteCenterPosition());
 		System.out.println(Box4.getAbsoluteCenterPosition());
+		for (Box box : Box1.getDescendantBoxes()) {
+			System.out.println(box.getID());
+		}
 	}
 
 	public static void connectBoxes(Box b1, Box b2) {
