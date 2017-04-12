@@ -30,6 +30,7 @@ public class Box implements Cloneable {
 		Box box = (Box) super.clone();
 		box.size = new Dimension2D(size.getWidth(), size.getHeight());
 		box.children = new ArrayList<>();
+		box.id = new String(id + "");
 		for (Connector c : this.children)
 			box.connectChild(c.clone());
 		return box;
