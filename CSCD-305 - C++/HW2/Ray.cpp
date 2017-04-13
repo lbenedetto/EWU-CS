@@ -20,13 +20,13 @@ Ray &Ray::setDirection(Point3D direction) {
 }
 
 void Ray::checkIntersection(Sphere &s) {
+    //TODO:Fix math
     double A, B, C;
     A = direction.squarePoints();
     B = origin.subtractPoints(s.center).multiplyPoints(direction);
     C = (s.radius * s.radius) - origin.subtractPoints(s.center).squarePoints();
-    if (((B * B) - (A * C)) < 0) {
-        std::cout << "Ray does not touch or intersect the sphere";
-    } else {
-        std::cout << "Ray either touches or intersects the sphere";
-    }
+    if (((B * B) - (A * C)) < 0)
+        std::cout << "Ray does not touch or intersect the sphere" << std::endl;
+    else
+        std::cout << "Ray either touches or intersects the sphere" << std::endl;
 }
