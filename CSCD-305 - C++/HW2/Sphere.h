@@ -4,23 +4,23 @@
 #include "Point3D.h"
 
 class Sphere {
-    friend class Ray;
+	friend class Ray;
 
 private:
-    Point3D center;
-    double radius;
+	Point3D center;
+	double radius;
 public:
-    Sphere() : center{}, radius{0} {}
+	Sphere() : center{}, radius{0} {}
 
-    Sphere(Point3D center, double radius) : center{center}, radius{radius} {}
+	Sphere(Point3D center, double radius) : center{center}, radius{radius} {}
 
-    Point3D &getCenter();
+	Point3D &getCenter();
 
-    double getRadius();
+	double getRadius();
 
-    Sphere &setCenter(Point3D center);
+	Sphere &setCenter(Point3D center);
 
-    Sphere &setRadius(double radius);
+	Sphere &setRadius(double radius);
 };
 
 

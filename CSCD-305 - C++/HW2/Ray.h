@@ -8,22 +8,22 @@
 class Ray {
 
 private:
-    Point3D origin;
-    Point3D direction;
+	Point3D origin;
+	Point3D direction;
 public:
-    Ray() : origin{}, direction{} {}
+	Ray() : origin{}, direction{} {}
 
-    Ray(Point3D origin, Point3D direction) : origin{origin}, direction{direction} {}
+	Ray(Point3D origin, Point3D direction) : origin{origin}, direction{direction} {}
 
-    Point3D &getOrigin();
+	Point3D &getOrigin();
 
-    Point3D &getDirection();
+	Point3D &getDirection();
 
-    Ray &setOrigin(Point3D origin);
+	Ray &setOrigin(Point3D origin);
 
-    Ray &setDirection(Point3D direction);
+	Ray &setDirection(Point3D direction);
 
-    void checkIntersection(Sphere &s);
+	void checkIntersection(Sphere &s);
 };
 
 
