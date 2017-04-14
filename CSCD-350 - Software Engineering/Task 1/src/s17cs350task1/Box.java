@@ -1,7 +1,6 @@
 package s17cs350task1;
 
-import javafx.geometry.Dimension2D;
-import javafx.geometry.Point2D;
+import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -9,18 +8,18 @@ import java.util.List;
 
 public class Box implements Cloneable {
 	private String id;
-	private Dimension2D size;
+	private Dimension3D size;
 	private boolean isRoot;
 	private ArrayList<Connector> children;
 	private Connector parent;
 
-	public Box(String id, Dimension2D size) {
+	public Box(String id, Dimension3D size) {
 		this.id = id;
 		this.size = size;
 		children = new ArrayList<>();
 	}
 
-	public Box(String id, Dimension2D size, boolean isRoot) {
+	public Box(String id, Dimension3D size, boolean isRoot) {
 		this(id, size);
 		this.isRoot = isRoot;
 		children = new ArrayList<>();
@@ -28,7 +27,7 @@ public class Box implements Cloneable {
 
 	public Box clone() throws CloneNotSupportedException {
 		Box box = (Box) super.clone();
-		box.size = new Dimension2D(size.getWidth(), size.getHeight());
+		box.size = size.clone();
 		box.children = new ArrayList<>();
 		box.id = new String(id + "");
 		for (Connector c : this.children)
@@ -41,8 +40,8 @@ public class Box implements Cloneable {
 		children.add(connector);
 	}
 
-	public Point2D getAbsoluteCenterPosition() {
-		Point2D p = new Point2D(0, 0);
+	public Point3D getAbsoluteCenterPosition() {
+		Point3D p = new Point3D(0, 0, 0);
 		if (hasConnectorToParent())
 			p = p.add(parent.getOffsetFromParentBox()).add(parent.getParentBox().getAbsoluteCenterPosition());
 		return p;
@@ -90,7 +89,7 @@ public class Box implements Cloneable {
 		return id;
 	}
 
-	public Dimension2D getSize() {
+	public Dimension3D getSize() {
 		return size;
 	}
 

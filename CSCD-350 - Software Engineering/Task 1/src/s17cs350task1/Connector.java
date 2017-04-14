@@ -1,13 +1,13 @@
 package s17cs350task1;
 
-import javafx.geometry.Point2D;
+import javafx.geometry.Point3D;
 
 public class Connector implements Cloneable {
 	private Box childBox;
 	private Box parentBox;
-	private Point2D offset;
+	private Point3D offset;
 
-	public Connector(Box childBox, Point2D offset) {
+	public Connector(Box childBox, Point3D offset) {
 		this.childBox = childBox;
 		this.offset = offset;
 		childBox.setConnectorToParent(this);
@@ -15,7 +15,7 @@ public class Connector implements Cloneable {
 
 	public Connector clone() throws CloneNotSupportedException {
 		Connector c = (Connector) super.clone();
-		c.offset = new Point2D(offset.getX(), offset.getY());
+		c.offset = new Point3D(offset.getX(), offset.getY(), offset.getZ());
 		c.childBox = childBox.clone();
 		c.childBox.setConnectorToParent(c);
 		return c;
@@ -25,7 +25,7 @@ public class Connector implements Cloneable {
 		return childBox;
 	}
 
-	public Point2D getOffsetFromParentBox() {
+	public Point3D getOffsetFromParentBox() {
 		if (hasParentBox())
 			return offset;
 		return null;
