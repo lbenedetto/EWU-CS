@@ -7,7 +7,10 @@ public class Connector implements Cloneable {
 	private Box parentBox;
 	private Point3D offset;
 
-	public Connector(Box childBox, Point3D offset) {
+	public Connector(Box childBox, Point3D offset) throws TaskException {
+		if (childBox == null) throw new TaskException("child box was null");
+		if (offset == null) throw new TaskException("offset was null");
+		if (childBox.isRoot()) throw new TaskException("Root box cannot be child box");
 		this.childBox = childBox;
 		this.offset = offset;
 		childBox.setConnectorToParent(this);
@@ -33,10 +36,11 @@ public class Connector implements Cloneable {
 
 	public Box getParentBox() {
 		if (hasParentBox()) return parentBox;
-		return null;
+		throw new TaskException("Box does not have parent box");
 	}
 
 	public void setParentBox(Box parentBox) {
+		if (parentBox == null) throw new TaskException("parentBox was null");
 		this.parentBox = parentBox;
 	}
 

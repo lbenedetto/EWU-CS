@@ -14,6 +14,8 @@ public class Box implements Cloneable {
 	private Connector parent;
 
 	public Box(String id, Dimension3D size) {
+		if (id == null || id.equals("")) throw new TaskException("id passed to box was null or empty");
+		if (size == null) throw new TaskException("size passed to box was null");
 		this.id = id;
 		this.size = size;
 		children = new ArrayList<>();
@@ -36,6 +38,7 @@ public class Box implements Cloneable {
 	}
 
 	public void connectChild(Connector connector) {
+		if (connector == null) throw new TaskException("connector passed to connectChild was null");
 		connector.setParentBox(this);
 		children.add(connector);
 	}
@@ -68,6 +71,7 @@ public class Box implements Cloneable {
 	}
 
 	public void setConnectorToParent(Connector connector) {
+		if (connector == null) throw new TaskException("connector was null");
 		this.parent = connector;
 	}
 

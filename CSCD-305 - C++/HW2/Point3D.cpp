@@ -28,17 +28,13 @@ Point3D &Point3D::setZ(double z) {
 }
 
 Point3D &Point3D::addPoints(const Point3D &p) {
-	x += p.x;
-	y += p.y;
-	z += p.z;
-	return *this;
+	Point3D *p2 = new Point3D(x + p.x, y + p.y, z + p.z);
+	return *p2;
 }
 
 Point3D &Point3D::subtractPoints(const Point3D &p) {
-	x -= p.x;
-	y -= p.y;
-	z -= p.z;
-	return *this;
+	Point3D *p2 = new Point3D(x - p.x, y - p.y, z - p.z);
+	return *p2;
 }
 
 double Point3D::multiplyPoints(const Point3D &p) {

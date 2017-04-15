@@ -23,6 +23,21 @@ public class Dimension3D implements Cloneable {
 		return depth;
 	}
 
+	public Dimension3D setWidth(double width) {
+		this.width = width;
+		return this;
+	}
+
+	public Dimension3D setHeight(double height) {
+		this.height = height;
+		return this;
+	}
+
+	public Dimension3D setDepth(double depth) {
+		this.depth = depth;
+		return this;
+	}
+
 	@Override
 	public Dimension3D clone() throws CloneNotSupportedException {
 		return (Dimension3D) super.clone();
