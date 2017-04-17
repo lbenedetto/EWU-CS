@@ -1,6 +1,9 @@
 #ifndef HW2_POINT3D_H
 #define HW2_POINT3D_H
 
+#include <string>
+
+using namespace std;
 
 class Point3D {
 private :
@@ -31,6 +34,8 @@ public:
 	double multiplyPoints(const Point3D &p);
 
 	double squarePoints();
+
+	string toString();
 };
 
 #endif //HW2_POINT3D_H

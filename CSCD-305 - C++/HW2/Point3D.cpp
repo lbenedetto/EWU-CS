@@ -44,3 +44,7 @@ double Point3D::multiplyPoints(const Point3D &p) {
 double Point3D::squarePoints() {
 	return (x * x) + (y * y) + (z * z);
 }
+
+string Point3D::toString() {
+	return "(x: " + to_string(x) + "y: " + to_string(y) + "z: " + to_string(z) + ")";
+}
