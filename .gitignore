@@ -1,0 +1,8 @@
+*.class
+*.rsp
+*.make
+*.cmake
+CSCD-305 - C++/HW2/cmake-build-debug/CMakeCache.txt
+*.bin
+CSCD-305 - C++/HW2/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/a.exe
+CSCD-305 - C++/HW2/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/CMakeCXXCompilerId.cpp
