@@ -28,6 +28,7 @@ public class Box implements Cloneable {
 	}
 
 	public Box clone() throws CloneNotSupportedException {
+		if(!isRoot) throw new CloneNotSupportedException("Must clone tree starting from root");
 		Box box = (Box) super.clone();
 		box.size = size.clone();
 		box.children = new ArrayList<>();
@@ -107,12 +108,7 @@ public class Box implements Cloneable {
 
 	@Override
 	public String toString() {
-		StringBuilder s = new StringBuilder("");
-		s.append(getID());
-		for (Connector c : children) {
-			s.append(c.toString());
-		}
-		return s.toString();
+		return "ComponentBox[id=\'" + id + "\' isRoot=" + isRoot + " size=" + size;
 	}
 
 	@Override

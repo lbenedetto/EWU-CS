@@ -1,5 +1,3 @@
-import javafx.geometry.Dimension3D;
-import javafx.geometry.Point2D;
 import javafx.geometry.Point3D;
 import s17cs350task1.Box;
 import s17cs350task1.Connector;
@@ -19,23 +17,10 @@ public class Tester {
 		connectBoxes(Box2, Box5);
 		connectBoxes(Box3, Box6);
 		System.out.println(Box1.toString());
-		try {
-			Box Box1Clone = Box1.clone();
-			System.out.println(Box1Clone.toString());
-			if (Box1.equals(Box1Clone)) {
-				if (Box1 != Box1Clone)
-					System.out.println("Clone Successful");
-			}
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
 		Box1.getDescendantBoxes().forEach(System.out::println);
 		System.out.println(Box1.getAbsoluteCenterPosition());
 		System.out.println(Box2.getAbsoluteCenterPosition());
 		System.out.println(Box4.getAbsoluteCenterPosition());
-		for (Box box : Box1.getDescendantBoxes()) {
-			System.out.println(box.getID());
-		}
 	}
 
 	public static void connectBoxes(Box b1, Box b2) {

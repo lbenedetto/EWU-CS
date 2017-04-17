@@ -28,9 +28,15 @@ double *readXYZ() {
 }
 
 int main() {
+//	//Fail
 //	Ray ray = {{0, 2, 5},
 //	           {1, 0, -2}};
-//	Sphere sphere = {{0,0,0}, 1};
+//	Sphere sphere = {{100,100,100}, 1};
+//	ray.checkIntersection(sphere);
+//	//Success
+//	ray = {{0, 2, 5},
+//	           {1, 0, -2}};
+//	sphere = {{2,4,1}, 8};
 //	ray.checkIntersection(sphere);
 	cout << "Enter ray origin:" << endl;
 	double *c = readXYZ();

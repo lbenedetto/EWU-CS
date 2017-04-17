@@ -15,22 +15,22 @@ public class Dimension3D implements Cloneable {
 		return width;
 	}
 
-	public double getHeight() {
-		return height;
-	}
-
-	public double getDepth() {
-		return depth;
-	}
-
 	public Dimension3D setWidth(double width) {
 		this.width = width;
 		return this;
 	}
 
+	public double getHeight() {
+		return height;
+	}
+
 	public Dimension3D setHeight(double height) {
 		this.height = height;
 		return this;
+	}
+
+	public double getDepth() {
+		return depth;
 	}
 
 	public Dimension3D setDepth(double depth) {
@@ -41,5 +41,10 @@ public class Dimension3D implements Cloneable {
 	@Override
 	public Dimension3D clone() throws CloneNotSupportedException {
 		return (Dimension3D) super.clone();
+	}
+
+	@Override
+	public String toString() {
+		return "[" + width + " " + height + " " + depth + "]";
 	}
 }
