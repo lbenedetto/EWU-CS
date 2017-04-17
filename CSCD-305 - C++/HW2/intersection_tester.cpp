@@ -1,3 +1,4 @@
+//Lars Benedetto. I used CMake to Compile
 #include <iostream>
 #include "Point3D.h"
 #include "Sphere.h"

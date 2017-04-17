@@ -21,8 +21,11 @@ Ray &Ray::setDirection(Point3D direction) {
 
 void Ray::checkIntersection(Sphere &s) {
 	double A, B, C;
+	//A=d^2
 	A = direction.squarePoints();
+	//B=(o-c)*d
 	B = origin.subtractPoints(s.center).multiplyPoints(direction);
+	//C=(o-c)^2 - R^2
 	C = origin.subtractPoints(s.center).squarePoints() - (s.radius * s.radius);
 	double ans = (B * B) - (A * C);
 //	std::cout << "A: " + std::to_string(A) << std::endl;
