@@ -11,10 +11,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b2f23b-e772-470d-a830-6a3a8532e634" name="Default" comment="Added toString and used official tester">
+    <list default="true" id="53b2f23b-e772-470d-a830-6a3a8532e634" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Point3D.cpp" afterPath="$PROJECT_DIR$/Point3D.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Point3D.h" afterPath="$PROJECT_DIR$/Point3D.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +38,8 @@
       <file leaf-file-name="intersection_tester.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/intersection_tester.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="15" column="56" lean-forward="true" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
+            <state relative-caret-position="116">
+              <caret line="8" column="34" lean-forward="true" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
               <folding>
                 <element signature="e#42#61#0" expanded="true" />
               </folding>
@@ -378,7 +376,7 @@
       <workItem from="1492060235467" duration="7935000" />
       <workItem from="1492144659465" duration="42000" />
       <workItem from="1492298130924" duration="1318000" />
-      <workItem from="1492463453242" duration="1703000" />
+      <workItem from="1492463453242" duration="2165000" />
     </task>
     <task id="LOCAL-00001" summary="Started project">
       <created>1492065387582</created>
@@ -408,14 +406,21 @@
       <option name="project" value="LOCAL" />
       <updated>1492464989553</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added toString">
+      <created>1492465167536</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1492465167536</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13636000" />
+    <option name="totallyTimeSpent" value="14098000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.096481875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -471,7 +476,8 @@
     <MESSAGE value="Added tester" />
     <MESSAGE value="Added required comments." />
     <MESSAGE value="Added toString and used official tester" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added toString and used official tester" />
+    <MESSAGE value="Added toString" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added toString" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -673,8 +679,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/intersection_tester.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="15" column="56" lean-forward="true" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
+        <state relative-caret-position="116">
+          <caret line="8" column="34" lean-forward="true" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
           <folding>
             <element signature="e#42#61#0" expanded="true" />
           </folding>
