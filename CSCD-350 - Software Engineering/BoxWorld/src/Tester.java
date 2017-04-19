@@ -21,6 +21,11 @@ public class Tester {
 		System.out.println(Box1.getAbsoluteCenterPosition());
 		System.out.println(Box2.getAbsoluteCenterPosition());
 		System.out.println(Box4.getAbsoluteCenterPosition());
+		try {
+			Box Box1Clone = Box1.clone();
+		}catch (CloneNotSupportedException e){
+			
+		}
 	}
 
 	public static void connectBoxes(Box b1, Box b2) {

@@ -38,7 +38,7 @@ public class Box implements Cloneable {
 
 	public void connectChild(Connector connector) {
 		if (connector == null) throw new TaskException("connector passed to connectChild was null");
-		if(connector.getChildBox().isRoot) throw new TaskException("cannot combine two trees with roots");
+		if (connector.getChildBox().isRoot) throw new TaskException("cannot combine two trees with roots");
 		ArrayList<String> parentTreeIDs = getTreeIDs();
 		ArrayList<String> childTreeIDS = connector.getChildBox().getTreeIDs();
 		if (!Collections.disjoint(parentTreeIDs, childTreeIDS))
@@ -49,9 +49,14 @@ public class Box implements Cloneable {
 
 	private ArrayList<String> getTreeIDs() {
 		Box b = this;
-		while (b.hasConnectorToParent())
-			b = b.getConnectorToParent().getParentBox();
+		try {
+			while (b.hasConnectorToParent())
+				b = b.getConnectorToParent().getParentBox();
+		} catch (TaskException e) {
+			//Shhhh
+		}
 		List<Box> boxes = b.getDescendantBoxes();
+		boxes.add(b);
 		ArrayList<String> ids = new ArrayList<>();
 		for (Box box : boxes) {
 			ids.add(box.id);
@@ -83,7 +88,7 @@ public class Box implements Cloneable {
 
 	public Connector getConnectorToParent() {
 		if (hasConnectorToParent()) return parent;
-		return null;
+		throw new TaskException("Cannot get connector to parent: Box does not have connector to parent");
 	}
 
 	public void setConnectorToParent(Connector connector) {
