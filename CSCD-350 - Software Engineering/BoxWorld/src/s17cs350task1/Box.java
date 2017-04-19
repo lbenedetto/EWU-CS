@@ -2,9 +2,7 @@ package s17cs350task1;
 
 import javafx.geometry.Point3D;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Box implements Cloneable {
 	private String id;
@@ -28,7 +26,7 @@ public class Box implements Cloneable {
 	}
 
 	public Box clone() throws CloneNotSupportedException {
-		if(!isRoot) throw new CloneNotSupportedException("Must clone tree starting from root");
+		if (!isRoot) throw new CloneNotSupportedException("Must clone tree starting from root");
 		Box box = (Box) super.clone();
 		box.size = size.clone();
 		box.children = new ArrayList<>();
@@ -40,8 +38,25 @@ public class Box implements Cloneable {
 
 	public void connectChild(Connector connector) {
 		if (connector == null) throw new TaskException("connector passed to connectChild was null");
+		if(connector.getChildBox().isRoot) throw new TaskException("cannot combine two trees with roots");
+		ArrayList<String> parentTreeIDs = getTreeIDs();
+		ArrayList<String> childTreeIDS = connector.getChildBox().getTreeIDs();
+		if (!Collections.disjoint(parentTreeIDs, childTreeIDS))
+			throw new TaskException("Cannot connect box/tree to tree that contains duplicate box id");
 		connector.setParentBox(this);
 		children.add(connector);
+	}
+
+	private ArrayList<String> getTreeIDs() {
+		Box b = this;
+		while (b.hasConnectorToParent())
+			b = b.getConnectorToParent().getParentBox();
+		List<Box> boxes = b.getDescendantBoxes();
+		ArrayList<String> ids = new ArrayList<>();
+		for (Box box : boxes) {
+			ids.add(box.id);
+		}
+		return ids;
 	}
 
 	public Point3D getAbsoluteCenterPosition() {
@@ -73,6 +88,7 @@ public class Box implements Cloneable {
 
 	public void setConnectorToParent(Connector connector) {
 		if (connector == null) throw new TaskException("connector was null");
+		if (hasConnectorToParent()) throw new TaskException("Box already has parent");
 		this.parent = connector;
 	}
 

@@ -25,8 +25,6 @@ public class Tester {
 
 	public static void connectBoxes(Box b1, Box b2) {
 		Connector c1 = new Connector(b2, new Point3D(5, 5, 5));
-		c1.setParentBox(b1);
 		b1.connectChild(c1);
-		b2.setConnectorToParent(c1);
 	}
 }
