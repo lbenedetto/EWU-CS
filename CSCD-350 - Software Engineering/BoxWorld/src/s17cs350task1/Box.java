@@ -26,14 +26,17 @@ public class Box implements Cloneable {
 	}
 
 	public Box clone() throws CloneNotSupportedException {
-		if (!isRoot) throw new CloneNotSupportedException("Must clone tree starting from root");
-		Box box = (Box) super.clone();
-		box.size = size.clone();
-		box.children = new ArrayList<>();
-		box.id = new String(id + "");
-		for (Connector c : this.children)
-			box.connectChild(c.clone());
-		return box;
+		Box clone = (Box) super.clone();
+		clone.parent = null;
+		clone.size = size.clone();
+		clone.children = new ArrayList<>();
+		clone.id = new String(id + "");
+		for (Connector c : this.children) {
+			Connector c1 = c.clone();
+			clone.connectChild(c1);
+			c1.getChildBox().setConnectorToParent(c1);
+		}
+		return clone;
 	}
 
 	public void connectChild(Connector connector) {

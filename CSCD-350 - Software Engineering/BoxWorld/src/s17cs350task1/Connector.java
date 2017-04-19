@@ -17,11 +17,10 @@ public class Connector implements Cloneable {
 	}
 
 	public Connector clone() throws CloneNotSupportedException {
-		Connector c = (Connector) super.clone();
-		c.offset = new Point3D(offset.getX(), offset.getY(), offset.getZ());
-		c.childBox = childBox.clone();
-		c.childBox.setConnectorToParent(c);
-		return c;
+		Connector clone = (Connector) super.clone();
+		clone.offset = new Point3D(offset.getX(), offset.getY(), offset.getZ());
+		clone.childBox = childBox.clone();
+		return clone;
 	}
 
 	public Box getChildBox() {
@@ -51,7 +50,7 @@ public class Connector implements Cloneable {
 
 	@Override
 	public String toString() {
-		return "->" + childBox.toString();
+		return parentBox.toString() + " -> " + childBox.toString();
 	}
 
 	@Override
