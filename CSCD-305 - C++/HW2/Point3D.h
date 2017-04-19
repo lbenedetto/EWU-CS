@@ -33,6 +33,12 @@ public:
 
 	double multiplyPoints(const Point3D &p);
 
+	Point3D operator-(const Point3D &p);
+
+	Point3D operator+(const Point3D &p);
+
+	double operator*(const Point3D &p);
+
 	double squarePoints();
 
 	string toString();

@@ -24,9 +24,9 @@ void Ray::checkIntersection(Sphere &s) {
 	//A=d^2
 	A = direction.squarePoints();
 	//B=(o-c)*d
-	B = origin.subtractPoints(s.center).multiplyPoints(direction);
+	B = (origin - s.center) * direction ;
 	//C=(o-c)^2 - R^2
-	C = origin.subtractPoints(s.center).squarePoints() - (s.radius * s.radius);
+	C = (origin - s.center).squarePoints() - (s.radius * s.radius);
 	double ans = (B * B) - (A * C);
 //	std::cout << "A: " + std::to_string(A) << std::endl;
 //	std::cout << "B: " + std::to_string(B) << std::endl;
