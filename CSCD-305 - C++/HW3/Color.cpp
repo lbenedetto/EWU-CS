@@ -26,13 +26,15 @@ Color operator*(const Color &c1, const Color &c2) {
 }
 
 bool operator!=(const Color &c1, const Color &c2) {
-	return !(c1==c2);
+	return !(c1 == c2);
 }
 
 ostream &operator<<(ostream &stream, const Color &c) {
-	stream<<"["<<c.r<<","<<c.g<<","<<c.b<<"]";
+	stream << "[" << c.r << "," << c.g << "," << c.b << "]";
+	return stream;
 }
 
 istream &operator>>(istream &stream, Color &c) {
-
+	stream >> c.r >> c.g >> c.b;
+	return stream;
 }

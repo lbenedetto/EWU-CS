@@ -55,11 +55,22 @@ bool operator!(const ColorBlob &blob) {
 }
 
 ostream &operator<<(ostream &stream, const ColorBlob &blob) {
-
+	for (int i = 0; i < blob.height; i++) {
+		for (int j = 0; j < blob.width; j++) {
+			stream << blob.data[i][j];
+		}
+		stream << endl;
+	}
+	return stream;
 }
 
 istream &operator>>(istream &stream, ColorBlob &blob) {
-
+	for (int i = 0; i < blob.height; i++) {
+		for (int j = 0; j < blob.width; j++) {
+			stream >> blob.data[i][j];
+		}
+	}
+	return stream;
 }
 
 Color &ColorBlob::operator[](const int i) {
