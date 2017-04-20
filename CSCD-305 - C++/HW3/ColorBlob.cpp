@@ -26,8 +26,8 @@ ColorBlob operator-(const ColorBlob &b1, const ColorBlob &b2) {
 	int h = min(b1.height, b2.height);
 	int w = min(b1.width, b2.width);
 	ColorBlob blob = ColorBlob(h, w);
-	for (int i = 0; i < blob.height; i++) {
-		for (int j = 0; j < blob.width; j++) {
+	for (int i = 0; i < h; i++) {
+		for (int j = 0; j < w; j++) {
 			blob.data[i][j] = b1.data[i][j] - b2.data[i][j];
 		}
 	}
@@ -35,11 +35,23 @@ ColorBlob operator-(const ColorBlob &b1, const ColorBlob &b2) {
 }
 
 ColorBlob operator*(const ColorBlob &blob, const Color &color) {
-	return ColorBlob();
+	ColorBlob newBlob = ColorBlob(blob.height, blob.width);
+	for (int i = 0; i < newBlob.height; i++) {
+		for (int j = 0; j < newBlob.width; j++) {
+			newBlob.data[i][j] = blob.data[i][j] * color;
+		}
+	}
+	return newBlob;
 }
 
 bool operator!(const ColorBlob &blob) {
-	return false;
+	Color black = {0, 0, 0};
+	for (int i = 0; i < blob.height; i++) {
+		for (int j = 0; j < blob.width; j++) {
+			if (blob.data[i][j] != black) return false;
+		}
+	}
+	return true;
 }
 
 ostream &operator<<(ostream &stream, const ColorBlob &blob) {
@@ -50,9 +62,9 @@ istream &operator>>(istream &stream, ColorBlob &blob) {
 
 }
 
-//friend Color **operator[](int i) const {
-//	return data[i];
-//}
+Color &ColorBlob::operator[](const int i) {
+	return *data[i];
+}
 
 int ColorBlob::getHeight() {
 	return height;
@@ -65,10 +77,3 @@ int ColorBlob::getWidth() {
 Color **ColorBlob::getData() {
 	return data;
 }
-/*
-for (int i = 0; i < height; i++) {
-	for (int j = 0; j < width; j++) {
-
-	}
-}
- */

@@ -46,6 +46,8 @@ public:
 
 	friend istream &operator>>(istream &stream, ColorBlob &blob);
 
+	Color& operator[](const int i);
+
 	int getHeight();
 
 	int getWidth();

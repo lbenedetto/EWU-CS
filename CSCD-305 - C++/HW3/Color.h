@@ -1,6 +1,9 @@
 #ifndef HW3_COLOR_H
 #define HW3_COLOR_H
 
+#include <iostream>
+
+using namespace std;
 
 class Color {
 private:
@@ -16,9 +19,17 @@ public:
 
 	friend bool operator==(const Color &c1, const Color &c2);
 
+	friend bool operator!=(const Color &c1, const Color &c2);
+
 	friend Color operator+(const Color &b1, const Color &b2);
 
 	friend Color operator-(const Color &b1, const Color &b2);
+
+	friend Color operator*(const Color &c1, const Color &c2);
+
+	friend ostream &operator<<(ostream &stream, const Color &c);
+
+	friend istream &operator>>(istream &stream, Color &c);
 
 	double getRed() {
 		return r;
