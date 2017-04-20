@@ -13,7 +13,11 @@ private:
 public:
 	Color() : r(0), g(0), b(0) {}
 
-	Color(double r, double g, double b) : r(r), g(g), b(b) {}
+	Color(double r_, double g_, double b_) {
+		r = min(max(r_, 0.0), 1.0);
+		g = min(max(g_, 0.0), 1.0);
+		b = min(max(b_, 0.0), 1.0);
+	}
 
 	Color(const Color &c) : r(c.r), g(c.g), b(c.b) {}
 

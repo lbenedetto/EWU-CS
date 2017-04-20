@@ -12,14 +12,30 @@ private:
 	int width;
 	int height;
 	Color **data;
+
+	void deleteData() {
+		for (int i = 0; i < height; i++) {
+			delete[] data[i];
+		}
+		delete[] data;
+	}
+
 public:
+	//Destructor
+	~ColorBlob() {
+		if (data != nullptr) {
+			deleteData();
+		}
+	}
+
+	//Default constructor
 	ColorBlob() : ColorBlob(1, 1, {0, 0, 0}) {}
 
+	//Delegating constructor
 	ColorBlob(int width, int height) : ColorBlob(width, height, {0, 0, 0}) {}
 
-	ColorBlob(int width_, int height_, Color color) {
-		width = min(max(width_, 0), 1);
-		height = min(max(height_, 0), 1);
+	//Constructor
+	ColorBlob(int width_, int height_, Color color) : width(width_), height(height_) {
 		data = new Color *[height];
 		for (int i = 0; i < height; i++) {
 			data[i] = new Color[width];
@@ -29,6 +45,7 @@ public:
 		}
 	}
 
+	//Copy constructor
 	ColorBlob(const ColorBlob &blob) : width(blob.width), height(blob.height) {
 		data = new Color *[height];
 		for (int i = 0; i < height; i++) {
@@ -37,6 +54,53 @@ public:
 				data[i][j] = blob.data[i][j];
 			}
 		}
+	}
+
+	//Move constructor
+	ColorBlob(const ColorBlob &&blob) {
+		// Copy the data pointer and its length from the
+		// source object.
+		data = blob.data;
+		height = blob.height;
+		width = blob.width;
+
+		// Release the data pointer from the source object so that
+		// the destructor does not free the memory multiple times.
+//		blob.data = nullptr;
+//		blob.width = 0;
+//		blob.height = 0;
+	}
+
+	//Move assignment operator
+	ColorBlob &operator=(ColorBlob &blob) {
+		if (this != &blob) {
+			// Free the existing resource.
+			deleteData();
+			// Copy the data pointer and its length from the
+			// source object.
+			data = blob.data;
+			height = blob.height;
+			width = blob.width;
+
+			// Release the data pointer from the source object so that
+			// the destructor does not free the memory multiple times.
+			blob.data = nullptr;
+			blob.width = 0;
+			blob.height = 0;
+		}
+		return *this;
+	}
+
+	//Copy assignment operator
+	ColorBlob &operator=(const ColorBlob &blob) {
+		if (this != &blob) {
+			deleteData();
+			width = blob.width;
+			height = blob.height;
+			data = new Color *[height];
+			copy(&blob.data[0][0], &blob.data[0][0] + height * width, &data[0][0]);
+		}
+		return *this;
 	}
 
 	friend bool operator==(const ColorBlob &b1, const ColorBlob &b2);
