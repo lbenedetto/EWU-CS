@@ -47,6 +47,7 @@ public:
 
 	//Copy constructor
 	ColorBlob(const ColorBlob &blob) : width(blob.width), height(blob.height) {
+		cout << "Copy constructor called" << endl;
 		data = new Color *[height];
 		for (int i = 0; i < height; i++) {
 			data[i] = new Color[width];
@@ -57,7 +58,8 @@ public:
 	}
 
 	//Move constructor
-	ColorBlob(const ColorBlob &&blob) {
+	ColorBlob(ColorBlob &&blob) {
+		cout << "Move constructor called" << endl;
 		// Copy the data pointer and its length from the
 		// source object.
 		data = blob.data;
@@ -66,13 +68,14 @@ public:
 
 		// Release the data pointer from the source object so that
 		// the destructor does not free the memory multiple times.
-//		blob.data = nullptr;
-//		blob.width = 0;
-//		blob.height = 0;
+		blob.data = nullptr;
+		blob.width = 0;
+		blob.height = 0;
 	}
 
 	//Move assignment operator
 	ColorBlob &operator=(ColorBlob &blob) {
+		cout << "Move assignment operator called" << endl;
 		if (this != &blob) {
 			// Free the existing resource.
 			deleteData();
@@ -93,12 +96,18 @@ public:
 
 	//Copy assignment operator
 	ColorBlob &operator=(const ColorBlob &blob) {
+		cout << "Copy assignment operator called" << endl;
 		if (this != &blob) {
 			deleteData();
 			width = blob.width;
 			height = blob.height;
 			data = new Color *[height];
-			copy(&blob.data[0][0], &blob.data[0][0] + height * width, &data[0][0]);
+			for (int i = 0; i < height; i++) {
+				data[i] = new Color[width];
+				for (int j = 0; j < width; j++) {
+					data[i][j] = blob.data[i][j];
+				}
+			}
 		}
 		return *this;
 	}

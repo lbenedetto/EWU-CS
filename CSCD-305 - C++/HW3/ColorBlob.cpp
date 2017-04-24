@@ -13,7 +13,7 @@ bool operator==(const ColorBlob &b1, const ColorBlob &b2) {
 ColorBlob operator+(const ColorBlob &b1, const ColorBlob &b2) {
 	int h = min(b1.height, b2.height);
 	int w = min(b1.width, b2.width);
-	ColorBlob blob = ColorBlob(h, w);
+	ColorBlob blob(h, w);
 	for (int i = 0; i < blob.height; i++) {
 		for (int j = 0; j < blob.width; j++) {
 			blob.data[i][j] = b1.data[i][j] + b2.data[i][j];
@@ -35,7 +35,7 @@ ColorBlob operator-(const ColorBlob &b1, const ColorBlob &b2) {
 }
 
 ColorBlob operator*(const ColorBlob &blob, const Color &color) {
-	ColorBlob newBlob = ColorBlob(blob.height, blob.width);
+	ColorBlob newBlob(blob.height, blob.width);
 	for (int i = 0; i < newBlob.height; i++) {
 		for (int j = 0; j < newBlob.width; j++) {
 			newBlob.data[i][j] = blob.data[i][j] * color;
