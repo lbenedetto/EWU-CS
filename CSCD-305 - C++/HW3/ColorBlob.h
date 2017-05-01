@@ -18,6 +18,8 @@ private:
 			delete[] data[i];
 		}
 		delete[] data;
+		width = 0;
+		height = 0;
 	}
 
 public:

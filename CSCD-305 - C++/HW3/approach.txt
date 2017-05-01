@@ -1,0 +1,5 @@
+My approach was to overload all the assignment operators specified with the behavior specified, and then also override
+any other operators I could think of that I thought my be useful. The assignment only specified overloads for ColorBlob,
+and while implementing those, it became apparent that overloading the operators in Color would simplify code logic.
+Not sure what else to say about my approach. I used nested for loops a lot, which is kind of a given because we're
+dealing with a 2D array. I used the built in min and max functions to apply the upper and lower bounds.

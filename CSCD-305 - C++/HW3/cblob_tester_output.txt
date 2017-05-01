@@ -1,0 +1,30 @@
+cBlob = [0,0,0][0,0,0]
+[0,0,0][0,0,0]
+
+Copy constructor called
+.1
+.2
+.3
+.4
+.5
+.6
+7
+8
+.9
+1
+1
+1
+cBlobThree = [0.1,0.2,0.3][0.4,0.5,0.6]
+[1,1,0.9][1,1,1]
+
+cBlobFour = [0,0,0][0,0,0]
+[0,0,0][0,0,0]
+
+cBlobFive= [0,0,0][0,0,0]
+[0,0,0][0,0,0]
+
+1
+cBlobSix= [0,0,0]
+
+Copy assignment operator called
+Move constructor called

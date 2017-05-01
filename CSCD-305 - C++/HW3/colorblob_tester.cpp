@@ -1,6 +1,6 @@
+//Lars Benedetto, compiled with CMake
 #include <iostream>
 #include "ColorBlob.h"
-#include "Color.h"
 
 using namespace std;
 
