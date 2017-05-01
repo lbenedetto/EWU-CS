@@ -40,6 +40,7 @@ public class Connector implements Cloneable {
 
 	public void setParentBox(Box parentBox) {
 		if (parentBox == null) throw new TaskException("parentBox was null");
+		if (this.parentBox != null) throw new TaskException("parent Box already set");
 		this.parentBox = parentBox;
 	}
 

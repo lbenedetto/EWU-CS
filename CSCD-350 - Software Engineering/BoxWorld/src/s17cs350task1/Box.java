@@ -2,7 +2,10 @@ package s17cs350task1;
 
 import javafx.geometry.Point3D;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class Box implements Cloneable {
 	private String id;
@@ -68,10 +71,13 @@ public class Box implements Cloneable {
 	}
 
 	public Point3D getAbsoluteCenterPosition() {
-		Point3D p = new Point3D(0, 0, 0);
-		if (hasConnectorToParent())
+		if (hasConnectorToParent()) {
+			Point3D p = new Point3D(0, 0, 0);
 			p = p.add(parent.getOffsetFromParentBox()).add(parent.getParentBox().getAbsoluteCenterPosition());
-		return p;
+			return p;
+		} else {
+			throw new TaskException("Tree does not have root");
+		}
 	}
 
 	public int getChildBoxCount() {

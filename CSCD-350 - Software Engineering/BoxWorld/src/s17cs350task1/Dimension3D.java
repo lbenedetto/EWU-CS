@@ -6,6 +6,7 @@ public class Dimension3D implements Cloneable {
 	private double depth;
 
 	public Dimension3D(double width, double height, double depth) {
+		if (width < 0 || height < 0 || depth < 0) throw new TaskException("Invalid box size");
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
