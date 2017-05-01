@@ -20,7 +20,7 @@ int main() {
 	cout << !cBlobFive << endl;
 	ColorBlob cBlobSix;
 	cout << "cBlobSix= " << cBlobSix << endl;
-	cBlobSix = std::move(cBlobFive);
-	ColorBlob cBlobSeven = std::move(cBlobOne);
+	cBlobSix = move(cBlobFive);
+	ColorBlob cBlobSeven = move(cBlobOne);
 	return 0;
 }
