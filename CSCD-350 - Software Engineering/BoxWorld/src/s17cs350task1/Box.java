@@ -157,4 +157,66 @@ public class Box implements Cloneable {
 			return o1.id.compareTo(o2.id);
 		}
 	}
+
+	/*
+	   NEW FUNCTIONALITY
+	 */
+	public double NEW_calculateAreaAll(BoundingBox.E_Plane plane) {
+		double d = 0;
+		for (Box b : getDescendantBoxes()) {
+			d += b.NEW_calculateAreaSelf(plane);
+		}
+		return d;
+	}
+
+	public double NEW_calculateAreaSelf(BoundingBox.E_Plane plane) {
+		return new BoundingBox(getAbsoluteCenterPosition(), size).calculateArea(plane);
+	}
+
+	public Point3D NEW_calculateCenterOfMassAll() {
+		return NEW_generateBoundingBoxAll().getCenter();
+	}
+
+	public Point3D NEW_calculateCenterOfMassSelf() {
+		return getAbsoluteCenterPosition();
+	}
+
+	public BoundingBox NEW_generateBoundingBoxAll() {
+		BoundingBox bb = NEW_generateBoundingBoxSelf();
+		for (Box b : getDescendantBoxes()) {
+			bb = bb.extend(b.NEW_generateBoundingBoxSelf());
+		}
+		return bb;
+	}
+
+	public BoundingBox NEW_generateBoundingBoxSelf() {
+		return new BoundingBox(getAbsoluteCenterPosition(), size);
+	}
+
+	public double NEW_calculateVolumeAll() {
+		double d = 0;
+		for (Box b : getDescendantBoxes()) {
+			d += b.NEW_calculateVolumeSelf();
+		}
+		return d;
+	}
+
+	public double NEW_calculateVolumeSelf() {
+		return NEW_generateBoundingBoxSelf().calculateVolume();
+	}
+
+	public List<List<Point3D>> NEW_generateFramesAll() {
+		List<List<Point3D>> points = new ArrayList<>();
+		for (Box b : getDescendantBoxes()) {
+			points.add(b.NEW_generateFramesSelf());
+		}
+		return points;
+	}
+
+	public List<Point3D> NEW_generateFramesSelf() {
+		List<Point3D> points = new ArrayList<>();
+		points.add(getAbsoluteCenterPosition());
+		points.addAll(NEW_generateBoundingBoxSelf().generateCorners());
+		return points;
+	}
 }
