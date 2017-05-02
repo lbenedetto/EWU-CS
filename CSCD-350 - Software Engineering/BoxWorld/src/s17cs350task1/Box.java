@@ -65,19 +65,19 @@ public class Box implements Cloneable {
 		boxes.add(b);
 		ArrayList<String> ids = new ArrayList<>();
 		for (Box box : boxes) {
-			ids.add(box.id);
+			ids.add(box.id.toLowerCase());
 		}
 		return ids;
 	}
 
 	public Point3D getAbsoluteCenterPosition() {
+		Point3D p = new Point3D(0, 0, 0);
 		if (hasConnectorToParent()) {
-			Point3D p = new Point3D(0, 0, 0);
 			p = p.add(parent.getOffsetFromParentBox()).add(parent.getParentBox().getAbsoluteCenterPosition());
-			return p;
-		} else {
+		} else if (!isRoot) {
 			throw new TaskException("Tree does not have root");
 		}
+		return p;
 	}
 
 	public int getChildBoxCount() {
@@ -92,7 +92,9 @@ public class Box implements Cloneable {
 	}
 
 	public List<Connector> getConnectorsToChildren() {
-		return children;
+		ArrayList<Connector> temp = new ArrayList<>();
+		temp.addAll(children);
+		return temp;
 	}
 
 	public Connector getConnectorToParent() {
