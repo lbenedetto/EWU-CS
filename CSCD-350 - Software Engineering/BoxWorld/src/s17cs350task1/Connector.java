@@ -19,6 +19,7 @@ public class Connector implements Cloneable {
 	public Connector clone() throws CloneNotSupportedException {
 		Connector clone = (Connector) super.clone();
 		clone.offset = new Point3D(offset.getX(), offset.getY(), offset.getZ());
+		clone.parentBox = null;
 		clone.childBox = childBox.clone();
 		return clone;
 	}
