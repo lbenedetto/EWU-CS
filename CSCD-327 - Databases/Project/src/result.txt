@@ -1,0 +1,87 @@
+******** Query 0 ********
+name
+Zhang
+Shankar
+Peltier
+Levy
+Williams
+Brown
+Bourikas
+******** Query 1 ********
+id             name           GPA            
+00128          Zhang          3.858571428571428
+12345          Shankar        3.4285714285714284
+19991          Brandt         3              
+23121          Chavez         2.33           
+44553          Peltier        2.67           
+54321          Williams       3.5            
+55739          Sanchez        3.67           
+76543          Brown          4              
+76653          Aoi            2              
+98988          Tanaka         2              
+******** Query 2 ********
+course_id                     title                         sec_id                        semester                      year                          name                          enrollment                    
+BIO-101                       Intro. to Biology             1                             Summer                        2009                          Crick                         1                             
+BIO-301                       Genetics                      1                             Summer                        2010                          Crick                         1                             
+CS-101                        Intro. to Computer Science    1                             Fall                          2009                          Srinivasan                    6                             
+CS-190                        Game Design                   2                             Spring                        2009                          Brandt                        2                             
+CS-319                        Image Processing              1                             Spring                        2010                          Katz                          1                             
+CS-319                        Image Processing              2                             Spring                        2010                          Brandt                        1                             
+CS-347                        Database System Concepts      1                             Fall                          2009                          Srinivasan                    2                             
+EE-181                        Intro. to Digital Systems     1                             Spring                        2009                          Kim                           1                             
+FIN-201                       Investment Banking            1                             Spring                        2010                          Wu                            1                             
+HIS-351                       World History                 1                             Spring                        2010                          El Said                       1                             
+PHY-101                       Physical Principles           1                             Fall                          2009                          Einstein                      1                             
+******** Query 3 ********
+name
+Srinivasan
+Brandt
+******** Query 4 ********
+course                        prereq                        
+Intro. to Biology             null                          
+Genetics                      Intro. to Biology             
+Computational Biology         Intro. to Biology             
+Intro. to Computer Science    null                          
+Game Design                   Intro. to Computer Science    
+Robotics                      Intro. to Computer Science    
+Image Processing              Intro. to Computer Science    
+Database System Concepts      Intro. to Computer Science    
+Intro. to Digital Systems     Physical Principles           
+Investment Banking            null                          
+World History                 null                          
+Music Video Production        null                          
+Physical Principles           null                          
+******** Query 5 ********
+id             name           dept_name      tot_cred       
+00128          Zhang          Comp. Sci.     7              
+12345          Shankar        Comp. Sci.     14             
+19991          Brandt         History        3              
+23121          Chavez         Finance        3              
+44553          Peltier        Physics        4              
+45678          Levy           Physics        7              
+54321          Williams       Comp. Sci.     8              
+55739          Sanchez        Music          3              
+70557          Snow           Physics        0              
+76543          Brown          Comp. Sci.     7              
+76653          Aoi            Elec. Eng.     3              
+98765          Bourikas       Elec. Eng.     7              
+98988          Tanaka         Biology        4              
+******** Query 6 ********
+id             name           First_Semester Last_Semester  
+00128          Zhang          Fall 2009      Fall 2009      
+12345          Shankar        Spring 2009    Spring 2010    
+19991          Brandt         Spring 2010    Spring 2010    
+23121          Chavez         Spring 2010    Spring 2010    
+44553          Peltier        Fall 2009      Fall 2009      
+45678          Levy           Fall 2009      Spring 2010    
+54321          Williams       Spring 2009    Fall 2009      
+55739          Sanchez        Spring 2010    Spring 2010    
+76543          Brown          Fall 2009      Spring 2010    
+76653          Aoi            Spring 2009    Spring 2009    
+98765          Bourikas       Fall 2009      Spring 2010    
+98988          Tanaka         Summer 2009    Summer 2010    
+******** Query 7 ********
+Please enter the department name for the query: Music
+Music
+Music Department has 1 instructors
+Music Department has 1 students
