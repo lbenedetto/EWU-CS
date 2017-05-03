@@ -4,8 +4,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.Assert.*;
+import s17cs350task1.Box;
 
 public class BoxTest {
+	private static Box b1, b2, b3, b4, b5;
 	@BeforeClass
 	public static void setUpClass() {
 		//Runs once
@@ -13,6 +15,7 @@ public class BoxTest {
 
 	@Before
 	public void setUp() {
+		//b1 = new Box();
 		//Runs before each test
 	}
 

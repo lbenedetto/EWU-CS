@@ -45,13 +45,14 @@ public class BoundingBox implements Cloneable {
 		double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE, maxZ = Double.MIN_VALUE;
 		double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE, minZ = Double.MAX_VALUE;
 		for (int i = 0; i < 16; i++) {
-			double x = corners.get(i).getX();
+			Point3D p = corners.get(i);
+			double x = p.getX();
 			maxX = Math.max(maxX, x);
 			minX = Math.min(minX, x);
-			double y = corners.get(i).getY();
+			double y = p.getY();
 			maxY = Math.max(maxX, y);
 			minY = Math.min(minX, y);
-			double z = corners.get(i).getZ();
+			double z = p.getZ();
 			maxZ = Math.max(maxZ, z);
 			minZ = Math.min(minZ, z);
 		}

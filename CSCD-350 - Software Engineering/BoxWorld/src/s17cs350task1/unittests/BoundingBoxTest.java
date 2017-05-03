@@ -16,7 +16,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class BoundingBoxTest {
-	private static Box b1, b2, b3, b4, b5;
 	private static BoundingBox bb1, bb2;
 
 	@BeforeClass
