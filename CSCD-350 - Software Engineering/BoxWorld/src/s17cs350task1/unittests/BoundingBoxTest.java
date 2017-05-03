@@ -65,7 +65,11 @@ public class BoundingBoxTest {
 
 	@Test
 	public void test_extend() {
-
+		bb1 = new BoundingBox(new Point3D(0, 0, 0), new Dimension3D(1, 1, 1));
+		bb2 = new BoundingBox(new Point3D(10, 10, 10.0001), new Dimension3D(1.1, 1.01, 1.001));
+		BoundingBox actual = bb1.extend(bb2);
+		assertEquals(new Point3D(5.025, 5.025, 5.0003), actual.getCenter());
+		assertEquals(new Dimension3D(11.05, 11.05, 11.0006), actual.getSize());
 	}
 
 	@Test
