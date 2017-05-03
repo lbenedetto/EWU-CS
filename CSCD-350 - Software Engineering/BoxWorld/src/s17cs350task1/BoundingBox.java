@@ -32,7 +32,7 @@ public class BoundingBox implements Cloneable {
 			case YZ:
 				return (size.getDepth() * size.getHeight()) * 2;
 		}
-		return 0;//TODO: Throw exception instead?
+		throw new TaskException("The universe is broken");
 	}
 
 	public double calculateVolume() {
@@ -40,10 +40,27 @@ public class BoundingBox implements Cloneable {
 	}
 
 	public BoundingBox extend(BoundingBox boundingBox) {
-		List<Point3D> b1Corners = this.generateCorners();
-		List<Point3D> b2Corners = boundingBox.generateCorners();
-		//TODO:Figure out how to do this
-		return new BoundingBox(this.center, this.size);
+		List<Point3D> corners = this.generateCorners();
+		corners.addAll(boundingBox.generateCorners());
+		double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE, maxZ = Double.MIN_VALUE;
+		double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE, minZ = Double.MAX_VALUE;
+		for (int i = 0; i < 16; i++) {
+			double x = corners.get(i).getX();
+			maxX = Math.max(maxX, x);
+			minX = Math.min(minX, x);
+			double y = corners.get(i).getY();
+			maxY = Math.max(maxX, y);
+			minY = Math.min(minX, y);
+			double z = corners.get(i).getZ();
+			maxZ = Math.max(maxZ, z);
+			minZ = Math.min(minZ, z);
+		}
+		double w, h, d;
+		w = maxX - minX;
+		h = maxY - minY;
+		d = maxZ - minZ;
+		return new BoundingBox(new Point3D(maxX - (w / 2), maxY - (h / 2), maxZ - (d / 2)),
+				new Dimension3D(w, h, d));
 	}
 
 	public List<Point3D> generateCorners() {
@@ -67,7 +84,7 @@ public class BoundingBox implements Cloneable {
 	}
 
 	public Point3D getCenter() {
-		return center;
+		return new Point3D(center.getX(), center.getY(), center.getZ());
 	}
 
 	public Dimension3D getSize() {
@@ -75,7 +92,7 @@ public class BoundingBox implements Cloneable {
 	}
 
 	public String toString() {
-		return "[" + center.toString() + "," + size.toString() + "]";
+		return String.format("[%s, %s]", center.toString(), size.toString());
 	}
 
 	public enum E_Plane implements Serializable, Comparable<E_Plane> {

@@ -46,6 +46,6 @@ public class Dimension3D implements Cloneable {
 
 	@Override
 	public String toString() {
-		return "[" + width + " " + height + " " + depth + "]";
+		return String.format("Dimension3D [w = %s, h = %s, d = %s]", width, height, depth);
 	}
 }
