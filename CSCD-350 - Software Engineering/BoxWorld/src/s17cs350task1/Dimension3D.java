@@ -48,4 +48,10 @@ public class Dimension3D implements Cloneable {
 	public String toString() {
 		return String.format("Dimension3D [w = %s, h = %s, d = %s]", width, height, depth);
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		Dimension3D that = (Dimension3D) o;
+		return (that != null && this.height == that.height && this.width == that.width && this.depth == that.depth);
+	}
 }

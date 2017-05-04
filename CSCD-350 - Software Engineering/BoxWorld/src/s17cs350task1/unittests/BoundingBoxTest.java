@@ -16,7 +16,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class BoundingBoxTest {
-	private static Box b1, b2, b3, b4, b5;
 	private static BoundingBox bb1, bb2;
 
 	@BeforeClass
@@ -65,7 +64,12 @@ public class BoundingBoxTest {
 
 	@Test
 	public void test_extend() {
-
+		BoundingBox actual = bb1.extend(bb2);
+		assertEquals(new Point3D(5.025, 5.025, 5.0003), actual.getCenter());
+		assertEquals(new Dimension3D(11.05, 11.05, 11.0006), actual.getSize());
+		actual = bb1.extend(bb1);
+		assertEquals(new Point3D(0, 0, 0), actual.getCenter());
+		assertEquals(new Dimension3D(1, 1, 1), actual.getSize());
 	}
 
 	@Test
