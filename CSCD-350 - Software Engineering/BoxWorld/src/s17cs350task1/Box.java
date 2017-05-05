@@ -140,7 +140,10 @@ public class Box implements Cloneable {
 
 	@Override
 	public String toString() {
-		return "ComponentBox[id=\'" + id + "\' isRoot=" + isRoot + " size=" + size;
+		StringBuilder out = new StringBuilder(String.format("Box[id='%s', isRoot=%s, size=%s]", id, isRoot, size));
+		for(Connector c : children)
+			out.append("\n").append(c.toString());
+		return out.toString().replaceAll("\n", "\n\t");
 	}
 
 	@Override

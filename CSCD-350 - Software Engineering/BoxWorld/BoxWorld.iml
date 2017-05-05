@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" scope="TEST">
+    <orderEntry type="module-library" scope="PROVIDED">
       <library name="JUnit5">
         <CLASSES>
           <root url="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/junit-jupiter-api-5.0.0-M4.jar!/" />
@@ -17,15 +17,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/lib/groovy-all-2.4.6.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="Arquillian JUnit:Release" level="project" />
   </component>
 </module>

@@ -52,7 +52,8 @@ public class Connector implements Cloneable {
 
 	@Override
 	public String toString() {
-		return parentBox.toString() + " -> " + childBox.toString();
+		boolean parent = (parentBox != null && parentBox.getConnectorsToChildren().contains(this));
+		return String.format("Connector[GoodParent=%s, offset=%s] -> %s", parent, offset, childBox);
 	}
 
 	@Override

@@ -1,79 +1,80 @@
 package s17cs350task1.unittests;
 
 import javafx.geometry.Point3D;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import s17cs350task1.BoundingBox;
-import s17cs350task1.Box;
 import s17cs350task1.Dimension3D;
+import s17cs350task1.TaskException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BoundingBoxTest {
 	private static BoundingBox bb1, bb2;
 
-	@BeforeClass
-	public static void setUpClass() {
+	@BeforeAll
+	static void setUpClass() {
 		//Runs once
 		bb1 = new BoundingBox(new Point3D(0, 0, 0), new Dimension3D(1, 1, 1));
 		bb2 = new BoundingBox(new Point3D(10, 10, 10.0001), new Dimension3D(1.1, 1.01, 1.001));
 	}
 
-	@Before
-	public void setUp() {
+	public static void testAll() throws Exception {
+		BoundingBoxTest bbt = new BoundingBoxTest();
+		BoundingBoxTest.setUpClass();
+		bbt.test_clone();
+		bbt.test_calculateArea();
+		bbt.test_calculateVolume();
+		bbt.test_extend();
+		bbt.test_generateCorners();
+		bbt.test_toString();
 	}
 
 	@Test
-	public void test_clone() {
-		try {
-			BoundingBox clone1 = bb1.clone();
-			assertNotEquals(bb1, clone1);
-			assertEquals(bb1.toString(), clone1.toString());
-			BoundingBox clone2 = bb2.clone();
-			assertNotEquals(bb2, clone2);
-			assertEquals(bb2.toString(), clone2.toString());
-		} catch (CloneNotSupportedException e) {
-
-		}
+	void test_clone() throws CloneNotSupportedException {
+		BoundingBox clone1 = bb1.clone();
+		assertNotEquals(bb1, clone1);
+		assertEquals(bb1.toString(), clone1.toString());
+		BoundingBox clone2 = bb2.clone();
+		assertNotEquals(bb2, clone2);
+		assertEquals(bb2.toString(), clone2.toString());
 	}
 
 	@Test
-	public void test_calculateArea() {
-		assertEquals(2, bb1.calculateArea(BoundingBox.E_Plane.XY), 0);
-		assertEquals(2, bb1.calculateArea(BoundingBox.E_Plane.XZ), 0);
-		assertEquals(2, bb1.calculateArea(BoundingBox.E_Plane.YZ), 0);
-		assertEquals(2.2220000000000004, bb2.calculateArea(BoundingBox.E_Plane.XY), 0);
-		assertEquals(2.2022, bb2.calculateArea(BoundingBox.E_Plane.XZ), 0);
-		assertEquals(2.02202, bb2.calculateArea(BoundingBox.E_Plane.YZ), 0);
+	void test_calculateArea() {
+		assertEquals(2, bb1.calculateArea(BoundingBox.E_Plane.XY));
+		assertEquals(2, bb1.calculateArea(BoundingBox.E_Plane.XZ));
+		assertEquals(2, bb1.calculateArea(BoundingBox.E_Plane.YZ));
+		assertEquals(2.2220000000000004, bb2.calculateArea(BoundingBox.E_Plane.XY));
+		assertEquals(2.2022, bb2.calculateArea(BoundingBox.E_Plane.XZ));
+		assertEquals(2.02202, bb2.calculateArea(BoundingBox.E_Plane.YZ));
 	}
 
 	@Test
-	public void test_calculateVolume() {
+	void test_calculateVolume() {
 		double actual;
 		actual = bb1.calculateVolume();
-		assertEquals(1, actual, 0);
+		assertEquals(1, actual);
 		actual = bb2.calculateVolume();
-		assertEquals(1.112111, actual, 0);
+		assertEquals(1.112111, actual);
 	}
 
 	@Test
-	public void test_extend() {
+	void test_extend() {
 		BoundingBox actual = bb1.extend(bb2);
 		assertEquals(new Point3D(5.025, 5.025, 5.0003), actual.getCenter());
 		assertEquals(new Dimension3D(11.05, 11.05, 11.0006), actual.getSize());
 		actual = bb1.extend(bb1);
 		assertEquals(new Point3D(0, 0, 0), actual.getCenter());
 		assertEquals(new Dimension3D(1, 1, 1), actual.getSize());
+		assertThrows(TaskException.class, () -> bb1.extend(null));
 	}
 
 	@Test
-	public void test_generateCorners() {
+	void test_generateCorners() {
 		List<Point3D> actual = bb1.generateCorners();
 		assertEquals(8, actual.size());
 		List<Point3D> expected = new ArrayList<>();
@@ -117,7 +118,7 @@ public class BoundingBoxTest {
 	}
 
 	@Test
-	public void test_toString() {
+	void test_toString() {
 		String actual, expected;
 		actual = bb1.toString();
 		expected = "[Point3D [x = 0.0, y = 0.0, z = 0.0], Dimension3D [w = 1.0, h = 1.0, d = 1.0]]";
@@ -126,5 +127,4 @@ public class BoundingBoxTest {
 		expected = "[Point3D [x = 10.0, y = 10.0, z = 10.0001], Dimension3D [w = 1.1, h = 1.01, d = 1.001]]";
 		assertEquals(expected, actual);
 	}
-
 }

@@ -40,6 +40,8 @@ public class BoundingBox implements Cloneable {
 	}
 
 	public BoundingBox extend(BoundingBox boundingBox) {
+		if (boundingBox == null)
+			throw new TaskException("Bounding box was null");
 		List<Point3D> corners = this.generateCorners();
 		corners.addAll(boundingBox.generateCorners());
 		double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE, maxZ = Double.MIN_VALUE;
@@ -89,7 +91,7 @@ public class BoundingBox implements Cloneable {
 	}
 
 	public Dimension3D getSize() {
-		return size;
+		return new Dimension3D(size.getWidth(), size.getHeight(), size.getDepth());
 	}
 
 	public String toString() {
