@@ -127,7 +127,7 @@ public class Box implements Cloneable {
 	}
 
 	public Dimension3D getSize() {
-		return size;
+		return new Dimension3D(size.getWidth(), size.getHeight(), size.getDepth());
 	}
 
 	public boolean hasConnectorToParent() {
@@ -141,7 +141,7 @@ public class Box implements Cloneable {
 	@Override
 	public String toString() {
 		StringBuilder out = new StringBuilder(String.format("Box[id='%s', isRoot=%s, size=%s]", id, isRoot, size));
-		for(Connector c : children)
+		for (Connector c : children)
 			out.append("\n").append(c.toString());
 		return out.toString().replaceAll("\n", "\n\t");
 	}
@@ -167,7 +167,9 @@ public class Box implements Cloneable {
 	   NEW FUNCTIONALITY
 	 */
 	public double NEW_calculateAreaAll(BoundingBox.E_Plane plane) {
-		double d = 0;
+		if (plane == null)
+			throw new TaskException("Plane was null");
+		double d = NEW_calculateAreaSelf(plane);
 		for (Box b : getDescendantBoxes()) {
 			d += b.NEW_calculateAreaSelf(plane);
 		}
@@ -175,7 +177,9 @@ public class Box implements Cloneable {
 	}
 
 	public double NEW_calculateAreaSelf(BoundingBox.E_Plane plane) {
-		return new BoundingBox(getAbsoluteCenterPosition(), size).calculateArea(plane);
+		if (plane == null)
+			throw new TaskException("Plane was null");
+		return NEW_generateBoundingBoxSelf().calculateArea(plane);
 	}
 
 	public Point3D NEW_calculateCenterOfMassAll() {

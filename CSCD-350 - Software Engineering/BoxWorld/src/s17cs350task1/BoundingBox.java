@@ -24,6 +24,8 @@ public class BoundingBox implements Cloneable {
 	}
 
 	public double calculateArea(E_Plane plane) {
+		if (plane == null)
+			throw new TaskException("Plane was null");
 		switch (plane) {
 			case XY:
 				return (size.getWidth() * size.getHeight()) * 2;

@@ -17,19 +17,18 @@ main:
   # $t1 index
   # $t2 number of occurances
   # $t3 the array
-  # $t4 the absolute address
-  # $t5 the value at the ix
+  # $t4 the value at the ix
 
     li $t1, 0
     li $t2, 0
     la $t3, numbers
   loop:
     bgt $t1,12,exit # for 0 through 12
-    add $t4, $t1, $t3 # find the address of that index
-    lw $t5, 0($t4) # put the value at ix in $t5
-    bne $t0, $t5, L1 # if != jump to incrementer
+    lw $t4, 0($t3) # put the value at ix in $t5
+    bne $t0, $t4, L1 # if != jump to incrementer
     addi $t2, $t2, 1 # if == increment num occurances
-    L1: addi $t1,$t1,4 # increment ix by 1 (4 bytes)
+    L1: addi $t1,$t1,1 # increment ix by 1
+    addi $t3, $t3, 4 # increment address by 4
     j loop
 
   exit:
