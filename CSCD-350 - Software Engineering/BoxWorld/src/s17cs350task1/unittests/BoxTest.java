@@ -39,7 +39,6 @@ public class BoxTest {
 		bt.test_getDescendantBoxes();
 		bt.test_getSize();
 		bt.test_hasConnectorToParent();
-		bt.test_isRoot();
 		bt.test_toString();
 		bt.test_equals();
 		bt.test_NEW_calculateCenterOfMassAll();
@@ -48,8 +47,6 @@ public class BoxTest {
 		bt.test_NEW_generateBoundingBoxSelf();
 		bt.test_NEW_calculateVolumeAll();
 		bt.test_NEW_calculateVolumeSelf();
-		bt.test_NEW_generateFramesAll();
-		bt.test_NEW_generateFramesSelf();
 	}
 
 	private static void connectBoxes(Box b1, Box b2) {
@@ -158,10 +155,6 @@ public class BoxTest {
 	}
 
 	@Test
-	void test_isRoot() {
-	}
-
-	@Test
 	void test_toString() {
 		String expected = "Box[id='Box1', isRoot=true, size=Dimension3D [w = 1.0, h = 1.0, d = 1.0]]" +
 				"\n\tConnector[GoodParent=true, offset=Point3D [x = 5.0, y = 5.0, z = 5.0]] -> Box[id='Box2', isRoot=false, size=Dimension3D [w = 2.0, h = 2.0, d = 2.0]]" +
@@ -195,7 +188,6 @@ public class BoxTest {
 		assertEquals(58, b2.NEW_calculateAreaAll(XZ));
 		assertEquals(58, b2.NEW_calculateAreaAll(YZ));
 		assertThrows(TaskException.class, () -> b1.NEW_calculateAreaAll(null));
-
 	}
 
 	@Test
@@ -242,18 +234,15 @@ public class BoxTest {
 
 	@Test
 	void test_NEW_calculateVolumeAll() {
+		assertEquals(100, b1.NEW_calculateVolumeAll());
+		assertEquals(99, b2.NEW_calculateVolumeAll());
+		assertThrows(TaskException.class, () -> b8.NEW_calculateVolumeAll());
 	}
 
 	@Test
 	void test_NEW_calculateVolumeSelf() {
+		assertThrows(TaskException.class, () -> b8.NEW_calculateVolumeSelf());
+		b1.connectChild(new Connector(b8, new Point3D(5, 5, 5)));
+		assertEquals(2 * 3 * 4, b8.NEW_calculateVolumeSelf());
 	}
-
-	@Test
-	void test_NEW_generateFramesAll() {
-	}
-
-	@Test
-	void test_NEW_generateFramesSelf() {
-	}
-
 }

@@ -203,7 +203,7 @@ public class Box implements Cloneable {
 	}
 
 	public double NEW_calculateVolumeAll() {
-		double d = 0;
+		double d = NEW_calculateVolumeSelf();
 		for (Box b : getDescendantBoxes()) {
 			d += b.NEW_calculateVolumeSelf();
 		}
