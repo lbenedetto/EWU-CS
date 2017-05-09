@@ -54,8 +54,8 @@ public class BoundingBox implements Cloneable {
 			maxX = Math.max(maxX, x);
 			minX = Math.min(minX, x);
 			double y = p.getY();
-			maxY = Math.max(maxX, y);
-			minY = Math.min(minX, y);
+			maxY = Math.max(maxY, y);
+			minY = Math.min(minY, y);
 			double z = p.getZ();
 			maxZ = Math.max(maxZ, z);
 			minZ = Math.min(minZ, z);

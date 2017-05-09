@@ -21,56 +21,34 @@ public class BoxTest {
 	public static void testAll() throws Exception {
 		BoxTest bt = new BoxTest();
 		bt.setUp();
-		bt.test_clone();
-		bt.setUp();
 		bt.test_connectChild();
 		bt.setUp();
-		bt.test_getAbsoluteCenterPosition();
-		bt.setUp();
-		bt.test_getChildBoxCount();
-		bt.setUp();
-		bt.test_getChildBoxes();
-		bt.setUp();
-		bt.test_getConnectorsToChildren();
-		bt.setUp();
-		bt.test_getConnectorToParent();
-		bt.setUp();
 		bt.test_setConnectorToParent();
-		bt.setUp();
-		bt.test_getDescendantBoxCount();
-		bt.setUp();
-		bt.test_getDescendantBoxes();
-		bt.setUp();
-		bt.test_getID();
-		bt.setUp();
-		bt.test_getSize();
-		bt.setUp();
-		bt.test_hasConnectorToParent();
-		bt.setUp();
-		bt.test_isRoot();
-		bt.setUp();
-		bt.test_toString();
-		bt.setUp();
-		bt.test_equals();
 		bt.setUp();
 		bt.test_NEW_calculateAreaAll();
 		bt.setUp();
 		bt.test_NEW_calculateAreaSelf();
 		bt.setUp();
+		bt.test_clone();
+		bt.test_getAbsoluteCenterPosition();
+		bt.test_getChildBoxCount();
+		bt.test_getChildBoxes();
+		bt.test_getConnectorsToChildren();
+		bt.test_getConnectorToParent();
+		bt.test_getDescendantBoxCount();
+		bt.test_getDescendantBoxes();
+		bt.test_getSize();
+		bt.test_hasConnectorToParent();
+		bt.test_isRoot();
+		bt.test_toString();
+		bt.test_equals();
 		bt.test_NEW_calculateCenterOfMassAll();
-		bt.setUp();
 		bt.test_NEW_calculateCenterOfMassSelf();
-		bt.setUp();
 		bt.test_NEW_generateBoundingBoxAll();
-		bt.setUp();
 		bt.test_NEW_generateBoundingBoxSelf();
-		bt.setUp();
 		bt.test_NEW_calculateVolumeAll();
-		bt.setUp();
 		bt.test_NEW_calculateVolumeSelf();
-		bt.setUp();
 		bt.test_NEW_generateFramesAll();
-		bt.setUp();
 		bt.test_NEW_generateFramesSelf();
 	}
 
@@ -170,11 +148,9 @@ public class BoxTest {
 	}
 
 	@Test
-	void test_getID() {
-	}
-
-	@Test
 	void test_getSize() {
+		assertEquals(new Dimension3D(2, 3, 4), b8.getSize());
+		assertFalse(b8.getSize() == b8.getSize());
 	}
 
 	@Test
