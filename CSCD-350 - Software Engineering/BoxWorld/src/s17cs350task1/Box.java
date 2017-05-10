@@ -216,6 +216,7 @@ public class Box implements Cloneable {
 
 	public List<List<Point3D>> NEW_generateFramesAll() {
 		List<List<Point3D>> points = new ArrayList<>();
+		points.add(NEW_generateFramesSelf());
 		for (Box b : getDescendantBoxes()) {
 			points.add(b.NEW_generateFramesSelf());
 		}
