@@ -22,17 +22,6 @@ public class BoundingBoxTest {
 		bb2 = new BoundingBox(new Point3D(10, 10, 10.0001), new Dimension3D(1.1, 1.01, 1.001));
 	}
 
-	public static void testAll() throws Exception {
-		BoundingBoxTest bbt = new BoundingBoxTest();
-		BoundingBoxTest.setUpClass();
-		bbt.test_clone();
-		bbt.test_calculateArea();
-		bbt.test_calculateVolume();
-		bbt.test_extend();
-		bbt.test_generateCorners();
-		bbt.test_toString();
-	}
-
 	@Test
 	void test_clone() throws CloneNotSupportedException {
 		BoundingBox clone1 = bb1.clone();

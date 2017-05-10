@@ -14,41 +14,6 @@ import static s17cs350task1.BoundingBox.E_Plane.*;
 public class BoxTest {
 	private static Box b1, b2, b3, b4, b5, b6, b7, b8;
 
-	/**
-	 * Use this code for code coverage testing.
-	 * This is will not tell if you if the tests passed, only if they ran
-	 */
-	public static void testAll() throws Exception {
-		BoxTest bt = new BoxTest();
-		bt.setUp();
-		bt.test_connectChild();
-		bt.setUp();
-		bt.test_setConnectorToParent();
-		bt.setUp();
-		bt.test_NEW_calculateAreaAll();
-		bt.setUp();
-		bt.test_NEW_calculateAreaSelf();
-		bt.setUp();
-		bt.test_clone();
-		bt.test_getAbsoluteCenterPosition();
-		bt.test_getChildBoxCount();
-		bt.test_getChildBoxes();
-		bt.test_getConnectorsToChildren();
-		bt.test_getConnectorToParent();
-		bt.test_getDescendantBoxCount();
-		bt.test_getDescendantBoxes();
-		bt.test_getSize();
-		bt.test_hasConnectorToParent();
-		bt.test_toString();
-		bt.test_equals();
-		bt.test_NEW_calculateCenterOfMassAll();
-		bt.test_NEW_calculateCenterOfMassSelf();
-		bt.test_NEW_generateBoundingBoxAll();
-		bt.test_NEW_generateBoundingBoxSelf();
-		bt.test_NEW_calculateVolumeAll();
-		bt.test_NEW_calculateVolumeSelf();
-	}
-
 	private static void connectBoxes(Box b1, Box b2) {
 		Connector c1 = new Connector(b2, new Point3D(5, 5, 5));
 		b1.connectChild(c1);
