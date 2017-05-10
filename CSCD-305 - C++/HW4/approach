@@ -1,0 +1,15 @@
+When loadCityInformation is called the file is opened into an ifstream
+getline grabs the next line of the file, which is subsequently turned
+into an istringstream. The first char is loaded into a controlCharacter variable
+which decides how to interpret the following 3 numbers
+
+If the character is p, the next three values will be interpreted as xyz coords
+and pushed into the cityCoordinates vector as a new Point3D. The current city index
+is also added to the vector of city indexes
+
+If the character is c will be interpreted as city index and will be used to
+generate city connectivity, by adding every combination of the 3 ints to the
+cityConnectivity map<int, vector>
+
+The implementation of the other functions is trivial,
+and are left as an exercise for the reader ;)
