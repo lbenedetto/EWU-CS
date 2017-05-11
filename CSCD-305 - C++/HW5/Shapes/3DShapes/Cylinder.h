@@ -1,5 +1,5 @@
-#ifndef HW_5_CYLINDER_H
-#define HW_5_CYLINDER_H
+#ifndef HW5_CYLINDER_H
+#define HW5_CYLINDER_H
 
 
 #include "../Shape3D.h"
@@ -12,13 +12,13 @@ public:
 
 	Cylinder() : radius(1), height(1) {}
 
-	void printShapeDetail() const;
+	void printShapeDetail();
 
-	double computeArea() const;
+	double computeArea();
 
-	double computeVolume() const;
+	double computeVolume();
 
 };
 
 
-#endif //HW_5_CYLINDER_H
+#endif //HW5_CYLINDER_H

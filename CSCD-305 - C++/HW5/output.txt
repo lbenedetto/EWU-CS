@@ -1,0 +1,6 @@
+Shape 0: Circle, 2D Shape, radius: 2.1, Area: 13.8544.
+Shape 1: Rectangle, 2D Shape, width: 3.1, height: 1.2, Area: 3.72.
+Shape 2: Triangle, 2D Shape, base: 3, height: 4, Area: 6.
+Shape 3: Box, 3D Shape, width: 4.5, height: 4.5, depth: 6, Area: 148.5, Volume: 121.5.
+Shape 4: Sphere, 3D Shape, radius: 6, Area: 452.389, Volume: 904.779.
+Shape 5: Cylinder, 3D Shape, radius: 3, height: 4, Area: 131.947, Volume: 113.097.

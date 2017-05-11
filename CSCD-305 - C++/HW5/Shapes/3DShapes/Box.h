@@ -1,5 +1,5 @@
-#ifndef HW_5_BOX_H
-#define HW_5_BOX_H
+#ifndef HW5_BOX_H
+#define HW5_BOX_H
 
 
 #include "../Shape3D.h"
@@ -12,12 +12,12 @@ public:
 
 	Box() : width(1), height(1), depth(1) {}
 
-	void printShapeDetail() const;
+	void printShapeDetail();
 
-	double computeArea() const;
+	double computeArea();
 
-	double computeVolume() const;
+	double computeVolume();
 };
 
 
-#endif //HW_5_BOX_H
+#endif //HW5_BOX_H

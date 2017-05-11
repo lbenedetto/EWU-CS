@@ -1,5 +1,5 @@
-#ifndef HW_5_SHAPE_H
-#define HW_5_SHAPE_H
+#ifndef HW5_SHAPE_H
+#define HW5_SHAPE_H
 
 
 class Shape {
@@ -10,4 +10,4 @@ public:
 };
 
 
-#endif //HW_5_SHAPE_H
+#endif //HW5_SHAPE_H

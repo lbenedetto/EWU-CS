@@ -1,5 +1,5 @@
-#ifndef HW_5_SHAPE2D_H
-#define HW_5_SHAPE2D_H
+#ifndef HW5_SHAPE2D_H
+#define HW5_SHAPE2D_H
 
 
 #include "Shape.h"
@@ -10,4 +10,4 @@ public:
 };
 
 
-#endif //HW_5_SHAPE2D_H
+#endif //HW5_SHAPE2D_H

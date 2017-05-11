@@ -1,5 +1,5 @@
-#ifndef HW_5_SPHERE_H
-#define HW_5_SPHERE_H
+#ifndef HW5_SPHERE_H
+#define HW5_SPHERE_H
 
 
 #include "../Shape3D.h"
@@ -12,12 +12,12 @@ public:
 
 	Sphere() : radius(1) {}
 
-	void printShapeDetail() const;
+	void printShapeDetail();
 
-	double computeArea() const;
+	double computeArea();
 
-	double computeVolume() const;
+	double computeVolume();
 };
 
 
-#endif //HW_5_SPHERE_H
+#endif //HW5_SPHERE_H

@@ -1,3 +1,4 @@
+//Lars Benedetto, CMake
 #include <iostream>
 #include "Shapes/Shape.h"
 #include "Shapes/2DShapes/Rectangle.h"
@@ -8,12 +9,12 @@
 #include "Shapes/3DShapes/Sphere.h"
 
 int main() {
-	Circle circle;
-	Rectangle rectangle;
-	Triangle triangle;
-	Box box;
-	Sphere sphere;
-	Cylinder cylinder;
+	Circle circle(2.1);
+	Rectangle rectangle(3.1, 1.2);
+	Triangle triangle(3, 4);
+	Box box(4.5, 4.5, 6);
+	Sphere sphere(6);
+	Cylinder cylinder(3, 4);
 
 	Shape *shape[6];
 	int i = 0;
@@ -25,7 +26,7 @@ int main() {
 	shape[i] = &cylinder;
 	i = 0;
 	for (Shape *s : shape) {
-		std::cout << "Shape " << i << ": ";
+		std::cout << "Shape " << i++ << ": ";
 		s->printShapeDetail();
 	}
 	return 0;

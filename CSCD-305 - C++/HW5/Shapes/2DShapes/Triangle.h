@@ -1,5 +1,5 @@
-#ifndef HW_5_TRIANGLE_H
-#define HW_5_TRIANGLE_H
+#ifndef HW5_TRIANGLE_H
+#define HW5_TRIANGLE_H
 
 
 #include "../Shape2D.h"
@@ -13,10 +13,10 @@ public:
 
 	Triangle() : base(1), height(1) {}
 
-	void printShapeDetail() const;
+	void printShapeDetail();
 
-	double computeArea() const;
+	double computeArea();
 };
 
 
-#endif //HW_5_TRIANGLE_H
+#endif //HW5_TRIANGLE_H

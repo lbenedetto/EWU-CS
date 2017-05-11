@@ -1,5 +1,5 @@
-#ifndef HW_5_CIRCLE_H
-#define HW_5_CIRCLE_H
+#ifndef HW5_CIRCLE_H
+#define HW5_CIRCLE_H
 
 
 #include "../Shape2D.h"
@@ -12,10 +12,10 @@ public:
 
 	Circle() : radius(1) {}
 
-	void printShapeDetail() const;
+	void printShapeDetail();
 
-	double computeArea() const;
+	double computeArea();
 };
 
 
-#endif //HW_5_CIRCLE_H
+#endif //HW5_CIRCLE_H

@@ -1,11 +1,13 @@
 #include <iostream>
 #include "Circle.h"
 
-void Circle::printShapeDetail() const {
-	std::cout << "Circle, 2D Shape, radius: " << radius << ", Area: " << computeArea();
+void Circle::printShapeDetail() {
+	std::cout << "Circle, 2D Shape, radius: " << radius
+	          << ", Area: " << computeArea()
+	          << "." << std::endl;
 }
 
-double Circle::computeArea() const {
+double Circle::computeArea() {
 	return PI * (radius * radius);
 
 }

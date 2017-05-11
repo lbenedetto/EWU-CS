@@ -1,5 +1,5 @@
-#ifndef HW_5_SHAPE3D_H
-#define HW_5_SHAPE3D_H
+#ifndef HW5_SHAPE3D_H
+#define HW5_SHAPE3D_H
 
 
 #include "Shape2D.h"
@@ -9,4 +9,4 @@ class Shape3D : public Shape2D {
 };
 
 
-#endif //HW_5_SHAPE3D_H
+#endif //HW5_SHAPE3D_H
