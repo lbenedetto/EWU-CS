@@ -16,6 +16,7 @@ public class ComponentBox extends A_Component {
 
 	public ComponentBox(String id, Dimension3D size, boolean isRoot) {
 		super(id, isRoot);
+		this.size = size;
 	}
 
 
@@ -75,9 +76,24 @@ public class ComponentBox extends A_Component {
 	}
 
 	@Override
-	String export(A_Exporter exporter) {
+	public String export(A_Exporter exporter) {
 		if (exporter == null) throw new TaskException("Exporter was null");
-		return null;
+		if (isRoot()) exporter.openComponentNode(getID());
+		else exporter.openComponentNode(getID(), getConnectorToParent().getComponentParent().getID());
+		Point3D[] points = generateFramesSelf().toArray(new Point3D[9]);
+		int i = 0;
+		exporter.addPoint("center", points[i++]);
+		exporter.addPoint("left-bottom-far", points[i++]);
+		exporter.addPoint("right-bottom-far", points[i++]);
+		exporter.addPoint("right-bottom-near", points[i++]);
+		exporter.addPoint("left-bottom-near", points[i++]);
+		exporter.addPoint("left-top-far", points[i++]);
+		exporter.addPoint("right-top-far", points[i++]);
+		exporter.addPoint("right-top-near", points[i++]);
+		exporter.addPoint("left-top-near", points[i]);
+		getChildren().forEach(b -> b.export(exporter));
+		exporter.closeComponentNode(getID());
+		return exporter.export();
 	}
 
 	public List<List<Point3D>> generateFramesAll() {

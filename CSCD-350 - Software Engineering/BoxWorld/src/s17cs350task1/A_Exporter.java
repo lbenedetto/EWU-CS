@@ -2,11 +2,11 @@ package s17cs350task1;
 
 public abstract class A_Exporter {
 	StringBuilder output;
-	boolean isClosed;
+	private boolean isClosed;
 
 	A_Exporter() {
+		output = new StringBuilder();
 		isClosed = false;
-		closeExport();
 	}
 
 	abstract void addPoint(String id, Point3D point);
