@@ -1,13 +1,12 @@
 package s17cs350task1;
 
-import javafx.geometry.Point3D;
 
 public class Connector implements Cloneable {
-	private Box childBox;
-	private Box parentBox;
+	private A_Component childBox;
+	private A_Component parentBox;
 	private Point3D offset;
 
-	public Connector(Box childBox, Point3D offset) throws TaskException {
+	public Connector(ComponentBox childBox, Point3D offset) throws TaskException {
 		if (childBox == null) throw new TaskException("child box was null");
 		if (offset == null) throw new TaskException("offset was null");
 		if (childBox.isRoot()) throw new TaskException("Root box cannot be child box");
@@ -18,36 +17,36 @@ public class Connector implements Cloneable {
 
 	public Connector clone() throws CloneNotSupportedException {
 		Connector clone = (Connector) super.clone();
-		clone.offset = new Point3D(offset.getX(), offset.getY(), offset.getZ());
+		clone.offset = offset.clone();
 		clone.parentBox = null;
 		clone.childBox = childBox.clone();
 		return clone;
 	}
 
-	public Box getChildBox() {
+	public A_Component getComponentChild() {
 		return childBox;
 	}
 
-	public Point3D getOffsetFromParentBox() {
-		if (hasParentBox())
+	public A_Component getComponentParent() {
+		if (hasComponentParent()) return parentBox;
+		throw new TaskException("Component does not have parent box");
+	}
+
+	public Point3D getOffsetFromParent() {
+		if (hasComponentParent())
 			return offset;
 		return null;
 	}
 
-	public Box getParentBox() {
-		if (hasParentBox()) return parentBox;
-		throw new TaskException("Box does not have parent box");
-	}
-
-	public void setParentBox(Box parentBox) {
-		if (parentBox == null) throw new TaskException("parentBox was null");
-		if (this.parentBox != null) throw new TaskException("parent Box already set");
-		this.parentBox = parentBox;
-	}
-
-
-	public boolean hasParentBox() {
+	public boolean hasComponentParent() {
 		return parentBox != null;
+	}
+
+
+	public void setComponentParent(A_Component parentBox) {
+		if (parentBox == null) throw new TaskException("parentBox was null");
+		if (this.parentBox != null) throw new TaskException("parent Component already set");
+		this.parentBox = parentBox;
 	}
 
 	@Override

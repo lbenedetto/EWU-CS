@@ -16,27 +16,12 @@ public class Dimension3D implements Cloneable {
 		return width;
 	}
 
-	public Dimension3D setWidth(double width) {
-		this.width = width;
-		return this;
-	}
-
 	public double getHeight() {
 		return height;
 	}
 
-	public Dimension3D setHeight(double height) {
-		this.height = height;
-		return this;
-	}
-
 	public double getDepth() {
 		return depth;
-	}
-
-	public Dimension3D setDepth(double depth) {
-		this.depth = depth;
-		return this;
 	}
 
 	@Override

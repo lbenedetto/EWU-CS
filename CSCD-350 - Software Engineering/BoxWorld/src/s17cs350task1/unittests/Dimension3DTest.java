@@ -9,30 +9,6 @@ class Dimension3DTest {
 	}
 
 	@Test
-	void test_getWidth() {
-	}
-
-	@Test
-	void test_setWidth() {
-	}
-
-	@Test
-	void test_getHeight() {
-	}
-
-	@Test
-	void test_setHeight() {
-	}
-
-	@Test
-	void test_getDepth() {
-	}
-
-	@Test
-	void test_setDepth() {
-	}
-
-	@Test
 	void test_clone() {
 	}
 

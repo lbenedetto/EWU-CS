@@ -1,7 +1,5 @@
 package s17cs350task1;
 
-import javafx.geometry.Point3D;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,11 @@
 package s17cs350task1.unittests;
 
-import javafx.geometry.Point3D;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import s17cs350task1.BoundingBox;
 import s17cs350task1.Dimension3D;
+import s17cs350task1.Point3D;
 import s17cs350task1.TaskException;
 
 import java.util.ArrayList;
