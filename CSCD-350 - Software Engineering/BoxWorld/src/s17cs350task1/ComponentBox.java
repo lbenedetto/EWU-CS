@@ -91,8 +91,9 @@ public class ComponentBox extends A_Component {
 		exporter.addPoint("right-top-far", points[i++]);
 		exporter.addPoint("right-top-near", points[i++]);
 		exporter.addPoint("left-top-near", points[i]);
-		getChildren().forEach(b -> b.export(exporter));
 		exporter.closeComponentNode(getID());
+		getChildren().forEach(b -> b.export(exporter));
+		if(isRoot()) exporter.closeExport();
 		return exporter.export();
 	}
 
