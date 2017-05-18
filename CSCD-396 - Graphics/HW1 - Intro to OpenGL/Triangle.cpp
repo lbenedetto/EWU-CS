@@ -4,14 +4,20 @@
 
 
 typedef struct {
-	GLenum       type;
-	const char*  filename;
-	GLuint       shader;
+	GLenum type;
+	const char *filename;
+	GLuint shader;
 } ShaderInfo;
 
-enum VAO_IDs { Triangles, NumVAOs };
-enum Buffer_IDs { ArrayBuffer, NumBuffers };
-enum Attrib_IDs { verPosition = 0 };
+enum VAO_IDs {
+	Triangles, NumVAOs
+};
+enum Buffer_IDs {
+	ArrayBuffer, NumBuffers
+};
+enum Attrib_IDs {
+	verPosition = 0
+};
 
 GLuint VAOs[NumVAOs];
 GLuint Buffers[NumBuffers];
@@ -22,13 +28,13 @@ const GLuint NumVertices = 3;
 
 //----------------------------------------------------------------------------
 
-const GLchar* ReadShader(const char* filename) {
+const GLchar *ReadShader(const char *filename) {
 #ifdef WIN32
 	FILE* infile;
 	fopen_s(&infile, filename, "rb");
 
 #else
-	FILE* infile = fopen(filename, "rb");
+	FILE *infile = fopen(filename, "rb");
 #endif // WIN32
 
 	if (!infile) {
@@ -42,32 +48,31 @@ const GLchar* ReadShader(const char* filename) {
 	int len = ftell(infile);
 	fseek(infile, 0, SEEK_SET);
 
-	GLchar* source = (GLchar*)malloc(sizeof(GLchar)*(len + 1));
+	GLchar *source = (GLchar *) malloc(sizeof(GLchar) * (len + 1));
 
 	fread(source, 1, len, infile);
 	fclose(infile);
 
 	source[len] = 0;
 
-	return ((GLchar*)source);
+	return ((GLchar *) source);
 }
 
 //----------------------------------------------------------------------------
 
 GLuint
-LoadShaders(ShaderInfo* shaders)
-{
+LoadShaders(ShaderInfo *shaders) {
 	if (shaders == NULL) { return 0; }
 
 	GLuint program = glCreateProgram();
 
-	ShaderInfo* entry = shaders;
+	ShaderInfo *entry = shaders;
 	while (entry->type != GL_NONE) {
 		GLuint shader = glCreateShader(entry->type);
 
 		entry->shader = shader;
 
-		const GLchar* source = ReadShader(entry->filename);
+		const GLchar *source = ReadShader(entry->filename);
 
 		if (source == NULL) {
 
@@ -81,7 +86,7 @@ LoadShaders(ShaderInfo* shaders)
 		}
 
 		glShaderSource(shader, 1, &source, NULL);
-		free((GLchar*)source);
+		free((GLchar *) source);
 
 		glCompileShader(shader);
 
@@ -138,13 +143,17 @@ void init(void) {
 	glGenVertexArrays(NumVAOs, VAOs);
 	glBindVertexArray(VAOs[Triangles]);
 
-	GLfloat vertices[NumVertices][2] = { { -0.90, -0.90 },{ 0.90,  -0.90 },{ 0.90, 0.90 }};
+	GLfloat vertices[NumVertices][2] = {{-0.90, -0.90},
+	                                    {0.90,  -0.90},
+	                                    {0.90,  0.90}};
 
 	glGenBuffers(NumBuffers, Buffers);
 	glBindBuffer(GL_ARRAY_BUFFER, Buffers[ArrayBuffer]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	ShaderInfo shaders[] = { { GL_VERTEX_SHADER, "triangles.vert" },{ GL_FRAGMENT_SHADER, "triangles.frag" },{ GL_NONE, NULL } };
+	ShaderInfo shaders[] = {{GL_VERTEX_SHADER,   "triangles.vert"},
+	                        {GL_FRAGMENT_SHADER, "triangles.frag"},
+	                        {GL_NONE, NULL}};
 
 	GLuint program = LoadShaders(shaders);
 	glUseProgram(program);
@@ -156,8 +165,7 @@ void init(void) {
 }
 
 void display(void) {
-	
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBindVertexArray(VAOs[Triangles]);
 	glDrawArrays(GL_TRIANGLES, 0, NumVertices);
@@ -165,7 +173,7 @@ void display(void) {
 }
 
 /***/
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA);
