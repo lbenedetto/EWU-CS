@@ -8,7 +8,7 @@ public abstract class A_Exporter {
 	A_Exporter() {
 		output = new StringBuilder();
 		isClosed = false;
-		componentClosed = true;
+		componentClosed = true;0000000
 	}
 
 	abstract void addPoint(String id, Point3D point);
@@ -35,4 +35,11 @@ public abstract class A_Exporter {
 		return componentClosed;
 	}
 
+	public void openComponent() {
+		componentClosed = false;
+	}
+
+	public void closeComponent() {
+		componentClosed = true;
+	}
 }

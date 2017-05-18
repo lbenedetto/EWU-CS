@@ -18,18 +18,21 @@ public class ExporterXML extends A_Exporter {
 	void closeComponentNode(String id) {
 		if (isComponentClosed()) throw new TaskException("Cannot close node if it is already closed");
 		output.append("\t</component>\n");
+		closeComponent();
 	}
 
 	@Override
 	void openComponentNode(String id) {
 		if (!isComponentClosed()) throw new TaskException("Cannot open new node until previous node is closed");
 		output.append(String.format("\t<component id=\"%s\" isRoot=\"true\">\n", id));
+		openComponent();
 	}
 
 	@Override
 	void openComponentNode(String id, String idParent) {
 		if (!isComponentClosed()) throw new TaskException("Cannot open new node until previous node is closed");
 		output.append(String.format("\t<component id=\"%s\" isRoot=\"false\" idParent=\"%s\">\n", id, idParent));
+		openComponent();
 	}
 
 	@Override
