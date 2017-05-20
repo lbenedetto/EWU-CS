@@ -1,5 +1,7 @@
 package s17cs350task1;
 
+import javafx.concurrent.Task;
+
 public class ExporterXML extends A_Exporter {
 	public ExporterXML() {
 		super();
@@ -17,6 +19,7 @@ public class ExporterXML extends A_Exporter {
 	@Override
 	void closeComponentNode(String id) {
 		if (isComponentClosed()) throw new TaskException("Cannot close node if it is already closed");
+		if (!getLastID().equals(id)) throw new TaskException("Closing tag mismatch");
 		output.append("\t</component>\n");
 		closeComponent();
 	}
@@ -25,19 +28,19 @@ public class ExporterXML extends A_Exporter {
 	void openComponentNode(String id) {
 		if (!isComponentClosed()) throw new TaskException("Cannot open new node until previous node is closed");
 		output.append(String.format("\t<component id=\"%s\" isRoot=\"true\">\n", id));
-		openComponent();
+		openComponent(id);
 	}
 
 	@Override
 	void openComponentNode(String id, String idParent) {
 		if (!isComponentClosed()) throw new TaskException("Cannot open new node until previous node is closed");
 		output.append(String.format("\t<component id=\"%s\" isRoot=\"false\" idParent=\"%s\">\n", id, idParent));
-		openComponent();
+		openComponent(id);
 	}
 
 	@Override
 	public void closeExport() {
-		if(isClosed()) throw new TaskException("Cannot close export, export is already closed");
+		if (isClosed()) throw new TaskException("Cannot close export, export is already closed");
 		output.append("</components>");
 		super.closeExport();
 	}

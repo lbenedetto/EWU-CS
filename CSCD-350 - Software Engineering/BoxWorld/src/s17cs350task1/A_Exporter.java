@@ -3,12 +3,14 @@ package s17cs350task1;
 public abstract class A_Exporter {
 	StringBuilder output;
 	private boolean isClosed;
+	private String lastID;
 	private boolean componentClosed;
 
 	A_Exporter() {
 		output = new StringBuilder();
 		isClosed = false;
-		componentClosed = true;0000000
+		componentClosed = true;
+		lastID = "";
 	}
 
 	abstract void addPoint(String id, Point3D point);
@@ -27,19 +29,24 @@ public abstract class A_Exporter {
 		isClosed = true;
 	}
 
-	public boolean isClosed() {
+	boolean isClosed() {
 		return isClosed;
 	}
 
-	public boolean isComponentClosed() {
+	boolean isComponentClosed() {
 		return componentClosed;
 	}
 
-	public void openComponent() {
+	void openComponent(String id) {
 		componentClosed = false;
+		lastID = id;
 	}
 
-	public void closeComponent() {
+	void closeComponent() {
 		componentClosed = true;
+	}
+
+	String getLastID() {
+		return lastID;
 	}
 }
