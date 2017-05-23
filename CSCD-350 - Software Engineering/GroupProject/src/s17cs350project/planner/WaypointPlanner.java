@@ -1,8 +1,6 @@
 package s17cs350project.planner;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +8,10 @@ import java.util.List;
 public class WaypointPlanner {
 	private E_AxisNative[] axesNative;
 	private E_Unit unitNative;
+	private static final E_Unit unitCanonical = E_Unit.METERS;
 	private BufferedReader bufferedReader;
+	private static final int MEGABYTE = 1000000;
+	private ArrayList<Coordinates> coordinates;
 
 	/**
 	 * Creates planner. Defines axes and reads the coordinates [3]
@@ -22,9 +23,20 @@ public class WaypointPlanner {
 	 * @param instream   the input stream containing the coordinates
 	 */
 	public WaypointPlanner(E_AxisNative axisA, E_AxisNative axisB, E_AxisNative axisC, E_Unit unitNative, InputStream instream) {
+		// validate arguments
+		if (axisA == null || axisB == null || axisC == null || unitNative == null || instream == null)
+			throw new IllegalArgumentException("null argument");
+		if (axisA.axis.equals(axisB.axis) || axisA.axis.equals(axisC.axis) || axisB.axis.equals(axisC.axis))
+			throw new IllegalArgumentException("Invalid axis combination");
+
 		axesNative = new E_AxisNative[]{axisA, axisB, axisC};
 		this.unitNative = unitNative;
 		bufferedReader = new BufferedReader(new InputStreamReader(instream));
+		try {
+			bufferedReader.mark(MEGABYTE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -47,6 +59,10 @@ public class WaypointPlanner {
 	 * @return the total distance
 	 */
 	public double calculateDistance(E_AxisCombinationNeutral axes, boolean isCanonicalElseNative, E_Unit unit) {
+		// validate arguments
+		if (axes == null || unit == null)
+			throw new IllegalArgumentException("null argument");
+
 		return calculateDistances(axes, isCanonicalElseNative, unit).stream().reduce(0.0, Double::sum);
 	}
 
@@ -59,13 +75,15 @@ public class WaypointPlanner {
 	 * @return the intermediate distances
 	 */
 	public List<Double> calculateDistances(E_AxisCombinationNeutral axes, boolean isCanonicalElseNative, E_Unit unit) {
+		// validate arguments
+		if (axes == null || unit == null)
+			throw new IllegalArgumentException("null argument");
+
 		ArrayList<Double> distances = new ArrayList<>();
-		List<Coordinates> coordinates = getCoordinates(isCanonicalElseNative, unit);
-		Coordinates prev = null;
-		for (Coordinates curr : coordinates) {
-			if (prev == null) prev = curr;
-			distances.add(prev.distanceTo(curr, axes));
-		}
+		getCoordinates(isCanonicalElseNative, unit);
+		Coordinates[] coords = coordinates.toArray(new Coordinates[coordinates.size()]);
+		for (int i = 1; i < coords.length; i++)
+			distances.add(Math.abs(unitCanonical.convertTo(coords[i - 1].distanceTo(coords[i], axes), unit)));
 		return distances;
 	}
 
@@ -105,30 +123,52 @@ public class WaypointPlanner {
 	 * @return the coordinates
 	 */
 	public List<Coordinates> getCoordinates(boolean isCanonicalElseNative, E_Unit unit) {
-		//If its canonical, take them as is. If its native, convert them from the specified unit to the nativeUnit
+		// validate arguments
+		if (unit == null)
+			throw new IllegalArgumentException("null argument");
+		ArrayList<Coordinates> internalCoords = new ArrayList<>();
 		ArrayList<Coordinates> coords = new ArrayList<>();
 		bufferedReader.lines().forEach(line -> {
-			double[] c = Arrays.stream(line.split(","))
-					.map(String::trim)
-					.mapToDouble(Double::parseDouble)
-					.map(v -> convert(v, isCanonicalElseNative, unit))
-					.toArray();
-			coords.add(new Coordinates(axesNative[0].orient(c[0]), axesNative[1].orient(c[1]), axesNative[2].orient(c[2])));
+			try {
+				double[] c = Arrays.stream(line.split(","))
+						.map(String::trim)
+						.mapToDouble(Double::parseDouble)
+						.map(v -> convert(v, unitNative, unitCanonical))
+						.toArray();
+				if (c.length != 3) throw new IllegalArgumentException("Invalid input stream (wrong length)");
+				if (isCanonicalElseNative)
+					c = E_AxisNative.map(c, axesNative);
+				internalCoords.add(new Coordinates(c[0], c[1], c[2]));
+				c = convert(c, unitCanonical, unit);
+				coords.add(new Coordinates(c[0], c[1], c[2]));
+			} catch (NumberFormatException e) {
+				throw new IllegalArgumentException("Invalid input stream (Could not parse digits)");
+			}
 		});
+		try {
+			bufferedReader.reset();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		coordinates = internalCoords;
 		return coords;
 	}
 
 	/**
 	 * Converts the specified double to the specified unit depending on whether we are in canonical or native mode
 	 *
-	 * @param v                     the value to be converted
-	 * @param isCanonicalElseNative the mode we are in
-	 * @param unit                  the target unit
+	 * @param v          the value to be converted
+	 * @param sourceUnit the source unit
+	 * @param targetUnit the target unit
 	 * @return converted (or not) value
 	 */
-	private double convert(double v, boolean isCanonicalElseNative, E_Unit unit) {
-		if (!isCanonicalElseNative)
-			return unit.convertTo(v, unitNative);
+	private double convert(double v, E_Unit sourceUnit, E_Unit targetUnit) {
+		return sourceUnit.convertTo(v, targetUnit);
+	}
+
+	private double[] convert(double[] v, E_Unit sourceUnit, E_Unit targetUnit) {
+		for (int i = 0; i < v.length; i++)
+			v[i] = convert(v[i], sourceUnit, targetUnit);
 		return v;
 	}
 
@@ -158,6 +198,8 @@ public class WaypointPlanner {
 		 * @param third  the third coordinate
 		 */
 		public Coordinates(double first, double second, double third) {
+			if (Double.isNaN(first) || Double.isNaN(second) || Double.isNaN(third))
+				throw new IllegalArgumentException("double was NaN");
 			this.first = first;
 			this.second = second;
 			this.third = third;
@@ -168,11 +210,26 @@ public class WaypointPlanner {
 			if (this == o) return true;
 			if (o == null || getClass() != o.getClass()) return false;
 			Coordinates that = (Coordinates) o;
-			return Double.compare(that.first, first) == 0 && Double.compare(that.second, second) == 0 && Double.compare(that.third, third) == 0;
+
+			return equalsDelta(that.first, first) && equalsDelta(that.second, second) && equalsDelta(that.third, third);
 		}
 
 		/**
-		 * Outputs the triple in the form (<i>first</i> <i>second</i> <i>third</i>). [1]
+		 * helper method for equals
+		 * allow difference between doubles
+		 *
+		 * @param _a first value
+		 * @param _b second value
+		 * @return if difference between doubles fall within internal delta
+		 */
+		private boolean equalsDelta(double _a, double _b) {
+			final double _delta = 0.0000001;
+			double _diff = Double.compare(_a, _b);
+			return (Math.abs(_diff) <= _delta) || _a == _b;
+		}
+
+		/**
+		 * Outputs the triple in the form (first second third). [1]
 		 *
 		 * @return the string
 		 */
@@ -184,28 +241,36 @@ public class WaypointPlanner {
 		/**
 		 * Calculates the distance between this point and the other point, along the specified axes
 		 *
-		 * @param other The other point
-		 * @param axes  the axes to calculate along
+		 * @param o    The other point
+		 * @param axes the axes to calculate along
 		 * @return the distance between the two points
 		 */
-		double distanceTo(Coordinates other, E_AxisCombinationNeutral axes) {
+		double distanceTo(Coordinates o, E_AxisCombinationNeutral axes) {
 			switch (axes) {
 				case FIRST:
-					return other.first - first;
+					return o.first - first;
 				case SECOND:
-					return other.second - second;
+					return o.second - second;
 				case THIRD:
-					return other.third - third;
+					return o.third - third;
 				case FIRST_SECOND:
-					return (other.first + other.second) - (first + second);
+					return distanceBetween2D(first, o.first, second, o.second);
 				case FIRST_THIRD:
-					return (other.first + other.third) - (first + third);
+					return distanceBetween2D(first, o.first, third, o.third);
 				case SECOND_THIRD:
-					return (other.second + other.third) - (second + third);
+					return distanceBetween2D(second, o.second, third, o.third);
 				case FIRST_SECOND_THIRD:
-					return (other.first + other.second + other.third) - (first + second + third);
+					return distanceBetween3D(first, o.first, second, o.second, third, o.third);
 			}
 			return 0.0;//Unreachable
+		}
+
+		static double distanceBetween2D(double x1, double x2, double y1, double y2) {
+			return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+		}
+
+		static double distanceBetween3D(double x1, double x2, double y1, double y2, double z1, double z2) {
+			return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2) + Math.pow(z2 - z1, 2));
 		}
 	}
 
@@ -226,23 +291,48 @@ public class WaypointPlanner {
 	 * Defines how to interpret a lettered axis; i.e., axisA, axisB, or axisC. [6]
 	 */
 	public enum E_AxisNative {
-		//TODO: Use this somewhere, somehow
-		X_MINUS(-1),    //interprets the lettered axis as x with negative values going in the lettered positive direction
-		X_PLUS(1),     //interprets the lettered axis as x with positive values going in the lettered positive direction
-		Y_MINUS(-1),    //interprets the lettered axis as y with negative values going in the lettered positive direction
-		Y_PLUS(1),     //interprets the lettered axis as y with positive values going in the lettered positive direction
-		Z_MINUS(-1),    //interprets the lettered axis as z with negative values going in the lettered positive direction
-		Z_PLUS(1);      //interprets the lettered axis as z with positive values going in the lettered positive direction
+		X_MINUS(-1, "X"),    //interprets the lettered axis as x with negative values going in the lettered positive direction
+		X_PLUS(1, "X"),     //interprets the lettered axis as x with positive values going in the lettered positive direction
+		Y_MINUS(-1, "Y"),    //interprets the lettered axis as y with negative values going in the lettered positive direction
+		Y_PLUS(1, "Y"),     //interprets the lettered axis as y with positive values going in the lettered positive direction
+		Z_MINUS(-1, "Z"),    //interprets the lettered axis as z with negative values going in the lettered positive direction
+		Z_PLUS(1, "Z");      //interprets the lettered axis as z with positive values going in the lettered positive direction
 
 		int inverter;
+		String axis;
 
-		E_AxisNative(int inverter) {
+		E_AxisNative(int inverter, String axis) {
 			this.inverter = inverter;
+			this.axis = axis;
 		}
 
 		double orient(double v) {
 			return v * inverter;
 		}
+
+		static double[] map(double[] c, E_AxisNative[] axisNatives) {
+			double[] out = new double[3];
+			for (int i = 0; i < 3; i++) {
+				E_AxisNative map = axisNatives[i];
+				switch (map.axis) {
+					case "X":
+						out[i] = map.orient(c[0]);
+						break;
+					case "Y":
+						out[i] = map.orient(c[1]);
+						break;
+					case "Z":
+						out[i] = map.orient(c[2]);
+						break;
+				}
+			}
+			return out;
+		}
+
+		boolean equals(E_AxisNative that) {
+			return this.axis.equals(that.axis);
+		}
+
 	}
 
 	/**
