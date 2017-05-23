@@ -295,7 +295,6 @@ class WaypointPlannerTest {
 				new Coordinates(4.0, 6.0, 2.0)));
 
 		List<Double> distancesNative = planner.calculateDistances(E_AxisCombinationNeutral.FIRST_SECOND, false, E_Unit.KILOMETERS);
-		//TODO:Figure out why this call is being treated differently than the call above
 		List<Double> distancesCanonical = planner.calculateDistances(E_AxisCombinationNeutral.FIRST_SECOND, true, E_Unit.KILOMETERS);
 
 		validateDistances(distancesNative, Arrays.asList(9.433981132056603, 14.142135623730951, 2.0, 12.083045973594572));
@@ -359,7 +358,7 @@ class WaypointPlannerTest {
 		List<Double> distancesCanonical = planner.calculateDistances(E_AxisCombinationNeutral.FIRST_SECOND, true, E_Unit.KILOMETERS);
 
 		validateDistances(distancesNative, Arrays.asList(9.433981132056603, 14.142135623730951, 2.0, 12.083045973594572));
-		validateDistances(distancesCanonical, Arrays.asList(9.433981132056603, 14.142135623730951, 2.0, 12.083045973594572));
+		validateDistances(distancesCanonical, Arrays.asList(8.246211251235321, 14.142135623730951, 4.0, 12.083045973594572));
 
 		double distanceNative = planner.calculateDistance(E_AxisCombinationNeutral.FIRST_SECOND, false, E_Unit.KILOMETERS);
 		double distanceCanonical = planner.calculateDistance(E_AxisCombinationNeutral.FIRST_SECOND, true, E_Unit.KILOMETERS);
@@ -368,19 +367,6 @@ class WaypointPlannerTest {
 		validateDistance(distanceCanonical, 38.471392848560846);
 
 		_instream.close();
-
-		/*
-		expected results
-
-		coordinatesNative = [(1.0 2.0 3.0), (9.0 7.0 5.0), (-1.0 -3.0 -5.0), (-1.0 -5.0 -9.0), (4.0 6.0 2.0)]
-		coordinatesCanonical = [(-3.0 1.0 2.0), (-5.0 9.0 7.0), (5.0 -1.0 -3.0), (9.0 -1.0 -5.0), (-2.0 4.0 6.0)]
-
-		distancesNative= [9.433981132056603, 5.385164807134504, 7.280109889280518, 5.0]
-		distancesCanonical = [8.246211251235321, 8.246211251235321, 12.165525060596439, 3.1622776601683795]
-
-		distanceNative = 27.099255828471623
-		distanceCanonical = 31.82022522323546
-		 */
 	}
 
 	/**
@@ -1150,13 +1136,13 @@ class WaypointPlannerTest {
 				Arrays.asList(1.732050808, 1.732050808, 1.732050808, 1.732050808));
 		// first
 		test_calculateDistances_validate(_input, E_AxisNative.X_PLUS, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST, true, E_Unit.METERS,
-				Arrays.asList(1.0, 1.0, 1.0));
+				Arrays.asList(1.0, 1.0, 1.0, 1.0));
 		// second
 		test_calculateDistances_validate(_input, E_AxisNative.X_PLUS, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.SECOND, true, E_Unit.METERS,
-				Arrays.asList(1.0, 1.0, 1.0));
+				Arrays.asList(1.0, 1.0, 1.0, 1.0));
 		// third
 		test_calculateDistances_validate(_input, E_AxisNative.X_PLUS, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.THIRD, true, E_Unit.METERS,
-				Arrays.asList(1.0, 1.0, 1.0));
+				Arrays.asList(1.0, 1.0, 1.0, 1.0));
 		// first second
 		test_calculateDistances_validate(_input, E_AxisNative.X_PLUS, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST_SECOND, true, E_Unit.METERS,
 				Arrays.asList(1.414213562, 1.414213562, 1.414213562, 1.414213562));
@@ -1217,13 +1203,13 @@ class WaypointPlannerTest {
 				Arrays.asList(1.732050808, 1.732050808, 1.732050808, 1.732050808));
 		// first
 		test_calculateDistances_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST, true, E_Unit.METERS,
-				Arrays.asList(1.0, 1.0, 1.0));
+				Arrays.asList(1.0, 1.0, 1.0, 1.0));
 		// second
 		test_calculateDistances_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.SECOND, true, E_Unit.METERS,
-				Arrays.asList(1.0, 1.0, 1.0));
+				Arrays.asList(1.0, 1.0, 1.0, 1.0));
 		// third
 		test_calculateDistances_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.THIRD, true, E_Unit.METERS,
-				Arrays.asList(1.0, 1.0, 1.0));
+				Arrays.asList(1.0, 1.0, 1.0, 1.0));
 		// first second
 		test_calculateDistances_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST_SECOND, true, E_Unit.METERS,
 				Arrays.asList(1.414213562, 1.414213562, 1.414213562, 1.414213562));
@@ -1371,7 +1357,7 @@ class WaypointPlannerTest {
 		// canonical (-Z,X,Y)
 		// first second third
 		test_calculateDistances_validate(_input, E_AxisNative.Z_MINUS, E_AxisNative.X_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST_SECOND_THIRD, true, E_Unit.METERS,
-				Arrays.asList(13.65650028, 5.255987062, 10.04664123, 6.550077938));
+				Arrays.asList(2.828108909, 8.838551918, 5.039841267, 8.28673639));
 		// first
 		test_calculateDistances_validate(_input, E_AxisNative.Z_MINUS, E_AxisNative.X_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST, true, E_Unit.METERS,
 				Arrays.asList(2.29, 4.4, 2.2, 5.5));
@@ -1394,7 +1380,7 @@ class WaypointPlannerTest {
 		// canonical (Z,Y,X)
 		// first second third
 		test_calculateDistances_validate(_input, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_AxisNative.X_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST_SECOND_THIRD, true, E_Unit.METERS,
-				Arrays.asList(13.65650028, 5.255987062, 10.04664123, 6.550077938));
+				Arrays.asList(2.828108909, 8.838551918, 5.039841267, 8.28673639));
 		// first
 		test_calculateDistances_validate(_input, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_AxisNative.X_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST, true, E_Unit.METERS,
 				Arrays.asList(2.29, 4.4, 2.2, 5.5));
@@ -1449,7 +1435,7 @@ class WaypointPlannerTest {
 	@Test
 	@SuppressWarnings("Duplicates")
 	void test_input1_calculateDistance() throws IOException {
-		String _input = "0.9, 2.99  , 1.11\n-0.6, 3.7, 3.4\n-8, 5.7, 7.8\n-5, 2.3, 5.6\n1.1, 1.2, 11.1";
+		String _input = "0,0,0\n1,1,1\n2,2,2\n3,3,3\n4,4,4";
 
 		// native
 		// change across ABC should always be the same
@@ -1618,28 +1604,28 @@ class WaypointPlannerTest {
 		test_calculateDistance_validate(_input, E_AxisNative.X_PLUS, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.SECOND_THIRD, false, E_Unit.METERS,
 				28.49481267);
 
-		// canonical (-X,Z,Y)
+		// canonical (Y,Z,X)
 		// first second third
-		test_calculateDistance_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST_SECOND_THIRD, true, E_Unit.METERS,
+		test_calculateDistance_validate(_input, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_AxisNative.X_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST_SECOND_THIRD, true, E_Unit.METERS,
 				35.50920651);
 		// first
-		test_calculateDistance_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST, true, E_Unit.METERS,
+		test_calculateDistance_validate(_input, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_AxisNative.X_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST, true, E_Unit.METERS,
 				13.27);
 		// second
-		test_calculateDistance_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.SECOND, true, E_Unit.METERS,
+		test_calculateDistance_validate(_input, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_AxisNative.X_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.SECOND, true, E_Unit.METERS,
 				23.45);
 		// third
-		test_calculateDistance_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.THIRD, true, E_Unit.METERS,
+		test_calculateDistance_validate(_input, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_AxisNative.X_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.THIRD, true, E_Unit.METERS,
 				20.509);
 		// first second
-		test_calculateDistance_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST_SECOND, true, E_Unit.METERS,
+		test_calculateDistance_validate(_input, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_AxisNative.X_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST_SECOND, true, E_Unit.METERS,
 				28.49481267);
 		// first third
-		test_calculateDistance_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST_THIRD, true, E_Unit.METERS,
+		test_calculateDistance_validate(_input, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_AxisNative.X_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.FIRST_THIRD, true, E_Unit.METERS,
 
 				25.35631369);
 		// second third
-		test_calculateDistance_validate(_input, E_AxisNative.X_MINUS, E_AxisNative.Z_PLUS, E_AxisNative.Y_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.SECOND_THIRD, true, E_Unit.METERS,
+		test_calculateDistance_validate(_input, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, E_AxisNative.X_PLUS, E_Unit.METERS, E_AxisCombinationNeutral.SECOND_THIRD, true, E_Unit.METERS,
 				31.93827741);
 
 		// canonical (Z,X,Y)

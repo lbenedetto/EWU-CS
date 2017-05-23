@@ -13,11 +13,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="WaypointPlanner.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WaypointPlanner.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/s17cs350project/planner/WaypointPlanner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+            <state relative-caret-position="160">
+              <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3990#3991#0" expanded="true" />
@@ -33,21 +33,21 @@
                 <element signature="e#11174#11175#0" expanded="true" />
                 <element signature="e#11202#11203#0" expanded="true" />
                 <element signature="e#11590#11591#0" expanded="false" />
-                <marker date="1495573984476" expanded="false" signature="8204:8210" ph=" { " />
-                <marker date="1495573984476" expanded="false" signature="8267:8271" ph=" }" />
-                <marker date="1495573984476" expanded="false" signature="11647:11653" ph=" { " />
-                <marker date="1495573984476" expanded="false" signature="12302:12485" ph="{...}" />
-                <marker date="1495573984476" expanded="false" signature="12529:12703" ph="{...}" />
+                <marker date="1495575728032" expanded="false" signature="8204:8210" ph=" { " />
+                <marker date="1495575728032" expanded="false" signature="8267:8271" ph=" }" />
+                <marker date="1495575728032" expanded="false" signature="11647:11653" ph=" { " />
+                <marker date="1495575728032" expanded="false" signature="12302:12485" ph="{...}" />
+                <marker date="1495575728032" expanded="false" signature="12529:12703" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WaypointPlannerTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WaypointPlannerTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/s17cs350project/UnitTests/WaypointPlannerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="298" column="68" lean-forward="false" selection-start-line="298" selection-start-column="68" selection-end-line="298" selection-end-column="68" />
+            <state relative-caret-position="15181">
+              <caret line="1083" column="0" lean-forward="false" selection-start-line="1083" selection-start-column="0" selection-end-line="1083" selection-end-column="0" />
               <folding>
                 <element signature="method#test_Coordinates_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
                 <element signature="method#test_WaypointPlanner_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
@@ -63,25 +63,15 @@
                 <element signature="e#9624#9625#0" expanded="true" />
                 <element signature="e#9672#9673#0" expanded="true" />
                 <element signature="e#9749#9750#0" expanded="true" />
-                <element signature="e#48234#48265#0" expanded="true" />
-                <element signature="e#52326#52357#0" expanded="true" />
-                <element signature="e#56438#56469#0" expanded="true" />
-                <element signature="e#62422#62453#0" expanded="true" />
-                <element signature="e#69574#69605#0" expanded="true" />
-                <element signature="e#73095#73126#0" expanded="true" />
-                <element signature="e#76592#76623#0" expanded="true" />
-                <element signature="e#81635#81666#0" expanded="true" />
+                <element signature="e#47643#47674#0" expanded="true" />
+                <element signature="e#51750#51781#0" expanded="true" />
+                <element signature="e#55877#55908#0" expanded="true" />
+                <element signature="e#61861#61892#0" expanded="true" />
+                <element signature="e#69011#69042#0" expanded="true" />
+                <element signature="e#72488#72519#0" expanded="true" />
+                <element signature="e#75985#76016#0" expanded="true" />
+                <element signature="e#81020#81051#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Assertions.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/junit-jupiter-api-5.0.0-M4.jar!/org/junit/jupiter/api/Assertions.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="436" column="0" lean-forward="false" selection-start-line="436" selection-start-column="0" selection-end-line="436" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -132,10 +122,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -264,7 +253,6 @@
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/s17cs350project/UnitTests/WaypointPlannerTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/s17cs350project/planner/WaypointPlanner.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -272,7 +260,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/tests/tests.xlsm</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -280,7 +267,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/tests/tests.xlsx</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -374,7 +360,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.WaypointPlannerTest.test_pdf2">
+  <component name="RunManager" selected="JUnit.WaypointPlannerTest">
     <configuration default="false" name="WaypointPlannerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -389,32 +375,6 @@
       <option name="MAIN_CLASS_NAME" value="s17cs350project.UnitTests.WaypointPlannerTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="WaypointPlannerTest.test_WaypointPlanner_illegal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="s17cs350project.UnitTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="GroupProject" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="s17cs350project.UnitTests" />
-      <option name="MAIN_CLASS_NAME" value="s17cs350project.UnitTests.WaypointPlannerTest" />
-      <option name="METHOD_NAME" value="test_WaypointPlanner_illegal" />
-      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -492,6 +452,32 @@
       <option name="PACKAGE_NAME" value="s17cs350project.UnitTests" />
       <option name="MAIN_CLASS_NAME" value="s17cs350project.UnitTests.WaypointPlannerTest" />
       <option name="METHOD_NAME" value="test_Coordinates_illegal" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="WaypointPlannerTest.test_input2_calculateDistances" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="s17cs350project.UnitTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="GroupProject" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="s17cs350project.UnitTests" />
+      <option name="MAIN_CLASS_NAME" value="s17cs350project.UnitTests.WaypointPlannerTest" />
+      <option name="METHOD_NAME" value="test_input2_calculateDistances" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -894,18 +880,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_WaypointPlanner_illegal" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_pdf1" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_pdf2" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_Coordinates_illegal" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_pdf1" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_pdf2" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_Coordinates_illegal" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_input2_calculateDistances" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_pdf2" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_Coordinates_illegal" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_input2_calculateDistances" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_pdf2" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_pdf1" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_WaypointPlanner_illegal" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.WaypointPlannerTest.test_Coordinates_illegal" />
       </list>
     </recent_temporary>
   </component>
@@ -925,7 +911,7 @@
       <workItem from="1495138176382" duration="25883000" />
       <workItem from="1495332462406" duration="14077000" />
       <workItem from="1495480521700" duration="841000" />
-      <workItem from="1495481493622" duration="8144000" />
+      <workItem from="1495481493622" duration="11115000" />
     </task>
     <task id="LOCAL-00001" summary="Added everything">
       <created>1495140162613</created>
@@ -1088,43 +1074,57 @@
       <option name="project" value="LOCAL" />
       <updated>1495574114564</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Fixed copy paste mistake in tester">
+      <created>1495576227325</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1495576227325</updated>
+    </task>
+    <task id="LOCAL-00025" summary="(re)fixed copy paste mistake in tester">
+      <created>1495576415067</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1495576415067</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="WaypointPlannerTest - 2017.05.23 at 14h 00m 46s.xml">
+    <history-entry file="WaypointPlannerTest - 2017.05.23 at 14h 50m 00s.xml">
       <configuration name="WaypointPlannerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WaypointPlannerTest - 2017.05.23 at 14h 07m 35s.xml">
+    <history-entry file="WaypointPlannerTest - 2017.05.23 at 14h 53m 57s.xml">
       <configuration name="WaypointPlannerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WaypointPlannerTest_test_Coordinates_illegal - 2017.05.23 at 13h 58m 42s.xml">
-      <configuration name="WaypointPlannerTest.test_Coordinates_illegal" configurationId="JUnit" />
+    <history-entry file="WaypointPlannerTest - 2017.05.23 at 15h 06m 26s.xml">
+      <configuration name="WaypointPlannerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WaypointPlannerTest_test_Coordinates_illegal - 2017.05.23 at 13h 59m 01s.xml">
-      <configuration name="WaypointPlannerTest.test_Coordinates_illegal" configurationId="JUnit" />
+    <history-entry file="WaypointPlannerTest_test_input2_calculateDistances - 2017.05.23 at 14h 56m 22s.xml">
+      <configuration name="WaypointPlannerTest.test_input2_calculateDistances" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WaypointPlannerTest_test_Coordinates_illegal - 2017.05.23 at 13h 59m 37s.xml">
-      <configuration name="WaypointPlannerTest.test_Coordinates_illegal" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="WaypointPlannerTest_test_pdf1 - 2017.05.23 at 14h 14m 02s.xml">
-      <configuration name="WaypointPlannerTest.test_pdf1" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="WaypointPlannerTest_test_pdf2 - 2017.05.23 at 14h 04m 15s.xml">
+    <history-entry file="WaypointPlannerTest_test_pdf2 - 2017.05.23 at 14h 42m 18s.xml">
       <configuration name="WaypointPlannerTest.test_pdf2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WaypointPlannerTest_test_pdf2 - 2017.05.23 at 14h 08m 08s.xml">
+    <history-entry file="WaypointPlannerTest_test_pdf2 - 2017.05.23 at 14h 42m 51s.xml">
       <configuration name="WaypointPlannerTest.test_pdf2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WaypointPlannerTest_test_pdf2 - 2017.05.23 at 14h 09m 02s.xml">
+    <history-entry file="WaypointPlannerTest_test_pdf2 - 2017.05.23 at 14h 46m 56s.xml">
       <configuration name="WaypointPlannerTest.test_pdf2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WaypointPlannerTest_test_pdf2 - 2017.05.23 at 14h 12m 26s.xml">
+    <history-entry file="WaypointPlannerTest_test_pdf2 - 2017.05.23 at 14h 49m 41s.xml">
+      <configuration name="WaypointPlannerTest.test_pdf2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WaypointPlannerTest_test_pdf2 - 2017.05.23 at 14h 52m 55s.xml">
+      <configuration name="WaypointPlannerTest.test_pdf2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WaypointPlannerTest_test_pdf2 - 2017.05.23 at 14h 53m 09s.xml">
       <configuration name="WaypointPlannerTest.test_pdf2" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48945000" />
+    <option name="totallyTimeSpent" value="51916000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1136,32 +1136,32 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3261105" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32603937" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3261105" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32822758" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34792122" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20149253" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41356674" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39761648" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.64551425" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1180,7 +1180,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/the-project-team-11" />
     </ignored-roots>
-    <MESSAGE value="Added everything" />
     <MESSAGE value="Added code to E_Unit and began adding code in a few other places" />
     <MESSAGE value="Fixed E_AxisCombinationNeutral" />
     <MESSAGE value="Added boilerplate for IntelliJ unit tests with JUnit 5" />
@@ -1204,11 +1203,21 @@
     <MESSAGE value="Fixed math in distanceBetween3D" />
     <MESSAGE value="Fixed typo" />
     <MESSAGE value="Made improvements to calculateDistances" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made improvements to calculateDistances" />
+    <MESSAGE value="Fixed copy paste mistake in tester" />
+    <MESSAGE value="(re)fixed copy paste mistake in tester" />
+    <option name="LAST_COMMIT_MESSAGE" value="(re)fixed copy paste mistake in tester" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="44" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/s17cs350project/UnitTests/WaypointPlannerTest.java</url>
+          <line>1204</line>
+          <properties />
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="61" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1236,11 +1245,11 @@
             <element signature="e#11174#11175#0" expanded="true" />
             <element signature="e#11202#11203#0" expanded="true" />
             <element signature="e#11590#11591#0" expanded="false" />
-            <marker date="1495573984476" expanded="false" signature="8204:8210" ph=" { " />
-            <marker date="1495573984476" expanded="false" signature="8267:8271" ph=" }" />
-            <marker date="1495573984476" expanded="false" signature="11647:11653" ph=" { " />
-            <marker date="1495573984476" expanded="false" signature="12302:12485" ph="{...}" />
-            <marker date="1495573984476" expanded="false" signature="12529:12703" ph="{...}" />
+            <marker date="1495575728032" expanded="false" signature="8204:8210" ph=" { " />
+            <marker date="1495575728032" expanded="false" signature="8267:8271" ph=" }" />
+            <marker date="1495575728032" expanded="false" signature="11647:11653" ph=" { " />
+            <marker date="1495575728032" expanded="false" signature="12302:12485" ph="{...}" />
+            <marker date="1495575728032" expanded="false" signature="12529:12703" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1264,14 +1273,14 @@
             <element signature="e#9624#9625#0" expanded="true" />
             <element signature="e#9672#9673#0" expanded="true" />
             <element signature="e#9749#9750#0" expanded="true" />
-            <element signature="e#48234#48265#0" expanded="true" />
-            <element signature="e#52326#52357#0" expanded="true" />
-            <element signature="e#56438#56469#0" expanded="true" />
-            <element signature="e#62422#62453#0" expanded="true" />
-            <element signature="e#69574#69605#0" expanded="true" />
-            <element signature="e#73095#73126#0" expanded="true" />
-            <element signature="e#76592#76623#0" expanded="true" />
-            <element signature="e#81635#81666#0" expanded="true" />
+            <element signature="e#47643#47674#0" expanded="true" />
+            <element signature="e#51750#51781#0" expanded="true" />
+            <element signature="e#55877#55908#0" expanded="true" />
+            <element signature="e#61861#61892#0" expanded="true" />
+            <element signature="e#69011#69042#0" expanded="true" />
+            <element signature="e#72488#72519#0" expanded="true" />
+            <element signature="e#75985#76016#0" expanded="true" />
+            <element signature="e#81020#81051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1311,11 +1320,11 @@
             <element signature="e#11174#11175#0" expanded="true" />
             <element signature="e#11202#11203#0" expanded="true" />
             <element signature="e#11590#11591#0" expanded="false" />
-            <marker date="1495573984476" expanded="false" signature="8204:8210" ph=" { " />
-            <marker date="1495573984476" expanded="false" signature="8267:8271" ph=" }" />
-            <marker date="1495573984476" expanded="false" signature="11647:11653" ph=" { " />
-            <marker date="1495573984476" expanded="false" signature="12302:12485" ph="{...}" />
-            <marker date="1495573984476" expanded="false" signature="12529:12703" ph="{...}" />
+            <marker date="1495575728032" expanded="false" signature="8204:8210" ph=" { " />
+            <marker date="1495575728032" expanded="false" signature="8267:8271" ph=" }" />
+            <marker date="1495575728032" expanded="false" signature="11647:11653" ph=" { " />
+            <marker date="1495575728032" expanded="false" signature="12302:12485" ph="{...}" />
+            <marker date="1495575728032" expanded="false" signature="12529:12703" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1339,14 +1348,14 @@
             <element signature="e#9624#9625#0" expanded="true" />
             <element signature="e#9672#9673#0" expanded="true" />
             <element signature="e#9749#9750#0" expanded="true" />
-            <element signature="e#48234#48265#0" expanded="true" />
-            <element signature="e#52326#52357#0" expanded="true" />
-            <element signature="e#56438#56469#0" expanded="true" />
-            <element signature="e#62422#62453#0" expanded="true" />
-            <element signature="e#69574#69605#0" expanded="true" />
-            <element signature="e#73095#73126#0" expanded="true" />
-            <element signature="e#76592#76623#0" expanded="true" />
-            <element signature="e#81635#81666#0" expanded="true" />
+            <element signature="e#47643#47674#0" expanded="true" />
+            <element signature="e#51750#51781#0" expanded="true" />
+            <element signature="e#55877#55908#0" expanded="true" />
+            <element signature="e#61861#61892#0" expanded="true" />
+            <element signature="e#69011#69042#0" expanded="true" />
+            <element signature="e#72488#72519#0" expanded="true" />
+            <element signature="e#75985#76016#0" expanded="true" />
+            <element signature="e#81020#81051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1386,11 +1395,11 @@
             <element signature="e#11174#11175#0" expanded="true" />
             <element signature="e#11202#11203#0" expanded="true" />
             <element signature="e#11590#11591#0" expanded="false" />
-            <marker date="1495573984476" expanded="false" signature="8204:8210" ph=" { " />
-            <marker date="1495573984476" expanded="false" signature="8267:8271" ph=" }" />
-            <marker date="1495573984476" expanded="false" signature="11647:11653" ph=" { " />
-            <marker date="1495573984476" expanded="false" signature="12302:12485" ph="{...}" />
-            <marker date="1495573984476" expanded="false" signature="12529:12703" ph="{...}" />
+            <marker date="1495575728032" expanded="false" signature="8204:8210" ph=" { " />
+            <marker date="1495575728032" expanded="false" signature="8267:8271" ph=" }" />
+            <marker date="1495575728032" expanded="false" signature="11647:11653" ph=" { " />
+            <marker date="1495575728032" expanded="false" signature="12302:12485" ph="{...}" />
+            <marker date="1495575728032" expanded="false" signature="12529:12703" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1414,14 +1423,14 @@
             <element signature="e#9624#9625#0" expanded="true" />
             <element signature="e#9672#9673#0" expanded="true" />
             <element signature="e#9749#9750#0" expanded="true" />
-            <element signature="e#48234#48265#0" expanded="true" />
-            <element signature="e#52326#52357#0" expanded="true" />
-            <element signature="e#56438#56469#0" expanded="true" />
-            <element signature="e#62422#62453#0" expanded="true" />
-            <element signature="e#69574#69605#0" expanded="true" />
-            <element signature="e#73095#73126#0" expanded="true" />
-            <element signature="e#76592#76623#0" expanded="true" />
-            <element signature="e#81635#81666#0" expanded="true" />
+            <element signature="e#47643#47674#0" expanded="true" />
+            <element signature="e#51750#51781#0" expanded="true" />
+            <element signature="e#55877#55908#0" expanded="true" />
+            <element signature="e#61861#61892#0" expanded="true" />
+            <element signature="e#69011#69042#0" expanded="true" />
+            <element signature="e#72488#72519#0" expanded="true" />
+            <element signature="e#75985#76016#0" expanded="true" />
+            <element signature="e#81020#81051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1515,41 +1524,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/s17cs350project/UnitTests/WaypointPlannerTest.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/lang/ClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="298" column="68" lean-forward="false" selection-start-line="298" selection-start-column="68" selection-end-line="298" selection-end-column="68" />
-          <folding>
-            <element signature="method#test_Coordinates_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
-            <element signature="method#test_WaypointPlanner_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
-            <element signature="method#test_WaypointPlanner_illegal_stream#0;class#WaypointPlannerTest#0" expanded="false" />
-            <element signature="method#test_calculateDistance_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
-            <element signature="method#test_calculateDistances_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
-            <element signature="method#test_getCoordinates_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
-            <element signature="method#test_WaypointPlanner#0;class#WaypointPlannerTest#0" expanded="false" />
-            <element signature="method#missingAxis#0;class#WaypointPlannerTest#0" expanded="false" />
-            <element signature="e#9422#9423#0" expanded="true" />
-            <element signature="e#9499#9500#0" expanded="true" />
-            <element signature="e#9547#9548#0" expanded="true" />
-            <element signature="e#9624#9625#0" expanded="true" />
-            <element signature="e#9672#9673#0" expanded="true" />
-            <element signature="e#9749#9750#0" expanded="true" />
-            <element signature="e#48234#48265#0" expanded="true" />
-            <element signature="e#52326#52357#0" expanded="true" />
-            <element signature="e#56438#56469#0" expanded="true" />
-            <element signature="e#62422#62453#0" expanded="true" />
-            <element signature="e#69574#69605#0" expanded="true" />
-            <element signature="e#73095#73126#0" expanded="true" />
-            <element signature="e#76592#76623#0" expanded="true" />
-            <element signature="e#81635#81666#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="99">
+          <caret line="487" column="0" lean-forward="false" selection-start-line="487" selection-start-column="0" selection-end-line="487" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/s17cs350project/planner/WaypointPlanner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+        <state relative-caret-position="160">
+          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3990#3991#0" expanded="true" />
@@ -1565,11 +1551,42 @@
             <element signature="e#11174#11175#0" expanded="true" />
             <element signature="e#11202#11203#0" expanded="true" />
             <element signature="e#11590#11591#0" expanded="false" />
-            <marker date="1495573984476" expanded="false" signature="8204:8210" ph=" { " />
-            <marker date="1495573984476" expanded="false" signature="8267:8271" ph=" }" />
-            <marker date="1495573984476" expanded="false" signature="11647:11653" ph=" { " />
-            <marker date="1495573984476" expanded="false" signature="12302:12485" ph="{...}" />
-            <marker date="1495573984476" expanded="false" signature="12529:12703" ph="{...}" />
+            <marker date="1495575728032" expanded="false" signature="8204:8210" ph=" { " />
+            <marker date="1495575728032" expanded="false" signature="8267:8271" ph=" }" />
+            <marker date="1495575728032" expanded="false" signature="11647:11653" ph=" { " />
+            <marker date="1495575728032" expanded="false" signature="12302:12485" ph="{...}" />
+            <marker date="1495575728032" expanded="false" signature="12529:12703" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/s17cs350project/UnitTests/WaypointPlannerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15181">
+          <caret line="1083" column="0" lean-forward="false" selection-start-line="1083" selection-start-column="0" selection-end-line="1083" selection-end-column="0" />
+          <folding>
+            <element signature="method#test_Coordinates_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
+            <element signature="method#test_WaypointPlanner_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
+            <element signature="method#test_WaypointPlanner_illegal_stream#0;class#WaypointPlannerTest#0" expanded="false" />
+            <element signature="method#test_calculateDistance_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
+            <element signature="method#test_calculateDistances_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
+            <element signature="method#test_getCoordinates_illegal#0;class#WaypointPlannerTest#0" expanded="false" />
+            <element signature="method#test_WaypointPlanner#0;class#WaypointPlannerTest#0" expanded="false" />
+            <element signature="method#missingAxis#0;class#WaypointPlannerTest#0" expanded="false" />
+            <element signature="e#9422#9423#0" expanded="true" />
+            <element signature="e#9499#9500#0" expanded="true" />
+            <element signature="e#9547#9548#0" expanded="true" />
+            <element signature="e#9624#9625#0" expanded="true" />
+            <element signature="e#9672#9673#0" expanded="true" />
+            <element signature="e#9749#9750#0" expanded="true" />
+            <element signature="e#47643#47674#0" expanded="true" />
+            <element signature="e#51750#51781#0" expanded="true" />
+            <element signature="e#55877#55908#0" expanded="true" />
+            <element signature="e#61861#61892#0" expanded="true" />
+            <element signature="e#69011#69042#0" expanded="true" />
+            <element signature="e#72488#72519#0" expanded="true" />
+            <element signature="e#75985#76016#0" expanded="true" />
+            <element signature="e#81020#81051#0" expanded="true" />
           </folding>
         </state>
       </provider>
