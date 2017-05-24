@@ -49,7 +49,7 @@ void InfoRepository<T, U, V>::retrieveInfoNode(T &t) {
 	InfoNode<T, U, V> *curr = first;
 	while (curr != nullptr) {
 		if (curr->dataOne == t) {
-			cout << curr;
+			curr->print();
 			return;
 		}
 		curr = curr->next;
