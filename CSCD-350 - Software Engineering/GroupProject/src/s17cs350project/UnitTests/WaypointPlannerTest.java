@@ -7,14 +7,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import s17cs350project.planner.WaypointPlanner;
 import s17cs350project.planner.WaypointPlanner.*;
-
-// TODO: Tests for unit conversion
 
 class WaypointPlannerTest {
 	// delta for comparing double values
@@ -35,6 +34,7 @@ class WaypointPlannerTest {
 	/*
 	 * Illegal tests for WaypointPlanner()
 	 */
+	@SuppressWarnings("ConstantConditions")
 	@Test
 	void test_WaypointPlanner_illegal() throws IOException {
 
@@ -234,34 +234,10 @@ class WaypointPlannerTest {
 	 * checks if any axis (X,Y,Z) is missing
 	 */
 	private boolean missingAxis(E_AxisNative _axisA, E_AxisNative _axisB, E_AxisNative _axisC) {
-		// X-axis check
-		if (!(isAxisX(_axisA) || isAxisX(_axisB) || isAxisX(_axisC))) {
-			return true;
-		}
-		// Y-axis check
-		if (!(isAxisY(_axisA) || isAxisY(_axisB) || isAxisY(_axisC))) {
-			return true;
-		}
-		// Z-axis check
-		return !(isAxisZ(_axisA) || isAxisZ(_axisB) || isAxisZ(_axisC));
+		return _axisA.getCardinalAxis().equals(_axisB.getCardinalAxis())
+				|| _axisA.getCardinalAxis().equals(_axisC.getCardinalAxis())
+				|| _axisB.getCardinalAxis().equals(_axisC.getCardinalAxis());
 	}
-
-	/**
-	 * helper methods in extension
-	 * check if an axis matches a type
-	 */
-	private boolean isAxisX(E_AxisNative _axis) {
-		return (_axis == E_AxisNative.X_MINUS || _axis == E_AxisNative.X_PLUS);
-	}
-
-	private boolean isAxisY(E_AxisNative _axis) {
-		return (_axis == E_AxisNative.Y_MINUS || _axis == E_AxisNative.Y_PLUS);
-	}
-
-	private boolean isAxisZ(E_AxisNative _axis) {
-		return (_axis == E_AxisNative.Z_MINUS || _axis == E_AxisNative.Z_PLUS);
-	}
-
 
 	/**
 	 * test given in pdf
@@ -490,7 +466,7 @@ class WaypointPlannerTest {
 		coordinatesCanonical = [(-3.0000000960000004 1.000000032 -2.000000064), (-5.00000016 9.000000288 -7.000000224), (5.00000016 -1.000000032 3.0000000960000004), (9.000000288 -1.000000032 5.00000016), (-2.000000064 4.000000128 -6.000000192000001)]
 
 		distancesNative= [9.433981433944, 5.385164979459779, 7.280110122244035, 5.000000160000001]
-		distancesCanonical = [0.0015617819507680816, 0.0015617819507680814, 0.0023040760031960155, 5.98916038226433E-4]
+		distancesCanonical = [doubleDelta5617819507680816, doubleDelta5617819507680814, 0.0023040760031960155, 5.98916038226433E-4]
 
 		distanceNative = 0.00513243322814626
 		distanceCanonical = 9.698804648042168
@@ -553,7 +529,7 @@ class WaypointPlannerTest {
 		coordinatesCanonical = [(-3.0000000960000004 1.000000032 -2.000000064), (-5.00000016 9.000000288 -7.000000224), (5.00000016 -1.000000032 3.0000000960000004), (9.000000288 -1.000000032 5.00000016), (-2.000000064 4.000000128 -6.000000192000001)]
 
 		distancesNative= [8.000000256, 2.000000064, 2.000000064, 3.000000096]
-		distancesCanonical = [0.0015151510464000003, 3.7878776160000003E-4, 3.7878776160000003E-4, 5.681816424E-4]
+		distancesCanonical = [doubleDelta5151510464000003, 3.7878776160000003E-4, 3.7878776160000003E-4, 5.681816424E-4]
 
 		distanceNative = 0.007276889772037
 		distanceCanonical = 8.259853176518153
@@ -632,7 +608,7 @@ class WaypointPlannerTest {
 	 * @param _isCanonicalElseNative format of coordinates
 	 * @param _unitCoordinates       unit to get coordinates as
 	 * @param _coordinatesExpected   list of coordinates expected
-	 * @throws IOException
+	 * @throws IOException when closing the stream
 	 */
 	private void test_getCoordinates_validate(String _input, E_AxisNative _axisA, E_AxisNative _axisB, E_AxisNative _axisC, E_Unit _unitPlanner, boolean _isCanonicalElseNative, E_Unit _unitCoordinates, List<Coordinates> _coordinatesExpected) throws IOException {
 		InputStream _stream = new ByteArrayInputStream(_input.getBytes());
@@ -963,7 +939,7 @@ class WaypointPlannerTest {
 	 * for excel test 5
 	 */
 	@Test
-	void test_input5_getCoordinates() throws IOException {
+	void test_input4_getCoordinates() throws IOException {
 		String _input = "0.9, 2.99  , 1.11\n-0.6, 3.7, 3.4\n-8, 5.7, 7.8\n-5, 2.3, 5.6\n1.1, 1.2, 11.1";
 
 		// native
@@ -1318,7 +1294,7 @@ class WaypointPlannerTest {
 	 */
 	@Test
 	@SuppressWarnings("Duplicates")
-	void test_input5_calculateDistances() throws IOException {
+	void test_input4_calculateDistances() throws IOException {
 		String _input = "0.9, 2.99  , 1.11\n-0.6, 3.7, 3.4\n-8, 5.7, 7.8\n-5, 2.3, 5.6\n1.1, 1.2, 11.1";
 
 		// native
@@ -1659,7 +1635,7 @@ class WaypointPlannerTest {
 	 */
 	@Test
 	@SuppressWarnings("Duplicates")
-	void test_input5_calculateDistance() throws IOException {
+	void test_input4_calculateDistance() throws IOException {
 		String _input = "0.9, 2.99  , 1.11\n-0.6, 3.7, 3.4\n-8, 5.7, 7.8\n-5, 2.3, 5.6\n1.1, 1.2, 11.1";
 
 		// native
@@ -1743,5 +1719,244 @@ class WaypointPlannerTest {
 				20.0577558);
 
 	}
+
+	// UNIT CONVERSION TESTS
+
+	/**
+	 * Check all waypoints on x, y, and zed axes for correct conversion.
+	 *
+	 * @param _converted Waypoints as given by internal conversion.
+	 * @param _expected  Expected results.
+	 */
+	private void validateUnitConversion_waypoints(List<Coordinates> _converted, List<Coordinates> _expected) {
+		for (int i = 0; i < _converted.size(); i++) {
+			assertEquals(_converted.get(i).getFirst(), _expected.get(i).getFirst(), doubleDelta);
+			assertEquals(_converted.get(i).getSecond(), _expected.get(i).getSecond(), doubleDelta);
+			assertEquals(_converted.get(i).getThird(), _expected.get(i).getThird(), doubleDelta);
+		}
+	}
+
+	/**
+	 * Check all intermediate distances for correct conversion.
+	 *
+	 * @param _converted Distances as given by internal conversion.
+	 * @param _expected  Expected results.
+	 */
+	private void validateUnitConversion_distances(List<Double> _converted, List<Double> _expected) {
+		for (int i = 0; i < _expected.size(); i++) {
+			assertEquals(_expected.get(i), _converted.get(i), doubleDelta);
+		}
+	}
+
+	/**
+	 * Check total distance for correct conversion.
+	 *
+	 * @param _converted Total distance as given by internal conversion.
+	 * @param _expected  Expected results.
+	 */
+	private void validateUnitConversion_totalDistance(double _converted, double _expected) {
+		assertEquals(_expected, _converted, doubleDelta);
+	}
+
+	/**
+	 * Helper method to generate list of expected waypoints to save a lot of copy and pasting.
+	 *
+	 * @param _input Input string; copied from Excel sheet; structure is: X,Y,Z\nX,Y,Z\n...etc.
+	 * @return The list of waypoints.
+	 */
+	private List<Coordinates> createExpectedWaypointsList(String _input) {
+		String[] _waypoints = _input.split("\n");
+		List<Coordinates> _expectedCoordinates = new ArrayList<Coordinates>();
+		for (String waypoint : _waypoints) {
+			String[] points = waypoint.split(",");
+			_expectedCoordinates.add(new Coordinates(Double.parseDouble(points[0]), Double.parseDouble(points[1]), Double.parseDouble(points[2])));
+		}
+		return _expectedCoordinates;
+	}
+
+	/**
+	 * Helper method to generate list of expected waypoints to save a lot of copy and pasting.
+	 * NOTE: exclude first zero-distance from expected String; not used by internal conversion
+	 *
+	 * @param _input Input string; copied from Excel sheet; structure is: D\nD\n...etc.
+	 * @return The list of distances.
+	 */
+	private List<Double> createExpectedDistancesList(String _input) {
+		String[] _distances = _input.split("\n");
+		List<Double> _expectedDistances = new ArrayList<Double>();
+		int i = 0;
+		for (String distance : _distances) {
+			_expectedDistances.add(Double.parseDouble(_distances[i]));
+			i++;
+		}
+		return _expectedDistances;
+	}
+
+	/**
+	 * Tester driver; takes input string, creates waypoint planner, gets converted coordinates, distances, and total distance; tests them against expected values
+	 *
+	 * @param _input                 Simulated input via String
+	 * @param _unitIn                Starting unit
+	 * @param _unitOut               Ending unit
+	 * @param _expectedCoordinates   Expected results of conversion of coordinates
+	 * @param _expectedDistances     Expected results of conversion of distances
+	 * @param _expectedTotalDistance Expected result of total distance
+	 * @throws IOException IntelliJ said I needed this - pfft
+	 */
+	private void test_unitConversion(String _input, E_Unit _unitIn, E_Unit _unitOut, List<Coordinates> _expectedCoordinates, List<Double> _expectedDistances, double _expectedTotalDistance) throws IOException {
+		// Stream-in points
+		InputStream _stream = new ByteArrayInputStream(_input.getBytes());
+
+		// Create waypoint planner
+		WaypointPlanner _planner = new WaypointPlanner(E_AxisNative.X_PLUS, E_AxisNative.Y_PLUS, E_AxisNative.Z_PLUS, _unitIn, _stream);
+
+		// Get list of coordinates and intermediate distances; total distance, too
+		List<Coordinates> _convertedCoordinates = _planner.getCoordinates(true, _unitOut);
+		List<Double> _convertedDistances = _planner.calculateDistances(E_AxisCombinationNeutral.FIRST_SECOND_THIRD, true, _unitOut);
+		double _convertedTotalDistance = _planner.calculateDistance(E_AxisCombinationNeutral.FIRST_SECOND_THIRD, true, _unitOut);
+
+		// Test the things
+		validateUnitConversion_waypoints(_convertedCoordinates, _expectedCoordinates);
+		validateUnitConversion_distances(_convertedDistances, _expectedDistances);
+		validateUnitConversion_totalDistance(_convertedTotalDistance, _expectedTotalDistance);
+
+		_stream.close();
+	}
+
+	// CASE 1: METERS to KILOMETERS
+	@Test
+	void test_unitConv1_metersToKilometers() {
+		String _input = "1698336.000000,-6147953.000000,91.000000\n" +
+				"1927176.000000,-6134094.000000,51610.000000\n" +
+				"3525156.000000,-5471952.000000,132371.000000\n" +
+				"-4634768.000000,457099.000000,173051.000000\n" +
+				"-6287169.000000,161034.000000,157118.000000\n" +
+				"-5471278.000000,-411456.000000,101902.000000\n" +
+				"-4420170.000000,-2045881.000000,45488.000000\n" +
+				"-3497035.000000,-2813811.000000,9163.000000\n" +
+				"-3483541.000000,-2806099.000000,0.000000";
+
+		String _expectedWaypointValues = "1698.336000,-6147.953000,0.091000\n" +
+				"1927.176000,-6134.094000,51.610000\n" +
+				"3525.156000,-5471.952000,132.371000\n" +
+				"-4634.768000,457.099000,173.051000\n" +
+				"-6287.169000,161.034000,157.118000\n" +
+				"-5471.278000,-411.456000,101.902000\n" +
+				"-4420.170000,-2045.881000,45.488000\n" +
+				"-3497.035000,-2813.811000,9.163000\n" +
+				"-3483.541000,-2806.099000,0.000000";
+
+		String _expectedDistanceValues = "234.977000\n" +
+				"1731.616000\n" +
+				"10086.608000\n" +
+				"1678.790000\n" +
+				"998.234000\n" +
+				"1944.056000\n" +
+				"1201.339000\n" +
+				"18.042000";
+
+		List<Coordinates> _expectedCoordinates = createExpectedWaypointsList(_expectedWaypointValues);
+
+		List<Double> _expectedDistances = createExpectedDistancesList(_expectedDistanceValues);
+
+		double _expectedTotalDistance = 17893.662796;
+
+		try {
+			test_unitConversion(_input, E_Unit.METERS, E_Unit.KILOMETERS, _expectedCoordinates, _expectedDistances, _expectedTotalDistance);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// CASE 2: METERS to FEET
+	@Test
+	void test_unitConv2_metersToFeet() {
+		String _input = "1698336.000000,-6147953.000000,91.000000\n" +
+				"1927176.000000,-6134094.000000,51610.000000\n" +
+				"3525156.000000,-5471952.000000,132371.000000\n" +
+				"-4634768.000000,457099.000000,173051.000000\n" +
+				"-6287169.000000,161034.000000,157118.000000\n" +
+				"-5471278.000000,-411456.000000,101902.000000\n" +
+				"-4420170.000000,-2045881.000000,45488.000000\n" +
+				"-3497035.000000,-2813811.000000,9163.000000\n" +
+				"-3483541.000000,-2806099.000000,0.000000";
+
+		String _expectedWaypointValues = "5571968.682240,-20170450.120520,298.556440\n" +
+				"6322756.107840,-20124980.958960,169324.152400\n" +
+				"11565472.811040,-17952598.999680,434288.071640\n" +
+				"-15205932.245120,1499668.683160,567752.642840\n" +
+				"-20627195.541960,528326.788560,515479.019120\n" +
+				"-17950387.713520,-1349921.303040,334324.157680\n" +
+				"-14501870.542800,-6712208.220040,149238.849920\n" +
+				"-11473212.309400,-9231663.681240,30062.336920\n" +
+				"-11428940.654440,-9206361.843160,0.000000";
+
+		String _expectedDistanceValues = "770920.783986\n" +
+				"5681155.488588\n" +
+				"33092546.887141\n" +
+				"5507842.893693\n" +
+				"3275047.042077\n" +
+				"6378138.304249\n" +
+				"3941399.441437\n" +
+				"59193.804948";
+
+		List<Coordinates> _expectedCoordinates = createExpectedWaypointsList(_expectedWaypointValues);
+
+		List<Double> _expectedDistances = createExpectedDistancesList(_expectedDistanceValues);
+
+		double _expectedTotalDistance = 58706244.646120;
+
+		try {
+			test_unitConversion(_input, E_Unit.METERS, E_Unit.FEET, _expectedCoordinates, _expectedDistances, _expectedTotalDistance);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// CASE 3: METERS to MILES
+	@Test
+	void test_unitConv3_metersToMiles() {
+		String _input = "1698336.000000,-6147953.000000,91.000000\n" +
+				"1927176.000000,-6134094.000000,51610.000000\n" +
+				"3525156.000000,-5471952.000000,132371.000000\n" +
+				"-4634768.000000,457099.000000,173051.000000\n" +
+				"-6287169.000000,161034.000000,157118.000000\n" +
+				"-5471278.000000,-411456.000000,101902.000000\n" +
+				"-4420170.000000,-2045881.000000,45488.000000\n" +
+				"-3497035.000000,-2813811.000000,9163.000000\n" +
+				"-3483541.000000,-2806099.000000,0.000000";
+
+		String _expectedWaypointValues = "1055.296739,-3820.159704,0.056545\n" +
+				"1197.491278,-3811.548123,32.068957\n" +
+				"2190.429709,-3400.112286,82.251501\n" +
+				"-2879.910427,284.028063,107.528873\n" +
+				"-3906.664489,100.061858,97.628569\n" +
+				"-3399.693482,-255.666826,63.318948\n" +
+				"-2746.565453,-1271.251123,28.264924\n" +
+				"-2172.956135,-1748.420555,5.693622\n" +
+				"-2164.571355,-1743.628542,0.000000";
+
+		String _expectedDistanceValues = "146.007674\n" +
+				"1075.976051\n" +
+				"6267.525680\n" +
+				"1043.151707\n" +
+				"620.273849\n" +
+				"1207.980327\n" +
+				"746.476912\n" +
+				"11.210944";
+
+		List<Coordinates> _expectedCoordinates = createExpectedWaypointsList(_expectedWaypointValues);
+
+		List<Double> _expectedDistances = createExpectedDistancesList(_expectedDistanceValues);
+
+		double _expectedTotalDistance = 11118.603145;
+
+		try {
+			test_unitConversion(_input, E_Unit.METERS, E_Unit.MILES, _expectedCoordinates, _expectedDistances, _expectedTotalDistance);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 }

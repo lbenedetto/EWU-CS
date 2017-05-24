@@ -205,6 +205,18 @@ public class WaypointPlanner {
 			this.third = third;
 		}
 
+		public double getFirst() {
+			return this.first;
+		}
+
+		public double getSecond() {
+			return this.second;
+		}
+
+		public double getThird() {
+			return this.third;
+		}
+
 		@Override
 		public boolean equals(Object o) {
 			if (this == o) return true;
@@ -298,8 +310,8 @@ public class WaypointPlanner {
 		Z_MINUS(-1, "Z"),    //interprets the lettered axis as z with negative values going in the lettered positive direction
 		Z_PLUS(1, "Z");      //interprets the lettered axis as z with positive values going in the lettered positive direction
 
-		int inverter;
-		String axis;
+		final int inverter;
+		final String axis;
 
 		E_AxisNative(int inverter, String axis) {
 			this.inverter = inverter;
@@ -329,6 +341,10 @@ public class WaypointPlanner {
 			return out;
 		}
 
+		public String getCardinalAxis() {
+			return axis;
+		}
+
 		boolean equals(E_AxisNative that) {
 			return this.axis.equals(that.axis);
 		}
@@ -340,18 +356,6 @@ public class WaypointPlanner {
 	 */
 	public enum E_Unit {
 		FEET, KILOMETERS, METERS, MILES;
-
-		private double convertToKilometers(double in) {
-			switch (this) {
-				case FEET:
-					return in * 0.0003048;
-				case METERS:
-					return in * .001;
-				case MILES:
-					return in * 1.60934;
-			}
-			return in;
-		}
 
 		private double convertToMeters(double in) {
 			switch (this) {
@@ -365,30 +369,6 @@ public class WaypointPlanner {
 			return in;
 		}
 
-		private double convertToMiles(double in) {
-			switch (this) {
-				case METERS:
-					return in * 0.000621371;
-				case FEET:
-					return in * 0.000189394;
-				case KILOMETERS:
-					return in * 0.621371;
-			}
-			return in;
-		}
-
-		private double convertToFeet(double in) {
-			switch (this) {
-				case MILES:
-					return in * 5280.0;
-				case METERS:
-					return in * 3.28084;
-				case KILOMETERS:
-					return in * 3280.84;
-			}
-			return in;
-		}
-
 		/**
 		 * Converts a value from this format to the target format
 		 *
@@ -397,15 +377,14 @@ public class WaypointPlanner {
 		 * @return converted value
 		 */
 		public double convertTo(double in, E_Unit target) {
+			in = convertToMeters(in);
 			switch (target) {
 				case FEET:
-					return convertToFeet(in);
+					return in * 3.28084;
 				case KILOMETERS:
-					return convertToKilometers(in);
-				case METERS:
-					return convertToMeters(in);
+					return in * .001;
 				case MILES:
-					return convertToMiles(in);
+					return in * 0.000621371;
 			}
 			return in;
 		}
