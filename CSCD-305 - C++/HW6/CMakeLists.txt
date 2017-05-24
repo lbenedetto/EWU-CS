@@ -3,5 +3,5 @@ project(HW6)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp InfoNode.cpp InfoNode.h InfoRepository.cpp InfoRepository.h)
+set(SOURCE_FILES main.cpp InfoNode.h InfoRepository.h)
 add_executable(HW6 ${SOURCE_FILES})

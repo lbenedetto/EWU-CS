@@ -1,8 +1,9 @@
 #include <iostream>
-#include <string>
 #include "InfoRepository.h"
+
 using namespace std;
-int main(){
+
+int main() {
 	InfoRepository<int, string, double> infoRepository("Company");
 	infoRepository.addInfo(3010731, "Bowen, David", 60000.00);
 	infoRepository.addInfo(456901, "Donnelly, Tom", 89000.00);
