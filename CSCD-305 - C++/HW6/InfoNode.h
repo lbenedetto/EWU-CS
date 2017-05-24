@@ -20,7 +20,7 @@ class InfoNode {
 public:
 	InfoNode(T &t, U &u, V &v, InfoNode<T, U, V> *p) : dataOne(t), dataTwo(u), dataThree(v), next(p) {}
 
-	ostream &operator<<(ostream &os);
+	void print();
 
 private:
 	T dataOne;
@@ -31,18 +31,13 @@ private:
 };
 
 template<class T, class U, class V>
-ostream &InfoNode<T, U, V>::operator<<(ostream &os) {
-	printWithPadding(dataOne);
-	printWithPadding(dataTwo);
-	printWithPadding(dataThree);
-	return os << endl;
-}
-
-template<class X>
-void printWithPadding(const X &in) {
+void InfoNode<T, U, V>::print() {
 	const int width = 20;
 	const char separator = ' ';
-	cout << left << setw(width) << setfill(separator) << in;
+	cout << left << setw(width) << setfill(separator) << dataOne;
+	cout << left << setw(width) << setfill(separator) << dataTwo;
+	cout << left << setw(width) << setfill(separator) << dataThree;
+	cout << endl;
 }
 
 #endif //HW6_INFONODE_H

@@ -39,7 +39,7 @@ template<class T, class U, class V>
 void InfoRepository<T, U, V>::printInformation() {
 	InfoNode<T, U, V> *curr = first;
 	while (curr != nullptr) {
-		cout << curr;
+		curr->print();
 		curr = curr->next;
 	}
 }
