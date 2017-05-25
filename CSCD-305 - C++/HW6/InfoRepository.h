@@ -37,6 +37,7 @@ bool InfoRepository<T, U, V>::isEmpty() {
 
 template<class T, class U, class V>
 void InfoRepository<T, U, V>::printInformation() {
+	cout << "Printing " << iName << " info.....\n\n";
 	InfoNode<T, U, V> *curr = first;
 	while (curr != nullptr) {
 		curr->print();
@@ -46,15 +47,19 @@ void InfoRepository<T, U, V>::printInformation() {
 
 template<class T, class U, class V>
 void InfoRepository<T, U, V>::retrieveInfoNode(T &t) {
+	cout << "\nRetrieving Node with id " << t << " from the database.....\n";
 	InfoNode<T, U, V> *curr = first;
 	while (curr != nullptr) {
 		if (curr->dataOne == t) {
+			cout << "Node with id " << t << "was found in the database.\n\n";
+			cout << "Here's the information .....\n";
 			curr->print();
+			cout << endl;
 			return;
 		}
 		curr = curr->next;
 	}
-	cout << "Specified InfoNode does not exist in the Info Repository";
+	cout << "No Node with id " << t << " exists in the list.";
 }
 
 template<class T, class U, class V>

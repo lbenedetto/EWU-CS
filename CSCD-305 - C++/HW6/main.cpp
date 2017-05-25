@@ -1,3 +1,4 @@
+//Lars Benedetto, compiled with CMake
 #include <iostream>
 #include "InfoRepository.h"
 

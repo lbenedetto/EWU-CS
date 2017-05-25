@@ -32,7 +32,7 @@ private:
 
 template<class T, class U, class V>
 void InfoNode<T, U, V>::print() {
-	const int width = 20;
+	const int width = 30;
 	const char separator = ' ';
 	cout << left << setw(width) << setfill(separator) << dataOne;
 	cout << left << setw(width) << setfill(separator) << dataTwo;
