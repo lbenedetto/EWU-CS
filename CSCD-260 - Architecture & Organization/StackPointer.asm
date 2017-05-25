@@ -21,8 +21,7 @@
   la $a0, result
   syscall
   
-  lw $t1, 0($sp)
-  move $a0, $t1
+  lw $a0, 0($sp)
   li $v0, 1
   syscall
   
@@ -67,3 +66,5 @@
     syscall
     jr $ra
 exit:
+li $v0, 10
+syscall
