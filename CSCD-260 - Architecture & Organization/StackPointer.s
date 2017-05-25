@@ -1,10 +1,10 @@
 .data
-  array: .word 5,5,5,5,5,10,10,10,10,10
+  array: .word 5, 5, 5, 5, 5, 10, 10, 10, 10, 10
   prompt: .asciiz "Enter the number to compare: "
   result: .asciiz "Final Result: "
   newline: .asciiz "\n"
 .text
-
+main:
   # print
   li $v0, 4
   la $a0, prompt
