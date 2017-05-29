@@ -64,7 +64,16 @@ void InfoRepository<T, U, V>::retrieveInfoNode(T &t) {
 
 template<class T, class U, class V>
 InfoRepository<T, U, V>::~InfoRepository() {
-
+	InfoNode<T, U, V> *curr = first;
+	InfoNode<T, U, V> *prev = nullptr;
+	while (curr != nullptr) {
+		if (prev != nullptr) {
+			delete prev;
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+	delete prev;
 }
 
 #endif //HW6_INFOREPOSITORY_H
