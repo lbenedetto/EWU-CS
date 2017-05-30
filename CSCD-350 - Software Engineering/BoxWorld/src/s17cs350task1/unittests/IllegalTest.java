@@ -601,47 +601,34 @@ class IllegalTest {
 		// null
 		try {
 			ExporterXML _exporter = new ExporterXML();
-
 			_exporter.openComponentNode(null);
-
 			fail("failed to catch null");
 		} catch (TaskException ignored) {
 		}
-
 		// empty
 		try {
 			ExporterXML _exporter = new ExporterXML();
-
 			_exporter.openComponentNode("");
-
 			fail("failed to catch empty");
 		} catch (TaskException ignored) {
 		}
-
 		try {
 			ExporterXML _exporter = new ExporterXML();
-
 			_exporter.openComponentNode("  ");
-
 			fail("failed to catch empty");
 		} catch (TaskException ignored) {
 		}
-
 		// node already open
 		try {
 			ExporterXML _exporter = new ExporterXML();
-
 			_exporter.openComponentNode("A");
 			_exporter.openComponentNode("B");
-
 			fail("failed to catch open node");
 		} catch (TaskException ignored) {
 		}
-
 		// node w/ ID exists
 		try {
 			ExporterXML _exporter = new ExporterXML();
-
 			_exporter.openComponentNode("A");
 			_exporter.closeComponentNode("A");
 			_exporter.openComponentNode("A");
@@ -649,16 +636,13 @@ class IllegalTest {
 			fail("failed to catch node with ID exists");
 		} catch (TaskException ignored) {
 		}
-
 		// closed
 		try {
 			ExporterXML _exporter = new ExporterXML();
 			_exporter.openComponentNode("A");
 			_exporter.closeComponentNode("A");
 			_exporter.closeExport();
-
 			_exporter.openComponentNode("B");
-
 			fail("failed to catch closed");
 		} catch (TaskException ignored) {
 		}

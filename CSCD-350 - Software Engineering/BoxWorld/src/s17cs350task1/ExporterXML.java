@@ -1,7 +1,5 @@
 package s17cs350task1;
 
-import javafx.concurrent.Task;
-
 public class ExporterXML extends A_Exporter {
 	public ExporterXML() {
 		super();
@@ -13,9 +11,11 @@ public class ExporterXML extends A_Exporter {
 		validateID(id);
 		if (p == null) throw new TaskException("Point was null");
 		if (isComponentClosed()) throw new TaskException("Cannot add points outside of a component tag");
+		if(addedPoints.contains(id)) throw new TaskException("Tried to add duplicate point");
 		output.append(String.format(
 				"\t\t<point id=\"%s\" x=\"%s\" y=\"%s\" z=\"%s\"/>\n",
 				id, p.getX(), p.getY(), p.getZ()));
+		addedPoints.add(id);
 	}
 
 	@Override
@@ -30,16 +30,19 @@ public class ExporterXML extends A_Exporter {
 	public void openComponentNode(String id) {
 		validateID(id);
 		if (!isComponentClosed()) throw new TaskException("Cannot open new node until previous node is closed");
+		if(!addedNodes.isEmpty()) throw new TaskException("Must open root first");
 		output.append(String.format("\t<component id=\"%s\" isRoot=\"true\">\n", id));
 		openComponent(id);
 	}
 
 	@Override
 	public void openComponentNode(String id, String idParent) {
+		if(isClosed()) throw new TaskException("Cannot open node after export is closed");
 		validateID(idParent);
 		validateID(id);
 		if (id.equals(idParent)) throw new TaskException("child matches parent");
 		if (!isComponentClosed()) throw new TaskException("Cannot open new node until previous node is closed");
+		if(addedNodes.contains(id)) throw new TaskException("Tried to open node that was already opened (and possibly closed)");
 		output.append(String.format("\t<component id=\"%s\" isRoot=\"false\" idParent=\"%s\">\n", id, idParent));
 		openComponent(id);
 	}
@@ -47,6 +50,7 @@ public class ExporterXML extends A_Exporter {
 	@Override
 	public void closeExport() {
 		if (isClosed()) throw new TaskException("Cannot close export, export is already closed");
+		if(!isComponentClosed()) throw new TaskException("Cannot close export with unclosed node");
 		output.append("</components>");
 		super.closeExport();
 	}
