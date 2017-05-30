@@ -9,7 +9,6 @@ public class ComponentBox extends A_Component {
 
 	public ComponentBox(String id, Dimension3D size) {
 		super(id, false);
-		if (id == null || id.equals("")) throw new TaskException("id passed to box was null or empty");
 		if (size == null) throw new TaskException("size passed to box was null");
 		this.size = size;
 	}
@@ -80,7 +79,7 @@ public class ComponentBox extends A_Component {
 		if (exporter == null) throw new TaskException("Exporter was null");
 		if (isRoot()) exporter.openComponentNode(getID());
 		else exporter.openComponentNode(getID(), getConnectorToParent().getComponentParent().getID());
-		Point3D[] points = generateFramesSelf().toArray(new Point3D[9]);
+		Point3D[] points = generateFrameSelf().toArray(new Point3D[9]);
 		int i = 0;
 		exporter.addPoint("center", points[i++]);
 		exporter.addPoint("left-bottom-far", points[i++]);
@@ -93,20 +92,20 @@ public class ComponentBox extends A_Component {
 		exporter.addPoint("left-top-near", points[i]);
 		exporter.closeComponentNode(getID());
 		getChildren().forEach(b -> b.export(exporter));
-		if(isRoot()) exporter.closeExport();
+		if (isRoot()) exporter.closeExport();
 		return exporter.export();
 	}
 
 	public List<List<Point3D>> generateFramesAll() {
 		List<List<Point3D>> points = new ArrayList<>();
-		points.add(generateFramesSelf());
+		points.add(generateFrameSelf());
 		for (A_Component b : getDescendants()) {
-			points.add(b.generateFramesSelf());
+			points.add(b.generateFrameSelf());
 		}
 		return points;
 	}
 
-	public List<Point3D> generateFramesSelf() {
+	public List<Point3D> generateFrameSelf() {
 		List<Point3D> points = new ArrayList<>();
 		points.add(getAbsoluteCenterPosition());
 		points.addAll(generateBoundingBoxSelf().generateCorners());
