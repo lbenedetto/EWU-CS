@@ -9,7 +9,9 @@ public class ExporterXML extends A_Exporter {
 	}
 
 	@Override
-	void addPoint(String id, Point3D p) {
+	public void addPoint(String id, Point3D p) {
+		validateID(id);
+		if (p == null) throw new TaskException("Point was null");
 		if (isComponentClosed()) throw new TaskException("Cannot add points outside of a component tag");
 		output.append(String.format(
 				"\t\t<point id=\"%s\" x=\"%s\" y=\"%s\" z=\"%s\"/>\n",
@@ -17,7 +19,7 @@ public class ExporterXML extends A_Exporter {
 	}
 
 	@Override
-	void closeComponentNode(String id) {
+	public void closeComponentNode(String id) {
 		if (isComponentClosed()) throw new TaskException("Cannot close node if it is already closed");
 		if (!getLastID().equals(id)) throw new TaskException("Closing tag mismatch");
 		output.append("\t</component>\n");
@@ -25,14 +27,18 @@ public class ExporterXML extends A_Exporter {
 	}
 
 	@Override
-	void openComponentNode(String id) {
+	public void openComponentNode(String id) {
+		validateID(id);
 		if (!isComponentClosed()) throw new TaskException("Cannot open new node until previous node is closed");
 		output.append(String.format("\t<component id=\"%s\" isRoot=\"true\">\n", id));
 		openComponent(id);
 	}
 
 	@Override
-	void openComponentNode(String id, String idParent) {
+	public void openComponentNode(String id, String idParent) {
+		validateID(idParent);
+		validateID(id);
+		if (id.equals(idParent)) throw new TaskException("child matches parent");
 		if (!isComponentClosed()) throw new TaskException("Cannot open new node until previous node is closed");
 		output.append(String.format("\t<component id=\"%s\" isRoot=\"false\" idParent=\"%s\">\n", id, idParent));
 		openComponent(id);
@@ -43,5 +49,9 @@ public class ExporterXML extends A_Exporter {
 		if (isClosed()) throw new TaskException("Cannot close export, export is already closed");
 		output.append("</components>");
 		super.closeExport();
+	}
+
+	private void validateID(String id) {
+		if (id == null || id.trim().equals("")) throw new TaskException("invalid id");
 	}
 }

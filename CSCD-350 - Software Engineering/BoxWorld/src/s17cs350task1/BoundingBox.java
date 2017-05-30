@@ -9,6 +9,8 @@ public class BoundingBox implements Cloneable {
 	private Dimension3D size;
 
 	public BoundingBox(Point3D center, Dimension3D size) {
+		if (center == null) throw new TaskException("center was null");
+		if (size == null) throw new TaskException("size was null");
 		this.center = center;
 		this.size = size;
 	}
@@ -100,5 +102,13 @@ public class BoundingBox implements Cloneable {
 
 	public enum E_Plane implements Serializable, Comparable<E_Plane> {
 		XY, YZ, XZ
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		BoundingBox that = (BoundingBox) o;
+		return (center != null ? center.equals(that.center) : that.center == null) && (size != null ? size.equals(that.size) : that.size == null);
 	}
 }

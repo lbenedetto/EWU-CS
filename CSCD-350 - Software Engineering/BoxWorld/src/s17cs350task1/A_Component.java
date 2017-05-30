@@ -3,17 +3,18 @@ package s17cs350task1;
 import java.util.*;
 
 public abstract class A_Component implements Cloneable {
-	A_Component(String id, boolean isRoot) {
-		this.id = id;
-		this.isRoot = isRoot;
-		children = new ArrayList<>();
-	}
 
 	private String id;
 	private boolean isRoot;
 	private ArrayList<Connector> children;
 	private Connector parent;
 
+	A_Component(String id, boolean isRoot) {
+		if (id == null || id.trim().equals("")) throw new TaskException("id passed to box was null or empty");
+		this.id = id;
+		this.isRoot = isRoot;
+		children = new ArrayList<>();
+	}
 
 	abstract double calculateAreaAll(BoundingBox.E_Plane plane);
 
@@ -69,7 +70,7 @@ public abstract class A_Component implements Cloneable {
 
 	abstract public List<List<Point3D>> generateFramesAll();
 
-	abstract public List<Point3D> generateFramesSelf();
+	abstract public List<Point3D> generateFrameSelf();
 
 	public Point3D getAbsoluteCenterPosition() {
 		Point3D p = new Point3D(0, 0, 0);
@@ -88,6 +89,7 @@ public abstract class A_Component implements Cloneable {
 	public List<A_Component> getChildren() {
 		List<A_Component> c = new ArrayList<>();
 		children.forEach(x -> c.add(x.getComponentChild()));
+		c.sort(new ComponentComparator());
 		return c;
 	}
 
