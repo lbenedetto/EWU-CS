@@ -1,70 +1,62 @@
 .data
-  array: .word 5, 5, 5, 5, 5, 10, 10, 10, 10, 10
-  prompt: .asciiz "Enter the number to compare: "
-  result: .asciiz "Final Result: "
-  newline: .asciiz "\n"
+  my_array: .word 5, 5, 5, 5, 5, 10, 10, 10, 10, 10
+  prompt: .asciiz "Integer value to compare to: "
 .text
-main:
-  # print
+  main:
   li $v0, 4
   la $a0, prompt
-  syscall
+  syscall # print prompt
 
-  # read int
   li $v0, 5
-  syscall
-  move $t0, $v0
-  # $t0, int to search for
-  jal search
-  
-  li $v0, 4
-  la $a0, result
-  syscall
-  
-  lw $a0, 0($sp)
-  li $v0, 1
-  syscall
-  
-  j exit
-  
-  search:
-    # store the return link in the stack
-    addi $sp, $sp, -4
-    sw $ra, 0($sp)
+  syscall # read input
 
-    la $t1, array #load the address of the array into t1
-    addi $sp, $sp, -4
-    sw $t1, 0($sp) # load address of array into the stack
-    # $t2 value at ix
-    add $t3, $t1, 36 #store the end address of the array in $t3
-    li $t1, 0 # the value to keep track of the sum
-  loop:
-    lw $t1, 0($sp)
-    bgt $t1, $t3, return
-    lw $t1, 0($t1)
-    bgt $t0, $t1, increment
-      jal addToSum
-    increment:
-    lw $t1, 0($sp)
-    addi $t1, $t1, 4
-    sw $t1, 0($sp)
+  li $t1, 40   # array size
+  la $t2, my_array # array
 
-    j loop
-    return:
-    addi $sp, $sp, 4
-    lw $ra, 0($sp)
-    sw $t4, 0($sp)
-    jr $ra
+  addi $sp, $sp, -12 # make room for 3 new values on the stack
+  sw $v0, 8($sp)   # store value entered
+  sw $t1, 4($sp)   # store array size
+  sw $t2, 0($sp)   # store array
 
-  addToSum:
-    add $t4, $t4, $t1
-    move $a0, $t4
-    li $v0, 1
+  jal checkArray
+
+  exit:
+    lw $a0, 0($sp)
+    li, $v0, 1
+    syscall    # print the int
+    addi $sp, $sp, 32
+    li  $v0, 10
     syscall
-    li $v0, 4
-    la $a0, newline
-    syscall
-    jr $ra
-exit:
-li $v0, 10
-syscall
+
+  checkArray:
+    lw $t0, 8($sp)   # load input
+    lw $t1, 4($sp)   # load size
+    lw $t2, 0($sp)   # load array
+    li $t3, 0        # load return value
+
+    addi $sp, $sp, -20 # make room for duplicate stack bullshit
+    sw $ra, 16($sp) # store return link
+    sw $t0, 12($sp) # store input
+    sw $t1, 8($sp)  # store size
+    sw $t2, 4($sp)  # store array
+    sw $t3, 0($sp)  # store return value
+
+    add $t4, $t1, $t2 # calculate stop address
+
+    forLoop:
+      bge $t2, $t4, end # &cur == &stop
+        lw $t5, 0($t2)
+        bge $t0, $t5, increment # if n > v, increment
+          jal addval
+        increment:
+        addi $t2,$t2,4 # increment array by 4 bytes
+        j forLoop
+    end:
+      lw $ra, 16($sp)
+      jr $ra
+
+  addval:
+    lw $t3, 0($sp) # get the return value from the stack
+    add $t3, $t5, $t3 # add the curr value to the ret value
+    sw $t3, 0($sp) # store the new ret value back into the stack
+    jr $ra # return
