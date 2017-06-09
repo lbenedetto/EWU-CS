@@ -1,5 +1,5 @@
 .data
-  my_array: .word 5, 5, 5, 5, 5, 10, 10, 10, 10, 10
+  my_array: .word 10, 20, -30, 421, -7,  6, 41, 40, 39, 1,  2, -3, 42, -7, 6,  411, 400, 9, 56, 65,  66, -88, 33, 44, 55,  66, 77
   prompt: .asciiz "Integer value to compare to: "
 .text
   main:
@@ -10,7 +10,7 @@
   li $v0, 5
   syscall # read input
 
-  li $t1, 40   # array size
+  li $t1, 108   # array size
   la $t2, my_array # array
 
   addi $sp, $sp, -12 # make room for 3 new values on the stack
