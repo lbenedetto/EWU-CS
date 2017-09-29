@@ -8,15 +8,15 @@ body {
     padding: 0 10px
 }
 
+h1, h2, h3 {
+    line-height: 1.2
+}
+
 input[type=text] {
     background-color: #5e5e5e;
     color: #f2f2f2;
     border: none;
     border-bottom: 2px solid #ba0000;
-}
-
-h1, h2, h3 {
-    line-height: 1.2
 }
 
 input[type=button] {
@@ -32,21 +32,42 @@ input[type=button] {
     cursor: pointer;
 }
 
-.output {
+.prettyTable {
     border-collapse: collapse;
     width: 100%;
 }
 
-.output th, td {
+.prettyTable th, td {
     text-align: left;
     padding: 8px;
 }
 
-.output tr:nth-child(even) {
+.prettyTable tr:nth-child(even) {
     background-color: #5e5e5e
 }
 
-.output th {
+.prettyTable th {
     background-color: #ba0000;
     color: #f2f2f2;
+}
+
+
+/* unvisited link */
+a:link {
+    color: #757575;
+}
+
+/* visited link */
+a:visited {
+    color: #BDBDBD;
+}
+
+/* mouse over link */
+a:hover {
+    color: lightcoral;
+}
+
+/* selected link */
+a:active {
+    color: coral;
 }
