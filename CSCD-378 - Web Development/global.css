@@ -54,12 +54,12 @@ input[type=button] {
 
 /* unvisited link */
 a:link {
-    color: #757575;
+    color: #BDBDBD;
 }
 
 /* visited link */
 a:visited {
-    color: #BDBDBD;
+    color: #757575;
 }
 
 /* mouse over link */
