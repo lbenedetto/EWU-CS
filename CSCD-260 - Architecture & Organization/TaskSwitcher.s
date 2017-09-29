@@ -5,8 +5,8 @@
   tid: .word 1
   
   .align 2
-  str0:   .asciiz "123"
-  str1:   .asciiz "45678"
+  str0:   .asciiz "abc"
+  str1:   .asciiz "defgh"
 
 .text
   .globl main
@@ -27,6 +27,9 @@
     addi $sp, $sp, -4                   # move stack pointer down
     sw $t0, 0($sp)                      # store t0 onto stack
     lw $t0, tid                         # load tid into t0
+    move $a0, $t0
+    li $v0, 1
+    syscall
     beq $t0, $0, savezero
     j saveone
 
