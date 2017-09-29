@@ -1,12 +1,52 @@
 body {
-    margin: 40px auto;
+    background-color: #3d3d3d;
     max-width: 650px;
+    color: #f2f2f2;
+    margin: 40px auto;
     line-height: 1.6;
     font-size: 18px;
-    color: #444;
     padding: 0 10px
+}
+
+input[type=text] {
+    background-color: #5e5e5e;
+    color: #f2f2f2;
+    border: none;
+    border-bottom: 2px solid #ba0000;
 }
 
 h1, h2, h3 {
     line-height: 1.2
+}
+
+input[type=button] {
+    background-color: #ba0000;
+    border: none;
+    color: #f2f2f2;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.output {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.output th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+.output tr:nth-child(even) {
+    background-color: #5e5e5e
+}
+
+.output th {
+    background-color: #ba0000;
+    color: #f2f2f2;
 }
