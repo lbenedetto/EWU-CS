@@ -12,7 +12,7 @@ function init() {
 function num() {
 	var input = $(this).text().toString();
 	var expr = /[%\/*\-+]/;
-	if(expr.test(out.val().toString())){
+	if (expr.test(out.val().toString())) {
 		clearText();
 	}
 	if (input === ".") {
@@ -43,11 +43,12 @@ function special() {
 			setText(out.val() * -1);
 			break;
 		case "1/x":
-			setText(1/out.val());
+			setText(1 / out.val());
 			break;
 		case "=":
 			var expr = sessionStorage.reg + out.val();
 			setText(eval(expr));
+			sessionStorage.reg = "";
 			break;
 	}
 }

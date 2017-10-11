@@ -1,11 +1,8 @@
 body {
     background-color: #3d3d3d;
-    max-width: 650px;
     color: #f2f2f2;
-    margin: 40px auto;
     line-height: 1.6;
     font-size: 18px;
-    padding: 0 10px
 }
 
 h1, h2, h3 {
@@ -34,7 +31,7 @@ input[type=button] {
 
 .prettyTable {
     border-collapse: collapse;
-    width: 100%;
+    max-width: 650px;
 }
 
 .prettyTable th, td {
