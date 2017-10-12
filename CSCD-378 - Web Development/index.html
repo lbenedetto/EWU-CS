@@ -49,7 +49,7 @@
 		}
 	</style>
 </head>
-<body id="main">
+<body id="main" onload="navigateToHash()">
 <div class="topBar">
 	<h1 align="center">Lars Benedetto CSCD 378</h1><br/>
 </div>
@@ -57,12 +57,13 @@
 <div class="sidenav">
 	<hr>
 	<h3>Links</h3>
-	<a target="iframe_a" class="nav" href="./phpinfo/phpinfo.php">PHP Info</a>
-	<a target="iframe_a" class="nav" href="./1-Javascript-Mortgage-Calculator">Mortgage Table</a>
-	<a target="iframe_a" class="nav" href="./2-Client-Side-Calculator">Client Side Calculator</a>
+	<a target="iframe_a" id="0" class="nav" href="./phpinfo/phpinfo.php">PHP Info</a>
+	<a target="iframe_a" id="1" class="nav" href="./1-Javascript-Mortgage-Calculator">Mortgage Table</a>
+	<a target="iframe_a" id="2" class="nav" href="./2-Client-Side-Calculator">Client Side Calculator</a>
 </div>
 <iframe name="iframe_a"
         style="position:fixed; top:100px; left:300px; bottom:0; right:0; width:100%; height:100%; border:none; margin:64px; padding:0; overflow:hidden;"></iframe>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="main.js"></script>
 </html>
