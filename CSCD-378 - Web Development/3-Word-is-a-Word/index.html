@@ -5,7 +5,7 @@
 	<title>A Word is a Word</title>
 	<LINK href="../global.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
-		input{
+		input {
 			font-size: 32px;
 		}
 	</style>
@@ -13,10 +13,50 @@
 <body>
 <table border='0'>
 	<tr>
-		<td><input type='text' id="inputWord"></td>
-		<td><button class="defButton clear" id="btnSubmitCE" type="button">Search</button></td>
+		<td><input type='text' id="inputWord" style="width: 400px;"></td>
+		<td><button onclick="search()" class="defButton clear" id="btnSubmitCE" type="button">Search</button></td>
 	</tr>
 </table>
+<div>
+	<table border='1' id="outputTableDefinitions" class="prettyTable" style="float: left; margin: 8px; width: 400px;">
+		<tr>
+			<th></th>
+			<th>Definitions</th>
+		</tr>
+	</table>
+
+	<table border='1' id="outputTableSynonyms" class="prettyTable" style="float: left; margin: 8px; width: 150px;">
+		<tr>
+			<th>Synonyms</th>
+		</tr>
+	</table>
+
+	<table border='1' id="outputTableAntonyms" class="prettyTable" style="float: left; margin: 8px; width: 150px;">
+		<tr>
+			<th>Antonyms</th>
+		</tr>
+	</table>
+
+	<table border='1' id="outputTableAnagrams" class="prettyTable" style="float: left; margin: 8px; width: 150px;">
+		<tr>
+			<th>Anagram</th>
+		</tr>
+	</table>
+
+	<table border='1' id="outputTableTranslations" class="prettyTable" style="float: left; margin: 8px; width: 150px;">
+		<tr>
+			<th>Language</th>
+			<th>Translation</th>
+		</tr>
+	</table>
+
+	<table border='1' id="outputTableYoda" class="prettyTable" style="float: left; margin: 8px; width: 150px;">
+		<tr>
+			<th>Yoda</th>
+		</tr>
+	</table>
+</div>
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="REST.js"></script>

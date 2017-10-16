@@ -1,70 +1,72 @@
+* {
+	font-family: Arial, sans-serif;
+}
 body {
-    background-color: #3d3d3d;
-    color: #f2f2f2;
-    line-height: 1.6;
-    font-size: 18px;
+	background-color: #3d3d3d;
+	color: #f2f2f2;
+	line-height: 1.6;
+	font-size: 18px;
 }
 
 h1, h2, h3 {
-    line-height: 1.2
+	line-height: 1.2
 }
 
 input[type=text] {
-    background-color: #5e5e5e;
-    color: #f2f2f2;
-    border: none;
-    border-bottom: 2px solid #ba0000;
+	background-color: #5e5e5e;
+	color: #f2f2f2;
+	border: none;
+	border-bottom: 2px solid #ba0000;
 }
 
 button {
-    background-color: #ba0000;
-    border: none;
-    color: #f2f2f2;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+	background-color: #ba0000;
+	border: none;
+	color: #f2f2f2;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
 }
 
 .prettyTable {
-    border-collapse: collapse;
-    max-width: 650px;
+	border-collapse: collapse;
+	max-width: 650px;
 }
 
 .prettyTable th, td {
-    text-align: left;
-    padding: 8px;
+	text-align: left;
+	padding: 8px;
 }
 
 .prettyTable tr:nth-child(even) {
-    background-color: #5e5e5e
+	background-color: #5e5e5e
 }
 
 .prettyTable th {
-    background-color: #ba0000;
-    color: #f2f2f2;
+	background-color: #ba0000;
+	color: #f2f2f2;
 }
-
 
 /* unvisited link */
 a:link {
-    color:deepskyblue;
+	color: deepskyblue;
 }
 
 /* visited link */
 a:visited {
-    color: dodgerblue;
+	color: dodgerblue;
 }
 
 /* mouse over link */
 a:hover {
-    color: lightcoral;
+	color: lightcoral;
 }
 
 /* selected link */
 a:active {
-    color: coral;
+	color: coral;
 }
