@@ -37,7 +37,7 @@ function search() {
 	client.get('http://api.datamuse.com/words?sp=' + word + '&qe=sp&md=d',
 		function (response) {
 			var definitions = response[0]["defs"];
-			for (var j = 0; j < definitions.length; j++) {
+			for (var j = 0; j < definitions.length && j < 5; j++) {
 				var def = definitions[j];
 				var ix = def.indexOf("\t");
 				var p1 = def.substring(0, ix);
@@ -50,14 +50,14 @@ function search() {
 	//Synonym
 	client.get('http://api.datamuse.com/words?rel_syn=' + word,
 		function (response) {
-			for (var j = 0; j < response.length; j++) {
+			for (var j = 0; j < response.length && j < 5; j++) {
 				tableSynonyms.insertRow(j + 1).insertCell(0).innerHTML = response[j]["word"];
 			}
 		});
 	//Antonym
 	client.get('http://api.datamuse.com/words?rel_ant=' + word,
 		function (response) {
-			for (var j = 0; j < response.length; j++) {
+			for (var j = 0; j < response.length && j < 5; j++) {
 				tableAntonyms.insertRow(j + 1).insertCell(0).innerHTML = response[j]["word"];
 			}
 		});
@@ -65,7 +65,7 @@ function search() {
 	client.get('http://www.anagramica.com/best/:' + word,
 		function (response) {
 			var words = response['best'];
-			for (var j = 0; j < words.length; j++) {
+			for (var j = 0; j < words.length && j < 5; j++) {
 				tableAnagrams.insertRow(j + 1).insertCell(0).innerHTML = words[j];
 			}
 		});

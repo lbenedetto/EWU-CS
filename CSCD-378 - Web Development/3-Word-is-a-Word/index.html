@@ -17,46 +17,58 @@
 		<td><button onclick="search()" class="defButton clear" id="btnSubmitCE" type="button">Search</button></td>
 	</tr>
 </table>
-<div>
-	<table border='1' id="outputTableDefinitions" class="prettyTable" style="float: left; margin: 8px; width: 400px;">
-		<tr>
-			<th></th>
-			<th>Definitions</th>
-		</tr>
-	</table>
 
-	<table border='1' id="outputTableSynonyms" class="prettyTable" style="float: left; margin: 8px; width: 150px;">
-		<tr>
-			<th>Synonyms</th>
-		</tr>
-	</table>
+<table>
+	<tr>
+		<th valign="top">
+			<table border='1' id="outputTableDefinitions" class="prettyTable" style="margin: 8px; width: 400px;">
+				<tr>
+					<th>P</th>
+					<th style="width:350px">Definitions</th>
+				</tr>
+			</table>
+		</th>
+		<th valign="top">
+			<table border='1' id="outputTableTranslations" class="prettyTable" style="vertical-align: top; margin: 8px; width: 400px;">
+				<tr>
+					<th>Language</th>
+					<th style="width:300px">Translation</th>
+				</tr>
+			</table>
+		</th>
+	</tr>
+</table>
+<table>
+	<tr>
+		<th valign="top">
+			<table border='1' id="outputTableSynonyms" class="prettyTable" style="margin: 8px; width: 150px;">
+				<tr>
+					<th>Synonyms</th>
+				</tr>
+			</table>
+		</th>
+		<th valign="top">
+			<table border='1' id="outputTableAntonyms" class="prettyTable" style="margin: 8px; width: 150px;">
+				<tr>
+					<th>Antonyms</th>
+				</tr>
+			</table>
+		</th>
+		<th valign="top">
+			<table border='1' id="outputTableAnagrams" class="prettyTable" style="margin: 8px; width: 150px;">
+				<tr>
+					<th>Anagram</th>
+				</tr>
+			</table>
+		</th>
+	</tr>
+</table>
 
-	<table border='1' id="outputTableAntonyms" class="prettyTable" style="float: left; margin: 8px; width: 150px;">
-		<tr>
-			<th>Antonyms</th>
-		</tr>
-	</table>
-
-	<table border='1' id="outputTableAnagrams" class="prettyTable" style="float: left; margin: 8px; width: 150px;">
-		<tr>
-			<th>Anagram</th>
-		</tr>
-	</table>
-
-	<table border='1' id="outputTableTranslations" class="prettyTable" style="float: left; margin: 8px; width: 150px;">
-		<tr>
-			<th>Language</th>
-			<th>Translation</th>
-		</tr>
-	</table>
-
-	<table border='1' id="outputTableYoda" class="prettyTable" style="float: left; margin: 8px; width: 150px;">
-		<tr>
-			<th>Yoda</th>
-		</tr>
-	</table>
-</div>
-
+<table border='1' id="outputTableYoda" class="prettyTable" style="margin: 8px; width: 150px;">
+	<tr>
+		<th>Yoda</th>
+	</tr>
+</table>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="REST.js"></script>
