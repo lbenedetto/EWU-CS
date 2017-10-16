@@ -45,6 +45,14 @@
 		.sidenav a:hover, .offcanvas a:focus {
 			color: #f1f1f1;
 		}
+
+		iframe {
+			position: fixed;
+			left: 300px;
+			border: none;
+			margin-left: 32px;
+			padding: 0;
+		}
 	</style>
 </head>
 <body id="main" onload="navigateToHash()">
@@ -60,7 +68,7 @@
 	<a target="iframe_a" id="2" class="nav" href="./2-Client-Side-Calculator">Client Side Calculator</a>
 	<a target="iframe_a" id="3" class="nav" href="./3-Word-is-a-Word">A Word is a Word</a>
 </div>
-<iframe name="iframe_a" style="position:fixed; top:100px; left:300px; bottom:0; right:0; width:100%; height:100%; border:none; margin:64px; padding:0; overflow:hidden;"></iframe>
+<iframe name="iframe_a" id="content" height="100" width="100" scrolling="yes"></iframe>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="main.js"></script>
