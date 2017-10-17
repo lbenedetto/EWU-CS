@@ -104,5 +104,9 @@ function searchWord() {
 }
 
 function searchPhrase() {
-
+	var phrase = $("#inputPhrase").val().toString().replace(" ", "%20");
+	client.get('http://api.funtranslations.com/translate/yoda.json?text=' + phrase,
+		function (response) {
+			document.getElementById("outputTableYoda").insertRow(1).insertCell(0).innerHTML = response["contents"]["translated"];
+		});
 }

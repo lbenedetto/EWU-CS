@@ -11,6 +11,7 @@
 	</style>
 </head>
 <body>
+<h2>Word Search</h2>
 <table border='0'>
 	<tr>
 		<td><input type='text' id="inputWord" style="width: 400px;"></td>
@@ -41,21 +42,21 @@
 <table>
 	<tr>
 		<th valign="top">
-			<table border='1' id="outputTableSynonyms" class="prettyTable" style="margin: 8px; width: 150px;">
+			<table border='1' id="outputTableSynonyms" class="prettyTable" style="margin: 8px; width: 200px;">
 				<tr>
 					<th>Synonyms</th>
 				</tr>
 			</table>
 		</th>
 		<th valign="top">
-			<table border='1' id="outputTableAntonyms" class="prettyTable" style="margin: 8px; width: 150px;">
+			<table border='1' id="outputTableAntonyms" class="prettyTable" style="margin: 8px; width: 200px;">
 				<tr>
 					<th>Antonyms</th>
 				</tr>
 			</table>
 		</th>
 		<th valign="top">
-			<table border='1' id="outputTableAnagrams" class="prettyTable" style="margin: 8px; width: 150px;">
+			<table border='1' id="outputTableAnagrams" class="prettyTable" style="margin: 8px; width: 200px;">
 				<tr>
 					<th>Anagram</th>
 				</tr>
@@ -63,14 +64,14 @@
 		</th>
 	</tr>
 </table>
-
+<h2>Phrase Search</h2>
 <table border='0'>
 	<tr>
-		<td><input type='text' id="inputSentence" style="width: 400px;"></td>
-		<td><button onclick="searchWord()" class="defButton clear" id="btnSubmitSentence" type="button">Search</button></td>
+		<td><input type='text' id="inputPhrase" style="width: 400px;"></td>
+		<td><button onclick="searchPhrase()" class="defButton clear" id="btnSubmitSentence" type="button">Search</button></td>
 	</tr>
 </table>
-<table border='1' id="outputTableYoda" class="prettyTable" style="margin: 8px; width: 150px;">
+<table border='1' id="outputTableYoda" class="prettyTable" style="margin: 8px; width: 400px;">
 	<tr>
 		<th>Yoda</th>
 	</tr>
