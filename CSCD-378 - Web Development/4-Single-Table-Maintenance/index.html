@@ -6,8 +6,24 @@
 	<link href="../global.css" rel="stylesheet" type="text/css">
 	<style>
 		button{
-			padding: 4px 6px 4px 6px;
-			display: inline-block;
+			font-size: 12px;
+			padding: 5px 5px;
+			margin-bottom: 4px;
+		}
+		td{
+			word-wrap: break-word;
+		}
+		.extraWide{
+			max-width: 100%;
+		}
+		.wide {
+			max-width: 200px;
+		}
+		.narrow {
+			max-width: 75px;
+		}
+		table {
+			width: 800px;
 		}
 	</style>
 </head>
@@ -15,37 +31,37 @@
 <div id="table" class="table-editable" align="center">
 	<h3>Internet Movie Database</h3>
 	<span class="table-add glyphicon glyphicon-plus"></span>
-	<table class="prettyTable table" width="800">
+	<table class="prettyTable table">
 		<tr>
-			<th width="125">Movie Name</th>
-			<th width="75">Year</th>
-			<th width="125">Studio</th>
-			<th width="400">Description</th>
-			<th width="75">Price</th>
-			<th><button class="table-add">New</button></th>
+			<th class="narrow"><button class="table-add blue">New</button></th>
+			<th class="wide" width="150">Movie Name</th>
+			<th class="narrow" width="75">Year</th>
+			<th class="wide" width="125">Studio</th>
+			<th class="narrow" width="75">Price</th>
+			<th class="extraWide" width="400">Description</th>
 		</tr>
 		<tr>
-			<td contenteditable="true">Geostorm</td>
-			<td contenteditable="true">2017</td>
-			<td contenteditable="true">Studio Gibley</td>
-			<td contenteditable="true">A shitty movie</td>
-			<td contenteditable="true">$100 million</td>
 			<td>
-				<button>Edit</button>
+				<button class="table-edit">Edit</button>
 				<button class="table-remove">Delete</button>
 			</td>
+			<td contenteditable="false">Geostorm</td>
+			<td contenteditable="false">2017</td>
+			<td contenteditable="false">Studio Gibley</td>
+			<td contenteditable="false">$100 million</td>
+			<td contenteditable="false">A shitty movie</td>
 		</tr>
 		<!-- This is our clonable table line -->
 		<tr class="hide">
-			<td contenteditable="true">null</td>
-			<td contenteditable="true">null</td>
-			<td contenteditable="true">null</td>
-			<td contenteditable="true">null</td>
-			<td contenteditable="true">null</td>
 			<td>
-				<button>Edit</button>
+				<button class="table-edit">Edit</button>
 				<button class="table-remove">Delete</button>
 			</td>
+			<td class="wide" contenteditable="false">null</td>
+			<td class="narrow" contenteditable="false">null</td>
+			<td class="wide" contenteditable="false">null</td>
+			<td class="narrow" contenteditable="false">null</td>
+			<td class="extraWide" contenteditable="false">null</td>
 		</tr>
 	</table>
 </div>

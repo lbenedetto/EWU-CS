@@ -24,17 +24,45 @@ input[type=text] {
 	display: none;
 }
 
+/*button {*/
+/*background-color: #ba0000;*/
+/*border: none;*/
+/*color: #f2f2f2;*/
+/*padding: 15px 32px;*/
+/*text-align: center;*/
+/*text-decoration: none;*/
+/*display: inline-block;*/
+/*font-size: 16px;*/
+/*margin: 4px 2px;*/
+/*cursor: pointer;*/
+/*}*/
+
 button {
+	color: #fff;
 	background-color: #ba0000;
 	border: none;
-	color: #f2f2f2;
-	padding: 15px 32px;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px #630000;
+	display: inline-block;
+	padding: 8px 8px;
+	font-size: 16px;
 	text-align: center;
 	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
 	cursor: pointer;
+}
+
+button:active {
+	transform: translateY(2px);
+}
+
+button.red {
+	box-shadow: 0 2px 5px #630000;
+	background-color: #ba0000;
+}
+
+button.blue {
+	background-color: #0046b7;
+	box-shadow: 0 2px 5px #002766;
 }
 
 .prettyTable {
