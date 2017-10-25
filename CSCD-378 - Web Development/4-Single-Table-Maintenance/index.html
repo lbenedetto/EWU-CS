@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Single Table Maintenance</title>
+	<link href="../global.css" rel="stylesheet" type="text/css">
+	<style>
+		button{
+			padding: 4px 6px 4px 6px;
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+<div id="table" class="table-editable" align="center">
+	<h3>Internet Movie Database</h3>
+	<span class="table-add glyphicon glyphicon-plus"></span>
+	<table class="prettyTable table" width="800">
+		<tr>
+			<th width="125">Movie Name</th>
+			<th width="75">Year</th>
+			<th width="125">Studio</th>
+			<th width="400">Description</th>
+			<th width="75">Price</th>
+			<th><button class="table-add">New</button></th>
+		</tr>
+		<tr>
+			<td contenteditable="true">Geostorm</td>
+			<td contenteditable="true">2017</td>
+			<td contenteditable="true">Studio Gibley</td>
+			<td contenteditable="true">A shitty movie</td>
+			<td contenteditable="true">$100 million</td>
+			<td>
+				<button>Edit</button>
+				<button class="table-remove">Delete</button>
+			</td>
+		</tr>
+		<!-- This is our clonable table line -->
+		<tr class="hide">
+			<td contenteditable="true">null</td>
+			<td contenteditable="true">null</td>
+			<td contenteditable="true">null</td>
+			<td contenteditable="true">null</td>
+			<td contenteditable="true">null</td>
+			<td>
+				<button>Edit</button>
+				<button class="table-remove">Delete</button>
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="interface.js"></script>
+</html>

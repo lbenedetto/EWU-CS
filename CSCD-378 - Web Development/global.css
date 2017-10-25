@@ -1,6 +1,7 @@
 * {
 	font-family: Arial, sans-serif;
 }
+
 body {
 	background-color: #3d3d3d;
 	color: #f2f2f2;
@@ -19,6 +20,10 @@ input[type=text] {
 	border-bottom: 2px solid #ba0000;
 }
 
+.hide {
+	display: none;
+}
+
 button {
 	background-color: #ba0000;
 	border: none;
@@ -34,7 +39,6 @@ button {
 
 .prettyTable {
 	border-collapse: collapse;
-	max-width: 650px;
 }
 
 .prettyTable th, td {
