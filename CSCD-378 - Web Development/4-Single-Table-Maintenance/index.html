@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Single Table Maintenance</title>
+	<meta charset="UTF-8">
+	<title>Single Table Maintenance</title>
 	<link href="../global.css" rel="stylesheet" type="text/css">
 	<style>
-		button{
+		button {
 			font-size: 12px;
 			padding: 5px 5px;
 			margin-bottom: 4px;
+			width: 45px;
 		}
-		td{
+
+		td {
 			word-wrap: break-word;
 		}
-		.extraWide{
+
+		.extraWide {
 			max-width: 100%;
 		}
+
 		.wide {
 			max-width: 200px;
 		}
+
 		.narrow {
 			max-width: 75px;
 		}
+
 		table {
 			width: 800px;
 		}
@@ -33,7 +39,9 @@
 	<span class="table-add glyphicon glyphicon-plus"></span>
 	<table class="prettyTable table">
 		<tr>
-			<th class="narrow"><button class="table-add blue">New</button></th>
+			<th class="narrow">
+				<button class="table-add blue">New</button>
+			</th>
 			<th class="wide" width="150">Movie Name</th>
 			<th class="narrow" width="75">Year</th>
 			<th class="wide" width="125">Studio</th>
@@ -54,14 +62,14 @@
 		<!-- This is our clonable table line -->
 		<tr class="hide">
 			<td>
-				<button class="table-edit">Edit</button>
+				<button class="table-edit">Save</button>
 				<button class="table-remove">Delete</button>
 			</td>
-			<td class="wide" contenteditable="false">null</td>
-			<td class="narrow" contenteditable="false">null</td>
-			<td class="wide" contenteditable="false">null</td>
-			<td class="narrow" contenteditable="false">null</td>
-			<td class="extraWide" contenteditable="false">null</td>
+			<td class="wide" contenteditable="true"></td>
+			<td class="narrow" contenteditable="true"></td>
+			<td class="wide" contenteditable="true"></td>
+			<td class="narrow" contenteditable="true"></td>
+			<td class="extraWide" contenteditable="true"></td>
 		</tr>
 	</table>
 </div>
