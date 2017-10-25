@@ -3,7 +3,7 @@ var $TABLE = $('#table');
 $('.table-edit').click(function () {
 	var button = $(this);
 	var children = button.closest('tr').find('td');
-	var isEdit = children.get(0).contentEditable;
+	var isEdit = children.get(1).contentEditable;
 	if (isEdit === "true")
 		button.html("Edit");
 	else
