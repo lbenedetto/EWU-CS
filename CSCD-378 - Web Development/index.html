@@ -14,7 +14,7 @@
 			overflow: hidden;
 		}
 
-		h3 {
+		h3, h1 {
 			padding-left: 32px;
 		}
 
@@ -49,26 +49,36 @@
 		iframe {
 			position: fixed;
 			left: 300px;
+			height: calc(100% - 90px);
+			height: -webkit-calc(100% - 90px); /* google, safari */
+			height: -moz-calc(100% - 90px); /* firefox */
+			width: calc(100% - 300px);
+			width: -webkit-calc(100% - 300px); /* google, safari */
+			width: -moz-calc(100% - 300px); /* firefox */
 			border: none;
-			margin-left: 32px;
 			padding: 0;
 		}
 	</style>
 </head>
 <body id="main" onload="navigateToHash()">
 <div class="topBar">
-	<h1 align="center">Lars Benedetto CSCD 378</h1><br/>
+	<h1>Lars Benedetto CSCD 378</h1><br/>
+</div>
+<div>
+	<div class="sidenav" style="display: inline-block">
+		<hr>
+		<h3>Links</h3>
+		<a target="iframe_a" id="0" class="nav" href="./phpinfo/phpinfo.php">PHP Info</a>
+		<a target="iframe_a" id="1" class="nav" href="./1-Javascript-Mortgage-Calculator">Mortgage Table</a>
+		<a target="iframe_a" id="2" class="nav" href="./2-Client-Side-Calculator">Client Side Calculator</a>
+		<a target="iframe_a" id="3" class="nav" href="./3-Word-is-a-Word">A Word is a Word</a>
+		<a target="iframe_a" id="4" class="nav" href="./4-Single-Table-Maintenance">Single Table Maintenance</a>
+	</div>
+	<div style="display: inline-block; background-color: green;">
+		<iframe name="iframe_a" id="content" scrolling="yes"></iframe>
+	</div>
 </div>
 
-<div class="sidenav">
-	<hr>
-	<h3>Links</h3>
-	<a target="iframe_a" id="0" class="nav" href="./phpinfo/phpinfo.php">PHP Info</a>
-	<a target="iframe_a" id="1" class="nav" href="./1-Javascript-Mortgage-Calculator">Mortgage Table</a>
-	<a target="iframe_a" id="2" class="nav" href="./2-Client-Side-Calculator">Client Side Calculator</a>
-	<a target="iframe_a" id="3" class="nav" href="./3-Word-is-a-Word">A Word is a Word</a>
-</div>
-<iframe name="iframe_a" id="content" height="100" width="100" scrolling="yes"></iframe>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="main.js"></script>
