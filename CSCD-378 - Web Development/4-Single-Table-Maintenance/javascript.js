@@ -1,4 +1,6 @@
-var $TABLE = $('#table');
+var TABLE = $('#table');
+var CLONE = $('#clone');
+
 var HttpClient = function () {
 	this.get = function (aUrl, aCallback) {
 		$.ajax({
@@ -16,9 +18,10 @@ $('.table-edit').click(function () {
 	var isEdit = children.get(1).contentEditable;
 	if (isEdit === "true") {
 		button.html("Edit");
+		saveRow(children);
 	} else {
 		button.html("Save");
-		saveRow(children)
+		editRow(children);
 	}
 	for (var i = 1; i < children.length; i++) {
 		var child = children.get(i);
@@ -31,10 +34,14 @@ $('.table-remove').click(function () {
 });
 
 $('.table-add').click(function () {
-	var $clone = $TABLE.find('tr.hide').clone(true).removeClass('hide table-line');
-	$TABLE.find('table').append($clone);
+	var clone = CLONE.find('tr.hide').clone(true).removeClass('hide table-line');
+	TABLE.find('table').append(clone);
 });
 
-function saveRow(fields){
+function saveRow(fields) {
+	console.log("saving row " + fields.get(1).innerHTML)
+}
 
+function editRow(fields) {
+	console.log("editing row " + fields.get(1).innerHTML)
 }
