@@ -11,37 +11,65 @@ var HttpClient = function () {
 	}
 };
 var client = new HttpClient();
-
-$('.table-edit').click(function () {
-	var button = $(this);
-	var children = button.closest('tr').find('td');
-	var isEdit = children.get(1).contentEditable;
-	if (isEdit === "true") {
-		button.html("Edit");
-		saveRow(children);
-	} else {
-		button.html("Save");
-		editRow(children);
-	}
-	for (var i = 1; i < children.length; i++) {
-		var child = children.get(i);
-		child.contentEditable = isEdit !== "true";
-	}
-});
-
+var id = 0;
+var tid = 0;
 $('.table-remove').click(function () {
 	$(this).parents('tr').detach();
+	//TODO: Remove from DB
 });
 
-$('.table-add').click(function () {
-	var clone = CLONE.find('tr.hide').clone(true).removeClass('hide table-line');
-	TABLE.find('table').append(clone);
-});
-
-function saveRow(fields) {
-	console.log("saving row " + fields.get(1).innerHTML)
+function save() {
+	var newRow;
+	if (tid > id) {
+		newRow = CLONE.find('tr.hide').clone(true).removeClass('hide table-line');
+		newRow.attr('id', tid);
+	} else {
+		newRow = $("#" + tid)
+	}
+	var data = newRow.find('td');
+	var inputs = $('#newMovieForm').find("input[type=text], textarea");
+	for (var i = 0; i < 5; i++) {
+		data[i + 1].innerText = inputs[i].value;
+	}
+	if (tid > id) {
+		TABLE.find('table').append(newRow);
+		id++;
+	}
+	hideForm();
+	clearInputs();
 }
 
-function editRow(fields) {
-	console.log("editing row " + fields.get(1).innerHTML)
+function cancel() {
+	hideForm();
+	clearInputs();
+}
+
+function newMovie() {
+	tid = id + 1;
+	showForm();
+}
+
+$('.table-edit').click(function () {
+	var row = $(this).closest('tr');
+	var children = row.find('td');
+	var inputs = $('#newMovieForm').find("input[type=text], textarea");
+	for (var i = 1; i < children.length; i++) {
+		inputs.get(i - 1).value = children.get(i).innerText;
+	}
+	tid = row.attr('id');
+	showForm();
+});
+
+function hideForm() {
+	$('#newMovieDiv').addClass("hide");
+	$('#table').removeClass("blur");
+}
+
+function showForm() {
+	$('#newMovieDiv').removeClass("hide");
+	$('#table').addClass("blur");
+}
+
+function clearInputs() {
+	$('#newMovieForm').find("input[type=text], textarea").val("");
 }

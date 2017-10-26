@@ -9,7 +9,7 @@
 			font-size: 12px;
 			padding: 5px 5px;
 			margin-bottom: 4px;
-			width: 45px;
+			width: 50px;
 		}
 
 		td {
@@ -28,52 +28,100 @@
 			max-width: 75px;
 		}
 
-		table {
+		.prettyTable {
 			width: 800px;
+		}
+
+		#newMovieDiv {
+			border-radius: 5px;
+			background-color: #232323;
+			padding: 20px;
+			width: 400px;
+			z-index: 100;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			top: 50%;
+			box-shadow: 0 5px 5px #111111;
+		}
+
+		input[type=text] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+		.blur{
+			filter: blur(5px);
+			user-select: none;
+			pointer-events: none;
 		}
 	</style>
 </head>
 <body>
-<div id="table" class="table-editable" align="center">
-	<h3>Internet Movie Database</h3>
-	<span class="table-add glyphicon glyphicon-plus"></span>
-	<table class="prettyTable table">
-		<tr>
-			<th class="narrow">
-				<button class="table-add blue">New</button>
-			</th>
-			<th class="wide" width="150">Movie Name</th>
-			<th class="narrow" width="75">Year</th>
-			<th class="wide" width="125">Studio</th>
-			<th class="narrow" width="75">Price</th>
-			<th class="extraWide" width="400">Description</th>
-		</tr>
-		<tr>
-			<td>
-				<button class="table-edit">Edit</button>
-				<button class="table-remove">Delete</button>
-			</td>
-			<td contenteditable="false">Geostorm</td>
-			<td contenteditable="false">2017</td>
-			<td contenteditable="false">Studio Gibley</td>
-			<td contenteditable="false">$100 million</td>
-			<td contenteditable="false">A shitty movie</td>
-		</tr>
-	</table>
-	<table id="clone" class="hide">
-		<!-- This is our clonable table line -->
-		<tr class="hide">
-			<td>
-				<button class="table-edit">Save</button>
-				<button class="table-remove">Delete</button>
-			</td>
-			<td class="wide" contenteditable="true"></td>
-			<td class="narrow" contenteditable="true"></td>
-			<td class="wide" contenteditable="true"></td>
-			<td class="narrow" contenteditable="true"></td>
-			<td class="extraWide" contenteditable="true"></td>
-		</tr>
-	</table>
+<div style="position: relative; height: 100%; width: 100%;">
+	<div id="table" class="table-editable" align="center">
+		<h3>Internet Movie Database</h3>
+		<span class="table-add glyphicon glyphicon-plus"></span>
+		<table class="prettyTable table">
+			<tr>
+				<th class="narrow">
+					<button class="table-add blue" onclick="newMovie()">New</button>
+				</th>
+				<th class="wide" width="150">Movie Name</th>
+				<th class="narrow" width="75">Year</th>
+				<th class="wide" width="125">Studio</th>
+				<th class="narrow" width="75">Price</th>
+				<th class="extraWide" width="400">Description</th>
+			</tr>
+			<tr id="0">
+				<td>
+					<button class="table-edit">Edit</button>
+					<button class="table-remove">Delete</button>
+				</td>
+				<td>Geostorm</td>
+				<td>2017</td>
+				<td>Studio Gibley</td>
+				<td>$100 million</td>
+				<td>A shitty movie</td>
+			</tr>
+		</table>
+		<table id="clone" class="hide">
+			<!-- This is our clonable table line -->
+			<tr class="hide">
+				<td>
+					<button class="table-edit">Edit</button>
+					<button class="table-remove">Delete</button>
+				</td>
+				<td class="wide"></td>
+				<td class="narrow"></td>
+				<td class="wide"></td>
+				<td class="narrow"></td>
+				<td class="extraWide"></td>
+			</tr>
+		</table>
+	</div>
+	<div id="newMovieDiv" align="center" class="hide">
+		<form id="newMovieForm">
+			<fieldset>
+				<legend>Add new movie</legend>
+				<label for="movieName">Movie Name: </label>
+				<input type='text' name="movieName" id="movieName"><br>
+				<label for="year">Year: </label>
+				<input type='text' name="year" id="year"><br>
+				<label for="Studio">Studio: </label>
+				<input type='text' name="Studio" id="Studio"><br>
+				<label for="Price">Price: </label>
+				<input type='text' name="Price" id="Price"><br>
+				<label for="Description">Description: </label>
+				<input type='text' name="Description" id="Description"><br>
+				<button type="button" class="saveButtonInForm" onclick="save()">Save</button>
+				<button type="button" onclick="cancel()">Cancel</button>
+			</fieldset>
+		</form>
+	</div>
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
