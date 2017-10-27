@@ -31,11 +31,13 @@ var HttpClient = function () {
 		});
 	}
 };
+
 var client = new HttpClient();
+
 client.get("server.php", function (response) {
 	var re = JSON.parse(response);
 	for(var i = 0; i < re.length; i++){
-		var r = re[0];
+		var r = re[i];
 		updateRow(r["id"], [r["name"], r["year"], r["studio"], r["price"], r["description"]])
 	}
 });

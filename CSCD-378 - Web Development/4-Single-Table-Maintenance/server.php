@@ -2,7 +2,7 @@
 $host = "localhost";
 $db = "id2995325_webdev";
 $user = "id2995325_larsbenedetto";
-$pass = "R0nanDex!";
+$pass = file_get_contents('pw');;
 $charset = "utf8mb4";
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
