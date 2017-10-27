@@ -53,7 +53,8 @@
 			border-radius: 4px;
 			box-sizing: border-box;
 		}
-		.blur{
+
+		.blur {
 			filter: blur(5px);
 			user-select: none;
 			pointer-events: none;
@@ -66,7 +67,7 @@
 		<h3>Internet Movie Database</h3>
 		<span class="table-add glyphicon glyphicon-plus"></span>
 		<table class="prettyTable table">
-			<tr>
+			<tr id="0">
 				<th class="narrow">
 					<button class="table-add blue" onclick="newMovie()">New</button>
 				</th>
@@ -76,33 +77,22 @@
 				<th class="narrow" width="75">Price</th>
 				<th class="extraWide" width="400">Description</th>
 			</tr>
-			<tr id="0">
-				<td>
-					<button class="table-edit">Edit</button>
-					<button class="table-remove">Delete</button>
-				</td>
-				<td>Geostorm</td>
-				<td>2017</td>
-				<td>Studio Gibley</td>
-				<td>$100 million</td>
-				<td>A shitty movie</td>
-			</tr>
-		</table>
-		<table id="clone" class="hide">
-			<!-- This is our clonable table line -->
-			<tr class="hide">
-				<td>
-					<button class="table-edit">Edit</button>
-					<button class="table-remove">Delete</button>
-				</td>
-				<td class="wide"></td>
-				<td class="narrow"></td>
-				<td class="wide"></td>
-				<td class="narrow"></td>
-				<td class="extraWide"></td>
-			</tr>
 		</table>
 	</div>
+	<table id="clone" class="hide">
+		<!-- This is our clonable table line -->
+		<tr class="hide">
+			<td>
+				<button class="table-edit">Edit</button>
+				<button class="table-remove">Delete</button>
+			</td>
+			<td class="wide"></td>
+			<td class="narrow"></td>
+			<td class="wide"></td>
+			<td class="narrow"></td>
+			<td class="extraWide"></td>
+		</tr>
+	</table>
 	<div id="newMovieDiv" align="center" class="hide">
 		<form id="newMovieForm">
 			<fieldset>
