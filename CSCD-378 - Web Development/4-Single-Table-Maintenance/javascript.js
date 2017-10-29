@@ -23,9 +23,11 @@ $.get("server.php", function (response) {
 
 $('.table-remove').click(function () {
 	var row = $(this).parents('tr');
-	var id = row.attr('id');
+	var id = row.attr('id') + "";
 	row.detach();
-	$.delete({id: id});
+	$.get("server.php", {id: id}, function (response) {
+		console.log(response)
+	});
 });
 
 function updateRow(id, data) {

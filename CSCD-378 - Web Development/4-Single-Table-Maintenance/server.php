@@ -30,9 +30,15 @@ switch ($rq) {
 function get()
 {
 	global $pdo;
-	$stmt = $pdo->prepare("SELECT * FROM `movies`");
-	$stmt->execute();
-	echo json_encode($stmt->fetchAll());
+	if (empty($_GET)) {
+		$stmt = $pdo->prepare("SELECT * FROM `movies`");
+		$stmt->execute();
+		echo json_encode($stmt->fetchAll());
+	}else{
+		$id = $_GET["id"];
+		$pdo->prepare("DELETE FROM `movies` WHERE id = ?")
+			->execute([$id]);
+	}
 }
 
 function post()
@@ -55,6 +61,5 @@ function delete()
 	global $pdo;
 	$id = $_POST["id"];
 	$pdo->prepare("DELETE FROM `movies` WHERE id = ?")
-		//->execute();
 		->execute([$id]);
 }
