@@ -5,17 +5,9 @@ $.fn.exists = function () {
 	return this.length !== 0;
 };
 
-$.put = function (url, data) {
+$.delete = function (data) {
 	$.ajax({
-		url: url,
-		type: 'PUT',
-		data: data
-	});
-};
-
-$.delete = function (url, data) {
-	$.ajax({
-		url: url,
+		url: "server.php",
 		type: 'DELETE',
 		data: data
 	});
@@ -33,7 +25,7 @@ $('.table-remove').click(function () {
 	var row = $(this).parents('tr');
 	var id = row.attr('id');
 	row.detach();
-	$.delete("server.php", {id: id});
+	$.delete({id: id});
 });
 
 function updateRow(id, data) {

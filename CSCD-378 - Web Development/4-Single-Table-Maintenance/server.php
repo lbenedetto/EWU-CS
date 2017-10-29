@@ -44,16 +44,10 @@ function post()
 	$price = $_POST['price'];
 	$description = $_POST['description'];
 	$id = $_POST['id'];
-	$stmt = $pdo->prepare("SELECT 1 FROM `movies` WHERE id = ?;");
-	$stmt->execute([$id]);
-	$foundID = $stmt->rowCount() > 0;
-	if ($foundID) {
-		$pdo->prepare("UPDATE `movies` SET `name`=?,`year`=?,`studio`=?,`price`=?,`description`=? WHERE id = 2")
-			->execute([$name, $year, $studio, $price, $description, $id]);
-	} else {
-		$pdo->prepare("INSERT INTO `movies`(`name`, `year`, `studio`, `price`, `description`) VALUES (?,?,?,?,?)")
-			->execute([$name, $year, $studio, $price, $description]);
-	}
+	$pdo->prepare("UPDATE `movies` SET `name`=?,`year`=?,`studio`=?,`price`=?,`description`=? WHERE id = ?")
+		->execute([$name, $year, $studio, $price, $description, $id]);
+	$pdo->prepare("INSERT INTO `movies`(`id`, `name`, `year`, `studio`, `price`, `description`) VALUES (?,?,?,?,?,?)")
+		->execute([$id, $name, $year, $studio, $price, $description]);
 }
 
 function delete()
@@ -61,5 +55,6 @@ function delete()
 	global $pdo;
 	$id = $_POST["id"];
 	$pdo->prepare("DELETE FROM `movies` WHERE id = ?")
+		//->execute();
 		->execute([$id]);
 }
