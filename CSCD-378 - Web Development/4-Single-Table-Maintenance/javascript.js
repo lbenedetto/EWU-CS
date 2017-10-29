@@ -4,39 +4,26 @@ var id;
 $.fn.exists = function () {
 	return this.length !== 0;
 };
-var HttpClient = function () {
-	this.get = function (aUrl, aCallback) {
-		$.ajax({
-			url: aUrl,
-			type: 'GET',
-			success: aCallback
-		});
-	};
-	this.post = function (aUrl) {
-		$.ajax({
-			url: aUrl,
-			type: 'POST'
-		});
-	};
-	this.put = function (aUrl) {
-		$.ajax({
-			url: aUrl,
-			type: 'PUT'
-		});
-	};
-	this.delete = function (aUrl) {
-		$.ajax({
-			url: aUrl,
-			type: 'DELETE'
-		});
-	}
+
+$.put = function (url, data) {
+	$.ajax({
+		url: url,
+		type: 'PUT',
+		data: data
+	});
 };
 
-var client = new HttpClient();
+$.delete = function (url, data) {
+	$.ajax({
+		url: url,
+		type: 'DELETE',
+		data: data
+	});
+};
 
-client.get("server.php", function (response) {
+$.get("server.php", function (response) {
 	var re = JSON.parse(response);
-	for(var i = 0; i < re.length; i++){
+	for (var i = 0; i < re.length; i++) {
 		var r = re[i];
 		updateRow(r["id"], [r["name"], r["year"], r["studio"], r["price"], r["description"]])
 	}
@@ -46,7 +33,7 @@ $('.table-remove').click(function () {
 	var row = $(this).parents('tr');
 	var id = row.attr('id');
 	row.detach();
-	client.delete("server.php?=" + id);
+	$.delete("server.php", {id: id});
 });
 
 function updateRow(id, data) {
@@ -69,6 +56,14 @@ function save() {
 	var inputs = $('#newMovieForm').find("input[type=text], textarea");
 	inputs.each(function (i, x) {
 		inputs[i] = x.value;
+	});
+	$.post("server.php", {
+		id: id,
+		name: inputs[0],
+		year: inputs[1],
+		studio: inputs[2],
+		price: inputs[3],
+		description: inputs[4]
 	});
 	updateRow(id, inputs);
 	hideForm();

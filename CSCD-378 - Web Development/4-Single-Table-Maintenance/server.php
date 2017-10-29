@@ -18,11 +18,12 @@ switch ($rq) {
 	case "GET":
 		get();
 		break;
-	case "POST":
-		break;
 	case "PUT":
+	case "POST":
+		post();
 		break;
 	case "DELETE";
+		delete();
 		break;
 }
 
@@ -34,23 +35,31 @@ function get()
 	echo json_encode($stmt->fetchAll());
 }
 
-function post($name, $year, $studio, $price, $description)
+function post()
 {
 	global $pdo;
-	$stmt = $pdo->prepare("INSERT INTO `movies`(`name`, `year`, `studio`, `price`, `description`) VALUES (?,?,?,?,?)");
-	$stmt->execute([$name, $year, $studio, $price, $description]);
+	$name = $_POST['name'];
+	$year = $_POST['year'];
+	$studio = $_POST['studio'];
+	$price = $_POST['price'];
+	$description = $_POST['description'];
+	$id = $_POST['id'];
+	$stmt = $pdo->prepare("SELECT 1 FROM `movies` WHERE id = ?;");
+	$stmt->execute([$id]);
+	$foundID = $stmt->rowCount() > 0;
+	if ($foundID) {
+		$pdo->prepare("UPDATE `movies` SET `name`=?,`year`=?,`studio`=?,`price`=?,`description`=? WHERE id = 2")
+			->execute([$name, $year, $studio, $price, $description, $id]);
+	} else {
+		$pdo->prepare("INSERT INTO `movies`(`name`, `year`, `studio`, `price`, `description`) VALUES (?,?,?,?,?)")
+			->execute([$name, $year, $studio, $price, $description]);
+	}
 }
 
-function put($name, $year, $studio, $price, $description, $id)
+function delete()
 {
 	global $pdo;
-	$pdo->prepare("UPDATE ? name = ? AND year = ? AND studio = ? AND price = ? AND description = ? WHERE id = ?")
-		->execute([$name, $year, $studio, $price, $description, $id]);
-}
-
-function delete($id)
-{
-	global $pdo;
+	$id = $_POST["id"];
 	$pdo->prepare("DELETE FROM `movies` WHERE id = ?")
 		->execute([$id]);
 }
