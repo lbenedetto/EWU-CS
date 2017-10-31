@@ -8,74 +8,94 @@
 		input {
 			font-size: 32px;
 		}
+
+		.smallTable {
+			margin: 8px;
+			width: 200px;
+		}
+
+		.bigTable {
+			margin: 8px;
+			width: 400px;
+		}
 	</style>
 </head>
 <body>
-<h2>Word Search</h2>
-<table border='0'>
+<h2 align="center"> Word Search</h2>
+<table border='0' align="center">
 	<tr>
 		<td><input type='text' id="inputWord" style="width: 400px;"></td>
-		<td><button onclick="searchWord()" class="defButton clear" id="btnSubmitWord" type="button">Search</button></td>
+		<td>
+			<button onclick="searchWord()" class="defButton" id="btnSubmitWord" type="button">Search</button>
+		</td>
 	</tr>
 </table>
-
-<table>
-	<tr>
-		<th valign="top">
-			<table border='1' id="outputTableDefinitions" class="prettyTable" style="margin: 8px; width: 400px;">
-				<tr>
-					<th>P</th>
-					<th style="width:350px">Definitions</th>
-				</tr>
-			</table>
-		</th>
-		<th valign="top">
-			<table border='1' id="outputTableTranslations" class="prettyTable" style="vertical-align: top; margin: 8px; width: 400px;">
-				<tr>
-					<th>Language</th>
-					<th style="width:300px">Translation</th>
-				</tr>
-			</table>
-		</th>
-	</tr>
-</table>
-<table>
-	<tr>
-		<th valign="top">
-			<table border='1' id="outputTableSynonyms" class="prettyTable" style="margin: 8px; width: 200px;">
-				<tr>
-					<th>Synonyms</th>
-				</tr>
-			</table>
-		</th>
-		<th valign="top">
-			<table border='1' id="outputTableAntonyms" class="prettyTable" style="margin: 8px; width: 200px;">
-				<tr>
-					<th>Antonyms</th>
-				</tr>
-			</table>
-		</th>
-		<th valign="top">
-			<table border='1' id="outputTableAnagrams" class="prettyTable" style="margin: 8px; width: 200px;">
-				<tr>
-					<th>Anagram</th>
-				</tr>
-			</table>
-		</th>
-	</tr>
-</table>
-<h2>Phrase Search</h2>
-<table border='0'>
-	<tr>
-		<td><input type='text' id="inputPhrase" style="width: 400px;"></td>
-		<td><button onclick="searchPhrase()" class="defButton clear" id="btnSubmitSentence" type="button">Search</button></td>
-	</tr>
-</table>
-<table border='1' id="outputTableYoda" class="prettyTable" style="margin: 8px; width: 400px;">
-	<tr>
-		<th>Yoda</th>
-	</tr>
-</table>
+<div align="center">
+	<div style="display: inline-block; vertical-align: top">
+		<table>
+			<tr>
+				<th valign="top">
+					<table border='1' id="outputTableSynonyms" class="prettyTable smallTable">
+						<tr>
+							<th>Synonyms</th>
+						</tr>
+					</table>
+				</th>
+			</tr>
+			<tr>
+				<th valign="top">
+					<table border='1' id="outputTableAntonyms" class="prettyTable smallTable">
+						<tr>
+							<th>Antonyms</th>
+						</tr>
+					</table>
+				</th>
+			</tr>
+			<tr>
+				<th valign="top">
+					<table border='1' id="outputTableAnagrams" class="prettyTable smallTable">
+						<tr>
+							<th>Anagram</th>
+						</tr>
+					</table>
+				</th>
+			</tr>
+		</table>
+	</div>
+	<div style="display: inline-block; vertical-align: top">
+		<table>
+			<tr>
+				<th valign="top">
+					<table border='1' id="outputTableDefinitions" class="prettyTable bigTable">
+						<tr>
+							<th>P</th>
+							<th style="width:350px">Definitions</th>
+						</tr>
+					</table>
+				</th>
+			</tr>
+			<tr>
+				<th valign="top">
+					<table border='1' id="outputTableTranslations" class="prettyTable bigTable">
+						<tr>
+							<th>Language</th>
+							<th style="width:300px">Translation</th>
+						</tr>
+					</table>
+				</th>
+			</tr>
+			<tr>
+				<th valign="top">
+					<table border='1' id="outputTableYoda" class="prettyTable bigTable">
+						<tr>
+							<th>Yoda</th>
+						</tr>
+					</table>
+				</th>
+			</tr>
+		</table>
+	</div>
+</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="ajax.js"></script>

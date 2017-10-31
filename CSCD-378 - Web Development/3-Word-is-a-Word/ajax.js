@@ -68,6 +68,14 @@ function getAnagram(word, table) {
 		});
 }
 
+function getYoda(word, table) {
+	var phrase = encodeURI(word);
+	client.get('http://api.funtranslations.com/translate/yoda.json?text=' + phrase,
+		function (response) {
+			table.insertRow(1).insertCell(0).innerHTML = response["contents"]["translated"];
+		});
+}
+
 function getTranslations(word, table) {
 	getTranslation(word, table, "Spanish", "es");
 	getTranslation(word, table, "Chinese", "zh-CN");
@@ -93,20 +101,16 @@ function searchWord() {
 	var tableAntonyms = document.getElementById("outputTableAntonyms");
 	var tableAnagrams = document.getElementById("outputTableAnagrams");
 	var tableTranslations = document.getElementById("outputTableTranslations");
+	var tableYoda = document.getElementById("outputTableYoda");
 
-	clearTables([tableDefinitions, tableSynonyms, tableAntonyms, tableAnagrams, tableTranslations]);
-
-	getDefinition(word, tableDefinitions);
-	getSynonym(word, tableSynonyms);
-	getAntonym(word, tableAntonyms);
-	getAnagram(word, tableAnagrams);
+	clearTables([tableDefinitions, tableSynonyms, tableAntonyms, tableAnagrams, tableTranslations, tableYoda]);
+	if (word.indexOf(" ") === -1) {
+		getDefinition(word, tableDefinitions);
+		getSynonym(word, tableSynonyms);
+		getAntonym(word, tableAntonyms);
+		getAnagram(word, tableAnagrams);
+	} else {
+		getYoda(word, tableYoda);
+	}
 	getTranslations(word, tableTranslations);
-}
-
-function searchPhrase() {
-	var phrase = encodeURI($("#inputPhrase").val().toString());
-	client.get('http://api.funtranslations.com/translate/yoda.json?text=' + phrase,
-		function (response) {
-			document.getElementById("outputTableYoda").insertRow(1).insertCell(0).innerHTML = response["contents"]["translated"];
-		});
 }
