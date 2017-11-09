@@ -8,18 +8,22 @@ vtkRenderWindowInteractor iren
   iren SetRenderWindow renWin
 
 vtkStructuredPointsReader reader
-  reader SetFileName "temperature.dat"
+  reader SetFileName "pressure.dat"
 
-vtkContourFilter contour
-  contour SetInputConnection [reader GetOutputPort]
-  eval contour GenerateValues 100 [[reader GetOutput] GetScalarRange]
+vtkTextActor textRangeLabel
+  #textRangeLabel SetInput "ISO Value: -0.18"
+  #textRangeLabel SetInput "ISO Value: -0.1"
+  #textRangeLabel SetInput "ISO Value: 0.0"
+  #textRangeLabel SetInput "ISO Value: 0.1"
+  textRangeLabel SetInput "ISO Value: 0.18"
 
-vtkPolyDataMapper contMapper
-  contMapper SetInputConnection [contour GetOutputPort]
-  eval contMapper SetScalarRange[[reader GetOutput] GetScalarRange]
-
-vtkActor skin
-  skin SetMapper contMapper
+vtkContourFilter contours
+  contours SetInputConnection [reader GetOutputPort]
+  #contours SetValue 0 -0.18
+  #contours SetValue 0 -0.1
+  #contours SetValue 0 0.0
+  #contours SetValue 0 0.1
+  contours SetValue 0 0.18
 
 vtkOutlineFilter outlineData
   outlineData SetInputConnection [reader GetOutputPort]
@@ -37,9 +41,17 @@ vtkLookupTable hueLut
   hueLut SetValueRange 1 1
   hueLut Build
 
+vtkPolyDataMapper contMapper
+  contMapper SetInputConnection [contours GetOutputPort]
+  contMapper SetLookupTable hueLut
+  contMapper SetScalarRange -0.2 0.2
+
+vtkActor skin
+  skin SetMapper contMapper
+
 vtkScalarBarActor scalarBar
   scalarBar SetLookupTable hueLut
-  scalarBar SetTitle "Temperature"
+  scalarBar SetTitle "Pressure"
   [scalarBar GetPositionCoordinate] SetValue 0.01 0.1
   scalarBar SetNumberOfLabels 5
   scalarBar SetWidth 0.15
@@ -54,6 +66,7 @@ vtkCamera aCamera
 aRenderer AddActor scalarBar
 aRenderer AddActor outline
 aRenderer AddActor skin
+aRenderer AddActor textRangeLabel
 
 aRenderer SetActiveCamera aCamera
 aRenderer ResetCamera

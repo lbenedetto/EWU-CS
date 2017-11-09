@@ -10,12 +10,23 @@ vtkRenderWindowInteractor iren
 vtkStructuredPointsReader reader
   reader SetFileName "temperature.dat"
 
-vtkContourFilter contour
-  contour SetInputConnection [reader GetOutputPort]
-  eval contour GenerateValues 100 [[reader GetOutput] GetScalarRange]
+vtkTextActor textRangeLabel
+  #textRangeLabel SetInput "ISO Value: 0.1"
+  #textRangeLabel SetInput "ISO Value: 0.2"
+  #textRangeLabel SetInput "ISO Value: 0.3"
+  #textRangeLabel SetInput "ISO Value: 0.5"
+  textRangeLabel SetInput "ISO Value: 0.75"
+
+vtkContourFilter contours
+  contours SetInputConnection [reader GetOutputPort]
+  #contours SetValue 0 0.1
+  #contours SetValue 0 0.2
+  #contours SetValue 0 0.3
+  #contours SetValue 0 0.5
+  contours SetValue 0 0.75
 
 vtkPolyDataMapper contMapper
-  contMapper SetInputConnection [contour GetOutputPort]
+  contMapper SetInputConnection [contours GetOutputPort]
   eval contMapper SetScalarRange[[reader GetOutput] GetScalarRange]
 
 vtkActor skin
@@ -26,6 +37,7 @@ vtkOutlineFilter outlineData
 
 vtkPolyDataMapper mapOutline
   mapOutline SetInputConnection [outlineData GetOutputPort]
+
 
 vtkActor outline
   outline SetMapper mapOutline
@@ -54,6 +66,7 @@ vtkCamera aCamera
 aRenderer AddActor scalarBar
 aRenderer AddActor outline
 aRenderer AddActor skin
+aRenderer AddActor textRangeLabel
 
 aRenderer SetActiveCamera aCamera
 aRenderer ResetCamera

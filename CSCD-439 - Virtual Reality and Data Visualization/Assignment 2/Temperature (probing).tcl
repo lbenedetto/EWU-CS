@@ -10,22 +10,16 @@ vtkRenderWindowInteractor iren
 vtkStructuredPointsReader reader
   reader SetFileName "temperature.dat"
 
-vtkContourFilter contour
-  contour SetInputConnection [reader GetOutputPort]
-  eval contour GenerateValues 100 [[reader GetOutput] GetScalarRange]
-
-vtkPolyDataMapper contMapper
-  contMapper SetInputConnection [contour GetOutputPort]
-  eval contMapper SetScalarRange[[reader GetOutput] GetScalarRange]
-
-vtkActor skin
-  skin SetMapper contMapper
-
 vtkOutlineFilter outlineData
   outlineData SetInputConnection [reader GetOutputPort]
 
 vtkPolyDataMapper mapOutline
   mapOutline SetInputConnection [outlineData GetOutputPort]
+
+vtkTextActor textRangeLabel
+  #textRangeLabel SetInput "Plane: X"
+  #textRangeLabel SetInput "Plane: Y"
+  textRangeLabel SetInput "Plane: Z"
 
 vtkActor outline
   outline SetMapper mapOutline
@@ -45,6 +39,18 @@ vtkScalarBarActor scalarBar
   scalarBar SetWidth 0.15
   scalarBar SetHeight 0.9
 
+vtkImageMapToColors sagittalColors
+  sagittalColors SetInputConnection [reader GetOutputPort]
+  sagittalColors SetLookupTable hueLut
+vtkImageActor sagittal
+  [sagittal GetMapper] SetInputConnection [sagittalColors GetOutputPort]
+  #X
+  #sagittal SetDisplayExtent 8 8  0 17  0 9
+  #Y
+  #sagittal SetDisplayExtent 0 17  8 8  0 9
+  #Z
+  sagittal SetDisplayExtent 0 17  0 17  5 5
+
 vtkCamera aCamera
   aCamera SetViewUp  0 0 -1
   aCamera SetPosition  0 1 0
@@ -53,7 +59,8 @@ vtkCamera aCamera
 
 aRenderer AddActor scalarBar
 aRenderer AddActor outline
-aRenderer AddActor skin
+aRenderer AddActor sagittal
+aRenderer AddActor textRangeLabel
 
 aRenderer SetActiveCamera aCamera
 aRenderer ResetCamera

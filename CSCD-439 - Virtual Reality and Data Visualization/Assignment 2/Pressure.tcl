@@ -8,18 +8,11 @@ vtkRenderWindowInteractor iren
   iren SetRenderWindow renWin
 
 vtkStructuredPointsReader reader
-  reader SetFileName "temperature.dat"
+  reader SetFileName "pressure.dat"
 
-vtkContourFilter contour
-  contour SetInputConnection [reader GetOutputPort]
-  eval contour GenerateValues 100 [[reader GetOutput] GetScalarRange]
-
-vtkPolyDataMapper contMapper
-  contMapper SetInputConnection [contour GetOutputPort]
-  eval contMapper SetScalarRange[[reader GetOutput] GetScalarRange]
-
-vtkActor skin
-  skin SetMapper contMapper
+vtkContourFilter skinExtractor
+  skinExtractor SetInputConnection [reader GetOutputPort]
+  eval skinExtractor GenerateValues 100 [[reader GetOutput] GetScalarRange]
 
 vtkOutlineFilter outlineData
   outlineData SetInputConnection [reader GetOutputPort]
@@ -37,9 +30,17 @@ vtkLookupTable hueLut
   hueLut SetValueRange 1 1
   hueLut Build
 
+vtkPolyDataMapper skinMapper
+  skinMapper SetInputConnection [skinExtractor GetOutputPort]
+  skinMapper SetLookupTable hueLut
+  skinMapper SetScalarRange -0.2 0.2
+
+vtkActor skin
+  skin SetMapper skinMapper
+
 vtkScalarBarActor scalarBar
   scalarBar SetLookupTable hueLut
-  scalarBar SetTitle "Temperature"
+  scalarBar SetTitle "Pressure"
   [scalarBar GetPositionCoordinate] SetValue 0.01 0.1
   scalarBar SetNumberOfLabels 5
   scalarBar SetWidth 0.15

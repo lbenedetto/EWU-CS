@@ -8,18 +8,12 @@ vtkRenderWindowInteractor iren
   iren SetRenderWindow renWin
 
 vtkStructuredPointsReader reader
-  reader SetFileName "temperature.dat"
+  reader SetFileName "pressure.dat"
 
-vtkContourFilter contour
-  contour SetInputConnection [reader GetOutputPort]
-  eval contour GenerateValues 100 [[reader GetOutput] GetScalarRange]
-
-vtkPolyDataMapper contMapper
-  contMapper SetInputConnection [contour GetOutputPort]
-  eval contMapper SetScalarRange[[reader GetOutput] GetScalarRange]
-
-vtkActor skin
-  skin SetMapper contMapper
+vtkTextActor textRangeLabel
+  #textRangeLabel SetInput "Plane: X"
+  #textRangeLabel SetInput "Plane: Y"
+  textRangeLabel SetInput "Plane: Z"
 
 vtkOutlineFilter outlineData
   outlineData SetInputConnection [reader GetOutputPort]
@@ -37,13 +31,37 @@ vtkLookupTable hueLut
   hueLut SetValueRange 1 1
   hueLut Build
 
+vtkContourFilter contours
+  contours SetInputConnection [reader GetOutputPort]
+  contours SetValue 0 0.3616
+
+vtkPolyDataMapper contMapper
+  contMapper SetInputConnection [contours GetOutputPort]
+  contMapper SetLookupTable hueLut
+  contMapper SetScalarRange -0.2 0.2
+
+vtkActor skin
+  skin SetMapper contMapper
+
 vtkScalarBarActor scalarBar
   scalarBar SetLookupTable hueLut
-  scalarBar SetTitle "Temperature"
+  scalarBar SetTitle "Pressure"
   [scalarBar GetPositionCoordinate] SetValue 0.01 0.1
   scalarBar SetNumberOfLabels 5
   scalarBar SetWidth 0.15
   scalarBar SetHeight 0.9
+
+vtkImageMapToColors sagittalColors
+  sagittalColors SetInputConnection [reader GetOutputPort]
+  sagittalColors SetLookupTable hueLut
+vtkImageActor sagittal
+  [sagittal GetMapper] SetInputConnection [sagittalColors GetOutputPort]
+  #X
+  #sagittal SetDisplayExtent 8 8  0 17  0 9
+  #Y
+  #sagittal SetDisplayExtent 0 17  8 8  0 9
+  #Z
+  sagittal SetDisplayExtent 0 17  0 17  5 5
 
 vtkCamera aCamera
   aCamera SetViewUp  0 0 -1
@@ -53,6 +71,8 @@ vtkCamera aCamera
 
 aRenderer AddActor scalarBar
 aRenderer AddActor outline
+aRenderer AddActor sagittal
+aRenderer AddActor textRangeLabel
 aRenderer AddActor skin
 
 aRenderer SetActiveCamera aCamera
