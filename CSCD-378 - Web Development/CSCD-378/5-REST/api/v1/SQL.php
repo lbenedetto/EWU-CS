@@ -1,6 +1,8 @@
 <?php
-
-$host = "localhost";
+#PHPSTORM
+#/etc/php/7.0/cgi/php.ini
+#/usr/lib/php/20151012/xdebug.so
+$host = "127.0.0.1";
 $db = "id2995325_webdev";
 $user = "id2995325_lbenedetto";
 $pass = file_get_contents(__DIR__ . '/pw.txt');
@@ -78,4 +80,51 @@ function post($table, $stock, $data)
 			"created" => $created,
 			"updated" => $updated)
 	);
+}
+
+function options()
+{
+	echo "{
+		    \"/api/v1/{endpoint}\": {
+		      \"POST\": {
+		        \"description\": \"Update or create an entry. This acts as PUT and POST.\",
+		        \"parameters\": {
+		          \"stock\": {
+		            \"type\": \"string\",
+		            \"description\": \"The stock number of the data to be retrieved\",
+		            \"required\": true
+  		          },
+  		          \"{endpoint}\": {
+		            \"type\": \"string\",
+		            \"description\": \"The data to be updated or inserted\",
+		            \"required\": true
+		          }
+		        }
+		      }
+		    },
+		    \"/api/v1/{endpoint}/GET\": {
+		      \"GET\": {
+		        \"description\": \"Get an entry\",
+		        \"parameters\": {
+		          \"stock\": {
+		            \"type\": \"string\",
+		            \"description\": \"The stock number of the data to be retrieved\",
+		            \"required\": true
+		          }
+		        }
+		      }
+		    },
+		    \"/api/v1/{endpoint}/DELETE\": {
+		      \"GET\": {
+		        \"description\": \"Delete an entry\",
+		        \"parameters\": {
+		          \"stock\": {
+		            \"type\": \"string\",
+		            \"description\": \"The stock number of the data to be deleted\",
+		            \"required\": true
+		          }
+		        }
+		      }
+		    }
+		  }";
 }

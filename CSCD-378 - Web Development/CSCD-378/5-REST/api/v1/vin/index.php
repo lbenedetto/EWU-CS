@@ -1,4 +1,8 @@
 <?php
 include "../SQL.php";
 
-post("vin", $_POST['stock'], $_POST['vin']);
+$rq = $_SERVER['REQUEST_METHOD'];
+if ($rq == "POST")
+	post("vin", $_POST['stock'], $_POST['vin']);
+else
+	options();
