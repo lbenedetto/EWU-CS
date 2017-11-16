@@ -1,0 +1,77 @@
+[
+  {
+	"/api/v1/$endpoint": {
+	  "GET": {
+		"description": "Get options in JSON format (what you are currently viewing)"
+	  }
+	},
+	"/api/v1/$endpoint/CREATE": {
+	  "POST": {
+		"description": "Create an entry. This acts as a regular POST request.",
+		"parameters": {
+		  "stock": {
+			"type": "string",
+			"description": "The stock number of the data to be added",
+			"required": true
+		  },
+		  "data": {
+			"type": "string",
+			"description": "The data to be inserted",
+			"required": true
+		  }
+		}
+	  }
+	},
+	"/api/v1/$endpoint/UPDATE": {
+	  "POST": {
+		"description": "Update an entry. This acts as a PUT request.",
+		"parameters": {
+		  "stock": {
+			"type": "string",
+			"description": "The stock number of the data to be updated",
+			"required": true
+		  },
+		  "data": {
+			"type": "string",
+			"description": "The data to be updated",
+			"required": true
+		  }
+		}
+	  }
+	},
+	"/api/v1/$endpoint/GET": {
+	  "GET": {
+		"description": "Get an entry. Only one of the three parameters may be active at a time",
+		"parameters": {
+		  "stock": {
+			"type": "string",
+			"description": "The stock number of the data to be retrieved",
+			"required": false
+		  },
+		  "regex": {
+			"type": "string",
+			"description": "A regular expression that matches the data you want",
+			"required": false
+		  },
+		  "all": {
+			"type": "empty",
+			"description": "Returns all data",
+			"required": false
+		  }
+		}
+	  }
+	},
+	"/api/v1/$endpoint/DELETE": {
+	  "GET": {
+		"description": "Delete an entry",
+		"parameters": {
+		  "stock": {
+			"type": "string",
+			"description": "The stock number of the data to be deleted",
+			"required": true
+		  }
+		}
+	  }
+	}
+  }
+]

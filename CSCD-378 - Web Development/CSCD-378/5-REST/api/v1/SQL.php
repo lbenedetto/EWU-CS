@@ -39,14 +39,11 @@ function get($table) {
 	if ($arg != null) {
 		getOne($table, $arg);
 	}
-	$arg = $_GET["all"];
-	if ($arg != null) {
-		getAll($table);
-	}
 	$arg = $_GET["regex"];
 	if ($arg != null) {
 		getMultiple($table, $arg);
 	}
+	getAll($table);
 }
 
 function getOne($table, $stock) {
@@ -119,48 +116,82 @@ function put($table) {
 }
 
 function options($endpoint) {
-	echo "{
-		    \"/api/v1/$endpoint\": {
-		      \"POST\": {
-		        \"description\": \"Update or create an entry. This acts as PUT and POST.\",
-		        \"parameters\": {
-		          \"stock\": {
-		            \"type\": \"string\",
-		            \"description\": \"The stock number of the data to be retrieved\",
-		            \"required\": true
-  		          },
-  		          \"$endpoint\": {
-		            \"type\": \"string\",
-		            \"description\": \"The data to be updated or inserted\",
-		            \"required\": true
-		          }
-		        }
-		      }
-		    },
-		    \"/api/v1/$endpoint/GET\": {
-		      \"GET\": {
-		        \"description\": \"Get an entry\",
-		        \"parameters\": {
-		          \"stock\": {
-		            \"type\": \"string\",
-		            \"description\": \"The stock number of the data to be retrieved\",
-		            \"required\": true
-		          }
-		        }
-		      }
-		    },
-		    \"/api/v1/$endpoint/DELETE\": {
-		      \"GET\": {
-		        \"description\": \"Delete an entry\",
-		        \"parameters\": {
-		          \"stock\": {
-		            \"type\": \"string\",
-		            \"description\": \"The stock number of the data to be deleted\",
-		            \"required\": true
-		          }
-		        }
-		      }
-		    }
-		  }";
+	echo "[
+  {
+	\"/api/v1/$endpoint\": {
+	  \"GET\": {
+		\"description\": \"Get options in JSON format (what you are currently viewing)\"
+	  }
+	},
+	\"/api/v1/$endpoint/CREATE\": {
+	  \"POST\": {
+		\"description\": \"Create an entry. This acts as a regular POST request.\",
+		\"parameters\": {
+		  \"stock\": {
+			\"type\": \"string\",
+			\"description\": \"The stock number of the data to be added\",
+			\"required\": true
+		  },
+		  \"data\": {
+			\"type\": \"string\",
+			\"description\": \"The data to be inserted\",
+			\"required\": true
+		  }
+		}
+	  }
+	},
+	\"/api/v1/$endpoint/UPDATE\": {
+	  \"POST\": {
+		\"description\": \"Update an entry. This acts as a PUT request.\",
+		\"parameters\": {
+		  \"stock\": {
+			\"type\": \"string\",
+			\"description\": \"The stock number of the data to be updated\",
+			\"required\": true
+		  },
+		  \"data\": {
+			\"type\": \"string\",
+			\"description\": \"The data to be updated\",
+			\"required\": true
+		  }
+		}
+	  }
+	},
+	\"/api/v1/$endpoint/GET\": {
+	  \"GET\": {
+		\"description\": \"Get an entry. Only one of the three parameters may be active at a time\",
+		\"parameters\": {
+		  \"stock\": {
+			\"type\": \"string\",
+			\"description\": \"The stock number of the data to be retrieved\",
+			\"required\": false
+		  },
+		  \"regex\": {
+			\"type\": \"string\",
+			\"description\": \"A regular expression that matches the data you want\",
+			\"required\": false
+		  },
+		  \"all\": {
+			\"type\": \"empty\",
+			\"description\": \"Returns all data\",
+			\"required\": false
+		  }
+		}
+	  }
+	},
+	\"/api/v1/$endpoint/DELETE\": {
+	  \"GET\": {
+		\"description\": \"Delete an entry\",
+		\"parameters\": {
+		  \"stock\": {
+			\"type\": \"string\",
+			\"description\": \"The stock number of the data to be deleted\",
+			\"required\": true
+		  }
+		}
+	  }
+	}
+  }
+]";
 	die(0);
 }
