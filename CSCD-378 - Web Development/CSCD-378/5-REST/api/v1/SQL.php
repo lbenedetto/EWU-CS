@@ -14,11 +14,17 @@ $opt = [
 	PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 	PDO::ATTR_EMULATE_PREPARES => false,
 ];
-$pdo = new PDO($dsn, $user, $pass, $opt);
 
-function delete($table, $stock)
-{
+try {
+	$pdo = new PDO($dsn, $user, $pass, $opt);
+} catch (PDOException $e) {
+	echo "Could not connect to database\n";
+	echo $e;
+}
+
+function delete($table) {
 	global $pdo;
+	$stock = $_GET['stock'];
 	$del = $pdo->prepare("DELETE FROM $table WHERE stock = ?");
 	$del->execute([$stock]);
 	$affectedRows = $del->rowCount();
@@ -28,64 +34,93 @@ function delete($table, $stock)
 	);
 }
 
-function get($table, $stock, $endpointName1, $endpoint1, $endpointName2, $endpoint2)
-{
-	$vin = internal_get($table, $stock);
-	if ($vin == null) {
-		http_response_code(404);
-		die();
-	} else {
-		echo json_encode(array(
-			"stock" => $stock,
-			$table => $vin[0][$table],
-			$endpointName1 => $endpoint1,
-			$endpointName2 => $endpoint2),
-			JSON_UNESCAPED_SLASHES
-		);
+function get($table) {
+	$arg = $_GET["stock"];
+	if ($arg != null) {
+		getOne($table, $arg);
+	}
+	$arg = $_GET["all"];
+	if ($arg != null) {
+		getAll($table);
+	}
+	$arg = $_GET["regex"];
+	if ($arg != null) {
+		getMultiple($table, $arg);
 	}
 }
 
-function internal_get($table, $stock)
-{
+function getOne($table, $stock) {
 	global $pdo;
 	$stmt = $pdo->prepare("SELECT * FROM $table WHERE stock = ?");
 	$stmt->execute([$stock]);
-
-	$vin = $stmt->fetchAll();
-	return $vin;
+	returnResults($stmt->fetchAll());
 }
 
-function post($table, $stock, $data)
-{
+function getAll($table) {
 	global $pdo;
-	$updated = false;
-	$created = false;
+	$stmt = $pdo->prepare("SELECT * FROM $table");
+	$stmt->execute();
+	returnResults($stmt->fetchAll());
+}
 
-	$vin = internal_get($table, $stock);
-	try {
-		if ($vin == null) {
-			$created = $pdo->prepare("INSERT INTO $table(`stock`, $table) VALUES (?,?)")
-				->execute([$stock, $data]);
-		} else {
-			$updated = $pdo->prepare("UPDATE $table SET $table=? WHERE stock = ?")
-				->execute([$data, $stock]);
-		}
-	} catch (PDOException $e) {
-		http_response_code(400);
-		echo "Vehicle VIN must be added before any other data";
+function getMultiple($table, $regex) {
+	global $pdo;
+	$stmt = $pdo->prepare("SELECT * FROM $table WHERE $table REGEXP ?");
+	$stmt->execute([$regex]);
+	returnResults($stmt->fetchAll());
+}
+
+function returnResults($results) {
+	if ($results == null) {
+		echo "Could not find any entries matching your request";
+		http_response_code(404);
 		die();
+	} else {
+		echo json_encode($results);
+	}
+	die(0);
+}
+
+function post($table) {
+	global $pdo;
+	$stock = $_POST['stock'];
+	$data = $_POST['data'];
+	$created = false;
+	try {
+		$created = $pdo->prepare("INSERT INTO $table(`stock`, $table) VALUES (?,?)")
+			->execute([$stock, $data]);
+	} catch (PDOException $e) {
+		echo "Cannot have duplicate stock numbers\n";
+		http_response_code(400);
 	}
 	echo json_encode(array(
 			"stock" => $stock,
-			"created" => $created,
-			"updated" => $updated)
+			"created" => $created)
 	);
+	die(0);
 }
 
-function options()
-{
+function put($table) {
+	global $pdo;
+	$stock = $_POST['stock'];
+	$data = $_POST['data'];
+	$updated = false;
+	try {
+		$updated = $pdo->prepare("UPDATE $table SET $table=? WHERE stock = ?")
+			->execute([$data, $stock]);
+	} catch (PDOException $e) {
+		http_response_code(400);
+	}
+	echo json_encode(array(
+			"stock" => $stock,
+			"updated" => $updated)
+	);
+	die(0);
+}
+
+function options($endpoint) {
 	echo "{
-		    \"/api/v1/{endpoint}\": {
+		    \"/api/v1/$endpoint\": {
 		      \"POST\": {
 		        \"description\": \"Update or create an entry. This acts as PUT and POST.\",
 		        \"parameters\": {
@@ -94,7 +129,7 @@ function options()
 		            \"description\": \"The stock number of the data to be retrieved\",
 		            \"required\": true
   		          },
-  		          \"{endpoint}\": {
+  		          \"$endpoint\": {
 		            \"type\": \"string\",
 		            \"description\": \"The data to be updated or inserted\",
 		            \"required\": true
@@ -102,7 +137,7 @@ function options()
 		        }
 		      }
 		    },
-		    \"/api/v1/{endpoint}/GET\": {
+		    \"/api/v1/$endpoint/GET\": {
 		      \"GET\": {
 		        \"description\": \"Get an entry\",
 		        \"parameters\": {
@@ -114,7 +149,7 @@ function options()
 		        }
 		      }
 		    },
-		    \"/api/v1/{endpoint}/DELETE\": {
+		    \"/api/v1/$endpoint/DELETE\": {
 		      \"GET\": {
 		        \"description\": \"Delete an entry\",
 		        \"parameters\": {
@@ -127,4 +162,5 @@ function options()
 		      }
 		    }
 		  }";
+	die(0);
 }
