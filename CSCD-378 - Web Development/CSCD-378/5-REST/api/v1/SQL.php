@@ -2,7 +2,7 @@
 #PHPSTORM
 #/etc/php/7.0/cgi/php.ini
 #/usr/lib/php/20151012/xdebug.so
-$host = "127.0.0.1";
+$host = "localhost";
 $db = "id2995325_webdev";
 $user = "id2995325_lbenedetto";
 $pass = file_get_contents(__DIR__ . '/pw.txt');
@@ -19,6 +19,7 @@ try {
 	$pdo = new PDO($dsn, $user, $pass, $opt);
 } catch (PDOException $e) {
 	echo "Could not connect to database\n";
+	http_response_code(500);
 	echo $e;
 }
 
