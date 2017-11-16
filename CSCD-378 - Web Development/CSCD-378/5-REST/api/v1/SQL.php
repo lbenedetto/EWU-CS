@@ -73,7 +73,7 @@ function returnResults($results) {
 		http_response_code(404);
 		die();
 	} else {
-		echo json_encode($results);
+		echo json_encode($results, JSON_UNESCAPED_SLASHES);
 	}
 	die(0);
 }
