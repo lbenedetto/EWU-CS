@@ -3,8 +3,8 @@
 #/etc/php/7.0/cgi/php.ini
 #/usr/lib/php/20151012/xdebug.so
 $host = "localhost";
-$db = "id2995325_webdev";
-$user = "id2995325_lbenedetto";
+$db = "u800402696_cs378";
+$user = "u800402696_bened";
 $pass = file_get_contents(__DIR__ . '/pw.txt');
 $charset = "utf8mb4";
 

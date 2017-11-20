@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
-$db = "id2995325_webdev";
-$user = "id2995325_lbenedetto";
+$db = "u800402696_cs378";
+$user = "u800402696_bened";
 $pass = file_get_contents('pw');
 $charset = "utf8mb4";
 
