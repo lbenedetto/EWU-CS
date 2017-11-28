@@ -32,23 +32,23 @@
       "company": "VIP Traders",
       "position": "Software Developer",
       "website": "https://www.vipautoimporters.com/",
-      "startDate": "2016-10",
-      "endDate": "",
-      "summary": "VIP Traders is a United States company specializing in the import and export of used and slightly-used vehicles and equipment ",
+      "startDate": "2016-10-01",
+      "endDate": "2017-11-27",
+      "summary": "Analyzed the workflow of other employees and designed software to optimize the process",
       "highlights": [
-        "Build an Android app for scanning VIN bar-codes into an cloud spreadsheet ",
-        "Build a file location tracking system using Java Swing and SQL",
-        "Design other small office automation utilities",
-        "Provide general tech support"
+        "Built an Android app for scanning VIN bar-codes into an cloud spreadsheet ",
+        "Built a file location tracking system using Java Swing and SQL",
+        "Designed other small office automation utilities",
+        "Provided general tech support"
       ]
     },
     {
       "company": "Spokane Public Schools",
       "position": "Programming Instructor",
       "website": "",
-      "startDate": "2014-6",
-      "endDate": "2014-8",
-      "summary": "Teach middle school age students to program at summer camp",
+      "startDate": "2014-06-01",
+      "endDate": "2014-08-01",
+      "summary": "Taught middle school age students to program at summer camp",
       "highlights": [
         "Designed a lesson plan for teaching approximately 25 students the basics of programming through AppInventor and Scratch"
       ]
@@ -59,11 +59,11 @@
       "organization": "TeConnections",
       "position": "Technician",
       "website": "",
-      "startDate": "2011-9",
-      "endDate": "2013-6",
+      "startDate": "2011-09-01",
+      "endDate": "2013-06-01",
       "summary": "Spokane Public Schools \"Reuse before Recycle\" program for repairing computers to be distributed to those in need",
       "highlights": [
-        "Dismantle donated broken computers and assemble the working parts into a computer for redistribution to those in need"
+        "Dismantled donated broken computers and assemble the working parts into a computer"
       ]
     }
   ],
