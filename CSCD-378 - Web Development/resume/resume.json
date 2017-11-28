@@ -1,0 +1,142 @@
+{
+  "basics": {
+    "name": "Lars Benedetto",
+    "label": "Programmer",
+    "picture": "",
+    "email": "larsbenedetto@gmail.com",
+    "phone": "+1 (509) 703-8150",
+    "website": "http://larsbenedetto.work/",
+    "summary": "Programming is my passion. It sounds cliche, but its true. When I have free time, I write code. What I love most of all is finding an open source project and involving myself in the community. I think the best part of programming is collaborating on a project with friends",
+    "location": {
+      "address": "105 N. 6th Street",
+      "postalCode": "99004",
+      "city": "Cheney",
+      "countryCode": "US",
+      "region": "Washington"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "Lars Benedetto",
+        "url": "https://www.linkedin.com/in/lars-benedetto-63b53814b/"
+      },
+      {
+        "network": "GitHub",
+        "username": "lbenedetto",
+        "url": "https://github.com/lbenedetto"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "VIP Traders",
+      "position": "Software Developer",
+      "website": "https://www.vipautoimporters.com/",
+      "startDate": "2016-10",
+      "endDate": "",
+      "summary": "VIP Traders is a United States company specializing in the import and export of used and slightly-used vehicles and equipment ",
+      "highlights": [
+        "Build an Android app for scanning VIN bar-codes into an cloud spreadsheet ",
+        "Build a file location tracking system using Java Swing and SQL",
+        "Design other small office automation utilities",
+        "Provide general tech support"
+      ]
+    },
+    {
+      "company": "Spokane Public Schools",
+      "position": "Programming Instructor",
+      "website": "",
+      "startDate": "2014-6",
+      "endDate": "2014-8",
+      "summary": "Teach middle school age students to program at summer camp",
+      "highlights": [
+        "Designed a lesson plan for teaching approximately 25 students the basics of programming through AppInventor and Scratch"
+      ]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "TeConnections",
+      "position": "Technician",
+      "website": "",
+      "startDate": "2011-9",
+      "endDate": "2013-6",
+      "summary": "Spokane Public Schools \"Reuse before Recycle\" program for repairing computers to be distributed to those in need",
+      "highlights": [
+        "Dismantle donated broken computers and assemble the working parts into a computer for redistribution to those in need"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Eastern Washington University",
+      "area": "of Science in Computer Science",
+      "studyType": "Bachelor",
+      "startDate": "2011-06-01",
+      "endDate": "2014-01-01",
+      "gpa": "3.7",
+      "courses": [
+        "CSCD372 - Android Mobile Development",
+        "CSCD378 - Web Application Development",
+        "CSCD349 - Design Patterns"
+      ]
+    }
+  ],
+  "awards": [],
+  "publications": [],
+  "skills": [
+    {
+      "name": "Web Development",
+      "keywords": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "SQL",
+        "PHP"
+      ]
+    },
+    {
+      "name": "Languages",
+      "keywords": [
+        "Java",
+        "C++",
+        "C",
+        "Python"
+      ]
+    },
+    {
+      "name": "Application Development",
+      "keywords": [
+        "Android",
+        "Swing"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "Danish",
+      "fluency": "Fluent"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Data Visualization",
+      "keywords": [
+        "Network Graph",
+        "Gephi",
+        "Web Crawling"
+      ]
+    },
+    {
+      "name": "Open Source",
+      "keywords": [
+        "JTerm"
+      ]
+    }
+  ],
+  "references": []
+}
