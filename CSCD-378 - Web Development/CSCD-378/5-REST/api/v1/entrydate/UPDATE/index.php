@@ -1,3 +1,3 @@
 <?php
 include "../../SQL.php";
-get("ups");
+put("entrydate");
