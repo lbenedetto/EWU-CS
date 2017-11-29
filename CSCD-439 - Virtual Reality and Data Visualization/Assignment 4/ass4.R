@@ -1,6 +1,11 @@
-setwd("N:/EWU-Computer-Science/CSCD-439 - Virtual Reality and Data Visualization/Assignment 4")
-mydata = read.csv("TheSouthSucks.csv")
-mydata
+rm(list=ls())
+gc()
 
-mydata_ordered<-mydata[order(mydata$Male.white, decreasing=TRUE),]
-row.names(mydata_ordered)<-mydata_ordered$Age.group
+library(RColorBrewer)
+
+mydata = read.csv("TheSouthSucks.csv")
+attach(mydata)
+
+mycolors = brewer.pal(5,'Reds')
+thecolors = mycolors[mapgroups('state',thestates,hgroups)]
+map('state',col=thecolors,fill=TRUE)
