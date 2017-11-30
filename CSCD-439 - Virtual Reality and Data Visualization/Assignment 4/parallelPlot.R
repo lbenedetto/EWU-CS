@@ -1,19 +1,18 @@
-rm(list=ls())
-gc()
-
 library(lattice)
 
-mydata = read.csv("TheSouthSucks.csv")
-attach(mydata)
-partialData <- scale(mydata[,2:7]) #standardize variables
+crimeData = read.csv("TheSouthSucks.csv")
+attach(crimeData)
+row.names(crimeData)<-crimeData$State # move state names into row names
+crimeData = crimeData[,2:7] # remove state name column
+crimeData <- scale(crimeData) #standardize variables
 
 # K-Means Cluster Analysis
-fit <- kmeans(partialData, 4) # Find 4 clusters
+fit <- kmeans(crimeData, 4) # Find 4 clusters
 # get cluster means 
-aggregate(partialData,by=list(fit$cluster),FUN=mean)
+aggregate(crimeData,by=list(fit$cluster),FUN=mean)
 # append cluster assignment
-partialData <- data.frame(partialData, fit$cluster)
+crimeData <- data.frame(crimeData, fit$cluster)
 
 #The seventh column of the table contains cluster information, use it to determine the colors
-plot <- parallelplot(partialData[,1:6], col=partialData[,7], horizontal.axis=FALSE)
+plot <- parallelplot(crimeData[,1:6], col=crimeData[,7], horizontal.axis=FALSE)
 print(plot)
