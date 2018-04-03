@@ -1,0 +1,84 @@
+cscd340_s18_lab1prob1.c
+1
+	1: a=0x00000000, b=0x00000014, c=0x00000094, i=0x000000B4
+	2: b=0x00000014, c=0x00000094
+	3: a[0] = 200, a[1] = 101, a[2] = 102, a[3] = 103
+	4: a[0] = 200, a[1] = 400, a[2] = 402, a[3] = 404
+	5: a[0] = 200, a[1] = 500, a[2] = 402, a[3] = 404
+	6: a[0] = 200, a[1] = 500, a[2] = 800, a[3] = 404
+	7: b = 0x00000004, c = 0x00000004
+2
+	My program had a starting address of 0x7ffe3e0d2830, so I will use that to calculate the diff
+	1: a= 0x0, b= -0x10, c= -0x8, -0x14
+	I have no idea why these are like this. It doesn't make any sense
+
+	2: My program gave b = 0x1678440, c = 0x16784d0 (diff 0x90)
+	I had guessed a diff of 0x80 because 32 slots were allocated for ints of size 4 which was 128. Apparently it should have been 144
+
+	3-5: I was correct
+
+	6: I assumed that casting to char pointer and back wouldn't change anything, so I just said a[2] would be 800 but it ended up being 256 and I have no idea why
+
+	7: I was right that b would 4 ahead of the original a, but I was wrong about c being 4 ahead, due to the funky int*->char*->int* casting shenanegans
+
+3. 
+	a) down. Based on the results from part 1 and 2 of this assignment
+	b) 5.4.0 20160609
+	c) They aren't allocated in the order they are declared
+	d) No. It was not dynamically allocated
+	e) Yes, it was dynamically allocated but never deallocated. 10 bytes were leaked
+	f) Yes, it was dynamically allocated but never deallocated. 32 bytes were leaked
+	g) Yes, it was dynamically allocated but never deallocated. 128 bytes were leaked
+	h) 
+	i) The addresses stayed the same when I ran it with valgrind, but not when I ran it the regular way. The addresses change each run due to address space layout randomization and because those addresses became unvailable due to other programs using them.
+	j) 
+	==11513== Memcheck, a memory error detector
+	==11513== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+	==11513== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+	==11513== Command: ./a.out
+	==11513== 
+	x: 0xffefffe30
+	ptr: 0xffefffe68
+	val: 0xffefffe38
+	dptr: 0xffefffe40
+	array: 0xffefffe70
+	array[5]: 0xffefffe84
+	val2: 0xffefffe48
+	y:0xffefffe34
+	dptr2: 0xffefffe50
+	ptr2: 0xffefffe58
+	word: 0xffefffe60
+	word: 0x5204040
+	1: a = 0xffefffdf0, b = 0xffefffde0, c = 0xffefffde8, i = 0xffefffddc
+	2: b = 0x52044d0, c = 0x5204590
+	3: a[0] = 200, a[1] = 101, a[2] = 102, a[3] = 103
+	4: a[0] = 200, a[1] = 400, a[2] = 402, a[3] = 404
+	5: a[0] = 200, a[1] = 500, a[2] = 402, a[3] = 404
+	6: a[0] = 200, a[1] = 205044, a[2] = 256, a[3] = 404
+	7: b = 0xffefffdf4, c = 0xffefffdf1
+	==11513== 
+	==11513== HEAP SUMMARY:
+	==11513==     in use at exit: 170 bytes in 3 blocks
+	==11513==   total heap usage: 4 allocs, 1 frees, 1,194 bytes allocated
+	==11513== 
+	==11513== LEAK SUMMARY:
+	==11513==    definitely lost: 170 bytes in 3 blocks
+	==11513==    indirectly lost: 0 bytes in 0 blocks
+	==11513==      possibly lost: 0 bytes in 0 blocks
+	==11513==    still reachable: 0 bytes in 0 blocks
+	==11513==         suppressed: 0 bytes in 0 blocks
+	==11513== Rerun with --leak-check=full to see details of leaked memory
+	==11513== 
+	==11513== For counts of detected and suppressed errors, rerun with: -v
+	==11513== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+4.
+	a)
+		1 
+		2
+		3
+		4
+		5
+		6
+		7
+		8
+		9
