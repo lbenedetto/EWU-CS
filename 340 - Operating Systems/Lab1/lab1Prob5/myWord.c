@@ -1,30 +1,25 @@
-//
-// Created by lars on 4/3/18.
-//
-
 #include "myWord.h"
 
 void *buildWord(FILE *stream) {
+    char c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
     printf("Please enter word ");
-    int c; //getchar() returns int
-    int i = 0;
-    char* asdfas = getline(stdin);
-    char *chars = calloc(40, sizeof(char));
-    while (((c = getchar()) != '\n') || (i >= 39)) {
-        chars[i++] = c;
-    }
-
-    struct my_word myWord = {chars};
-    struct my_word *p = &myWord;
-    return (void *) p;
+    char buf[250];
+    fgets(buf, 249, stdin);
+    char *str = calloc(strlen(buf) + 1, sizeof(char));
+    strncpy(str, buf, strlen(buf) + 1);
+    MyWord *myWord = calloc(1, sizeof *myWord);
+    myWord->word = str;
+    return (void *) myWord;
 }
 
 void printWord(void *ptr) {
-    struct my_word *f;
-    f = (struct my_word *) ptr;
-    printf("Word: %s\n", f->word);
+    char *str = ((struct my_word *) ptr)->word;
+    printf("Word: %s\n", str);
 }
 
 void cleanWord(void *ptr) {
-    //free(ptr);
+    MyWord *myWord = (MyWord *) ptr;
+    free(myWord->word);
+    free(myWord);
 }

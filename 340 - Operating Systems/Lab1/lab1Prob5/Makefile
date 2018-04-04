@@ -6,18 +6,18 @@ MAIN = cscd340_s18_lab1prob5.c
 
 
 prob5:	${OBJ}
-	${CC} -g -o ${EXE} ${OBJ} ${MAIN}
+	${CC} -o ${EXE} ${OBJ} ${MAIN}
 
 
 genericArray.o:	genericArray.h genericArray.c
-	${CC} -g -c genericArray.c
+	${CC} -c genericArray.c
 
 
 myInt.o:	myInt.h myInt.c
-	${CC} -g -c myInt.c
+	${CC} -c myInt.c
 
 myWord.o:	myWord.c myWord.h
-	${CC} -g -c myWord.c
+	${CC} -c myWord.c
 
 
 clean:
