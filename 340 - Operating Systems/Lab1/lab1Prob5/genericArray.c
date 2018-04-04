@@ -18,6 +18,8 @@ GenericArray *fillArray(void *(*buildType)(FILE *input), FILE *in, int *length) 
         printf("Please enter the number of elements ");
         scanf("%d", &len);
     } while (len < 1);
+    char c;
+    while ((c = getchar()) != '\n' && c != EOF);
     *length = len;
 
     GenericArray *array = calloc(len, sizeof(GenericArray));
