@@ -1,0 +1,10 @@
+Please enter the number of elements 2
+Please enter an integer 1
+Please enter an integer 2
+Int: 1
+Int: 2
+Please enter the number of elements 2
+Please enter word hi
+Please enter word stu
+Word: hi
+Word: stu
