@@ -44,7 +44,7 @@ public class Lookup1D extends A_Lookup {
 	 */
 	public double resolveDependentVariable(final double independentVariable) {
 		// add your 1D interpolation lookup here
-		return resolveDependentVariable(data, independentVariable);
+		return interpolate(data, independentVariable);
 	}
 
 

@@ -37,6 +37,6 @@ public class Lookup3D extends A_Lookup {
 	 * @return the dependent variable
 	 */
 	public double resolveDependentVariable(final double independentVariable1, final double independentVariable2, final double independentVariable3) {
-		return resolveDependentVariable(data, independentVariable3, independentVariable1, independentVariable2);
+		return interpolate(data, independentVariable3, independentVariable1, independentVariable2);
 	}
 }

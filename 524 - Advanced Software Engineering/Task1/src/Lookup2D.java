@@ -40,7 +40,7 @@ public class Lookup2D extends A_Lookup {
 	 * @return the dependent variable
 	 */
 	public double resolveDependentVariable(final double independentVariable1, final double independentVariable2) {
-		return resolveDependentVariable(data, independentVariable1, independentVariable2);
+		return interpolate(data, independentVariable1, independentVariable2);
 	}
 
 }

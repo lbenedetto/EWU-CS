@@ -38,7 +38,7 @@ public abstract class A_Lookup {
 				(independentVariableClose - independentVariableOpen)) * (dependentVariableClose - dependentVariableOpen)) + dependentVariableOpen;
 	}
 
-	double resolveDependentVariable(Pair[] data, double... v) {
+	double interpolate(Pair[] data, double... v) {
 		Pair open = data[0];
 		if (v[0] < open.x) throw new RuntimeException("independentVariable was smaller than allowed");
 		for (Pair close : data) {
