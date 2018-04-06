@@ -8,7 +8,7 @@ import java.nio.file.Paths;
  * Performs two-dimensional interpolation as defined in the task writeup.
  */
 public class Lookup2D extends A_Lookup {
-	private TwoDPair[] data;
+	private Pair.TwoDPair[] data;
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	/**
@@ -19,13 +19,13 @@ public class Lookup2D extends A_Lookup {
 	 */
 	public Lookup2D(final String filespec) throws IOException {
 		var lines = Files.readAllLines(Paths.get(filespec));
-		data = new TwoDPair[Integer.parseInt(lines.remove(0))];
+		data = new Pair.TwoDPair[Integer.parseInt(lines.remove(0))];
 		lines.remove(0);
-		var cols = Util.parseInts(lines.remove(0));
+		var cols = parseInts(lines.remove(0));
 		int i = 0;
 		for (String line : lines) {
-			var values = Util.parseInts(line);
-			data[i++] = new TwoDPair(values[0], new Lookup1D(cols, values));
+			var values = parseInts(line);
+			data[i++] = new Pair.TwoDPair(values[0], new Lookup1D(cols, values));
 		}
 	}
 
@@ -40,33 +40,7 @@ public class Lookup2D extends A_Lookup {
 	 * @return the dependent variable
 	 */
 	public double resolveDependentVariable(final double independentVariable1, final double independentVariable2) {
-		// add your 2D interpolation lookup here
-
-		//Find the two x coord bounds
-		//Interpolate their y values with iV1
-		//Interpolate the answer with iV2
-		TwoDPair open = data[0];
-		if (independentVariable1 < open.x) throw new RuntimeException("independentVariable was smaller than allowed");
-		for (TwoDPair close : data) {
-			if (close.x < independentVariable1) {
-				open = close;
-			} else {
-				double y1 = open.y.resolveDependentVariable(independentVariable2);
-				double y2 = close.y.resolveDependentVariable(independentVariable2);
-				return interpolate(independentVariable1, open.x, close.x, y1, y2);
-			}
-		}
-		throw new RuntimeException("independentVariable was larger than allowed");
-	}
-
-	public static class TwoDPair {
-		double x;
-		Lookup1D y;
-
-		TwoDPair(double x, Lookup1D y) {
-			this.x = x;
-			this.y = y;
-		}
+		return resolveDependentVariable(data, independentVariable1, independentVariable2);
 	}
 
 }

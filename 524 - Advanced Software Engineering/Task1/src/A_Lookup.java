@@ -1,5 +1,7 @@
 //=============================================================================================================================================================
 
+import java.util.Arrays;
+
 /**
  * Defines the shared elements of the lookup subclasses.
  */
@@ -31,8 +33,73 @@ public abstract class A_Lookup {
 	                             final double dependentVariableOpen,
 	                             final double dependentVariableClose) {
 		// add your interpolation code here
-		if(independentVariableClose == independentVariableOpen) return dependentVariableOpen;
+		if (independentVariableClose == independentVariableOpen) return dependentVariableOpen;
 		return (((independentVariable - independentVariableOpen) /
 				(independentVariableClose - independentVariableOpen)) * (dependentVariableClose - dependentVariableOpen)) + dependentVariableOpen;
+	}
+
+	double resolveDependentVariable(Pair[] data, double... v) {
+		Pair open = data[0];
+		if (v[0] < open.x) throw new RuntimeException("independentVariable was smaller than allowed");
+		for (Pair close : data) {
+			if (close.x < v[0]) {
+				open = close;
+			} else {
+				return interpolate(v[0], open.x, close.x, open.interpolate(v), close.interpolate(v));
+			}
+
+		}
+		throw new RuntimeException("independentVariable was larger than allowed");
+	}
+
+	static double[] parseInts(String s) {
+		return Arrays.stream(s.split(",")).mapToDouble(Double::parseDouble).toArray();
+	}
+
+
+	public static abstract class Pair {
+		double x;
+
+		public abstract double interpolate(double... iv);
+
+		public static class OneDPair extends Pair {
+			double y;
+
+			OneDPair(double x, double y) {
+				this.x = x;
+				this.y = y;
+			}
+
+			@Override
+			public double interpolate(double... iv) {
+				return y;
+			}
+		}
+
+		public static class TwoDPair extends Pair {
+			Lookup1D y;
+
+			TwoDPair(double x, Lookup1D y) {
+				this.x = x;
+				this.y = y;
+			}
+
+			public double interpolate(double... iv) {
+				return y.resolveDependentVariable(iv[1]);
+			}
+		}
+
+		public static class ThreeDPair extends Pair {
+			Lookup2D y;
+
+			ThreeDPair(double x, Lookup2D y) {
+				this.x = x;
+				this.y = y;
+			}
+
+			public double interpolate(double... iv) {
+				return y.resolveDependentVariable(iv[1], iv[2]);
+			}
+		}
 	}
 }
