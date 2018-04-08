@@ -1,0 +1,53 @@
+ssteiner@ubuntu-16:~/Dropbox/Lab2$ ./lab2
+Please enter the name of the input file stocks.txt
+
+Microsoft - MSFT - 53.24
+Hillenbrand Inc - HI - 30.65
+Charles Schwab - SCHW - 31.37
+Google - GOOG - 721.11
+
+Please choose from the following
+1) Sort by Symbol
+2) Sort by Company Name
+3) Sort by Price
+4) Quit
+Choice --> 1
+
+Google - GOOG - 721.11
+Hillenbrand Inc - HI - 30.65
+Microsoft - MSFT - 53.24
+Charles Schwab - SCHW - 31.37
+
+Please choose from the following
+1) Sort by Symbol
+2) Sort by Company Name
+3) Sort by Price
+4) Quit
+Choice --> 2
+
+Charles Schwab - SCHW - 31.37
+Google - GOOG - 721.11
+Hillenbrand Inc - HI - 30.65
+Microsoft - MSFT - 53.24
+
+Please choose from the following
+1) Sort by Symbol
+2) Sort by Company Name
+3) Sort by Price
+4) Quit
+Choice --> 3
+
+Hillenbrand Inc - HI - 30.65
+Charles Schwab - SCHW - 31.37
+Microsoft - MSFT - 53.24
+Google - GOOG - 721.11
+
+Please choose from the following
+1) Sort by Symbol
+2) Sort by Company Name
+3) Sort by Price
+4) Quit
+Choice --> 4
+all done
+ssteiner@ubuntu-16:~/Dropbox/Lab2$ 
+
