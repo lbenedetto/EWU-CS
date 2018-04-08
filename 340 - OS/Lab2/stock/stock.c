@@ -1,4 +1,7 @@
 #include "stock.h"
+#include "../utils/fileUtils.h"
+#include "stdbool.h"
+#include "stdlib.h"
 
 /**
 * Build stock builds a Stock object by reading 3 lines from the file.  First line is the symbol,
@@ -13,7 +16,22 @@
 * @return void * Representing a Stock object filled with data
 */
 void *buildStock(FILE *fin) {
+    Stock *stock = calloc(1, sizeof(stock));
+    char buff[MAX];
 
+    fgets(buff, MAX, fin);
+    char *str1 = calloc(strlen(buff) + 1, sizeof(char));
+    strncpy(str1, buff, strlen(buff) + 1);
+    stock->symbol = str1;
+
+    fgets(buff, MAX, fin);
+    char *str2 = calloc(strlen(buff) + 1, sizeof(char));
+    strncpy(str2, buff, strlen(buff) + 1);
+    stock->name = str2;
+
+    fscanf(fin, "%lf", &stock->price);
+    char c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
 
@@ -24,7 +42,7 @@ void *buildStock(FILE *fin) {
  */
 void printStock(void *ptr) {
     Stock *stock = (Stock *) ptr;
-    printf("%s - %s - %d", stock->name, stock->symbol, stock->price);
+    printf("%s - %s - %f", stock->name, stock->symbol, stock->price);
 }
 
 
@@ -95,5 +113,5 @@ int compareNames(const void *s1, const void *s2) {
 int comparePrices(const void *s1, const void *s2) {
     Stock *stock1 = (Stock *) s1;
     Stock *stock2 = (Stock *) s2;
-    return ((stock1->price) - 100) - ((stock2->symbol) - 100);
+    return ((stock1->price) - 100) - ((stock2->price) - 100);
 }

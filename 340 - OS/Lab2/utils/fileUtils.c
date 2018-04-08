@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include "stdlib.h"
+
 /**
 * A function that asks the user for an input file name, tries to open that file, and ensures
 * that file is open before the file pointer is returned.
@@ -12,9 +14,9 @@ FILE *openInputFile_Prompt() {
     fgets(buf, 250, stdin);
     char *str = calloc(strlen(buf) + 1, sizeof(char));
     strncpy(str, buf, strlen(buf) + 1);
-    File *fp;
+    FILE *fp;
     fp = fopen(str, "r");
-    if(fp == NULL){
+    if (fp == NULL) {
         printf("Could not open file");
     }
 }
@@ -33,22 +35,22 @@ FILE *openInputFile_Prompt() {
  * @warning You must reset/rewind the file pointer before the function exits
  */
 int countRecords(FILE *fin, int linesPer) {
-    if(fin == NULL) exit(-99);
+    if (fin == NULL) exit(-99);
     int count = 0;
 
     //Read the entire file into a string
     fseek(fin, 0, SEEK_END);
-    long fsize = ftell(f);
+    long fsize = ftell(fin);
     fseek(fin, 0, SEEK_SET);
     char *str = calloc(fsize, sizeof(char));
-    fread(string, sizeof(char), fsize, fin);
+    fread(str, sizeof(char), fsize, fin);
     fseek(fin, 0, SEEK_SET);
 
     //Count the number of newlines
-    for(int i = 0; i < fsize; i++){
-        if(str[i] == '\n') count++;
+    for (int i = 0; i < fsize; i++) {
+        if (str[i] == '\n') count++;
     }
 
-    if(count == 0 || count % linesPer != 0) exit(-99);
+    if (count == 0 || count % linesPer != 0) exit(-99);
     return count % linesPer;
 }
