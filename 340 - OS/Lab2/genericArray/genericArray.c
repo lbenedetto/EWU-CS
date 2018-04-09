@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "genericArray.h"
 #include "../stock/stock.h"
+
 /**
  * The fillArray method, fills the array by reading a record from the file.
  *
@@ -11,7 +12,7 @@
  */
 GenericArray *fillArray(FILE *in, int length, void *(*buildType)(FILE *input)) {
     GenericArray *array = calloc(length, sizeof(GenericArray));
-    for(int i = 0; i < length; i++){
+    for (int i = 0; i < length; i++) {
         array[i].data = buildType(in);
     }
     return array;
@@ -26,8 +27,8 @@ GenericArray *fillArray(FILE *in, int length, void *(*buildType)(FILE *input)) {
  * @param length A pointer back to main for the length of the array
  * @param function pointer for print the contents of the void pointer -- note the function pointer is passed the void * data
  */
-void printArray(GenericArray * array, int length, void (*printType)(void *)){
-    for(int i = 0; i < length; i++){
+void printArray(GenericArray *array, int length, void (*printType)(void *)) {
+    for (int i = 0; i < length; i++) {
         printType(array[i].data);
     }
 }
@@ -59,15 +60,15 @@ void cleanArray(GenericArray *array, int length, void (*cleanType)(void *)) {
  * @param function pointer for comparing the data from the line if(compar(array[search], array[min]) < 0)
  */
 void sortArray(GenericArray *array, int length, int (*compar)(const void *v1, const void *v2)) {
-//    for (int i = 0; i < length; i++) {
-//        int min = 0;
-//        for (int search = i; search < length; search++) {
-//            if (compar((void *) &array[search], (void *) &array[min]) < 0) {
-//                GenericArray temp = array[min];
-//                array[min] = array[search];
-//                array[search] = array[min];
-//                min = search;
-//            }
-//        }
-//    }
+    for (int i = 0; i < length; i++) {
+        int min = 0;
+        for (int search = i; search < length; search++) {
+            if (compar((void *) array[search].data, (void *) array[min].data) < 0) {
+                GenericArray temp = array[min];
+                array[min] = array[search];
+                array[search] = temp;
+                min = search;
+            }
+        }
+    }
 }
