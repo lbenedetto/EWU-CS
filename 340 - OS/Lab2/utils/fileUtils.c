@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "stdlib.h"
+#include <stdio.h>
+#include "fileUtils.h"
 
 /**
 * A function that asks the user for an input file name, tries to open that file, and ensures
@@ -9,16 +11,20 @@
 * @return FILE * to the open input file
 */
 FILE *openInputFile_Prompt() {
-    printf("Please enter filename: ");
-    char buf[250];
-    fgets(buf, 250, stdin);
-    char *str = calloc(strlen(buf) + 1, sizeof(char));
-    strncpy(str, buf, strlen(buf) + 1);
-    FILE *fp;
-    fp = fopen(str, "r");
-    if (fp == NULL) {
-        printf("Could not open file");
-    }
+    FILE *fp = NULL;
+    do {
+        printf("Please enter filename: ");
+        char str[100];
+        int i;
+        fgets(str, 100, stdin);
+
+        i = strlen(str) - 1;
+        if (str[i] == '\n')
+            str[i] = '\0';
+
+        fp = fopen(str, "r");
+    } while (fp == NULL);
+    return fp;
 }
 
 
@@ -35,22 +41,20 @@ FILE *openInputFile_Prompt() {
  * @warning You must reset/rewind the file pointer before the function exits
  */
 int countRecords(FILE *fin, int linesPer) {
-    if (fin == NULL) exit(-99);
-    int count = 0;
-
-    //Read the entire file into a string
-    fseek(fin, 0, SEEK_END);
-    long fsize = ftell(fin);
-    fseek(fin, 0, SEEK_SET);
-    char *str = calloc(fsize, sizeof(char));
-    fread(str, sizeof(char), fsize, fin);
-    fseek(fin, 0, SEEK_SET);
-
-    //Count the number of newlines
-    for (int i = 0; i < fsize; i++) {
-        if (str[i] == '\n') count++;
+    if (fin == NULL) {
+        exit(-99);
     }
+    int lines = 0;
+    char ch;
 
-    if (count == 0 || count % linesPer != 0) exit(-99);
-    return count % linesPer;
+    fseek(fin, 0, SEEK_SET);
+
+    while (EOF != (ch = (char) fgetc(fin)))
+        if (ch == '\n')
+            lines++;
+
+    fseek(fin, 0, SEEK_SET);
+
+    if (lines == 0 || lines % linesPer != 0) exit(-99);
+    return lines / linesPer;
 }

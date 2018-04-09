@@ -2,6 +2,18 @@
 #include "../utils/fileUtils.h"
 #include "stdbool.h"
 #include "stdlib.h"
+#include <stdio.h>
+
+char *readLine(FILE *fin) {
+    char *str = NULL;
+    size_t size;
+    ssize_t chars = getline(&str, &size, fin);
+    if (str[chars - 1] == '\n') {
+        str[chars - 1] = '\0';
+        --chars;
+    }
+    return str;
+}
 
 /**
 * Build stock builds a Stock object by reading 3 lines from the file.  First line is the symbol,
@@ -16,22 +28,15 @@
 * @return void * Representing a Stock object filled with data
 */
 void *buildStock(FILE *fin) {
-    Stock *stock = calloc(1, sizeof(stock));
-    char buff[MAX];
+    Stock *stock = calloc(1, sizeof *stock);
 
-    fgets(buff, MAX, fin);
-    char *str1 = calloc(strlen(buff) + 1, sizeof(char));
-    strncpy(str1, buff, strlen(buff) + 1);
-    stock->symbol = str1;
+    stock->symbol = readLine(fin);
+    stock->name = readLine(fin);
+    char *temp = readLine(fin);
+    sscanf(temp, "%lf", &stock->price);
+    free(temp);
 
-    fgets(buff, MAX, fin);
-    char *str2 = calloc(strlen(buff) + 1, sizeof(char));
-    strncpy(str2, buff, strlen(buff) + 1);
-    stock->name = str2;
-
-    fscanf(fin, "%lf", &stock->price);
-    char c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    return (void *) stock;
 }
 
 
@@ -42,7 +47,7 @@ void *buildStock(FILE *fin) {
  */
 void printStock(void *ptr) {
     Stock *stock = (Stock *) ptr;
-    printf("%s - %s - %f", stock->name, stock->symbol, stock->price);
+    printf("%s - %s - %f\n", stock->name, stock->symbol, stock->price);
 }
 
 
