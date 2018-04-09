@@ -41,7 +41,8 @@
         android:layout_toLeftOf="@+id/dpadMid"
         android:layout_toStartOf="@+id/dpadMid"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/dpad_left" />
+        app:srcCompat="@drawable/dpad_left"
+        android:contentDescription="@string/d_pad_left" />
 
     <ImageView
         android:id="@+id/dpadUp"
