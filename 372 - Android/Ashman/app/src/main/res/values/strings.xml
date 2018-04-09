@@ -6,4 +6,5 @@
     <string name="level">Level = </string>
     <string name="instructions">Tap here to go/pause.\n To move, use dpad</string>
     <string name="cakes_left">"Cakes Left = "</string>
+    <string name="d_pad_left">D-Pad Left</string>
 </resources>

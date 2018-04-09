@@ -24,7 +24,7 @@ import android.widget.ImageView;
  * android:(etc)
  * />
  **/
-public class AspectRatioImageView extends ImageView {
+public class AspectRatioImageView extends android.support.v7.widget.AppCompatImageView {
     private float mAspectRatio;  // width divided by height
 
     public AspectRatioImageView(final Context context) {

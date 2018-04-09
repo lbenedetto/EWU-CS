@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,52 +23,24 @@ public class MainActivity extends AppCompatActivity implements CakeListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mazeView = (MazeView) findViewById(R.id.mazeView);
+        mazeView = findViewById(R.id.mazeView);
         mazeView.registerCakeListener(this);
-        ImageView dpadUp = (ImageView) findViewById(R.id.dpadUp);
-        ImageView dpadDown = (ImageView) findViewById(R.id.dpadDown);
-        ImageView dpadLeft = (ImageView) findViewById(R.id.dpadLeft);
-        ImageView dpadRight = (ImageView) findViewById(R.id.dpadRight);
-        dpadUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mazeView.setAshmanDirection(UP);
-            }
+        ImageView dpadUp = findViewById(R.id.dpadUp);
+        ImageView dpadDown = findViewById(R.id.dpadDown);
+        ImageView dpadLeft = findViewById(R.id.dpadLeft);
+        ImageView dpadRight = findViewById(R.id.dpadRight);
+        dpadUp.setOnClickListener(v -> mazeView.setAshmanDirection(UP));
+        dpadDown.setOnClickListener(v -> mazeView.setAshmanDirection(DOWN));
+        dpadLeft.setOnClickListener(v -> mazeView.setAshmanDirection(LEFT));
+        dpadRight.setOnClickListener(v -> mazeView.setAshmanDirection(RIGHT));
+        TextView startGame = findViewById(R.id.textViewInstructions);
+        startGame.setOnClickListener(v -> mazeView.pausePlay());
+        startGame.setOnLongClickListener(v -> {
+            mazeView.cheat();
+            return true;
         });
-        dpadDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mazeView.setAshmanDirection(DOWN);
-            }
-        });
-        dpadLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mazeView.setAshmanDirection(LEFT);
-            }
-        });
-        dpadRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mazeView.setAshmanDirection(RIGHT);
-            }
-        });
-        TextView startGame = (TextView) findViewById(R.id.textViewInstructions);
-        startGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mazeView.pausePlay();
-            }
-        });
-        startGame.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                mazeView.cheat();
-                return true;
-            }
-        });
-        textViewCakes = (TextView) findViewById(R.id.textViewCakesRemaining);
-        textViewLevel = (TextView) findViewById(R.id.textViewLevel);
+        textViewCakes = findViewById(R.id.textViewCakesRemaining);
+        textViewLevel = findViewById(R.id.textViewLevel);
         String s = getString(R.string.level) + " " + 1;
         textViewLevel.setText(s);
     }
