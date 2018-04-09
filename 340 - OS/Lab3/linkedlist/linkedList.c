@@ -9,7 +9,9 @@
  *
  * @return LinkedList * - The linked list pointer that contains a dummy head node but is not circular.
  */
-LinkedList * linkedList();
+LinkedList * linkedList(){
+
+}
 
 
 /**
@@ -23,7 +25,9 @@ LinkedList * linkedList();
  * @warning - The passed in LinkedList * theList is checked - exit(-99) if NULL
  * @warning - The passed in Node * nn is checked - exit(-99) if NULL
  */
-void addLast(LinkedList * theList, Node * nn);
+void addLast(LinkedList * theList, Node * nn){
+
+}
 
 
 /**
@@ -37,7 +41,9 @@ void addLast(LinkedList * theList, Node * nn);
  * @warning - The passed in LinkedList * theList is checked - exit(-99) if NULL
  * @warning - The passed in Node * nn is checked - exit(-99) if NULL
  */
-void addFirst(LinkedList * theList, Node * nn);
+void addFirst(LinkedList * theList, Node * nn){
+
+}
 
 
 /**
@@ -50,7 +56,9 @@ void addFirst(LinkedList * theList, Node * nn);
  *
  * @warning - The passed in LinkedList * theList is checked - exit(-99) if NULL
  */
-void removeFirst(LinkedList * theList, void (*removeData)(void *));
+void removeFirst(LinkedList * theList, void (*removeData)(void *)){
+
+}
 
 
 /**
@@ -63,7 +71,9 @@ void removeFirst(LinkedList * theList, void (*removeData)(void *));
  *
  * @warning - The passed in LinkedList * theList is checked - exit(-99) if NULL
  */
-void removeLast(LinkedList * theList, void (*removeData)(void *));
+void removeLast(LinkedList * theList, void (*removeData)(void *)){
+
+}
 
 
 /**
@@ -80,7 +90,9 @@ void removeLast(LinkedList * theList, void (*removeData)(void *));
  * @warning - The passed in LinkedList * theList is checked - exit(-99) if NULL
  * @warning - The passed in Node * nn is checked - exit(-99) if NULL
  */
-void removeItem(LinkedList * theList, Node * nn, void (*removeData)(void *), int (*compare)(const void *, const void *));
+void removeItem(LinkedList * theList, Node * nn, void (*removeData)(void *), int (*compare)(const void *, const void *)){
+
+}
 
 
 /**
@@ -94,7 +106,9 @@ void removeItem(LinkedList * theList, Node * nn, void (*removeData)(void *), int
  *
  * @warning - The passed in LinkedList * theList is checked - if NULL nothing happens
  */
-void clearList(LinkedList * theList, void (*removeData)(void *));
+void clearList(LinkedList * theList, void (*removeData)(void *)){
+
+}
 
 
 /**
@@ -108,4 +122,6 @@ void clearList(LinkedList * theList, void (*removeData)(void *));
  *
  * @warning - The passed in LinkedList * theList is checked - if NULL "Empty List" is printed
  */
-void printList(const LinkedList * theList, void (*convertData)(void *));
+void printList(const LinkedList * theList, void (*convertData)(void *)){
+
+}
