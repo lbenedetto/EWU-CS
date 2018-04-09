@@ -1,0 +1,31 @@
+skim specs
+
+installing gnuplot
+
+reviewing provided code files
+
+implement non-assignment specific functionality (file parsing). I find that writing any code on an assignment familiarized me with the project without risking implementing something wrong
+
+While implementing file parsing, have an epiphany and fully understand how the assignment should work. Begin coding in earnest.
+
+Write the interpolate function
+
+Solve 1D interpolation keeping in mind reusability for 2D and 3D interpolation
+
+Fix bugs
+
+Solve 2D interpolation by using the existing 1D interpolator
+
+Fix bugs
+
+Solve 3D interpolation by using the existing 2D interpolator
+
+Fix bugs
+
+By the time I got to Lookup3D, I had the overall structure worked out flawlessly, but I was having trouble figuring out which independant variables to pass into which methods. Took a few educated guesses to get it right.
+
+Spend some time messing with gnuplot trying to get it to animate the 3d layers over time instead of displaying them all at once. Get close, but ultimately give up
+
+Notice there is a lot of duplicate-ish code and decide to spend some time refactoring into a design pattern
+
+Code seems nice and slick, time to submit
