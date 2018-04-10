@@ -18,13 +18,12 @@ void cleanTypeMovie(void *ptr) {
     Movie *movie = (Movie *) ptr;
 
     free(movie->title);
-    free(movie->actors->first);
-    free(movie->actors->last);
-    free(movie->actors);
-
     movie->title = NULL;
+    free(movie->actors->first);
     movie->actors->first = NULL;
+    free(movie->actors->last);
     movie->actors->last = NULL;
+    free(movie->actors);
     movie->actors = NULL;
 
     free(movie);

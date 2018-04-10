@@ -1,8 +1,12 @@
 #include "linkedList.h"
+#include "../myInt/myInt.h"
 
-void deleteNode(Node *n, void (*removeData)(void *)) {
-    n->prev->next = n->next;
-    removeData(n);
+void deleteNode(Node *p, Node *d, Node *n, void (*removeData)(void *)) {
+    if (p != NULL) p->next = n;
+    if (n != NULL) n->prev = p;
+    d->next = NULL;
+    d->prev = NULL;
+    removeData(d->data);
 }
 
 void insertNode(Node *p, Node *new, Node *n) {
@@ -81,7 +85,8 @@ void addFirst(LinkedList *theList, Node *nn) {
  */
 void removeFirst(LinkedList *theList, void (*removeData)(void *)) {
     if (theList == NULL) exit(-99);
-    deleteNode(theList->head->next, removeData);
+    Node *h = theList->head;
+    deleteNode(h, h->next, h->next->next, removeData);
     theList->size--;
 }
 
@@ -102,7 +107,7 @@ void removeLast(LinkedList *theList, void (*removeData)(void *)) {
     for (int i = 0; i < theList->size; i++) {
         c = c->next;
     }
-    deleteNode(c, removeData);
+    deleteNode(c->prev, c, c->next, removeData);
     theList->size--;
 }
 
@@ -127,10 +132,11 @@ void removeItem(LinkedList *theList, Node *nn, void (*removeData)(void *), int (
     for (int i = 0; i < theList->size; i++) {
         c = c->next;
         if (compare(c->data, nn->data) == 0) {
-            deleteNode(c, removeData);
+            deleteNode(c->prev, c, c->next, removeData);
+            theList->size--;
+            return;
         }
     }
-    theList->size--;
 }
 
 
@@ -147,10 +153,8 @@ void removeItem(LinkedList *theList, Node *nn, void (*removeData)(void *), int (
  */
 void clearList(LinkedList *theList, void (*removeData)(void *)) {
     if (theList == NULL) return;
-    Node *c = theList->head;
     for (int i = 0; i < theList->size; i++) {
-        c = c->next;
-        deleteNode(c, removeData);
+        removeFirst(theList, removeData);
     }
     theList->size = 0;
 }
