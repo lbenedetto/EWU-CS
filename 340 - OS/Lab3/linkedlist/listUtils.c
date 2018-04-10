@@ -42,27 +42,16 @@ Node *buildNode_Type(void *passedIn) {
     return node;
 }
 
-/**
- * Inserts a node into the BST. For this purpose "prev" is "left" and "next" is "right"
- * @param root
- * @param thing
- * @param compare
- */
-Node *insert(Node *root, Node *thing, int (*compare)(const void *, const void *)) {
-    if (thing == NULL) return root;
-    if (compare(root->data, thing->data) <= 0)
-        root->next = insert(root->next, thing, compare);
-    else
-        root->prev = insert(root->prev, thing, compare);
-    return root;
-}
+void swap(Node *n1p, Node *n1, Node *n2, Node *n2n) {
+    //Ignore previous connections and just build new ones
+    n1p->next = n2;//n1p ->n2
+    n2->prev = n1p;//n1p<->n2
 
-void treeToList(Node *root, Node *curr) {
-    if (root != NULL) {
-        treeToList(root->prev, curr);
-        curr = root;
-        treeToList(root->next, curr->next);
-    }
+    n2->next = n1;//n1p<->n2 ->n1
+    n1->prev = n2;//n1p<->n2<->n1
+
+    n1->next = n2n;//n1p<->n2<->n1 ->n2n
+    if(n2n != NULL) n2n->prev = n1;//n1p<->n2<->n1<->n2n
 }
 
 /**
@@ -85,15 +74,19 @@ void sort(LinkedList *theList, int (*compare)(const void *, const void *)) {
     if (theList == NULL) exit(-99);
     if (theList->size < 2) return;
 
-    Node *root = NULL;//Root of tree
-
-    root = theList->head->next;
-    Node *curr;
-    for (int i = 1; i < theList->size; i++) {
-        curr = root->next;
-        insert(root, curr, compare);
-    }
-    treeToList(root, root);
+    Node *c = theList->head->next;
+    int swapped;
+    do {
+        swapped = 0;
+        while (c != NULL && c->next != NULL) {
+            if (compare(c->data, c->next->data) > 0) {
+                swap(c->prev, c, c->next, c->next->next);
+                swapped = 1;
+            }
+            c = c->next;
+        }
+        c = theList->head->next;
+    } while (swapped == 1);
 }
 
 
