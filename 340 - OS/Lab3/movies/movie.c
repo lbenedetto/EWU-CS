@@ -46,6 +46,7 @@ void cleanTypeMovie(void *ptr) {
  * @warning - The passed in FILE * fin is checked - exit(-99) if NULL
  */
 void *buildTypeMovie(FILE *fin) {
+    if(fin == NULL) exit(-99);
     Movie *movie = calloc(1, sizeof(*movie));
     movie->title = readLine(fin);
     readInt(fin, &movie->totalActors);
@@ -56,6 +57,7 @@ void *buildTypeMovie(FILE *fin) {
         movie->actors[i].first = strtok(line, " ");
         movie->actors[i].last = strtok(line, " ");
     }
+    return (void *) movie;
 }
 
 
@@ -73,6 +75,7 @@ void *buildTypeMovie(FILE *fin) {
  * @warning - The passed in void * passedIn is checked - exit(-99) if NULL
  */
 void printTypeMovie(void *passedIn) {
+    if(passedIn == NULL) exit(-99);
     Movie *m = (Movie *) passedIn;
     printf("%s\n", m->title);
     for (int i = 0; i < m->totalActors; i++) {
@@ -97,6 +100,7 @@ void printTypeMovie(void *passedIn) {
  * @warning - The passed in FILE * fin is checked - exit(-99) if NULL
  */
 void *buildTypeMovie_Prompt(FILE *fin) {
+    if(fin == NULL) exit(-99);
     Movie *movie = calloc(1, sizeof(*movie));
     printf("Enter movie title: ");
     movie->title = readLine(fin);
@@ -110,6 +114,7 @@ void *buildTypeMovie_Prompt(FILE *fin) {
         movie->actors[i].first = strtok(line, " ");
         movie->actors[i].last = strtok(line, " ");
     }
+    return (void *) movie;
 }
 
 

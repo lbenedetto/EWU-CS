@@ -4,7 +4,7 @@
  * @brief The so called "constructor" for the linked list
  *
  * The linked list constructor builds a non circular linked list that
- * contains a dummy head not.  This is meant to be similar to a Java
+ * contains a dummy head node.  This is meant to be similar to a Java
  * linked list constructor.
  *
  * @return LinkedList * - The linked list pointer that contains a dummy head node but is not circular.
