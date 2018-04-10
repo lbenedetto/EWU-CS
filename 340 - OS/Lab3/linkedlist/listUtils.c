@@ -120,6 +120,8 @@ void sort(LinkedList *theList, int (*compare)(const void *, const void *)) {
 void buildListTotal(LinkedList *myList, int total, FILE *fin, void *(*buildData)(FILE *in)) {
     if (myList == NULL || total <= 0) exit(-99);
     for (int i = 0; i < total; i++) {
-        addFirst(myList, buildData(fin));
+        Node *n = calloc(1, sizeof(Node));
+        n->data = buildData(fin);
+        addFirst(myList, n);
     }
 }

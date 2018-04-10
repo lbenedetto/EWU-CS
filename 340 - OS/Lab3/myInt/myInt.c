@@ -27,7 +27,7 @@ void *buildInt(FILE *stream) {
  */
 void printInt(void *ptr) {
     MyInt *myInt = (MyInt *) ptr;
-    printf("%d", myInt->value);
+    printf("%d\n", myInt->value);
 }
 
 

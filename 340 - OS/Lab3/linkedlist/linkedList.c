@@ -3,14 +3,13 @@
 void deleteNode(Node *n, void (*removeData)(void *)) {
     n->prev->next = n->next;
     removeData(n);
-    free(n);
 }
 
 void insertNode(Node *p, Node *new, Node *n) {
     new->prev = p;
     new->next = n;
     p->next = new;
-    n->prev = new;
+    if (n != NULL) n->prev = new;
 }
 
 /**
@@ -47,8 +46,8 @@ void addLast(LinkedList *theList, Node *nn) {
     for (int i = 0; i < theList->size; i++) {
         c = c->next;
     }
-    c->next = nn;
-    nn->prev = c;
+    insertNode(c, nn, NULL);
+    theList->size++;
 }
 
 
@@ -66,6 +65,7 @@ void addLast(LinkedList *theList, Node *nn) {
 void addFirst(LinkedList *theList, Node *nn) {
     if (theList == NULL || nn == NULL) exit(-99);
     insertNode(theList->head, nn, theList->head->next);
+    theList->size++;
 }
 
 
@@ -82,6 +82,7 @@ void addFirst(LinkedList *theList, Node *nn) {
 void removeFirst(LinkedList *theList, void (*removeData)(void *)) {
     if (theList == NULL) exit(-99);
     deleteNode(theList->head->next, removeData);
+    theList->size--;
 }
 
 
@@ -102,6 +103,7 @@ void removeLast(LinkedList *theList, void (*removeData)(void *)) {
         c = c->next;
     }
     deleteNode(c, removeData);
+    theList->size--;
 }
 
 
@@ -128,7 +130,7 @@ void removeItem(LinkedList *theList, Node *nn, void (*removeData)(void *), int (
             deleteNode(c, removeData);
         }
     }
-    theList->size = theList->size - 1;
+    theList->size--;
 }
 
 
