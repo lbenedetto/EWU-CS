@@ -27,7 +27,6 @@ FILE * openInputFileType_Prompt(char * type)
    fgets(temp, 100, stdin);
    strip(temp);
    FILE * fin = fopen(temp, "r");
-
    while(fin == NULL)
    {
       printf("Please enter the name of the input file ");
@@ -91,19 +90,3 @@ int readTotal(FILE * fin)
 	return total;
 
 }// end readTotal
-
-char *readLine(FILE *fin) {
-    char *str = NULL;
-    size_t size;
-    ssize_t chars = getline(&str, &size, fin);
-    if (str[chars - 1] == '\n') {
-        str[chars - 1] = '\0';
-    }
-    return str;
-}
-
-void readInt(FILE * fin, int* i){
-    char *temp = readLine(fin);
-    sscanf(temp, "%d", i);
-    free(temp);
-}

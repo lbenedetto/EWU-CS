@@ -1,6 +1,6 @@
 #include "myInt.h"
-#include "../utils/fileUtils.h"
 #include "stdlib.h"
+#include "../utils/myFileUtils.h"
 
 /**
  * The buildInt method receives the input stream (in this case stdin)<br>

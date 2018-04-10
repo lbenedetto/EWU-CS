@@ -1,5 +1,5 @@
 #include "movie.h"
-#include "../utils/fileUtils.h"
+#include "../utils/myFileUtils.h"
 
 /**
 * @brief Cleans up all dynamically allocated memory for the movie
