@@ -50,7 +50,7 @@ Node *buildNode_Type(void *passedIn) {
  */
 Node *insert(Node *root, Node *thing, int (*compare)(const void *, const void *)) {
     if (thing == NULL) return root;
-    if (compare(root, thing) <= 0)
+    if (compare(root->data, thing->data) <= 0)
         root->next = insert(root->next, thing, compare);
     else
         root->prev = insert(root->prev, thing, compare);
