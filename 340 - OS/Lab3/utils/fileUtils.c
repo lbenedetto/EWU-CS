@@ -101,3 +101,9 @@ char *readLine(FILE *fin) {
     }
     return str;
 }
+
+void readInt(FILE * fin, int* i){
+    char *temp = readLine(fin);
+    sscanf(temp, "%d", i);
+    free(temp);
+}

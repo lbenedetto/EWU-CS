@@ -1,4 +1,5 @@
 #include "movie.h"
+#include "../utils/fileUtils.h"
 
 /**
 * @brief Cleans up all dynamically allocated memory for the movie
@@ -12,8 +13,22 @@
 *
 * @warning - The passed in void * passedIn is checked - exit(-99) if NULL
 */
-void cleanTypeMovie(void *ptr){
+void cleanTypeMovie(void *ptr) {
+    if (ptr == NULL) exit(-99);
+    Movie *movie = (Movie *) ptr;
 
+    free(movie->title);
+    free(movie->actors->first);
+    free(movie->actors->last);
+    free(movie->actors);
+
+    movie->title = NULL;
+    movie->actors->first = NULL;
+    movie->actors->last = NULL;
+    movie->actors = NULL;
+
+    free(movie);
+    movie = NULL;
 }
 
 
@@ -30,8 +45,17 @@ void cleanTypeMovie(void *ptr){
  *
  * @warning - The passed in FILE * fin is checked - exit(-99) if NULL
  */
-void *buildTypeMovie(FILE *fin){
-
+void *buildTypeMovie(FILE *fin) {
+    Movie *movie = calloc(1, sizeof(*movie));
+    movie->title = readLine(fin);
+    readInt(fin, &movie->totalActors);
+    //movie->actors = (Actor *) calloc(movie->totalActors, sizeof(Actor));//Parameter type mismatch: using size_t for signed values of type int
+    movie->actors = (Actor *) malloc(movie->totalActors * sizeof(Actor));
+    for (int i = 0; i < movie->totalActors; i++) {
+        char *line = readLine(fin);
+        movie->actors[i].first = strtok(line, " ");
+        movie->actors[i].last = strtok(line, " ");
+    }
 }
 
 
@@ -48,8 +72,14 @@ void *buildTypeMovie(FILE *fin){
  *
  * @warning - The passed in void * passedIn is checked - exit(-99) if NULL
  */
-void printTypeMovie(void *passedIn){
-
+void printTypeMovie(void *passedIn) {
+    Movie *m = (Movie *) passedIn;
+    printf("%s\n", m->title);
+    for (int i = 0; i < m->totalActors; i++) {
+        printf("%s %s", m->actors[i].first, m->actors[i].last);
+        if (i - 1 == m->totalActors) printf(",");
+        else printf("\n");
+    }
 }
 
 
@@ -66,8 +96,20 @@ void printTypeMovie(void *passedIn){
  *
  * @warning - The passed in FILE * fin is checked - exit(-99) if NULL
  */
-void *buildTypeMovie_Prompt(FILE *fin){
-
+void *buildTypeMovie_Prompt(FILE *fin) {
+    Movie *movie = calloc(1, sizeof(*movie));
+    printf("Enter movie title: ");
+    movie->title = readLine(fin);
+    printf("Enter number of actors: ");
+    readInt(fin, &movie->totalActors);
+    //movie->actors = (Actor *) calloc(movie->totalActors, sizeof(Actor));//Parameter type mismatch: using size_t for signed values of type int
+    movie->actors = (Actor *) malloc(movie->totalActors * sizeof(Actor));
+    for (int i = 0; i < movie->totalActors; i++) {
+        printf("Enter actor #%d: ", i + 1);
+        char *line = readLine(fin);
+        movie->actors[i].first = strtok(line, " ");
+        movie->actors[i].last = strtok(line, " ");
+    }
 }
 
 
@@ -86,6 +128,12 @@ void *buildTypeMovie_Prompt(FILE *fin){
  * @warning - The passed in void * p1 is checked - exit(-99) if NULL
  * @warning - The passed in void * p2 is checked - exit(-99) if NULL
  */
-int compareMovie(const void *p1, const void *p2){
-
+int compareMovie(const void *p1, const void *p2) {
+    if (p1 == NULL || p2 == NULL) exit(-99);
+    Movie *m1 = (Movie *) p1;
+    Movie *m2 = (Movie *) p2;
+    int i = strcmp(m1->title, m2->title);
+    if (i == 0)
+        i = m1->totalActors - m2->totalActors;
+    return i;
 }

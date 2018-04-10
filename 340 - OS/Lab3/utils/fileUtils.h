@@ -80,4 +80,12 @@ int readTotal(FILE * fin);
  * @return string
  */
 char *readLine(FILE *fin);
+
+/**
+ * Reads a line and converts it to an int
+ * @param fin input file
+ * @param i address to store int in
+ * @return
+ */
+void readInt(FILE *fin, int* i);
 #endif // FILEUTIL_H

@@ -16,9 +16,7 @@
 void *buildInt(FILE *stream) {
     MyInt *myInt = calloc(1, sizeof *myInt);
     printf("Enter an integer: ");
-    char *temp = readLine(stream);
-    sscanf(temp, "%d", &myInt->value);
-    free(temp);
+    readInt(stream, &myInt->value);
     return (void *) myInt;
 }
 
