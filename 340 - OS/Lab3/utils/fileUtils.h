@@ -74,4 +74,10 @@ int countRecords(FILE * fin, int linesPerRecord);
  */
 int readTotal(FILE * fin);
 
+/**
+ * Reads a single line of input from specified input
+ * @param fin input file
+ * @return string
+ */
+char *readLine(FILE *fin);
 #endif // FILEUTIL_H

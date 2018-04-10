@@ -92,4 +92,12 @@ int readTotal(FILE * fin)
 
 }// end readTotal
 
-
+char *readLine(FILE *fin) {
+    char *str = NULL;
+    size_t size;
+    ssize_t chars = getline(&str, &size, fin);
+    if (str[chars - 1] == '\n') {
+        str[chars - 1] = '\0';
+    }
+    return str;
+}
