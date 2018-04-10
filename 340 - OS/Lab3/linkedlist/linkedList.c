@@ -176,9 +176,11 @@ void printList(const LinkedList *theList, void (*convertData)(void *)) {
         printf("Empty List\n");
         return;
     }
+    printf("\n");
     Node *c = theList->head;
     for (int i = 0; i < theList->size; i++) {
         c = c->next;
         convertData(c->data);
     }
+    printf("\n");
 }

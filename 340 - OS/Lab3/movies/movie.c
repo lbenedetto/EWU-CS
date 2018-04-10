@@ -54,7 +54,7 @@ void *buildTypeMovie(FILE *fin) {
     for (int i = 0; i < movie->totalActors; i++) {
         char *line = readLine(fin);
         movie->actors[i].first = strtok(line, " ");
-        movie->actors[i].last = strtok(line, " ");
+        movie->actors[i].last = strtok(NULL, " ");
     }
     return (void *) movie;
 }
@@ -78,7 +78,7 @@ void printTypeMovie(void *passedIn) {
     Movie *m = (Movie *) passedIn;
     printf("%s\n", m->title);
     for (int i = 0; i < m->totalActors; i++) {
-        printf("%s %s", m->actors[i].first, m->actors[i].last);
+        printf("\t%s %s", m->actors[i].first, m->actors[i].last);
         if (i - 1 == m->totalActors) printf(",");
         else printf("\n");
     }
