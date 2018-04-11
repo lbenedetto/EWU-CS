@@ -1,6 +1,24 @@
 #include "movie.h"
 #include "../utils/myFileUtils.h"
 
+void *buildTypeMovieBoth(FILE *fin, int prompt) {
+	if (fin == NULL) exit(-99);
+	Movie *movie = calloc(1, sizeof(*movie));
+	if (prompt) printf("Enter movie title: ");
+	movie->title = readLine(fin);
+	if (prompt) printf("Enter number of actors: ");
+	readInt(fin, &movie->totalActors);
+	//movie->actors = (Actor *) calloc(movie->totalActors, sizeof(Actor));//Parameter type mismatch: using size_t for signed values of type int
+	movie->actors = (Actor *) malloc(movie->totalActors * sizeof(Actor));
+	for (int i = 0; i < movie->totalActors; i++) {
+		if (prompt) printf("Enter actor #%d: ", i + 1);
+		char *line = readLine(fin);
+		movie->actors[i].first = strtok(line, " ");
+		movie->actors[i].last = strtok(NULL, " ");
+	}
+	return (void *) movie;
+}
+
 /**
 * @brief Cleans up all dynamically allocated memory for the movie
 *
@@ -47,18 +65,7 @@ void cleanTypeMovie(void *ptr) {
  * @warning - The passed in FILE * fin is checked - exit(-99) if NULL
  */
 void *buildTypeMovie(FILE *fin) {
-	if (fin == NULL) exit(-99);
-	Movie *movie = calloc(1, sizeof(*movie));
-	movie->title = readLine(fin);
-	readInt(fin, &movie->totalActors);
-	//movie->actors = (Actor *) calloc(movie->totalActors, sizeof(Actor));//Parameter type mismatch: using size_t for signed values of type int
-	movie->actors = (Actor *) malloc(movie->totalActors * sizeof(Actor));
-	for (int i = 0; i < movie->totalActors; i++) {
-		char *line = readLine(fin);
-		movie->actors[i].first = strtok(line, " ");
-		movie->actors[i].last = strtok(NULL, " ");
-	}
-	return (void *) movie;
+	return buildTypeMovieBoth(fin, 0);
 }
 
 
@@ -101,21 +108,7 @@ void printTypeMovie(void *passedIn) {
  * @warning - The passed in FILE * fin is checked - exit(-99) if NULL
  */
 void *buildTypeMovie_Prompt(FILE *fin) {
-	if (fin == NULL) exit(-99);
-	Movie *movie = calloc(1, sizeof(*movie));
-	printf("Enter movie title: ");
-	movie->title = readLine(fin);
-	printf("Enter number of actors: ");
-	readInt(fin, &movie->totalActors);
-	//movie->actors = (Actor *) calloc(movie->totalActors, sizeof(Actor));//Parameter type mismatch: using size_t for signed values of type int
-	movie->actors = (Actor *) malloc(movie->totalActors * sizeof(Actor));
-	for (int i = 0; i < movie->totalActors; i++) {
-		printf("Enter actor #%d: ", i + 1);
-		char *line = readLine(fin);
-		movie->actors[i].first = strtok(line, " ");
-		movie->actors[i].last = strtok(line, " ");
-	}
-	return (void *) movie;
+	return buildTypeMovieBoth(fin, 1);
 }
 
 
