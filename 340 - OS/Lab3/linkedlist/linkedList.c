@@ -135,9 +135,11 @@ void removeItem(LinkedList *theList, Node *nn, void (*removeData)(void *), int (
 		if (compare(c->data, nn->data) == 0) {
 			deleteNode(c->prev, c, c->next, removeData);
 			theList->size--;
-			return;
+			break;
 		}
 	}
+	removeData(nn->data);
+	free(nn);
 }
 
 
