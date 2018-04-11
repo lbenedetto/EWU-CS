@@ -19,12 +19,12 @@
 
 #define MAX 100
 
-Node * buildNode(FILE * fin, void *(*buildData)(FILE * in) );
+Node *buildNode(FILE *fin, void *(*buildData)(FILE *in));
 
-Node * buildNode_Type(void * passedIn);
+Node *buildNode_Type(void *passedIn);
 
-void sort(LinkedList * theList, int (*compare)(const void *, const void *));
+void sort(LinkedList *theList, int (*compare)(const void *, const void *));
 
-void buildListTotal(LinkedList * myList, int total, FILE * fin, void * (*buildData)(FILE * in));
+void buildListTotal(LinkedList *myList, int total, FILE *fin, void *(*buildData)(FILE *in));
 
 #endif // LISTUTILS_H

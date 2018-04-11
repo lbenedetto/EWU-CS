@@ -2,18 +2,19 @@
 #include "../myInt/myInt.h"
 
 void deleteNode(Node *p, Node *d, Node *n, void (*removeData)(void *)) {
-    if (p != NULL) p->next = n;
-    if (n != NULL) n->prev = p;
-    d->next = NULL;
-    d->prev = NULL;
-    removeData(d->data);
+	if (p != NULL) p->next = n;
+	if (n != NULL) n->prev = p;
+	d->next = NULL;
+	d->prev = NULL;
+	removeData(d->data);
+	free(d);
 }
 
 void insertNode(Node *p, Node *new, Node *n) {
-    new->prev = p;
-    new->next = n;
-    p->next = new;
-    if (n != NULL) n->prev = new;
+	new->prev = p;
+	new->next = n;
+	p->next = new;
+	if (n != NULL) n->prev = new;
 }
 
 /**
@@ -26,10 +27,10 @@ void insertNode(Node *p, Node *new, Node *n) {
  * @return LinkedList * - The linked list pointer that contains a dummy head node but is not circular.
  */
 LinkedList *linkedList() {
-    LinkedList *ll = calloc(1, sizeof(LinkedList));
-    ll->size = 0;
-    ll->head = calloc(1, sizeof(Node));
-    return ll;
+	LinkedList *ll = calloc(1, sizeof(LinkedList));
+	ll->size = 0;
+	ll->head = calloc(1, sizeof(Node));
+	return ll;
 }
 
 
@@ -45,13 +46,13 @@ LinkedList *linkedList() {
  * @warning - The passed in Node * nn is checked - exit(-99) if NULL
  */
 void addLast(LinkedList *theList, Node *nn) {
-    if (theList == NULL || nn == NULL) exit(-99);
-    Node *c = theList->head;
-    for (int i = 0; i < theList->size; i++) {
-        c = c->next;
-    }
-    insertNode(c, nn, NULL);
-    theList->size++;
+	if (theList == NULL || nn == NULL) exit(-99);
+	Node *c = theList->head;
+	for (int i = 0; i < theList->size; i++) {
+		c = c->next;
+	}
+	insertNode(c, nn, NULL);
+	theList->size++;
 }
 
 
@@ -67,9 +68,9 @@ void addLast(LinkedList *theList, Node *nn) {
  * @warning - The passed in Node * nn is checked - exit(-99) if NULL
  */
 void addFirst(LinkedList *theList, Node *nn) {
-    if (theList == NULL || nn == NULL) exit(-99);
-    insertNode(theList->head, nn, theList->head->next);
-    theList->size++;
+	if (theList == NULL || nn == NULL) exit(-99);
+	insertNode(theList->head, nn, theList->head->next);
+	theList->size++;
 }
 
 
@@ -84,10 +85,10 @@ void addFirst(LinkedList *theList, Node *nn) {
  * @warning - The passed in LinkedList * theList is checked - exit(-99) if NULL
  */
 void removeFirst(LinkedList *theList, void (*removeData)(void *)) {
-    if (theList == NULL) exit(-99);
-    Node *h = theList->head;
-    deleteNode(h, h->next, h->next->next, removeData);
-    theList->size--;
+	if (theList == NULL) exit(-99);
+	Node *h = theList->head;
+	deleteNode(h, h->next, h->next->next, removeData);
+	theList->size--;
 }
 
 
@@ -102,13 +103,13 @@ void removeFirst(LinkedList *theList, void (*removeData)(void *)) {
  * @warning - The passed in LinkedList * theList is checked - exit(-99) if NULL
  */
 void removeLast(LinkedList *theList, void (*removeData)(void *)) {
-    if (theList == NULL) exit(-99);
-    Node *c = theList->head;
-    for (int i = 0; i < theList->size; i++) {
-        c = c->next;
-    }
-    deleteNode(c->prev, c, c->next, removeData);
-    theList->size--;
+	if (theList == NULL) exit(-99);
+	Node *c = theList->head;
+	for (int i = 0; i < theList->size; i++) {
+		c = c->next;
+	}
+	deleteNode(c->prev, c, c->next, removeData);
+	theList->size--;
 }
 
 
@@ -127,16 +128,16 @@ void removeLast(LinkedList *theList, void (*removeData)(void *)) {
  * @warning - The passed in Node * nn is checked - exit(-99) if NULL
  */
 void removeItem(LinkedList *theList, Node *nn, void (*removeData)(void *), int (*compare)(const void *, const void *)) {
-    if (theList == NULL || nn == NULL) exit(-99);
-    Node *c = theList->head;
-    for (int i = 0; i < theList->size; i++) {
-        c = c->next;
-        if (compare(c->data, nn->data) == 0) {
-            deleteNode(c->prev, c, c->next, removeData);
-            theList->size--;
-            return;
-        }
-    }
+	if (theList == NULL || nn == NULL) exit(-99);
+	Node *c = theList->head;
+	for (int i = 0; i < theList->size; i++) {
+		c = c->next;
+		if (compare(c->data, nn->data) == 0) {
+			deleteNode(c->prev, c, c->next, removeData);
+			theList->size--;
+			return;
+		}
+	}
 }
 
 
@@ -152,11 +153,11 @@ void removeItem(LinkedList *theList, Node *nn, void (*removeData)(void *), int (
  * @warning - The passed in LinkedList * theList is checked - if NULL nothing happens
  */
 void clearList(LinkedList *theList, void (*removeData)(void *)) {
-    if (theList == NULL) return;
-    for (int i = 0; i < theList->size; i++) {
-        removeFirst(theList, removeData);
-    }
-    theList->size = 0;
+	if (theList == NULL) return;
+	for (int i = 0; i < theList->size; i++) {
+		removeFirst(theList, removeData);
+	}
+	theList->size = 0;
 }
 
 
@@ -172,15 +173,15 @@ void clearList(LinkedList *theList, void (*removeData)(void *)) {
  * @warning - The passed in LinkedList * theList is checked - if NULL "Empty List" is printed
  */
 void printList(const LinkedList *theList, void (*convertData)(void *)) {
-    if (theList == NULL) {
-        printf("Empty List\n");
-        return;
-    }
-    printf("\n");
-    Node *c = theList->head;
-    for (int i = 0; i < theList->size; i++) {
-        c = c->next;
-        convertData(c->data);
-    }
-    printf("\n");
+	if (theList == NULL) {
+		printf("Empty List\n");
+		return;
+	}
+	printf("\n");
+	Node *c = theList->head;
+	for (int i = 0; i < theList->size; i++) {
+		c = c->next;
+		convertData(c->data);
+	}
+	printf("\n");
 }

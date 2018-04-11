@@ -19,9 +19,9 @@
  * @warning - Since FILE *fin is a pass through it is not checked.
  */
 Node *buildNode(FILE *fin, void *(*buildData)(FILE *in)) {
-    Node *node = calloc(1, sizeof(Node));
-    node->data = buildData(fin);
-    return node;
+	Node *node = calloc(1, sizeof(Node));
+	node->data = buildData(fin);
+	return node;
 }
 
 
@@ -37,21 +37,21 @@ Node *buildNode(FILE *fin, void *(*buildData)(FILE *in)) {
  * @return Node * - Representing a node for the linked list containing the specific data type.
  */
 Node *buildNode_Type(void *passedIn) {
-    Node *node = calloc(1, sizeof(Node));
-    node->data = passedIn;
-    return node;
+	Node *node = calloc(1, sizeof(Node));
+	node->data = passedIn;
+	return node;
 }
 
 void swap(Node *n1p, Node *n1, Node *n2, Node *n2n) {
-    //Ignore previous connections and just build new ones
-    n1p->next = n2;//n1p ->n2
-    n2->prev = n1p;//n1p<->n2
+	//Ignore previous connections and just build new ones
+	n1p->next = n2;//n1p ->n2
+	n2->prev = n1p;//n1p<->n2
 
-    n2->next = n1;//n1p<->n2 ->n1
-    n1->prev = n2;//n1p<->n2<->n1
+	n2->next = n1;//n1p<->n2 ->n1
+	n1->prev = n2;//n1p<->n2<->n1
 
-    n1->next = n2n;//n1p<->n2<->n1 ->n2n
-    if(n2n != NULL) n2n->prev = n1;//n1p<->n2<->n1<->n2n
+	n1->next = n2n;//n1p<->n2<->n1 ->n2n
+	if (n2n != NULL) n2n->prev = n1;//n1p<->n2<->n1<->n2n
 }
 
 /**
@@ -71,22 +71,22 @@ void swap(Node *n1p, Node *n1, Node *n2, Node *n2n) {
  * @note uses TreeSort
  */
 void sort(LinkedList *theList, int (*compare)(const void *, const void *)) {
-    if (theList == NULL) exit(-99);
-    if (theList->size < 2) return;
+	if (theList == NULL) exit(-99);
+	if (theList->size < 2) return;
 
-    Node *c = theList->head->next;
-    int swapped;
-    do {
-        swapped = 0;
-        while (c != NULL && c->next != NULL) {
-            if (compare(c->data, c->next->data) > 0) {
-                swap(c->prev, c, c->next, c->next->next);
-                swapped = 1;
-            }
-            c = c->next;
-        }
-        c = theList->head->next;
-    } while (swapped == 1);
+	Node *c = theList->head->next;
+	int swapped;
+	do {
+		swapped = 0;
+		while (c != NULL && c->next != NULL) {
+			if (compare(c->data, c->next->data) > 0) {
+				swap(c->prev, c, c->next, c->next->next);
+				swapped = 1;
+			}
+			c = c->next;
+		}
+		c = theList->head->next;
+	} while (swapped == 1);
 }
 
 
@@ -111,10 +111,10 @@ void sort(LinkedList *theList, int (*compare)(const void *, const void *)) {
  * @warning - Since FILE *fin is a pass through it is not checked.
  */
 void buildListTotal(LinkedList *myList, int total, FILE *fin, void *(*buildData)(FILE *in)) {
-    if (myList == NULL || total <= 0) exit(-99);
-    for (int i = 0; i < total; i++) {
-        Node *n = calloc(1, sizeof(Node));
-        n->data = buildData(fin);
-        addFirst(myList, n);
-    }
+	if (myList == NULL || total <= 0) exit(-99);
+	for (int i = 0; i < total; i++) {
+		Node *n = calloc(1, sizeof(Node));
+		n->data = buildData(fin);
+		addFirst(myList, n);
+	}
 }

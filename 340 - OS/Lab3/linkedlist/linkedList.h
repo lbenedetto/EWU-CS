@@ -22,11 +22,10 @@
  *
  * @note I prefer named structures and then the typedef after the structure
  */
-struct node
-{
-    void * data;
-    struct node * next;
-    struct node * prev;
+struct node {
+	void *data;
+	struct node *next;
+	struct node *prev;
 };
 typedef struct node Node;
 
@@ -41,27 +40,26 @@ typedef struct node Node;
  * @note In true C fashion the structures will not contain function prototypes
  * or function pointer prototypes.
  */
-struct linkedlist
-{
-    Node * head;
-    int size;
+struct linkedlist {
+	Node *head;
+	int size;
 };
 typedef struct linkedlist LinkedList;
 
-LinkedList * linkedList();
+LinkedList *linkedList();
 
-void addLast(LinkedList * theList, Node * nn);
+void addLast(LinkedList *theList, Node *nn);
 
-void addFirst(LinkedList * theList, Node * nn);
+void addFirst(LinkedList *theList, Node *nn);
 
-void removeFirst(LinkedList * theList, void (*removeData)(void *));
+void removeFirst(LinkedList *theList, void (*removeData)(void *));
 
-void removeLast(LinkedList * theList, void (*removeData)(void *));
+void removeLast(LinkedList *theList, void (*removeData)(void *));
 
-void removeItem(LinkedList * theList, Node * nn, void (*removeData)(void *), int (*compare)(const void *, const void *));
+void removeItem(LinkedList *theList, Node *nn, void (*removeData)(void *), int (*compare)(const void *, const void *));
 
-void clearList(LinkedList * theList, void (*removeData)(void *));
+void clearList(LinkedList *theList, void (*removeData)(void *));
 
-void printList(const LinkedList * theList, void (*convertData)(void *));
+void printList(const LinkedList *theList, void (*convertData)(void *));
 
 #endif // LINKEDLIST_H

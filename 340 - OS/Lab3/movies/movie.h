@@ -21,9 +21,9 @@
  * @note I prefer named structures and then the typedef after the structure
  */
 struct movie {
-    Actor *actors;
-    int totalActors;
-    char *title;
+	Actor *actors;
+	int totalActors;
+	char *title;
 };
 
 typedef struct movie Movie;

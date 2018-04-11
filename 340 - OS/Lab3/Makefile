@@ -7,7 +7,7 @@ MAIN = ./cscd340Lab3.c
 INTS = ./myInt/myInt.o
 MOVIES = ./movies/movie.o
 
-UTILS= ./utils/myUtils.o ./utils/fileUtils.o
+UTILS= ./utils/myUtils.o ./utils/fileUtils.o ./utils/myFileUtils.o
 LINKEDLIST = ./linkedlist/linkedList.o ./linkedlist/listUtils.o 
 
 ${EXE}:	${UTILS} ${INTS} ${MOVIES} ${LINKEDLIST}  ${MAIN}
@@ -28,6 +28,9 @@ myUtils.o:	./utils/myUtils.h ./utils/myUtils.c
 
 fileUtils.o:	./utils/fileUtils.h ./utils/fileUtils.c
 	gcc ${FLAGS} ./utils/fileUtil.c
+
+myFileUtils.o: ./utils/myFileUtils.h ./utils/myFileUtils.c
+	gcc ${FLAGS} ./utils/myFileUtils.c
 
 #==============================================================================================================================
 

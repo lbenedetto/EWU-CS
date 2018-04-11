@@ -18,8 +18,7 @@
  *
  * @note I prefer named structures and then the typedef after the structure
  */
-struct actor
-{
+struct actor {
 	char *first;
 	char *last;
 };

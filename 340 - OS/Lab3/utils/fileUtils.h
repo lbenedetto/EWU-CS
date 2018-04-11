@@ -24,7 +24,7 @@
  *
  * @return FILE * - Representing the open file
  */
-FILE * openInputFile_Prompt();
+FILE *openInputFile_Prompt();
 
 /**
  * @brief Prompts the user for the name of the supplied type for the input file and attempts to open that file.
@@ -38,7 +38,7 @@ FILE * openInputFile_Prompt();
  * @param type - The char * for the type
  * @return FILE * - Representing the open file
  */
-FILE * openInputFileType_Prompt(char * type);
+FILE *openInputFileType_Prompt(char *type);
 
 /**
  * @brief Counts the number of records that are in the file.
@@ -56,7 +56,7 @@ FILE * openInputFileType_Prompt(char * type);
  * @warning - The passed in int linesPerRecord is checked - exit(-99) if <= 0
  * @warning - If count is 0 the program is ended with a -99 status
  */
-int countRecords(FILE * fin, int linesPerRecord);
+int countRecords(FILE *fin, int linesPerRecord);
 
 /**
  * @brief Reads the number of records from the file
@@ -72,6 +72,6 @@ int countRecords(FILE * fin, int linesPerRecord);
  * @warning - The passed in FILE * fin is checked - exit(-99) if NULL
  * @warning - The number of records read from the file is checked - exit(-99) if <= 0
  */
-int readTotal(FILE * fin);
+int readTotal(FILE *fin);
 
 #endif // FILEUTIL_H

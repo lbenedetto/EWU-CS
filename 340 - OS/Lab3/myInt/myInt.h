@@ -15,7 +15,7 @@
  * The named structure my_int that holds a single integer named value
 */
 struct my_int {
-    int value;
+	int value;
 };
 
 

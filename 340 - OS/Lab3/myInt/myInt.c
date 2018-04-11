@@ -14,10 +14,10 @@
  * @warning Please ensure you leave the input buffer empty
  */
 void *buildInt(FILE *stream) {
-    MyInt *myInt = calloc(1, sizeof *myInt);
-    printf("Enter an integer: ");
-    readInt(stream, &myInt->value);
-    return (void *) myInt;
+	MyInt *myInt = calloc(1, sizeof *myInt);
+	printf("Enter an integer: ");
+	readInt(stream, &myInt->value);
+	return (void *) myInt;
 }
 
 /**
@@ -26,8 +26,8 @@ void *buildInt(FILE *stream) {
  * 2) Prints to the screen Int - and the value extracted from the cast MyInt *
  */
 void printInt(void *ptr) {
-    MyInt *myInt = (MyInt *) ptr;
-    printf("%d\n", myInt->value);
+	MyInt *myInt = (MyInt *) ptr;
+	printf("%d\n", myInt->value);
 }
 
 
@@ -39,9 +39,9 @@ void printInt(void *ptr) {
  * @warning All pointers need to be set to NULL after they are freed
  */
 void cleanInt(void *ptr) {
-    MyInt *myInt = (MyInt *) ptr;
-    free(myInt);
-    myInt = NULL;
+	MyInt *myInt = (MyInt *) ptr;
+	free(myInt);
+	myInt = NULL;
 }
 
 
@@ -61,8 +61,8 @@ void cleanInt(void *ptr) {
  * @warning - The passed in void * p2 is checked - exit(-99) if NULL
  */
 int compareInt(const void *p1, const void *p2) {
-    if (p1 == NULL || p2 == NULL) exit(-99);
-    MyInt *i1 = (MyInt *) p1;
-    MyInt *i2 = (MyInt *) p2;
-    return i1->value - i2->value;
+	if (p1 == NULL || p2 == NULL) exit(-99);
+	MyInt *i1 = (MyInt *) p1;
+	MyInt *i2 = (MyInt *) p2;
+	return i1->value - i2->value;
 }
