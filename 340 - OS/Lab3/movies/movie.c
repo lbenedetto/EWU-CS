@@ -19,14 +19,16 @@ void cleanTypeMovie(void *ptr) {
 
 	free(movie->title);
 	movie->title = NULL;
-	free(movie->actors->first);
-	movie->actors->first = NULL;
-	free(movie->actors->last);
-	movie->actors->last = NULL;
+	for (int i = 0; i < movie->totalActors; i++) {
+		free(movie->actors[i].first);//Since this was made with strtok, first and last are both freed with this one call
+		movie->actors[i].first = NULL;
+		movie->actors[i].last = NULL;
+	}
 	free(movie->actors);
 	movie->actors = NULL;
 
-	free(movie);
+	free(ptr);
+	ptr = NULL;
 	movie = NULL;
 }
 

@@ -154,9 +154,11 @@ void removeItem(LinkedList *theList, Node *nn, void (*removeData)(void *), int (
  */
 void clearList(LinkedList *theList, void (*removeData)(void *)) {
 	if (theList == NULL) return;
-	for (int i = 0; i < theList->size; i++) {
+	int size = theList->size;
+	for (int i = 0; i < size; i++) {
 		removeFirst(theList, removeData);
 	}
+	free(theList->head);
 	theList->size = 0;
 }
 
