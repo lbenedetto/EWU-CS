@@ -1,0 +1,4 @@
+/home/lars/Software/apps/CLion/ch-0/181.4203.549/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/home/lars/Programming/EWU-CS/340 - OS/Lab4"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/lars/Programming/EWU-CS/340 - OS/Lab4/cmake-build-debug
