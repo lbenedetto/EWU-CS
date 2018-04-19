@@ -18,18 +18,23 @@ void printargs(int argc, char **argv) {
 }// end printargs
 
 int makeargs(char *s, char ***argv) {
-	int size = countSpaces(s);
-	argv[0] = malloc(size * sizeof(char **));
 	const char t = ' ';
 	char *token;
+	char *save = s;
 	int i = 0;
+
+	/* make some room */
+	int size = countSpaces(s);
+	argv[0] = malloc(size * sizeof(char **));
+	if(!argv[0]) return -1;
+
 	/* get the first token */
-	token = strtok(s, &t);
+	token = strtok_r(save, &t, &save);
 
 	/* walk through other tokens */
 	while (token != NULL) {
 		argv[0][i] = token;
-		token = strtok(NULL, &t);
+		token = strtok_r(save, &t, &save);
 		i++;
 	}
 	return i;
