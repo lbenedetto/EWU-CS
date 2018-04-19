@@ -1,9 +1,23 @@
 #include "makeArgs.h"
 
-int countSpaces(char * s){
+#define bool int
+#define false 0
+#define true 1
+
+int countTokens(char *s) {
 	int size;
-	for (size=1; s[size]; s[size]==' ' ? size++ : *s++);
-	return size;
+	bool lastWasChar = false;
+	for (size = 0; s[size];) {
+		if (s[size] == ' ') {
+			lastWasChar ? size++ : *s++;
+			lastWasChar = false;
+		} else {
+			lastWasChar = true;
+			s++;
+		}
+	}
+	if (!lastWasChar) return size;
+	return size + 1;
 }
 
 void clean(int argc, char **argv) {
@@ -24,9 +38,9 @@ int makeargs(char *s, char ***argv) {
 	int i = 0;
 
 	/* make some room */
-	int size = countSpaces(s);
+	int size = countTokens(s);
 	argv[0] = malloc(size * sizeof(char **));
-	if(!argv[0]) return -1;
+	if (!argv[0]) return -1;
 
 	/* get the first token */
 	token = strtok_r(save, &t, &save);
