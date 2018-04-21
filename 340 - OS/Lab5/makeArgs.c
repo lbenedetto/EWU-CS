@@ -21,6 +21,9 @@ int countTokens(char *s) {
 }
 
 void clean(int argc, char **argv) {
+	int x;
+	for (x = 0; x < argc; x++)
+		free(argv[x]);
 	free(argv);
 }// end clean
 
@@ -47,8 +50,9 @@ int makeargs(char *s, char ***argv) {
 
 	/* walk through other tokens */
 	while (token != NULL) {
-		argv[0][i] = token;
-		token = strtok_r(save, &t, &save);
+		argv[0][i] = malloc((strlen(token) + 1) * sizeof(char));
+		strcpy(argv[0][i], token);
+		token = strtok_r(NULL, &t, &save);
 		i++;
 	}
 	return i;
