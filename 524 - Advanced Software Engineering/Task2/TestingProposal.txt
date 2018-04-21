@@ -1,0 +1,21 @@
+Use JUnit 5 to write tests for all methods
+Use reflection to access private methods
+Attempt to reach 100% code coverage
+Design a data set with as many edge cases built into as possible
+
+This is probably an attainable goal for a small project such as this one
+
+However, if this were a production sized project, it may be unattainable
+During development of the testing, focus on the most critical parts of the project,
+rather than on the easiest to test parts
+
+Test data should include
+all "."s
+inaccurate dimensions
+unacceptable characters
+
+Make sure to maximize dependency injection, so that tests can actually be unit tests rather than integration tests
+However, integration tests should also be included.
+
+Tests should have good human readable outputs to make it obvious if the error is with the test or the code being tested,
+and also exactly what part of the test failed
