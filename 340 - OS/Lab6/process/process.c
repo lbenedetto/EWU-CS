@@ -7,10 +7,10 @@
 void forkIt(char **argv) {
 	int status;
 	pid_t pid = fork();
-	if(pid != 0){
-		waitpid(pid, &status, 0);
+	if(pid == 0){
+		int result = execvp(argv[0], argv);
+		if(result == -1) exit(-99);
 	}else{
-		char ** parts = (char **) argv[1];
-		execvp(argv[0], parts);
+		waitpid(pid, &status, 0);
 	}
 }

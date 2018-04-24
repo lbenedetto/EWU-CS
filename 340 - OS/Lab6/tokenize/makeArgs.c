@@ -22,7 +22,7 @@ int countTokens(char *s) {
 
 void clean(int argc, char **argv) {
 	int x;
-	for (x = 0; x < argc; x++)
+	for (x = 0; x < argc + 1; x++)
 		free(argv[x]);
 	free(argv);
 }// end clean
@@ -42,7 +42,8 @@ int makeargs(char *s, char ***argv) {
 
 	/* make some room */
 	int size = countTokens(s);
-	argv[0] = malloc(size * sizeof(char **));
+	if(size == 0) return -1;
+	argv[0] = malloc((size + 1) * sizeof(char **));
 	if (!argv[0]) return -1;
 
 	/* get the first token */
@@ -55,6 +56,7 @@ int makeargs(char *s, char ***argv) {
 		token = strtok_r(NULL, &t, &save);
 		i++;
 	}
+	argv[0][i] = NULL;
 	return i;
 
 }// end makeArgs
