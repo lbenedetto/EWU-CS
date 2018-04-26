@@ -38,16 +38,16 @@ public abstract class A_Lookup {
 
 	double interpolate(Pair[] coordinates, double... v) {
 		Pair open = coordinates[0];
-		if (v[0] < open.x) throw new RuntimeException("independentVariable was smaller than allowed");
+		if (v[0] > open.x) throw new RuntimeException("independentVariable was larger than allowed");
 		for (Pair close : coordinates) {
-			if (close.x < v[0]) {
+			if (v[0] < close.x) {
 				open = close;
 			} else {
 				return interpolate(v[0], open.x, close.x, open.interpolate(v), close.interpolate(v));
 			}
 
 		}
-		throw new RuntimeException("independentVariable was larger than allowed");
+		throw new RuntimeException("independentVariable was smaller than allowed");
 	}
 
 	public static abstract class Pair {

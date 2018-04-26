@@ -11,7 +11,9 @@ public class WindLookupTest {
 	@Test
 	void interpolateDirectionTest() throws Exception {
 		double[] d = humanReadableCoordinatesToStupidCoordinates(0, 0, 0, 5.5, 0);
-		assertEquals((45.0 / 2.0), new WindLookup("simpleInput").interpolateSpeed(d[0], d[1], d[2], d[3], d[4], d[5], d[6]));
+		System.out.println(Arrays.toString(d));
+		double actual = new WindLookup("simpleInput").interpolateDirection(d[0], d[1], d[2], d[3], d[4], d[5], d[6]);
+		assertEquals((45.0 / 2.0), actual);
 	}
 
 	/**

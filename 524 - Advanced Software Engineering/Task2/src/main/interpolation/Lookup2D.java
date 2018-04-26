@@ -12,7 +12,7 @@ public class Lookup2D extends A_Lookup {
 	public Lookup2D(double[][] plane) {
 		coordinates = new Pair.Pair2D[plane.length - 1];
 		for (int i = 1; i < plane.length; i++) {
-			//In this case, 2D-Pair is a mapping of latitude to a 1D row (row,rowLabel)
+			//In this case, 2D-Pair is a mapping of latitude to a 1D row (rowLabel,row)
 			coordinates[i-1] = new Pair.Pair2D(plane[i][0], new Lookup1D(plane[0], plane[i]));
 		}
 	}

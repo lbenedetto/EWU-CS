@@ -21,13 +21,13 @@ public class WindLookup {
 		double startLng = Double.parseDouble(origin[1]);
 
 		//Add all the data
-		int lat = 0, alt, lng;
+		int lat = 1, alt, lng;
 		for(String line : lines){//all values of a given lat
 			alt = 0;
 			var rows = line.split(" ");
 			if(rows.length != 6) throw new RuntimeException("Invalid file format");
 			for(String row : rows){//all values of a lat and alt
-				lng = 0;
+				lng = 1;
 				var points = row.toCharArray();
 				if(points.length != 12) throw new RuntimeException("Invalid file format");
 				for(char point : points){//the value of the given lat alt and lng
@@ -58,11 +58,12 @@ public class WindLookup {
 	                                   double degreeEW,
 	                                   double minuteEW,
 	                                   double secondEW,
-	                                   double altitude) throws IOException{
+	                                   double altitude){
 		double latitude = convertToDouble(degreeNS, minuteNS, secondNS);
 		double longitude = convertToDouble(degreeEW, minuteEW, secondEW);
-
-		return new Lookup3D(direction).resolveDependentVariable(altitude, latitude, longitude);
+		Lookup3D lookup3D = new Lookup3D(direction);
+		double result = lookup3D.resolveDependentVariable(altitude,latitude,longitude);
+		return result;
 	}
 
 	public double interpolateSpeed(double degreeNS,
@@ -71,7 +72,7 @@ public class WindLookup {
 	                               double degreeEW,
 	                               double minuteEW,
 	                               double secondEW,
-	                               double altitude) throws IOException{
+	                               double altitude){
 		double latitude = convertToDouble(degreeNS, minuteNS, secondNS);
 		double longitude = convertToDouble(degreeEW, minuteEW, secondEW);
 		return new Lookup3D(speed).resolveDependentVariable(altitude, latitude, longitude);
@@ -81,7 +82,7 @@ public class WindLookup {
 	private double convertToDouble(double degrees,
 	                               double minutes,
 	                               double seconds){
-		return degrees + (minutes / 60) + (seconds / 3600);
+		return degrees + (minutes / 60.0) + (seconds / 3600.0);
 	}
 
 	private static int[] decodeChar(char c) {
