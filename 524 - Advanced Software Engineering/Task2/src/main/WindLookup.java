@@ -54,7 +54,7 @@ public class WindLookup {
 		}
 		//Add the column labels
 		for (alt = 0; alt < 6; alt++) {
-			speed[alt][0][0] = ALTITUDES[alt];
+			speed[alt][0][0] = ALTITUDES[ALTITUDES.length - alt - 1];
 			for (int i = 1; i < 13; i++) {
 				speed[alt][0][i] = convertToDouble(startLng, (12 - i) * 5, 0);
 				direction[alt][0][i] = convertToDouble(startLng, (12 - i) * 5, 0);

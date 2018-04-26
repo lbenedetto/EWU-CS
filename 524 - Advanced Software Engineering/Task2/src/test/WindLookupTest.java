@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class WindLookupTest {
 	private static char[] chars = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'};
 	private static double[] ALTITUDES = new double[]{0, 3000, 6000, 9000, 12000, 15000};
-
+	private static final double EPSILON = 0.0000001;
 	@Test
 	void interpolateDirectionTest() throws Exception {
-		double[] d = humanReadableCoordinatesToStupidCoordinates(0, 0, 0, 5.5, 0);
+		double[] d = humanReadableCoordinatesToStupidCoordinates(0, 0, 0, 5.5, 5);
 		System.out.println(Arrays.toString(d));
 		double actual = new WindLookup("simpleInput").interpolateDirection(d[0], d[1], d[2], d[3], d[4], d[5], d[6]);
-		assertEquals((45.0 / 2.0), actual);
+		assertEquals(45f/2f, actual, EPSILON);
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class WindLookupTest {
 		ret[3] = d[0];
 		ret[4] = d[1];
 		ret[5] = d[2];
-		ret[6] = z * 3000;
+		ret[6] = (5 - z) * 3000;
 		return ret;
 	}
 
