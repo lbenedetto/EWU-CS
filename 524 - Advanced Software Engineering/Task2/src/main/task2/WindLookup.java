@@ -1,27 +1,24 @@
-import interpolation.Lookup3D;
+package task2;
+
+import task2.interpolation.Lookup3D;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class WindLookup {
 	private double[][][] direction;
 	private double[][][] speed;
-	private static double[] ALTITUDES = new double[]{0, 3000, 6000, 9000, 12000, 15000};
+	private static double[] ALTITUDES = new double[]{
+			0,
+			3000,
+			6000,
+			9000,
+			12000,
+			15000
+	};
 
-	private static String printCube(double[][][] cube) {
-		var b = new StringBuilder();
-		for (int i = 0; i < cube.length; i++) {
-			for (int j = 0; j < cube[i].length; j++) {
-				b.append(Arrays.toString(cube[i][j])).append("\n");
-			}
-			b.append("\n");
-		}
-		return b.toString();
-	}
-
-	WindLookup(String filename) throws IOException {
+	public WindLookup(String filename) throws IOException {
 		direction = new double[6][13][13];
 		speed = new double[6][13][13];
 
@@ -55,11 +52,12 @@ public class WindLookup {
 		//Add the column labels
 		for (alt = 0; alt < 6; alt++) {
 			speed[alt][0][0] = ALTITUDES[ALTITUDES.length - alt - 1];
+			direction[alt][0][0] = speed[alt][0][0];
 			for (int i = 1; i < 13; i++) {
-				speed[alt][0][i] = convertToDouble(startLng, (12 - i) * 5, 0);
-				direction[alt][0][i] = convertToDouble(startLng, (12 - i) * 5, 0);
-				speed[alt][i][0] = convertToDouble(startLat, (12 - i) * 5, 0);
-				direction[alt][i][0] = convertToDouble(startLat, (12 - i) * 5, 0);
+				speed[alt][0][i] = convertToDecimal(startLng, (12 - i) * 5, 0);
+				speed[alt][i][0] = convertToDecimal(startLat, (12 - i) * 5, 0);
+				direction[alt][0][i] = speed[alt][0][i];
+				direction[alt][i][0] = speed[alt][i][0];
 			}
 		}
 	}
@@ -71,11 +69,10 @@ public class WindLookup {
 	                                   double minuteEW,
 	                                   double secondEW,
 	                                   double altitude) {
-		double latitude = convertToDouble(degreeNS, minuteNS, secondNS);
-		double longitude = convertToDouble(degreeEW, minuteEW, secondEW);
+		double latitude = convertToDecimal(degreeNS, minuteNS, secondNS);
+		double longitude = convertToDecimal(degreeEW, minuteEW, secondEW);
 		Lookup3D lookup3D = new Lookup3D(direction);
-		double result = lookup3D.resolveDependentVariable(altitude, latitude, longitude);
-		return result;
+		return lookup3D.resolveDependentVariable(altitude, latitude, longitude);
 	}
 
 	public double interpolateSpeed(double degreeNS,
@@ -85,19 +82,19 @@ public class WindLookup {
 	                               double minuteEW,
 	                               double secondEW,
 	                               double altitude) {
-		double latitude = convertToDouble(degreeNS, minuteNS, secondNS);
-		double longitude = convertToDouble(degreeEW, minuteEW, secondEW);
+		double latitude = convertToDecimal(degreeNS, minuteNS, secondNS);
+		double longitude = convertToDecimal(degreeEW, minuteEW, secondEW);
 		return new Lookup3D(speed).resolveDependentVariable(altitude, latitude, longitude);
 	}
 
 
-	private double convertToDouble(double degrees,
-	                               double minutes,
-	                               double seconds) {
+	private double convertToDecimal(double degrees,
+	                                double minutes,
+	                                double seconds) {
 		return degrees + (minutes / 60.0) + (seconds / 3600.0);
 	}
 
-	 static int[] decodeChar(char c) {
+	public static int[] decodeChar(char c) {
 		if (('A' <= c && c <= 'N') || ('a' <= c && c <= 'z') || c == '.') {
 			int x = (c < 'a') ? c - 'A' + 26 : c - 'a';
 			if (c == '.') x = -1;

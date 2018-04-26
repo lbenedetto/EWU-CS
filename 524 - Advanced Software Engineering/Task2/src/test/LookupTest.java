@@ -1,6 +1,6 @@
-import interpolation.Lookup1D;
-import interpolation.Lookup2D;
-import interpolation.Lookup3D;
+import task2.interpolation.Lookup1D;
+import task2.interpolation.Lookup2D;
+import task2.interpolation.Lookup3D;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

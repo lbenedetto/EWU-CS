@@ -1,10 +1,10 @@
-package interpolation;
+package task2.interpolation;
 
 
 //=============================================================================================================================================================
 
 /**
- * Performs one-dimensional interpolation as defined in the task writeup.
+ * Performs one-dimensional task2.interpolation as defined in the task writeup.
  */
 public class Lookup1D extends A_Lookup {
 	private Pair.Pair1D[] coordinates;

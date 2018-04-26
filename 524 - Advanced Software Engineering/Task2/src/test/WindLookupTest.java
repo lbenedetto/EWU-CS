@@ -1,21 +1,21 @@
 import org.junit.jupiter.api.Test;
+import task2.WindLookup;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WindLookupTest {
 	private static char[] chars = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'};
 	private static double[] ALTITUDES = new double[]{0, 3000, 6000, 9000, 12000, 15000};
 	private static final double EPSILON = 0.0000001;
+
 	@Test
 	void interpolateDirectionTest() throws Exception {
-		double[] d = humanReadableCoordinatesToStupidCoordinates(0, 0, 0, 5.5, 5);
+		double[] d = humanReadableCoordinatesToStupidCoordinates(0, 0, 0, 5.5, 0);
 		System.out.println(Arrays.toString(d));
 		double actual = new WindLookup("simpleInput").interpolateDirection(d[0], d[1], d[2], d[3], d[4], d[5], d[6]);
-		assertEquals(45f/2f, actual, EPSILON);
+		assertEquals(45f / 2f, actual, EPSILON);
 	}
 
 	/**
@@ -52,6 +52,7 @@ public class WindLookupTest {
 		System.out.println(Arrays.toString(humanReadableCoordinatesToStupidCoordinates(0, 0, 0, 5.5, 0)));
 //		assertEquals(new double[]{0, .2, 3, 0, 5, 6, 1500}, humanReadableCoordinatesToStupidCoordinates(0,0, 0, 5.5, 1.5));
 	}
+
 	@Test
 	void decodeValidChar() {
 		System.out.printf("testing %s, expecting %d,%d\n", '.', 0, 0);
@@ -66,17 +67,28 @@ public class WindLookupTest {
 		}
 	}
 
-	private void compareWind(int [] actual, int[] expected) {
+	private void compareWind(int[] actual, int[] expected) {
 		assertArrayEquals(expected, actual);
 	}
 
 	@Test
-	void decodeInvalidChar(){
-		for(char c = 0; c < 127; c++){
-			if(('A' <= c && c <= 'N') || ('a' <= c && c <= 'z') || c == '.') continue;
+	void decodeInvalidChar() {
+		for (char c = 0; c < 127; c++) {
+			if (('A' <= c && c <= 'N') || ('a' <= c && c <= 'z') || c == '.') continue;
 			System.out.printf("Testing invalid char '%s'\n", c);
 			final char in = c;
 			assertThrows(RuntimeException.class, () -> WindLookup.decodeChar(in));
 		}
+	}
+
+	private static String printCube(double[][][] cube) {
+		var b = new StringBuilder();
+		for (int i = 0; i < cube.length; i++) {
+			for (int j = 0; j < cube[i].length; j++) {
+				b.append(Arrays.toString(cube[i][j])).append("\n");
+			}
+			b.append("\n");
+		}
+		return b.toString();
 	}
 }

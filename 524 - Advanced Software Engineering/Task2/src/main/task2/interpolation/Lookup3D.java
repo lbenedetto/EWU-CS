@@ -1,9 +1,9 @@
-package interpolation;
+package task2.interpolation;
 
 //=============================================================================================================================================================
 
 /**
- * Performs three-dimensional interpolation as defined in the task writeup.
+ * Performs three-dimensional task2.interpolation as defined in the task writeup.
  */
 public class Lookup3D extends A_Lookup {
 	private Pair.Pair3D[] coordinates;
@@ -13,7 +13,7 @@ public class Lookup3D extends A_Lookup {
 	 * Creates a three-dimensional lookup.
 	 * threeD[alt][lat][lng]
 	 */
-	public Lookup3D(double [][][] cube) {
+	public Lookup3D(double[][][] cube) {
 		coordinates = new Pair.Pair3D[cube.length];
 		for (int i = 0; i < cube.length; i++) {
 			//In this case, 3D-Pair is a mapping of altitude to a 2D plane

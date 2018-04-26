@@ -1,9 +1,9 @@
-package interpolation;
+package task2.interpolation;
 
 //=============================================================================================================================================================
 
 /**
- * Performs two-dimensional interpolation as defined in the task writeup.
+ * Performs two-dimensional task2.interpolation as defined in the task writeup.
  */
 public class Lookup2D extends A_Lookup {
 	private Pair.Pair2D[] coordinates;
