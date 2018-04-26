@@ -1,25 +1,28 @@
 #include "pipes.h"
 #include "../tokenize/makeArgs.h"
 
-#define bool int
-#define true 1
-#define false 0
-//const char t = '|';
-
-bool containsPipe(char *s) {
+int containsPipe(char *s) {
+	int count = 0;
 	for (int i = 0; i < strlen(s); i++) {
-		if (s[i] == '|') return true;
+		if (s[i] == '|') count++;
 	}
-	return false;
+	printf("containsPipe: %d\n", count);
+	return count > 0;
 }
 
 char **parsePrePipe(char *s, int *preCount) {
 	char **argv = NULL;
 	char *save = calloc(strlen(s) + 1, sizeof(char));
 	strcpy(save, s);
+
 	char *token = strtok_r(save, "|", &save);
 	strip(token);
 	*preCount = makeargs(token, &argv);
+
+	printf("prePipe:\n");
+	for(int i = 0; i < *preCount; i++){
+		printf("\t%d:%s\n",i, argv[i]);
+	}
 
 	return argv;
 }
@@ -28,10 +31,16 @@ char **parsePostPipe(char *s, int *postCount) {
 	char **argv = NULL;
 	char *save = calloc(strlen(s) + 1, sizeof(char));
 	strcpy(save, s);
+
 	strtok_r(save, "|", &save);
 	char *token = strtok_r(save, "|", &save);
 	strip(token);
 	*postCount = makeargs(token, &argv);
+
+	printf("postPipe:\n");
+	for(int i = 0; i < *postCount; i++){
+		printf("\t%d:%s\n",i, argv[i]);
+	}
 
 	return argv;
 }
@@ -54,13 +63,13 @@ void pipeIt(char **prePipe, char **postPipe) {
 		close(0);
 		dup(fd[0]);
 		close(fd[0]);
-		execlp(postPipe[0], postPipe);
+		execvp(postPipe[0], postPipe);
 	}// end if AKA parent
 	else {
 		close(fd[0]);
 		close(1);
 		dup(fd[1]);
 		close(fd[1]);
-		execlp(prePipe[0], prePipe);
+		execvp(prePipe[0], prePipe);
 	}// end else AKA child
 }

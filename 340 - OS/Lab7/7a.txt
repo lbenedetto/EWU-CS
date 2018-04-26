@@ -1,9 +1,27 @@
 //Command line
-lars@lars-desktop ~/Programming/EWU-CS/340 - OS/Lab7/cmake-build-debug $ ls -l | wc -w
-56
+	lars@lars-desktop ~/Programming/EWU-CS/340 - OS/Lab7/cmake-build-debug $ ls -l | wc -w
+	56
 
-//Runing cscd340Lab7a.c
-"/home/lars/Programming/EWU-CS/340 - OS/Lab7/cmake-build-debug/Lab7a"
-56
+//Running cscd340Lab7a.c
+	"/home/lars/Programming/EWU-CS/340 - OS/Lab7/cmake-build-debug/Lab7a"
+	56
 
-Process finished with exit code 0
+	Process finished with exit code 0
+
+//Command line
+	lars@lars-desktop ~/Programming/EWU-CS/340 - OS/Lab7/cmake-build-debug $ ls -l | wc -w
+	74
+
+//Running cscd340Lab7.c
+	"/home/lars/Programming/EWU-CS/340 - OS/Lab7/cmake-build-debug/Lab7"
+	command?: ls -l | wc -w
+	containsPipe: 1
+	prePipe:
+		0:ls
+		1:-l
+	postPipe:
+		0:wc
+		1:-w
+	74
+
+	Process finished with exit code 0

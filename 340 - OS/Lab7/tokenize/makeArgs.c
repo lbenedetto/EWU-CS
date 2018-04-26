@@ -56,7 +56,7 @@ int makeargs(char *s, char ***argv) {
 		token = strtok_r(NULL, &t, &save);
 		i++;
 	}
-	argv[0][i] = NULL;
+	argv[0][i] = (char *) NULL;
 	return i;
 
 }// end makeArgs
