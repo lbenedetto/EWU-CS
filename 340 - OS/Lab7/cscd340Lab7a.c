@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 int main()
 {
@@ -20,7 +21,11 @@ int main()
 
 	if(pid != 0)
 	{
-   
+		close(fd[1]);
+		close(0);
+		dup(fd[0]);
+		close(fd[0]);
+		execlp("wc", "wc", "-w", NULL);
 	}// end if AKA parent
 	else
 	{

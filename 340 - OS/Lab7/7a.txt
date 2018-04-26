@@ -1,0 +1,9 @@
+//Command line
+lars@lars-desktop ~/Programming/EWU-CS/340 - OS/Lab7/cmake-build-debug $ ls -l | wc -w
+56
+
+//Runing cscd340Lab7a.c
+"/home/lars/Programming/EWU-CS/340 - OS/Lab7/cmake-build-debug/Lab7a"
+56
+
+Process finished with exit code 0
