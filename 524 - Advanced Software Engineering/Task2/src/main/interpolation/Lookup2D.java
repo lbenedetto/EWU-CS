@@ -27,7 +27,8 @@ public class Lookup2D extends A_Lookup {
 	 * @return the dependent variable
 	 */
 	public double resolveDependentVariable(final double latitude, final double longitude) {
-		return interpolate(coordinates, latitude, longitude);
+		//TODO: Maybe fix these having to be backwards?
+		return interpolate(coordinates, longitude, latitude);
 	}
 
 }
