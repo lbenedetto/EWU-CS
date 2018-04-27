@@ -1,0 +1,7 @@
+HISTCOUNT=50
+HISTFILECOUNT=100
+
+LA="ls -a"
+lsall="ls -al"
+
+PATH=$PATH:/data/myprogs

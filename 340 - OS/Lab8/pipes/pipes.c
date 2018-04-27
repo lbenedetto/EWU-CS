@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "pipes.h"
 #include "../tokenize/makeArgs.h"
 
@@ -38,7 +39,8 @@ void pipeIt(int numSize, char **commands) {
 			}
 			char **command;
 			makeargs(commands[i], &command, " ");
-			//TODO: execvpe for PATH
+			//TODO: Put actual path here
+//			int result = execvpe(command[0], command, (char *const *) "path");
 			int result = execvp(command[0], command);
 			if (result == -1) exit(-99);
 		} else {

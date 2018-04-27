@@ -19,12 +19,8 @@
 
 #define MAX 100
 
-Node *buildNode(FILE *fin, void *(*buildData)(FILE *in));
+Node *buildNode(char *passedIn);
 
-Node *buildNode_Type(void *passedIn);
-
-void sort(LinkedList *theList, int (*compare)(const void *, const void *));
-
-void buildListTotal(LinkedList *myList, int total, FILE *fin, void *(*buildData)(FILE *in));
+void sort(LinkedList *theList);
 
 #endif // LISTUTILS_H

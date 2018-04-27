@@ -1,12 +1,11 @@
 #include "linkedList.h"
-#include "../myInt/myInt.h"
 
-void deleteNode(Node *p, Node *d, Node *n, void (*removeData)(void *)) {
+void deleteNode(Node *p, Node *d, Node *n) {
 	if (p != NULL) p->next = n;
 	if (n != NULL) n->prev = p;
 	d->next = NULL;
 	d->prev = NULL;
-	removeData(d->data);
+	free(d->data);
 	free(d);
 }
 
@@ -80,14 +79,13 @@ void addFirst(LinkedList *theList, Node *nn) {
  * Removes the specified node to the beginning of this list
  *
  * @param theList - The specified linked list
- * @param *removeData - The function pointer for freeing the specific data type
  *
  * @warning - The passed in LinkedList * theList is checked - exit(-99) if NULL
  */
-void removeFirst(LinkedList *theList, void (*removeData)(void *)) {
+void removeFirst(LinkedList *theList) {
 	if (theList == NULL) exit(-99);
 	Node *h = theList->head;
-	deleteNode(h, h->next, h->next->next, removeData);
+	deleteNode(h, h->next, h->next->next);
 	theList->size--;
 }
 
@@ -98,17 +96,16 @@ void removeFirst(LinkedList *theList, void (*removeData)(void *)) {
  * Removes the specified node to the end of this list
  *
  * @param theList - The specified linked list
- * @param *removeData - The function pointer for freeing the specific data type
  *
  * @warning - The passed in LinkedList * theList is checked - exit(-99) if NULL
  */
-void removeLast(LinkedList *theList, void (*removeData)(void *)) {
+void removeLast(LinkedList *theList) {
 	if (theList == NULL) exit(-99);
 	Node *c = theList->head;
 	for (int i = 0; i < theList->size; i++) {
 		c = c->next;
 	}
-	deleteNode(c->prev, c, c->next, removeData);
+	deleteNode(c->prev, c, c->next);
 	theList->size--;
 }
 
@@ -121,24 +118,22 @@ void removeLast(LinkedList *theList, void (*removeData)(void *)) {
  *
  * @param theList - The specified linked list
  * @param nn - The node to be removed
- * @param *removeData - The function pointer for freeing the specific data type
- * @param *compare - The compare function to compare specific data type
  *
  * @warning - The passed in LinkedList * theList is checked - exit(-99) if NULL
  * @warning - The passed in Node * nn is checked - exit(-99) if NULL
  */
-void removeItem(LinkedList *theList, Node *nn, void (*removeData)(void *), int (*compare)(const void *, const void *)) {
+void removeItem(LinkedList *theList, Node *nn) {
 	if (theList == NULL || nn == NULL) exit(-99);
 	Node *c = theList->head;
 	for (int i = 0; i < theList->size; i++) {
 		c = c->next;
-		if (compare(c->data, nn->data) == 0) {
-			deleteNode(c->prev, c, c->next, removeData);
+		if (strcmp(c->data, nn->data) == 0) {
+			deleteNode(c->prev, c, c->next);
 			theList->size--;
 			break;
 		}
 	}
-	removeData(nn->data);
+	free(nn->data);
 	free(nn);
 }
 
@@ -149,16 +144,14 @@ void removeItem(LinkedList *theList, Node *nn, void (*removeData)(void *), int (
  * Removes all of the elements from this list.  The list will be empty after the function completes
  *
  * @param theList - The specified linked list
- * @param *removeData - The function pointer for freeing the specific data type
- * @param *compare - The compare function to compare specific data type
  *
  * @warning - The passed in LinkedList * theList is checked - if NULL nothing happens
  */
-void clearList(LinkedList *theList, void (*removeData)(void *)) {
+void clearList(LinkedList *theList) {
 	if (theList == NULL) return;
 	int size = theList->size;
 	for (int i = 0; i < size; i++) {
-		removeFirst(theList, removeData);
+		removeFirst(theList);
 	}
 	free(theList->head);
 	theList->size = 0;
@@ -172,11 +165,10 @@ void clearList(LinkedList *theList, void (*removeData)(void *)) {
  * or empty, "Empty List" is printed.
  *
  * @param theList - The specified linked list
- * @param *convert - The function pointer for printing the specific data type
  *
  * @warning - The passed in LinkedList * theList is checked - if NULL "Empty List" is printed
  */
-void printList(const LinkedList *theList, void (*convertData)(void *)) {
+void printList(const LinkedList *theList) {
 	if (theList == NULL) {
 		printf("Empty List\n");
 		return;
@@ -185,7 +177,7 @@ void printList(const LinkedList *theList, void (*convertData)(void *)) {
 	Node *c = theList->head;
 	for (int i = 0; i < theList->size; i++) {
 		c = c->next;
-		convertData(c->data);
+		printf("%s\n", c->data);
 	}
 	printf("\n");
 }
