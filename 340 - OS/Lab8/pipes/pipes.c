@@ -37,7 +37,7 @@ void pipeIt(int numSize, char **commands) {
 				close(newFD[std_in]);
 			}
 			char **command;
-			makeargs(commands[i], &command, ' ');
+			makeargs(commands[i], &command, " ");
 			//TODO: execvpe for PATH
 			int result = execvp(command[0], command);
 			if (result == -1) exit(-99);

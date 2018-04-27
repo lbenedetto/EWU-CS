@@ -4,7 +4,7 @@
 #include "./tokenize/makeArgs.h"
 
 int main() {
-	int argc, pipeCount;
+	int argc = 0, commandCount;
 	char **argv = NULL, s[MAX];
 
 	printf("command?: ");
@@ -12,19 +12,21 @@ int main() {
 	strip(s);
 
 	while (strcmp(s, "exit") != 0) {
-		pipeCount = countTokens(s, '|');
-		if(pipeCount == 0){
-			argc = makeargs(s, &argv, ' ');
-			if (argc != -1)
-				forkIt(argv);
-		}else{
-			argc = makeargs(s, &argv, '|');
-			if(argc != -1){
+		commandCount = countTokens(s, "|");
+		if (commandCount > 1) {
+			argc = makeargss(s, &argv, "|", commandCount);
+			if (argc != -1) {
 				pipeIt(argc, argv);
 			}
+		}else if (commandCount > 0) {
+			argc = makeargs(s, &argv, " ");
+			if (argc != -1)
+				forkIt(argv);
 		}
-		clean(argc, argv);
-		argv= NULL;
+		if (commandCount > 0) {
+			clean(argc, argv);
+			argv = NULL;
+		}
 
 		printf("command?: ");
 		fgets(s, MAX, stdin);

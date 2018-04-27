@@ -9,9 +9,14 @@
 
 #define MAX 100
 
-int countTokens(char *s, char t);
+int countTokens(char *s, const char *t);
+
 void clean(int argc, char **argv);
+
 void printargs(int argc, char **argv);
-int makeargs(char *s, char *** argv, char t);
+
+int makeargss(char *s, char ***argv, char *t, int size);
+
+int makeargs(char *s, char ***argv, char *t);
 
 #endif
