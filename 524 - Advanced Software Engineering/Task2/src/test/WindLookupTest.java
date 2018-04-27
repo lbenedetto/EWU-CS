@@ -11,11 +11,51 @@ public class WindLookupTest {
 	private static final double EPSILON = 0.0000001;
 
 	@Test
+	void invalidInterpolationTest() throws Exception {
+		double[] d = humanReadableCoordinatesToStupidCoordinates(0, 0, 1.5, 5.5, .5);
+		System.out.println(Arrays.toString(d));
+		assertThrows(
+				RuntimeException.class,
+				() -> {
+					var wl = new WindLookup("simpleInput");
+					wl.interpolateDirection(d[0], d[1], d[2], d[3], d[4], d[5], -1);
+				},
+				"independentVariable was smaller than allowed"
+		);
+	}
+
+	@Test
 	void interpolateDirectionTest() throws Exception {
-		double[] d = humanReadableCoordinatesToStupidCoordinates(0, 0, 0, 5.5, 0);
+		double[] d = humanReadableCoordinatesToStupidCoordinates(0, 0, 1.5, 5.5, .5);
 		System.out.println(Arrays.toString(d));
 		double actual = new WindLookup("simpleInput").interpolateDirection(d[0], d[1], d[2], d[3], d[4], d[5], d[6]);
-		assertEquals(45f / 2f, actual, EPSILON);
+		assertEquals(157.5, actual, EPSILON);
+		/*
+		 * 0->  22.5  <-45   180-> 202.5 <-225
+		 *       |                  |
+		 *       v                  v
+		 *       67.5 ->  157.5 <- 247.5
+		 *       ^                  ^
+		 *       |                  |
+		 * 90-> 112.5 <-135  270-> 292.5 <-315
+		 */
+	}
+
+	@Test
+	void interpolateSpeedTest() throws Exception {
+		double[] d = humanReadableCoordinatesToStupidCoordinates(0, 0, 1.5, 5.5, .5);
+		System.out.println(Arrays.toString(d));
+		double actual = new WindLookup("simpleInput").interpolateSpeed(d[0], d[1], d[2], d[3], d[4], d[5], d[6]);
+		assertEquals(26.25, actual, EPSILON);
+		/*
+		 * 10-> 15 <-20     50-> 30 <-10
+		 *       |               |
+		 *       v               v
+		 *       25 -> 26.25 <- 27.5
+		 *       ^               ^
+		 *       |               |
+		 * 30-> 35 <-40     20-> 25 <- 30
+		 */
 	}
 
 	/**

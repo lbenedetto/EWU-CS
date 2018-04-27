@@ -38,6 +38,7 @@ public abstract class A_Lookup {
 		var d3 = dvClose - dvOpen;
 		var d4 = d1 / d2;
 		var d5 = d4 * d3;
+		System.out.printf("Intermediary: %.2f\n", d5 + dvOpen);
 		return d5 + dvOpen;
 	}
 
