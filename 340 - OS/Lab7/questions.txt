@@ -25,3 +25,8 @@
 	74
 
 	Process finished with exit code 0
+//Questions
+	fixedPipeIt
+		1. No, the program does not leak memory
+		2. When an invalid command is passed, execvp returns, and I exit(-99)
+		3. Memory is "leaked" in the child thread, but that isn't a problem because the process image is deleted anyways. It does not leak in the main thread

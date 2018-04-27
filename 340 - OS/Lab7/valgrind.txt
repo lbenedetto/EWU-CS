@@ -1,0 +1,81 @@
+==16695== Memcheck, a memory error detector
+==16695== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==16695== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==16695== Command: ./lab7
+==16695==
+command?: ls -l | wc -w
+containsPipe: 1
+prePipe:
+	0:ls
+	1:-l
+postPipe:
+	0:wc
+	1:-w
+110
+command?: ls -l | pws
+containsPipe: 1
+prePipe:
+	0:ls
+	1:-l
+postPipe:
+	0:pws
+==16698==
+==16698== HEAP SUMMARY:
+==16698==     in use at exit: 50 bytes in 5 blocks
+==16698==   total heap usage: 17 allocs, 12 frees, 2,210 bytes allocated
+==16698==
+==16698== LEAK SUMMARY:
+==16698==    definitely lost: 0 bytes in 0 blocks
+==16698==    indirectly lost: 0 bytes in 0 blocks
+==16698==      possibly lost: 0 bytes in 0 blocks
+==16698==    still reachable: 50 bytes in 5 blocks
+==16698==         suppressed: 0 bytes in 0 blocks
+==16698== Rerun with --leak-check=full to see details of leaked memory
+==16698==
+==16698== For counts of detected and suppressed errors, rerun with: -v
+==16698== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+command?: pws | ls -l
+containsPipe: 1
+prePipe:
+	0:pws
+postPipe:
+	0:ls
+	1:-l
+==16712==
+==16712== HEAP SUMMARY:
+==16712==     in use at exit: 50 bytes in 5 blocks
+==16712==   total heap usage: 24 allocs, 19 frees, 2,284 bytes allocated
+==16712==
+==16712== LEAK SUMMARY:
+==16712==    definitely lost: 0 bytes in 0 blocks
+==16712==    indirectly lost: 0 bytes in 0 blocks
+==16712==      possibly lost: 0 bytes in 0 blocks
+==16712==    still reachable: 50 bytes in 5 blocks
+==16712==         suppressed: 0 bytes in 0 blocks
+==16712== Rerun with --leak-check=full to see details of leaked memory
+==16712==
+==16712== For counts of detected and suppressed errors, rerun with: -v
+==16712== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+total 236
+-rw-rw-r-- 1 lars lars    577 Apr 26 14:10 7a.txt
+drwxrwxr-x 3 lars lars   4096 Apr 26 20:45 cmake-build-debug
+-rw-rw-r-- 1 lars lars    267 Apr 26 12:19 CMakeLists.txt
+-rw-rw-r-- 1 lars lars    540 Apr 26 12:30 cscd340Lab7a.c
+-rw-rw-r-- 1 lars lars    857 Jan 19  2016 cscd340Lab7.c
+-rw-rw-r-- 1 lars lars 179585 Apr 23 08:56 cscd340_s18_lab7.pdf
+-rwxrwxr-x 1 lars lars  16816 Apr 26 20:53 lab7
+-rw-rw-r-- 1 lars lars    633 Apr 23 09:14 Makefile
+drwx------ 2 lars lars   4096 Apr 26 20:53 pipes
+drwx------ 2 lars lars   4096 Apr 26 20:53 process
+drwx------ 2 lars lars   4096 Apr 26 20:53 tokenize
+drwx------ 2 lars lars   4096 Apr 26 20:53 utils
+command?: exit
+==16695==
+==16695== HEAP SUMMARY:
+==16695==     in use at exit: 0 bytes in 0 blocks
+==16695==   total heap usage: 24 allocs, 24 frees, 2,284 bytes allocated
+==16695==
+==16695== All heap blocks were freed -- no leaks are possible
+==16695==
+==16695== For counts of detected and suppressed errors, rerun with: -v
+==16695== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
