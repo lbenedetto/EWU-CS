@@ -4,11 +4,11 @@
 #define false 0
 #define true 1
 
-int countTokens(char *s) {
+int countTokens(char *s, const char t) {
 	int size;
 	bool lastWasChar = false;
 	for (size = 0; s[size];) {
-		if (s[size] == ' ') {
+		if (s[size] == t) {
 			lastWasChar ? size++ : *s++;
 			lastWasChar = false;
 		} else {
@@ -34,14 +34,13 @@ void printargs(int argc, char **argv) {
 
 }// end printargs
 
-int makeargs(char *s, char ***argv) {
-	const char t = ' ';
+int makeargs(char *s, char ***argv, const char t) {
 	char *token;
 	char *save = s;
 	int i = 0;
 
 	/* make some room */
-	int size = countTokens(s);
+	int size = countTokens(s, t);
 	if (size == 0) return -1;
 	argv[0] = malloc((size + 1) * sizeof(char **));
 	if (!argv[0]) return -1;

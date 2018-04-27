@@ -4,91 +4,59 @@
 #define std_in 0
 #define std_out 1
 #define child 0
+#define bool int
+#define false 0
+#define true 1
 
-int containsPipe(char *s) {
-	int count = 0;
-	for (int i = 0; i < strlen(s); i++) {
-		if (s[i] == '|') count++;
-	}
-	printf("containsPipe: %d\n", count);
-	return count > 0;
-}
-
-char **parsePrePipe(char *s, int *preCount) {
-	char **argv = NULL;
-	char *temp = calloc(strlen(s) + 1, sizeof(char));
-	strcpy(temp, s);
-	char *save;
-	char *token = strtok_r(temp, "|", &save);
-	strip(token);
-	*preCount = makeargs(token, &argv);
-
-	printf("prePipe:\n");
-	for (int i = 0; i < *preCount; i++) {
-		printf("\t%d:%s\n", i, argv[i]);
-	}
-	free(temp);
-	temp = NULL;
-	return argv;
-}
-
-char **parsePostPipe(char *s, int *postCount) {
-	char **argv = NULL;
-	char *temp = calloc(strlen(s) + 1, sizeof(char));
-	strcpy(temp, s);
-	char *save;
-
-	strtok_r(temp, "|", &save);
-	char *token = strtok_r(NULL, "|", &save);
-	strip(token);
-	*postCount = makeargs(token, &argv);
-
-	printf("postPipe:\n");
-	for (int i = 0; i < *postCount; i++) {
-		printf("\t%d:%s\n", i, argv[i]);
-	}
-	free(temp);
-	temp = NULL;
-	return argv;
-}
-
-void actuallyPipeIt(char **prePipe, char **postPipe) {
+//https://stackoverflow.com/questions/916900/having-trouble-with-fork-pipe-dup2-and-exec-in-c/
+void pipeIt(int numSize, char **commands) {
 	pid_t pid;
-	int fd[2], res, status;
-
-	res = pipe(fd);
-
-	if (res < 0) {
-		printf("Pipe Failure\n");
-		exit(-1);
-	}
-
-	pid = fork();
-
-	if (pid == child) {
-		close(fd[std_in]);
-		close(std_out);
-		dup2(fd[std_out], std_out);
-		close(fd[std_out]);
-		int result = execvp(prePipe[0], prePipe);
-		if (result == -1) { _exit(-99); }
-	} else {
+	int oldFD[2], newFD[2];
+	int res, status;
+	bool hasPrev = false;
+	bool hasNext = false;
+	for (int i = 0; i < numSize; i++) {
+		if ((i + 1) < numSize) {
+			res = pipe(newFD);
+			if (res < 0) {
+				printf("Pipe Failure\n");
+				exit(-1);
+			}
+			hasNext = true;
+		}
+		pid = fork();
+		if (pid == child) {
+			if (hasPrev) {
+				dup2(oldFD[std_in], std_in);
+				close(oldFD[std_in]);
+				close(oldFD[std_out]);
+			}
+			if (hasNext) {
+				close(newFD[std_in]);
+				dup2(newFD[std_out], std_out);
+				close(newFD[std_in]);
+			}
+			char **command;
+			makeargs(commands[i], &command, ' ');
+			//TODO: execvpe for PATH
+			int result = execvp(command[0], command);
+			if (result == -1) exit(-99);
+		} else {
+			if (hasPrev) {
+				close(oldFD[std_in]);
+				close(oldFD[std_out]);
+			}
+			if(hasNext){
+				oldFD[std_in] = newFD[std_in];
+				oldFD[std_out] = newFD[std_out];
+			}
+		}
 		waitpid(pid, &status, 0);
-		close(fd[std_out]);
-		close(std_in);
-		dup2(fd[std_in], std_in);
-		close(fd[std_in]);
-		int result = execvp(postPipe[0], postPipe);
-		if (result == -1) { _exit(-99); }
+		hasNext = false;
+		hasPrev = true;
 	}
-}
-
-void pipeIt(char **prePipe, char **postPipe) {
-	int status;
-	pid_t pid = fork();
-	if (pid == child) {
-		actuallyPipeIt(prePipe, postPipe);
-	} else {
-		waitpid(pid, &status, 0);
+	if(numSize > 1){
+		close(oldFD[std_in]);
+		close(oldFD[std_out]);
 	}
 }
