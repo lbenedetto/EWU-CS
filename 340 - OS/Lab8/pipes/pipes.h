@@ -12,7 +12,7 @@
 #include <sys/types.h>
 #include "../tokenize/makeArgs.h"
 
-void pipeIt(char *PATH[], int numSize, char **commands);
+void pipeIt(char *PATH, int numSize, char **commands);
 
 
 #endif 

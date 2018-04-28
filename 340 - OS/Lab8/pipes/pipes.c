@@ -8,7 +8,7 @@
 #define true 1
 
 //https://stackoverflow.com/questions/916900/having-trouble-with-fork-pipe-dup2-and-exec-in-c/
-void pipeIt(char *PATH[], int numSize, char **commands) {
+void pipeIt(char *PATH, int numSize, char **commands) {
 	pid_t pid;
 	int oldFD[2], newFD[2];
 	int res, status;
@@ -37,9 +37,10 @@ void pipeIt(char *PATH[], int numSize, char **commands) {
 			}
 			char **command;
 			makeargs(commands[i], &command, " ");
-			//TODO: Put actual path here
-			execvpe(command[0], command, PATH);
-//			execvp(command[0], command);
+			char pathenv[strlen(PATH) + sizeof("PATH=")];
+			sprintf(pathenv, "PATH=%s", PATH);
+			char *envp[] = {pathenv, NULL};
+			execvpe(command[0], command, envp);
 			fprintf(stderr, "failed to execute %s\n", command[0]);
 			exit(-99);
 		} else {
