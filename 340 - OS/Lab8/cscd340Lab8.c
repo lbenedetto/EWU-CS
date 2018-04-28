@@ -90,9 +90,18 @@ int main() {
 	strip(s);
 
 	while (strcmp(s, "exit") != 0) {
-		addLast(newHistory, buildNode(s, true));
 		if (strcmp(s, "history") == 0) {
 			printList(history, stdout);
+		} else if (strcmp(s, "!!") == 0) {
+			strcpy(s, getLast(newHistory));
+			continue;
+		} else if (strncmp("!", s, 1) == 0) {
+			char *parseMe = calloc(strlen(s) + 1, sizeof(char));
+			strcpy(parseMe, s);
+			int n = atoi(parseMe + 1);
+			strcpy(s, getNthFromLast(newHistory, n));
+			free(parseMe);
+			continue;
 		} else if (strncmp("alias ", s, 6) == 0) {
 
 		} else if (strncmp("unalias ", s, 8) == 0) {
@@ -116,7 +125,7 @@ int main() {
 				argv = NULL;
 			}
 		}
-
+		addLast(newHistory, buildNode(s, true));
 		printf("command?: ");
 		fgets(s, MAX, stdin);
 		strip(s);

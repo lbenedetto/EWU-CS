@@ -93,7 +93,6 @@ void removeFirst(LinkedList *theList) {
 	theList->size--;
 }
 
-
 /**
  * @brief The remove last function for the linked list
  *
@@ -110,6 +109,28 @@ void removeLast(LinkedList *theList) {
 	theList->size--;
 }
 
+char *getNthFromLast(LinkedList *theList, int n) {
+	if (theList == NULL || theList->size < n || n < 0) exit(-99);
+	int diff = theList->size - n;
+	int stop;
+	Node * curr = theList->head;
+	if (diff < (theList->size / 2)) {
+		//Walk from front
+		for (int i = 0; i < n; i++) {
+			curr = curr->next;
+		}
+	} else {
+		//Walk from back
+		for (int i = 0; i < n; i++) {
+			curr = curr->prev;
+		}
+	}
+	return curr->data;
+}
+
+char *getLast(LinkedList *theList) {
+	return theList->head->prev->data;
+}
 
 /**
  * @brief The remove item function for the linked list
