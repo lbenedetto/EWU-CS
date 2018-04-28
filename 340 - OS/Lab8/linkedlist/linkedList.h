@@ -32,6 +32,6 @@ void removeItem(LinkedList *theList, Node *nn);
 
 void clearList(LinkedList *theList);
 
-void printList(const LinkedList *theList);
+void printList(const LinkedList *theList, FILE *fp);
 
 #endif // LINKEDLIST_H

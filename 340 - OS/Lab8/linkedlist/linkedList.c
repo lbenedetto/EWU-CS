@@ -12,7 +12,7 @@ void deleteNode(Node *p, Node *d, Node *n) {
 void insertNode(Node *p, Node *new, Node *n) {
 	new->prev = p;
 	new->next = n;
-	p->next = new;
+	if (p != NULL) p->next = new;
 	if (n != NULL) n->prev = new;
 }
 
@@ -46,11 +46,11 @@ LinkedList *linkedList() {
  */
 void addLast(LinkedList *theList, Node *nn) {
 	if (theList == NULL || nn == NULL) exit(-99);
-	Node *c = theList->head;
-	for (int i = 0; i < theList->size; i++) {
-		c = c->next;
+	if (theList->size == 0) {
+		insertNode(theList->head, nn, theList->head);
+	} else {
+		insertNode(theList->head->prev, nn, theList->head);
 	}
-	insertNode(c, nn, NULL);
 	theList->size++;
 }
 
@@ -68,7 +68,11 @@ void addLast(LinkedList *theList, Node *nn) {
  */
 void addFirst(LinkedList *theList, Node *nn) {
 	if (theList == NULL || nn == NULL) exit(-99);
-	insertNode(theList->head, nn, theList->head->next);
+	if (theList->size == 0) {
+		insertNode(theList->head, nn, theList->head);
+	} else {
+		insertNode(theList->head, nn, theList->head->next);
+	}
 	theList->size++;
 }
 
@@ -101,11 +105,8 @@ void removeFirst(LinkedList *theList) {
  */
 void removeLast(LinkedList *theList) {
 	if (theList == NULL) exit(-99);
-	Node *c = theList->head;
-	for (int i = 0; i < theList->size; i++) {
-		c = c->next;
-	}
-	deleteNode(c->prev, c, c->next);
+	Node *h = theList->head;
+	deleteNode(h->prev->prev, h->prev, h);
 	theList->size--;
 }
 
@@ -168,16 +169,11 @@ void clearList(LinkedList *theList) {
  *
  * @warning - The passed in LinkedList * theList is checked - if NULL "Empty List" is printed
  */
-void printList(const LinkedList *theList) {
-	if (theList == NULL) {
-		printf("Empty List\n");
-		return;
-	}
-	printf("\n");
+void printList(const LinkedList *theList, FILE *fp) {
+	if (theList == NULL) exit(-99);
 	Node *c = theList->head;
 	for (int i = 0; i < theList->size; i++) {
 		c = c->next;
-		printf("%s\n", c->data);
+		fprintf(fp, "%s\n", c->data);
 	}
-	printf("\n");
 }

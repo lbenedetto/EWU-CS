@@ -7,19 +7,23 @@
 
 #define CONFIG_FILE ".msshrc"
 #define HISTORY_FILE ".msshrc_history"
+#define false 0
+#define true 1
+
 
 int main() {
 	LinkedList *history = linkedList();
+	LinkedList *newHistory = linkedList();
 	LinkedList *aliases = linkedList();
-	int HISTCOUNT = 5;
-	int HISTFILECOUNT = 10;
+	int HISTCOUNT = 100;
+	int HISTFILECOUNT = 1000;
 	char *PATH = getenv("PATH");
 	if (PATH == NULL) PATH = "";
 
 	//Load config file
 	if (doesFileExist(CONFIG_FILE)) {
 		FILE *fin = fopen(CONFIG_FILE, "r");
-		if (fin != NULL) {
+		if (fin != NULL && !isFileEmpty(fin)) {
 			//Read history settings
 			char *line = readLine(fin);
 			//10 is the size of "HISTCOUNT="
@@ -37,7 +41,7 @@ int main() {
 			//Read aliases
 			line = readLine(fin);
 			while (strcmp(line, blank) != 0) {
-				addFirst(aliases, buildNode(line));
+				addFirst(aliases, buildNode(line, false));
 				line = readLine(fin);
 			}
 			free(line);
@@ -50,7 +54,30 @@ int main() {
 			printf("PATH: %s\n", PATH);
 			free(line);
 		} else {
-			printf("%s exists, but could not be opened", CONFIG_FILE);
+			printf("%s exists, but could not be opened or was empty", CONFIG_FILE);
+		}
+	}
+
+	//Load history file
+	if (doesFileExist(HISTORY_FILE)) {
+		FILE *fin = fopen(HISTORY_FILE, "r");
+		if (fin != NULL) {
+			if (!isFileEmpty(fin)) {
+				//Read entire file into linked list
+				char *line = readLine(fin);
+				while (line != NULL) {
+					addLast(history, buildNode(line, false));
+					line = readLine(fin);
+				}
+				free(line);
+				//Remove last until size == HISTFILECOUNT
+				//Make sure to keep it this size
+				while (history->size > HISTFILECOUNT) {
+					removeFirst(history);
+				}
+			}
+		} else {
+			printf("%s exists, but could not be opened", HISTORY_FILE);
 		}
 	}
 
@@ -63,20 +90,31 @@ int main() {
 	strip(s);
 
 	while (strcmp(s, "exit") != 0) {
-		commandCount = countTokens(s, "|");
-		if (commandCount > 1) {
-			argc = makeargss(s, &argv, "|", commandCount);
-			if (argc != -1) {
-				pipeIt(argc, argv);
+		addLast(newHistory, buildNode(s, true));
+		if (strcmp(s, "history") == 0) {
+			printList(history, stdout);
+		} else if (strncmp("alias ", s, 6) == 0) {
+
+		} else if (strncmp("unalias ", s, 8) == 0) {
+
+		} else if (strncmp("cd ", s, 3) == 0) {
+
+		} else {
+			commandCount = countTokens(s, "|");
+			if (commandCount > 1) {
+				argc = makeargss(s, &argv, "|", commandCount);
+				if (argc != -1) {
+					pipeIt(argc, argv);
+				}
+			} else if (commandCount > 0) {
+				argc = makeargs(s, &argv, " ");
+				if (argc != -1)
+					forkIt(argv);
 			}
-		} else if (commandCount > 0) {
-			argc = makeargs(s, &argv, " ");
-			if (argc != -1)
-				forkIt(argv);
-		}
-		if (commandCount > 0) {
-			clean(argc, argv);
-			argv = NULL;
+			if (commandCount > 0) {
+				clean(argc, argv);
+				argv = NULL;
+			}
 		}
 
 		printf("command?: ");
@@ -85,16 +123,26 @@ int main() {
 
 	}// end while
 
-	//TODO: Save history and aliases
+	//Save history
+	while (history->size + newHistory->size > HISTFILECOUNT) {
+		removeFirst(history);
+	}
+	FILE *fp = fopen(HISTORY_FILE, "a");
+	printList(newHistory, fp);
+	//TODO: Save aliases
+
 	//Clean up
 	clearList(aliases);
 	clearList(history);
+	clearList(newHistory);
 	free(aliases);
 	free(history);
+	free(newHistory);
 	free(PATH);
 	PATH = NULL;
 	aliases = NULL;
 	history = NULL;
+	newHistory = NULL;
 	return 0;
 
 }// end main

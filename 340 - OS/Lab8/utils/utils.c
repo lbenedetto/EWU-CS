@@ -8,14 +8,26 @@ int doesFileExist(const char *filename) {
 	return result == 0;
 }
 
+int isFileEmpty(FILE *fp){
+	fseek (fp, 0, SEEK_END);
+	long size = ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+
+	return 0 == size;
+}
+
 char *readLine(FILE *fin) {
 	char *str = NULL;
 	size_t size;
 	ssize_t chars = getline(&str, &size, fin);
-	if (str[chars - 1] == '\n') {
-		str[chars - 1] = '\0';
+	if (chars > 0) {
+		if (str[chars - 1] == '\n') {
+			str[chars - 1] = '\0';
+		}
+		return str;
 	}
-	return str;
+	free(str);
+	return NULL;
 }
 
 void readInt(FILE *fin, int *i) {

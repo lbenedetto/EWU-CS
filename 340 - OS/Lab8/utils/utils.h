@@ -37,10 +37,12 @@ void readInt(FILE *fin, int *i);
  *
  * @param The character array potentially containing a '\r' and/or '\n'
  *
- * @warning - The passed in pointer is checked - exit(-99) if NULL
+ * @warning - int isFileEmpty(FILE *fp){The passed in pointer is checked - exit(-99) if NULL
  */
 void strip(char *array);
 
 char *concat(char *s1, char *s2);
+
+int isFileEmpty(FILE *fp);
 
 #endif // FILEUTIL_H

@@ -19,7 +19,7 @@
 
 #define MAX 100
 
-Node *buildNode(char *passedIn);
+Node *buildNode(char *passedIn, int copy);
 
 void sort(LinkedList *theList);
 

@@ -12,9 +12,12 @@
  * @param *passedIn - The void * for the data type being created
  * @return Node * - Representing a node for the linked list containing the specific data type.
  */
-Node *buildNode(char *passedIn) {
+Node *buildNode(char *passedIn, int copy) {
 	Node *node = calloc(1, sizeof(Node));
-	node->data = passedIn;
+	if (copy) {
+		node->data = calloc(strlen(passedIn) + 1, sizeof(char));
+		strcpy(node->data, passedIn);
+	} else node->data = passedIn;
 	return node;
 }
 
