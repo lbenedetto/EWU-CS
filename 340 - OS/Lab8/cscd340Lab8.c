@@ -109,6 +109,7 @@ void handleCommand(char s[]) {
 			break;
 		}
 		case cmd_cd: {
+			chdir(s + 3);
 			break;
 		}
 		default: {
