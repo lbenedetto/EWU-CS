@@ -1,5 +1,3 @@
-#include <memory.h>
-#include <sys/stat.h>
 #include "utils.h"
 
 int doesFileExist(const char *filename) {
@@ -8,8 +6,8 @@ int doesFileExist(const char *filename) {
 	return result == 0;
 }
 
-int isFileEmpty(FILE *fp){
-	fseek (fp, 0, SEEK_END);
+int isFileEmpty(FILE *fp) {
+	fseek(fp, 0, SEEK_END);
 	long size = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
 

@@ -1,6 +1,5 @@
 #include "./pipes/pipes.h"
 #include "./process/process.h"
-#include "./tokenize/makeArgs.h"
 #include "utils/utils.h"
 #include "linkedlist/linkedList.h"
 #include "linkedlist/listUtils.h"
@@ -58,6 +57,9 @@ int main() {
 			printf("%s exists, but could not be opened or was empty", CONFIG_FILE);
 		}
 	}
+	char pathenv[strlen(PATH) + sizeof("PATH=")];
+	sprintf(pathenv, "PATH=%s", PATH);
+	char *envp[] = {pathenv, NULL};
 	//endregion
 
 	//region Load history file
@@ -93,11 +95,11 @@ int main() {
 
 	while (strcmp(s, "exit") != 0) {
 		//Test if command is alias
-		Node * curr = aliases->head;
+		Node *curr = aliases->head;
 		size_t len = strlen(s);
 		for (int i = 0; i < aliases->size; i++) {
 			curr = curr->next;
-			if(strncmp(s, curr->data, len) == 0){
+			if (strncmp(s, curr->data, len) == 0 && curr->data[len] == '=') {
 				strcpy(s, curr->data + len + 2);
 				len = strlen(s);
 				s[len - 1] = '\0';
@@ -131,12 +133,12 @@ int main() {
 			if (commandCount > 1) {
 				argc = makeargss(s, &argv, "|", commandCount);
 				if (argc != -1) {
-					pipeIt(argc, argv);
+					pipeIt(envp, argc, argv);
 				}
 			} else if (commandCount > 0) {
 				argc = makeargs(s, &argv, " ");
 				if (argc != -1)
-					forkIt(argv);
+					forkIt(envp, argv);
 			}
 			if (commandCount > 0) {
 				clean(argc, argv);

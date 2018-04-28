@@ -113,7 +113,7 @@ char *getNthFromLast(LinkedList *theList, int n) {
 	if (theList == NULL || theList->size < n || n < 0) exit(-99);
 	int diff = theList->size - n;
 	int stop;
-	Node * curr = theList->head;
+	Node *curr = theList->head;
 	if (diff < (theList->size / 2)) {
 		//Walk from front
 		for (int i = 0; i < n; i++) {

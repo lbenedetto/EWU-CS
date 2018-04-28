@@ -1,5 +1,4 @@
 #include "listUtils.h"
-#include "../utils/utils.h"
 
 /**
  * @brief Builds a node that contains a call to a specific type.

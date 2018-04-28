@@ -1,6 +1,4 @@
-#define _GNU_SOURCE
 #include "pipes.h"
-#include "../tokenize/makeArgs.h"
 
 #define std_in 0
 #define std_out 1
@@ -10,7 +8,7 @@
 #define true 1
 
 //https://stackoverflow.com/questions/916900/having-trouble-with-fork-pipe-dup2-and-exec-in-c/
-void pipeIt(int numSize, char **commands) {
+void pipeIt(char *PATH[], int numSize, char **commands) {
 	pid_t pid;
 	int oldFD[2], newFD[2];
 	int res, status;
@@ -40,15 +38,16 @@ void pipeIt(int numSize, char **commands) {
 			char **command;
 			makeargs(commands[i], &command, " ");
 			//TODO: Put actual path here
-//			int result = execvpe(command[0], command, (char *const *) "path");
-			int result = execvp(command[0], command);
-			if (result == -1) exit(-99);
+			execvpe(command[0], command, PATH);
+//			execvp(command[0], command);
+			fprintf(stderr, "failed to execute %s\n", command[0]);
+			exit(-99);
 		} else {
 			if (hasPrev) {
 				close(oldFD[std_in]);
 				close(oldFD[std_out]);
 			}
-			if(hasNext){
+			if (hasNext) {
 				oldFD[std_in] = newFD[std_in];
 				oldFD[std_out] = newFD[std_out];
 			}
@@ -57,7 +56,7 @@ void pipeIt(int numSize, char **commands) {
 		hasNext = false;
 		hasPrev = true;
 	}
-	if(numSize > 1){
+	if (numSize > 1) {
 		close(oldFD[std_in]);
 		close(oldFD[std_out]);
 	}
