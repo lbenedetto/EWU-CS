@@ -22,7 +22,9 @@ char *myPATH;
 #define cmd_alias 3
 #define cmd_unalias 4
 #define cmd_cd 5
-
+#define cmd_histcount 6
+#define cmd_histfilecount 7
+#define cmd_path 8
 
 int getCommandID(char s[]) {
 	if (strcmp(s, "history") == 0) return cmd_history;
@@ -31,6 +33,9 @@ int getCommandID(char s[]) {
 	else if (strncmp("alias ", s, 6) == 0) return cmd_alias;
 	else if (strncmp("unalias ", s, 8) == 0) return cmd_unalias;
 	else if (strncmp("cd ", s, 3) == 0) return cmd_cd;
+	else if (strncmp("HISTCOUNT=", s, 10) == 0) return cmd_histcount;
+	else if (strncmp("HISTFILECOUNT=", s, 14) == 0) return cmd_histfilecount;
+	else if (strncmp("PATH=", s, 5) == 0) return cmd_path;
 	else return -1;
 }
 
@@ -50,8 +55,31 @@ void handleCommand(char s[]) {
 	}
 
 	switch (getCommandID(s)) {
+		case cmd_histcount: {
+			//10 is the size of "HISTCOUNT="
+			HISTCOUNT = atoi(s + 10);
+			break;
+		}
+		case cmd_histfilecount: {
+			//14 is the size of "HISTFILECOUNT="
+			HISTFILECOUNT = atoi(s + 14);
+			break;
+		}
+		case cmd_path: {
+			if (strncmp("$PATH", s + 5, 5) == 0) {
+				myPATH = calloc(strlen(s + 10) + 1, sizeof(char));
+				strcpy(myPATH, s + 10);
+				PATH = concat(PATH, myPATH);
+			} else {
+				myPATH = calloc(strlen(s + 5) + 1, sizeof(char));
+				strcpy(myPATH, s + 5);
+				PATH = myPATH;
+			}
+			printf("PATH: %s\n", PATH);
+			break;
+		}
 		case cmd_history: {
-			printList(history, stdout);
+			printList("", history, stdout);
 			break;
 		}
 		case cmd_bangbang: {
@@ -110,35 +138,12 @@ void execFile(char *filename) {
 	if (doesFileExist(filename)) {
 		FILE *fin = fopen(filename, "r");
 		if (fin != NULL && !isFileEmpty(fin)) {
-			//Read history settings
 			char *line = readLine(fin);
-			//10 is the size of "HISTCOUNT="
-			HISTCOUNT = atoi(line + 10);
-			free(line);
-
-			line = readLine(fin);
-			//14 is the size of "HISTFILECOUNT="
-			HISTFILECOUNT = atoi(line + 14);
-			free(line);
-
-			//Consume blank line
-			char *blank = readLine(fin);
-
-			//Read aliases
-			line = readLine(fin);
-			while (strcmp(line, blank) != 0) {
-				addFirst(aliases, buildNode(line, false));
+			while (line != NULL) {
+				handleCommand(line);
+				free(line);
 				line = readLine(fin);
 			}
-			free(line);
-			free(blank);
-
-			//Read path
-			line = readLine(fin);
-			//10 is the size of "PATH=$PATH"
-			myPATH = line + 10;
-			PATH = concat(PATH, myPATH);
-			printf("PATH: %s\n", PATH);
 		} else {
 			fprintf(stderr, "%s exists, but could not be opened or was empty", filename);
 		}
@@ -173,7 +178,7 @@ void saveConfig() {
 	FILE *fp = fopen(CONFIG_FILE, "w");
 	fprintf(fp, "HISTCOUNT=%d\n", HISTCOUNT);
 	fprintf(fp, "HISTFILECOUNT=%d\n\n", HISTFILECOUNT);
-	printList(aliases, fp);
+	printList("alias ", aliases, fp);
 	fprintf(fp, "\nPATH=$PATH%s", myPATH);
 }
 
@@ -182,7 +187,7 @@ void saveHistory() {
 		removeFirst(history);
 	}
 	FILE *fp = fopen(HISTORY_FILE, "a");
-	printList(newHistory, fp);
+	printList("", newHistory, fp);
 }
 
 void cleanUp() {
@@ -193,25 +198,30 @@ void cleanUp() {
 	free(history);
 	free(newHistory);
 	free(PATH);
-	free(myPATH - 10);
+	free(myPATH);
 	PATH = NULL;
 	aliases = NULL;
 	history = NULL;
 	newHistory = NULL;
 }
-void prompt(char * s){
+
+void prompt(char *s) {
 	printf("command?: ");
 	fgets(s, MAX, stdin);
 	strip(s);
 }
-int main() {
+
+void init() {
 	history = linkedList();
 	newHistory = linkedList();
 	aliases = linkedList();
 	PATH = getenv("PATH");
 	myPATH = "";
 	if (PATH == NULL) PATH = "";
+}
 
+int main() {
+	init();
 	execFile(CONFIG_FILE);
 	loadHistory();
 
@@ -223,7 +233,7 @@ int main() {
 		addLast(newHistory, buildNode(s, true));
 		prompt(s);
 
-	}// end while
+	}
 
 	saveHistory();
 	saveConfig();

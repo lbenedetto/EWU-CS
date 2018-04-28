@@ -190,11 +190,11 @@ void clearList(LinkedList *theList) {
  *
  * @warning - The passed in LinkedList * theList is checked - if NULL "Empty List" is printed
  */
-void printList(const LinkedList *theList, FILE *fp) {
+void printList(char *prefix, const LinkedList *theList, FILE *fp) {
 	if (theList == NULL) exit(-99);
 	Node *c = theList->head;
 	for (int i = 0; i < theList->size; i++) {
 		c = c->next;
-		fprintf(fp, "%s\n", c->data);
+		fprintf(fp, "%s%s\n", prefix, c->data);
 	}
 }
