@@ -18,9 +18,10 @@ int main() {
 	int HISTCOUNT = 100;
 	int HISTFILECOUNT = 1000;
 	char *PATH = getenv("PATH");
+	char *myPATH = "";
 	if (PATH == NULL) PATH = "";
 
-	//Load config file
+	//region Load config file
 	if (doesFileExist(CONFIG_FILE)) {
 		FILE *fin = fopen(CONFIG_FILE, "r");
 		if (fin != NULL && !isFileEmpty(fin)) {
@@ -50,15 +51,16 @@ int main() {
 			//Read path
 			line = readLine(fin);
 			//10 is the size of "PATH=$PATH"
-			PATH = concat(PATH, line + 10);
+			myPATH = line + 10;
+			PATH = concat(PATH, myPATH);
 			printf("PATH: %s\n", PATH);
-			free(line);
 		} else {
 			printf("%s exists, but could not be opened or was empty", CONFIG_FILE);
 		}
 	}
+	//endregion
 
-	//Load history file
+	//region Load history file
 	if (doesFileExist(HISTORY_FILE)) {
 		FILE *fin = fopen(HISTORY_FILE, "r");
 		if (fin != NULL) {
@@ -80,7 +82,7 @@ int main() {
 			printf("%s exists, but could not be opened", HISTORY_FILE);
 		}
 	}
-
+	//endregion
 
 	int argc = 0, commandCount;
 	char **argv = NULL, s[MAX];
@@ -90,6 +92,18 @@ int main() {
 	strip(s);
 
 	while (strcmp(s, "exit") != 0) {
+		//Test if command is alias
+		Node * curr = aliases->head;
+		size_t len = strlen(s);
+		for (int i = 0; i < aliases->size; i++) {
+			curr = curr->next;
+			if(strncmp(s, curr->data, len) == 0){
+				strcpy(s, curr->data + len + 2);
+				len = strlen(s);
+				s[len - 1] = '\0';
+				continue;
+			}
+		}
 		if (strcmp(s, "history") == 0) {
 			printList(history, stdout);
 		} else if (strcmp(s, "!!") == 0) {
@@ -103,9 +117,13 @@ int main() {
 			free(parseMe);
 			continue;
 		} else if (strncmp("alias ", s, 6) == 0) {
-
+			char *alias = calloc(strlen(s) - 5, sizeof(char));
+			strncpy(alias, s + 6, strlen(s) - 6);
+			addFirst(aliases, buildNode(alias, 0));
 		} else if (strncmp("unalias ", s, 8) == 0) {
-
+			char *alias = calloc(strlen(s) - 7, sizeof(char));
+			strncpy(alias, s + 8, strlen(s) - 8);
+			removeItem(aliases, buildNode(alias, 0));
 		} else if (strncmp("cd ", s, 3) == 0) {
 
 		} else {
@@ -139,7 +157,11 @@ int main() {
 	FILE *fp = fopen(HISTORY_FILE, "a");
 	printList(newHistory, fp);
 	//TODO: Save aliases
-
+	fp = fopen(CONFIG_FILE, "w");
+	fprintf(fp, "HISTCOUNT=%d\n", HISTCOUNT);
+	fprintf(fp, "HISTFILECOUNT=%d\n\n", HISTFILECOUNT);
+	printList(aliases, fp);
+	fprintf(fp, "\nPATH=$PATH%s", myPATH);
 	//Clean up
 	clearList(aliases);
 	clearList(history);
@@ -148,6 +170,7 @@ int main() {
 	free(history);
 	free(newHistory);
 	free(PATH);
+	free(myPATH - 10);
 	PATH = NULL;
 	aliases = NULL;
 	history = NULL;
