@@ -1,5 +1,5 @@
 #include <regex.h>
-#include "redirect.h"
+#include "redirects.h"
 #include "../process/process.h"
 #include "../utils/utils.h"
 

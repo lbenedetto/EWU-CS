@@ -21,10 +21,4 @@ bool checkRedirects(char *s, int *inCount, int *outCount);
 
 void redirectIt(char *PATH, char *s, bool isIn, bool isOut);
 
-void fileToCommandToFile(char *PATH, char *s);
-
-void fileToCommand(char *PATH, char *s);
-
-void commandToFile(char *PATH, char *s);
-
 #endif //LAB8_REDIRECT_H

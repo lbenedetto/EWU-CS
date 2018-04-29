@@ -3,7 +3,7 @@
 #include "utils/utils.h"
 #include "linkedlist/linkedList.h"
 #include "linkedlist/listUtils.h"
-#include "redirects/redirect.h"
+#include "redirects/redirects.h"
 #include "stdbool.h"
 #define CONFIG_FILE ".msshrc"
 #define HISTORY_FILE ".msshrc_history"
