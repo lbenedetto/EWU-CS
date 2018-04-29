@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include "utils.h"
 
 int doesFileExist(const char *filename) {
@@ -56,4 +57,23 @@ char *concat(char *s1, char *s2) {
 	strcpy(s3, s1);
 	strcat(s3, s2);
 	return s3;
+}
+
+char *trimWhitespace(char *str) {
+	char *end;
+
+	// Trim leading space
+	while (isspace((unsigned char) *str)) str++;
+
+	if (*str == 0)  // All spaces?
+		return str;
+
+	// Trim trailing space
+	end = str + strlen(str) - 1;
+	while (end > str && isspace((unsigned char) *end)) end--;
+
+	// Write new null terminator
+	*(end + 1) = 0;
+
+	return str;
 }

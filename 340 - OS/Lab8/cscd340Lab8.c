@@ -3,11 +3,10 @@
 #include "utils/utils.h"
 #include "linkedlist/linkedList.h"
 #include "linkedlist/listUtils.h"
-
+#include "redirects/redirect.h"
+#include "stdbool.h"
 #define CONFIG_FILE ".msshrc"
 #define HISTORY_FILE ".msshrc_history"
-#define false 0
-#define true 1
 LinkedList *aliases;
 LinkedList *history;
 LinkedList *newHistory;
@@ -113,22 +112,25 @@ void handleCommand(char s[]) {
 			break;
 		}
 		default: {
-			int argc = 0, commandCount;
-			char **argv = NULL;
-			commandCount = countTokens(s, "|");
+			int commandCount = countTokens(s, "|");
 			if (commandCount > 1) {
-				argc = makeargss(s, &argv, "|", commandCount);
-				if (argc != -1) {
-					pipeIt(PATH, argc, argv);
-				}
+				pipeIt(PATH, s, commandCount);
 			} else if (commandCount > 0) {
-				argc = makeargs(s, &argv, " ");
-				if (argc != -1)
-					forkIt(PATH, argv);
-			}
-			if (commandCount > 0) {
-				clean(argc, argv);
-				argv = NULL;
+				int inCount;
+				int outCount;
+				bool hasRedirects = checkRedirects(s, &inCount, &outCount);
+				if(hasRedirects){
+					if(inCount > 1 || outCount > 1) fprintf(stderr, "Unsupported number of redirects");
+					if(inCount == 1 && outCount == 1){
+						fileToCommandToFile(PATH, s);
+					}else if(inCount == 1){
+						fileToCommand(PATH, s);
+					}else if(outCount == 1){
+						commandToFile(PATH, s);
+					}
+				}else{
+					forkIt(PATH, s);
+				}
 			}
 			break;
 		}

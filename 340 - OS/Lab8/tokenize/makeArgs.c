@@ -1,8 +1,6 @@
 #include "makeArgs.h"
-
-#define bool int
-#define false 0
-#define true 1
+#include "stdbool.h"
+#include "../utils/utils.h"
 
 int countTokens(char *s, const char *t) {
 	int size;
@@ -25,14 +23,15 @@ void clean(int argc, char **argv) {
 	for (x = 0; x < argc + 1; x++)
 		free(argv[x]);
 	free(argv);
-}// end clean
+}
 
 void printargs(int argc, char **argv) {
 	int x;
 	for (x = 0; x < argc; x++)
 		printf("%s\n", argv[x]);
 
-}// end printargs
+}
+
 int makeargss(char *s, char ***argv, char *t, int size) {
 	char *token;
 	char *save = s;
@@ -46,6 +45,7 @@ int makeargss(char *s, char ***argv, char *t, int size) {
 
 	/* walk through other tokens */
 	while (token != NULL) {
+		token = trimWhitespace(token);
 		argv[0][i] = malloc((strlen(token) + 1) * sizeof(char));
 		strcpy(argv[0][i], token);
 		token = strtok_r(NULL, t, &save);
@@ -56,10 +56,7 @@ int makeargss(char *s, char ***argv, char *t, int size) {
 }
 
 int makeargs(char *s, char ***argv, char *t) {
-
-	/* make some room */
 	int size = countTokens(s, t);
 	if (size == 0) return -1;
 	return makeargss(s, argv, t, size);
-
-}// end makeArgs
+}

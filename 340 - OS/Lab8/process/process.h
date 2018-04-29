@@ -10,6 +10,6 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
-void forkIt(char *PATH, char **argv);
+void forkIt(char *PATH, char *s);
 
 #endif

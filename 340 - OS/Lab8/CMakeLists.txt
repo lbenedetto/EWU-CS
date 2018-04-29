@@ -8,4 +8,5 @@ add_executable(mssh cscd340Lab8.c
 		process/process.h process/process.c
 		pipes/pipes.h pipes/pipes.c
 		linkedlist/linkedList.c linkedlist/listUtils.h
-		linkedlist/listUtils.c linkedlist/listUtils.h)
+		linkedlist/listUtils.c linkedlist/listUtils.h
+		redirects/redirect.c redirects/redirect.h)

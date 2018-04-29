@@ -47,4 +47,6 @@ char *concat(char *s1, char *s2);
 
 int isFileEmpty(FILE *fp);
 
+char *trimWhitespace(char *str);
+
 #endif // FILEUTIL_H
