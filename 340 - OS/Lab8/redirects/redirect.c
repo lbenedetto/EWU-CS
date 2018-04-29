@@ -1,6 +1,7 @@
+#include <regex.h>
 #include "redirect.h"
-#include "../tokenize/makeArgs.h"
 #include "../process/process.h"
+#include "../utils/utils.h"
 
 bool checkRedirects(char *s, int *inCount, int *outCount) {
 	*inCount = 0;
@@ -12,32 +13,40 @@ bool checkRedirects(char *s, int *inCount, int *outCount) {
 	if (inCount > 0 || outCount > 0) return true;
 }
 
-void genericRedirect(char *PATH, char *s, char *separator, char *fileType, FILE *replacementTarget) {
-	char **parts;
-	int argc = makeargs(s, &parts, separator);
-	if (argc == 2) {
-		int status;
-		pid_t pid = fork();
-		if (pid == child) {
-			freopen(parts[1], fileType, replacementTarget);
-			forkIt(PATH, parts[0]);
-			exit(0);
-		} else {
-			waitpid(pid, &status, 0);
-		}
-	} else {
-		fprintf(stderr, "Incorrect args in commandToFile");
+char *getRedirect(char *s, char start, char stop) {
+	int i = 0;
+	while (s[i++] != start);
+	int startIndex = i;
+	while (s[i++] == ' ');
+	while (s[i] != ' ' && s[i] != stop && s[i] != 0) i++;
+	int endIndex = i;
+	int size = endIndex - startIndex;
+	char *redirect = calloc((size + 1), sizeof(char));
+	strncpy(redirect, s + startIndex, (size_t) size);
+	if (startIndex > 0) startIndex--;
+	for (i = startIndex; i < endIndex; i++) {
+		s[i] = ' ';
 	}
+	return redirect;
 }
 
-void fileToCommandToFile(char *PATH, char *s) {
-
-}
-
-void fileToCommand(char *PATH, char *s) {
-	genericRedirect(PATH, s, "<", "r", stdin);
-}
-
-void commandToFile(char *PATH, char *s) {
-	genericRedirect(PATH, s, ">", "w", stdout);
+void redirectIt(char *PATH, char *s, bool isIn, bool isOut) {
+	int status;
+	pid_t pid = fork();
+	if (pid == child) {
+		if (isOut) {
+			char * out = getRedirect(s, '>', '<');
+			freopen(trimWhitespace(out), "w", stdout);
+			free(out);
+		}
+		if (isIn) {
+			char *in = getRedirect(s, '<', '>');
+			freopen(trimWhitespace(in), "r", stdin);
+			free(in);
+		}
+		forkIt(PATH, trimWhitespace(s));
+		exit(0);
+	} else {
+		waitpid(pid, &status, 0);
+	}
 }

@@ -121,13 +121,14 @@ void handleCommand(char s[]) {
 				bool hasRedirects = checkRedirects(s, &inCount, &outCount);
 				if(hasRedirects){
 					if(inCount > 1 || outCount > 1) fprintf(stderr, "Unsupported number of redirects");
-					if(inCount == 1 && outCount == 1){
-						fileToCommandToFile(PATH, s);
-					}else if(inCount == 1){
-						fileToCommand(PATH, s);
-					}else if(outCount == 1){
-						commandToFile(PATH, s);
-					}
+					redirectIt(PATH, s, inCount == 1, outCount == 1);
+//					if(inCount == 1 && outCount == 1){
+//						fileToCommandToFile(PATH, s);
+//					}else if(inCount == 1){
+//						fileToCommand(PATH, s);
+//					}else if(outCount == 1){
+//						commandToFile(PATH, s);
+//					}
 				}else{
 					forkIt(PATH, s);
 				}

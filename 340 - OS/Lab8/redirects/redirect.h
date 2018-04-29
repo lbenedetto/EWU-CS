@@ -19,7 +19,7 @@
 
 bool checkRedirects(char *s, int *inCount, int *outCount);
 
-void redirectIt(char *PATH, char *s, bool isOut, bool isIn);
+void redirectIt(char *PATH, char *s, bool isIn, bool isOut);
 
 void fileToCommandToFile(char *PATH, char *s);
 
