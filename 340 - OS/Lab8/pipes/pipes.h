@@ -14,6 +14,6 @@
 #include "../process/process.h"
 #include "../command/command.h"
 
-void pipeIt(char *s, int commandCount,  bool isSilent);
+void pipeIt(char *s, int commandCount);
 
 #endif 

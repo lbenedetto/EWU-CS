@@ -5,7 +5,7 @@
 #define child 0
 
 //https://stackoverflow.com/questions/916900/having-trouble-with-fork-pipe-dup2-and-exec-in-c/
-void pipeIt(char *s, int commandCount, bool isSilent) {
+void pipeIt(char *s, int commandCount) {
 	char **commands = NULL;
 	int argc = makeargss(s, &commands, "|", commandCount);
 	if (argc != -1) {
@@ -35,7 +35,7 @@ void pipeIt(char *s, int commandCount, bool isSilent) {
 					dup2(newFD[std_out], std_out);
 					close(newFD[std_in]);
 				}
-				handleCommand(commands[i], isSilent);
+				handleCommand(commands[i], true);
 				exit(0);
 			} else {
 				if (hasPrev) {

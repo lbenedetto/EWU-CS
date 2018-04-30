@@ -134,6 +134,13 @@ char *getLast(LinkedList *theList) {
 	return "";
 }
 
+char *get2ndToLast(LinkedList *theList) {
+	if (theList->head->prev != NULL)
+		if (theList->head->prev->prev != NULL)
+			return theList->head->prev->prev->data;
+	return "";
+}
+
 /**
  * @brief The remove item function for the linked list
  *

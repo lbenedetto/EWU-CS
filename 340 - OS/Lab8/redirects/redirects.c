@@ -27,7 +27,7 @@ char *getRedirect(char *s, char start, char stop) {
 	return redirect;
 }
 
-void redirectIt(char *s, bool isIn, bool isOut, bool isSilent) {
+void redirectIt(char *s, bool isIn, bool isOut) {
 	int status;
 	pid_t pid = fork();
 	if (pid == child) {
@@ -41,7 +41,7 @@ void redirectIt(char *s, bool isIn, bool isOut, bool isSilent) {
 			freopen(trimWhitespace(in), "r", stdin);
 			free(in);
 		}
-		handleCommand(trimWhitespace(s), isSilent);
+		handleCommand(trimWhitespace(s), true);
 		exit(0);
 	} else {
 		waitpid(pid, &status, 0);

@@ -31,7 +31,7 @@ void removeLast(LinkedList *theList);
 char *getNthFromLast(LinkedList *theList, int n);
 
 char *getLast(LinkedList *theList);
-
+char *get2ndToLast(LinkedList *theList);
 void removeItem(LinkedList *theList, Node *nn);
 
 void clearList(LinkedList *theList);

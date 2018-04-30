@@ -11,6 +11,6 @@
 
 bool checkRedirects(char *s, int *inCount, int *outCount);
 
-void redirectIt(char *s, bool isIn, bool isOut, bool isSilent);
+void redirectIt(char *s, bool isIn, bool isOut);
 
 #endif //LAB8_REDIRECT_H

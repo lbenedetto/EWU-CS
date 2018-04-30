@@ -24,6 +24,7 @@ int getCommandID(char s[]) {
 }
 
 void handleCommand(char s[], bool isSilent) {
+	if (!isSilent) addLast(newHistory, buildNode(s, true));
 	//Test if command is alias
 	Node *curr = aliases->head;
 	size_t len = strlen(s);
@@ -33,7 +34,7 @@ void handleCommand(char s[], bool isSilent) {
 			strcpy(s, curr->data + len + 2);
 			len = strlen(s);
 			s[len - 1] = '\0';
-			handleCommand(s, isSilent);
+			handleCommand(s, true);
 			return;
 		}
 	}
@@ -50,6 +51,8 @@ void handleCommand(char s[], bool isSilent) {
 			break;
 		}
 		case cmd_path: {
+			if (myPATH[0] != 0)
+				free(myPATH);
 			if (strncmp("$PATH", s + 5, 5) == 0) {
 				myPATH = calloc(strlen(s + 10) + 1, sizeof(char));
 				strcpy(myPATH, s + 10);
@@ -67,17 +70,17 @@ void handleCommand(char s[], bool isSilent) {
 			break;
 		}
 		case cmd_bangbang: {
-			strcpy(s, getLast(newHistory));
-			handleCommand(s, isSilent);
+			strcpy(s, get2ndToLast(newHistory));
+			handleCommand(s, true);
 			break;
 		}
 		case cmd_bangN: {
 			char *parseMe = calloc(strlen(s) + 1, sizeof(char));
 			strcpy(parseMe, s);
 			int n = atoi(parseMe + 1);
-			strcpy(s, getNthFromLast(newHistory, n));
+			strcpy(s, getNthFromLast(newHistory, n + 1));
 			free(parseMe);
-			handleCommand(s, isSilent);
+			handleCommand(s, true);
 			break;
 		}
 		case cmd_alias: {
@@ -109,14 +112,14 @@ void handleCommand(char s[], bool isSilent) {
 		default: {
 			int commandCount = countTokens(s, "|");
 			if (commandCount > 1) {
-				pipeIt(s, commandCount, isSilent);
+				pipeIt(s, commandCount);
 			} else if (commandCount > 0) {
 				int inCount;
 				int outCount;
 				bool hasRedirects = checkRedirects(s, &inCount, &outCount);
 				if (hasRedirects) {
 					if (inCount > 1 || outCount > 1) fprintf(stderr, "Unsupported number of redirects\n");
-					redirectIt(s, inCount == 1, outCount == 1, isSilent);
+					redirectIt(s, inCount == 1, outCount == 1);
 				} else {
 					forkIt(PATH, s);
 				}
@@ -124,7 +127,6 @@ void handleCommand(char s[], bool isSilent) {
 			break;
 		}
 	}
-	if (!isSilent) addLast(newHistory, buildNode(s, true));
 }
 
 
