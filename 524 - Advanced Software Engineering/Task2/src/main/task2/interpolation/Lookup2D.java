@@ -3,13 +3,13 @@ package task2.interpolation;
 //=============================================================================================================================================================
 
 /**
- * Performs two-dimensional task2.interpolation as defined in the task writeup.
+ * Performs two-dimensional task2.task2.interpolation as defined in the task writeup.
  */
-public class Lookup2D extends A_Lookup {
+class Lookup2D extends A_Lookup {
 	private Pair.Pair2D[] coordinates;
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	public Lookup2D(double[][] plane) {
+	Lookup2D(double[][] plane) {
 		coordinates = new Pair.Pair2D[plane.length - 1];
 		for (int i = 1; i < plane.length; i++) {
 			//In this case, 2D-Pair is a mapping of latitude to a 1D row (rowLabel,row)
@@ -26,7 +26,7 @@ public class Lookup2D extends A_Lookup {
 	 * @param longitude - the independent variable in row order in the data file
 	 * @return the dependent variable
 	 */
-	public double resolveDependentVariable(final double latitude, final double longitude) {
+	double resolveDependentVariable(final double latitude, final double longitude) {
 		//TODO: Maybe fix these having to be backwards?
 		return interpolate(coordinates, longitude, latitude);
 	}

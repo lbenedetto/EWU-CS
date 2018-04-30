@@ -1,36 +1,21 @@
-package task2.interpolation;//=============================================================================================================================================================
+package task2.interpolation;
 
-/**
- * Defines the shared elements of the lookup subclasses.
- */
-public abstract class A_Lookup {
-	// ---------------------------------------------------------------------------------------------------------------------------------------------------------
-
+abstract class A_Lookup {
 	/**
-	 * Creates a lookup.
-	 */
-	public A_Lookup() {
-	}
-
-	// ---------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	/**
-	 * Performs linear task2.interpolation to determine the dependent variable based on the independent variable.
+	 * Performs linear interpolation to determine the dependent variable based on the independent variable.
 	 *
-	 * @param iv      - the independent variable, which must lie inclusively between {@code independentVariableOpen} and
-	 *                {@code independentVariableClose}
-	 * @param ivOpen  - the value of the independent data element at or immediately before {@code independentVariable}
-	 * @param ivClose - the value of the independent data element at or immediately after {@code independentVariable}
-	 * @param dvOpen  - the value of the dependent data element corresponding to {@code independentVariableOpen}
-	 * @param dvClose - the value of the dependent data element corresponding to {@code independentVariableClose}
+	 * @param iv      - the independent variable, which must lie inclusively between {@code ivOpen} and {@code ivClose}
+	 * @param ivOpen  - the x value before iv
+	 * @param ivClose - the x value after iv
+	 * @param dvOpen  - the y value corresponding to ivOpen
+	 * @param dvClose - the y value corresponding to ivClose
 	 * @return the interpolated value
 	 */
-	protected double interpolate(final double iv,
-	                             final double ivOpen,
-	                             final double ivClose,
-	                             final double dvOpen,
-	                             final double dvClose) {
-		// add your task2.interpolation code here
+	private static double interpolate(final double iv,
+	                                  final double ivOpen,
+	                                  final double ivClose,
+	                                  final double dvOpen,
+	                                  final double dvClose) {
 		if (ivClose == ivOpen) return dvOpen;
 
 		var d1 = iv - ivOpen;
@@ -38,7 +23,6 @@ public abstract class A_Lookup {
 		var d3 = dvClose - dvOpen;
 		var d4 = d1 / d2;
 		var d5 = d4 * d3;
-		System.out.printf("Intermediary: %.2f\n", d5 + dvOpen);
 		return d5 + dvOpen;
 	}
 

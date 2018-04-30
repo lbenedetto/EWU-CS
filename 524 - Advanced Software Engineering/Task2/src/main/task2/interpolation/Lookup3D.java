@@ -3,7 +3,7 @@ package task2.interpolation;
 //=============================================================================================================================================================
 
 /**
- * Performs three-dimensional task2.interpolation as defined in the task writeup.
+ * Performs three-dimensional task2.task2.interpolation as defined in the task writeup.
  */
 public class Lookup3D extends A_Lookup {
 	private Pair.Pair3D[] coordinates;
