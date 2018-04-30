@@ -1,0 +1,24 @@
+history
+ls -l
+pwd
+cd ..
+pwd
+ls -l | wc -w
+ls -l | cut -c 1,2,3 | wc -w
+echo "!3"
+echo "!!"
+!!
+!3
+LA
+alias test="echo "success""
+test
+unalias test
+test
+alias lsall="ls -al"
+lsall | wc -w
+ls > ls.txt
+cat <ls.txt >cat.txt
+cat cat.txt
+rm ls.txt
+rm cat.txt
+history

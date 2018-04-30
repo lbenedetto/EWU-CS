@@ -129,7 +129,9 @@ char *getNthFromLast(LinkedList *theList, int n) {
 }
 
 char *getLast(LinkedList *theList) {
-	return theList->head->prev->data;
+	if (theList->head->prev != NULL)
+		return theList->head->prev->data;
+	return "";
 }
 
 /**

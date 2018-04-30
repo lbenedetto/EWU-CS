@@ -4,7 +4,8 @@
 #include "linkedlist/linkedList.h"
 #include "linkedlist/listUtils.h"
 #include "redirects/redirects.h"
-#include "stdbool.h"
+//#include "cscd340Lab8.h"
+
 #define CONFIG_FILE ".msshrc"
 #define HISTORY_FILE ".msshrc_history"
 LinkedList *aliases;
@@ -14,7 +15,7 @@ int HISTCOUNT = 100;
 int HISTFILECOUNT = 1000;
 char *PATH;
 char *myPATH;
-
+char startDir[1024];
 #define cmd_history 0
 #define cmd_bangbang 1
 #define cmd_bangN 2
@@ -24,6 +25,11 @@ char *myPATH;
 #define cmd_histcount 6
 #define cmd_histfilecount 7
 #define cmd_path 8
+#define cmd_exec 9
+
+void handleCommand(char s[]);
+
+void execFile(char *filename, bool silent);
 
 int getCommandID(char s[]) {
 	if (strcmp(s, "history") == 0) return cmd_history;
@@ -35,6 +41,7 @@ int getCommandID(char s[]) {
 	else if (strncmp("HISTCOUNT=", s, 10) == 0) return cmd_histcount;
 	else if (strncmp("HISTFILECOUNT=", s, 14) == 0) return cmd_histfilecount;
 	else if (strncmp("PATH=", s, 5) == 0) return cmd_path;
+	else if (strncmp("exec ", s, 5) == 0) return cmd_exec;
 	else return -1;
 }
 
@@ -78,7 +85,7 @@ void handleCommand(char s[]) {
 			break;
 		}
 		case cmd_history: {
-			printList("", history, stdout);
+			printList("\t", history, stdout);
 			break;
 		}
 		case cmd_bangbang: {
@@ -102,13 +109,23 @@ void handleCommand(char s[]) {
 			break;
 		}
 		case cmd_unalias: {
-			char *alias = calloc(strlen(s) - 7, sizeof(char));
-			strncpy(alias, s + 8, strlen(s) - 8);
-			removeItem(aliases, buildNode(alias, 0));
-			break;
+			curr = aliases->head;
+			len = strlen(s) - 8;
+			for (int i = 0; i < aliases->size; i++) {
+				curr = curr->next;
+				if (strncmp(s + 8, curr->data, len) == 0) {
+					deleteNode(curr->prev, curr, curr->next);
+					aliases->size--;
+					return;
+				}
+			}
 		}
 		case cmd_cd: {
 			chdir(s + 3);
+			break;
+		}
+		case cmd_exec: {
+			execFile(s + 5, false);
 			break;
 		}
 		default: {
@@ -119,17 +136,10 @@ void handleCommand(char s[]) {
 				int inCount;
 				int outCount;
 				bool hasRedirects = checkRedirects(s, &inCount, &outCount);
-				if(hasRedirects){
-					if(inCount > 1 || outCount > 1) fprintf(stderr, "Unsupported number of redirects");
+				if (hasRedirects) {
+					if (inCount > 1 || outCount > 1) fprintf(stderr, "Unsupported number of redirects\n");
 					redirectIt(PATH, s, inCount == 1, outCount == 1);
-//					if(inCount == 1 && outCount == 1){
-//						fileToCommandToFile(PATH, s);
-//					}else if(inCount == 1){
-//						fileToCommand(PATH, s);
-//					}else if(outCount == 1){
-//						commandToFile(PATH, s);
-//					}
-				}else{
+				} else {
 					forkIt(PATH, s);
 				}
 			}
@@ -138,19 +148,26 @@ void handleCommand(char s[]) {
 	}
 }
 
-void execFile(char *filename) {
+void execFile(char *filename, bool silent) {
 	if (doesFileExist(filename)) {
 		FILE *fin = fopen(filename, "r");
-		if (fin != NULL && !isFileEmpty(fin)) {
-			char *line = readLine(fin);
-			while (line != NULL) {
-				handleCommand(line);
-				free(line);
-				line = readLine(fin);
+		if (fin != NULL) {
+			if (!isFileEmpty(fin)) {
+				char *line = readLine(fin);
+				while (line != NULL) {
+					if(!silent) printf("~~Executing Command: %s\n", line);
+					handleCommand(line);
+					if(!silent) addLast(newHistory, buildNode(line, true));
+					free(line);
+					line = readLine(fin);
+				}
 			}
+			fclose(fin);
 		} else {
-			fprintf(stderr, "%s exists, but could not be opened or was empty", filename);
+			fprintf(stderr, "%s exists, but could not be opened or was empty\n", filename);
 		}
+	}else{
+		fprintf(stderr, "%s does not exist\n", filename);
 	}
 }
 
@@ -172,26 +189,39 @@ void loadHistory() {
 					removeFirst(history);
 				}
 			}
+			fclose(fin);
 		} else {
-			fprintf(stderr, "%s exists, but could not be opened", HISTORY_FILE);
+			fprintf(stderr, "%s exists, but could not be opened\n", HISTORY_FILE);
 		}
 	}
 }
 
 void saveConfig() {
 	FILE *fp = fopen(CONFIG_FILE, "w");
-	fprintf(fp, "HISTCOUNT=%d\n", HISTCOUNT);
-	fprintf(fp, "HISTFILECOUNT=%d\n\n", HISTFILECOUNT);
-	printList("alias ", aliases, fp);
-	fprintf(fp, "\nPATH=$PATH%s", myPATH);
+	if (fp != NULL) {
+		fprintf(fp, "HISTCOUNT=%d\n", HISTCOUNT);
+		fprintf(fp, "HISTFILECOUNT=%d\n\n", HISTFILECOUNT);
+		printList("alias ", aliases, fp);
+		fprintf(fp, "\nPATH=$PATH%s", myPATH);
+		fclose(fp);
+	} else {
+		fprintf(stderr, "Could not save config\n");
+	}
+
 }
 
 void saveHistory() {
 	while (history->size + newHistory->size > HISTFILECOUNT) {
 		removeFirst(history);
 	}
-	FILE *fp = fopen(HISTORY_FILE, "a");
-	printList("", newHistory, fp);
+	FILE *fp = fopen(HISTORY_FILE, "w");
+	if (fp != NULL) {
+		printList("", history, fp);
+		printList("", newHistory, fp);
+		fclose(fp);
+	} else {
+		fprintf(stderr, "Could not save history\n");
+	}
 }
 
 void cleanUp() {
@@ -207,6 +237,7 @@ void cleanUp() {
 	aliases = NULL;
 	history = NULL;
 	newHistory = NULL;
+	myPATH = NULL;
 }
 
 void prompt(char *s) {
@@ -222,11 +253,12 @@ void init() {
 	PATH = getenv("PATH");
 	myPATH = "";
 	if (PATH == NULL) PATH = "";
+	getcwd(startDir, sizeof(startDir));
 }
 
 int main() {
 	init();
-	execFile(CONFIG_FILE);
+	execFile(CONFIG_FILE, true);
 	loadHistory();
 
 	char s[MAX];
@@ -239,6 +271,7 @@ int main() {
 
 	}
 
+	chdir(startDir);
 	saveHistory();
 	saveConfig();
 	cleanUp();

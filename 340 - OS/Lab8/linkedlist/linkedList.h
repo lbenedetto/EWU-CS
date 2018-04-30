@@ -38,4 +38,6 @@ void clearList(LinkedList *theList);
 
 void printList(char *prefix, const LinkedList *theList, FILE *fp);
 
+void deleteNode(Node *p, Node *d, Node *n);
+
 #endif // LINKEDLIST_H
