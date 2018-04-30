@@ -1,12 +1,11 @@
 #include "pipes.h"
-#include "stdbool.h"
 
 #define std_in 0
 #define std_out 1
 #define child 0
 
 //https://stackoverflow.com/questions/916900/having-trouble-with-fork-pipe-dup2-and-exec-in-c/
-void pipeIt(char *PATH, char *s, int commandCount) {
+void pipeIt(char *s, int commandCount, bool isSilent) {
 	char **commands = NULL;
 	int argc = makeargss(s, &commands, "|", commandCount);
 	if (argc != -1) {
@@ -36,14 +35,8 @@ void pipeIt(char *PATH, char *s, int commandCount) {
 					dup2(newFD[std_out], std_out);
 					close(newFD[std_in]);
 				}
-				char **command;
-				makeargs(commands[i], &command, " ");
-				char pathenv[strlen(PATH) + sizeof("PATH=")];
-				sprintf(pathenv, "PATH=%s", PATH);
-				char *envp[] = {pathenv, NULL};
-				execvpe(command[0], command, envp);
-				fprintf(stderr, "failed to execute %s\n", command[0]);
-				exit(-99);
+				handleCommand(commands[i], isSilent);
+				exit(0);
 			} else {
 				if (hasPrev) {
 					close(oldFD[std_in]);

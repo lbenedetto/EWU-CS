@@ -63,7 +63,7 @@ void sortArray(GenericArray *array, int length, int (*compar)(const void *v1, co
     for (int i = 0; i < length; i++) {
         int min = 0;
         for (int search = i; search < length; search++) {
-            if (compar((void *) array[search].data, (void *) array[min].data) < 0) {
+            if (compar(array[search].data, array[min].data) < 0) {
                 GenericArray temp = array[min];
                 array[min] = array[search];
                 array[search] = temp;

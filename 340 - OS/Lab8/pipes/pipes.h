@@ -11,8 +11,9 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include "../tokenize/makeArgs.h"
+#include "../process/process.h"
+#include "../command/command.h"
 
-void pipeIt(char *PATH, char *s, int commandCount);
-
+void pipeIt(char *s, int commandCount,  bool isSilent);
 
 #endif 

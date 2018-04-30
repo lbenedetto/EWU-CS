@@ -3,4 +3,4 @@ HISTFILECOUNT=100
 
 alias LA="ls -a"
 
-PATH=$PATH:/data/myprogs
+PATH=$PATH:/data/myprogs:/home/EASTERN/lbenedetto/Software/idea-IU-181.4445.78/bin

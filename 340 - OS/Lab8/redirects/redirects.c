@@ -1,7 +1,4 @@
-#include <regex.h>
 #include "redirects.h"
-#include "../process/process.h"
-#include "../utils/utils.h"
 
 bool checkRedirects(char *s, int *inCount, int *outCount) {
 	*inCount = 0;
@@ -10,7 +7,7 @@ bool checkRedirects(char *s, int *inCount, int *outCount) {
 		if (s[i] == '<') *inCount = *inCount + 1;
 		else if (s[i] == '>') *outCount = *outCount + 1;
 	}
-	if (inCount > 0 || outCount > 0) return true;
+	return *inCount > 0 || *outCount > 0;
 }
 
 char *getRedirect(char *s, char start, char stop) {
@@ -30,12 +27,12 @@ char *getRedirect(char *s, char start, char stop) {
 	return redirect;
 }
 
-void redirectIt(char *PATH, char *s, bool isIn, bool isOut) {
+void redirectIt(char *s, bool isIn, bool isOut, bool isSilent) {
 	int status;
 	pid_t pid = fork();
 	if (pid == child) {
 		if (isOut) {
-			char * out = getRedirect(s, '>', '<');
+			char *out = getRedirect(s, '>', '<');
 			freopen(trimWhitespace(out), "w", stdout);
 			free(out);
 		}
@@ -44,7 +41,7 @@ void redirectIt(char *PATH, char *s, bool isIn, bool isOut) {
 			freopen(trimWhitespace(in), "r", stdin);
 			free(in);
 		}
-		forkIt(PATH, trimWhitespace(s));
+		handleCommand(trimWhitespace(s), isSilent);
 		exit(0);
 	} else {
 		waitpid(pid, &status, 0);
