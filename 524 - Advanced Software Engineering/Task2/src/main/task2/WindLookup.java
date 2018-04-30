@@ -94,7 +94,7 @@ public class WindLookup {
 		return degrees + (minutes / 60.0) + (seconds / 3600.0);
 	}
 
-	public static int[] decodeChar(char c) {
+	private static int[] decodeChar(char c) {
 		if (('A' <= c && c <= 'N') || ('a' <= c && c <= 'z') || c == '.') {
 			int x = (c < 'a') ? c - 'A' + 26 : c - 'a';
 			if (c == '.') x = -1;

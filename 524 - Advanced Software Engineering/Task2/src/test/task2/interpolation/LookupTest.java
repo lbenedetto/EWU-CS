@@ -1,11 +1,9 @@
-import task2.interpolation.Lookup1D;
-import task2.interpolation.Lookup2D;
-import task2.interpolation.Lookup3D;
+package task2.interpolation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LookupTest {
+class LookupTest {
 	private static final double EPSILON = 0.0000001;
 	@Test
 	void test1DLookup() {

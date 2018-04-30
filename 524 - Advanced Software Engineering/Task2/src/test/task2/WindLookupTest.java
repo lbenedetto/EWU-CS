@@ -1,5 +1,6 @@
+package task2;
+
 import org.junit.jupiter.api.Test;
-import task2.WindLookup;
 
 import java.util.Arrays;
 
@@ -94,14 +95,15 @@ public class WindLookupTest {
 	}
 
 	@Test
-	void decodeValidChar() {
-		System.out.printf("testing %s, expecting %d,%d\n", '.', 0, 0);
-		compareWind(WindLookup.decodeChar('.'), new int[]{0, 0});
+	void decodeValidChar() throws Exception {
+		var method = WindLookup.class.getDeclaredMethod("decodeChar", char.class);
+		method.setAccessible(true);
+		compareWind((int []) method.invoke(null, '.'), new int[]{0, 0});
 		int i = 0;
 		for (int d = 0; d < 360; d += 45) {
 			for (int s = 10; s < 60; s += 10) {
 				System.out.printf("testing %s, expecting %d,%d\n", chars[i], d, s);
-				compareWind(WindLookup.decodeChar(chars[i]), new int[]{d, s});
+				compareWind((int []) method.invoke(null, chars[i]), new int[]{d, s});
 				i++;
 			}
 		}
@@ -112,23 +114,25 @@ public class WindLookupTest {
 	}
 
 	@Test
-	void decodeInvalidChar() {
+	void decodeInvalidChar() throws Exception{
+        var method = WindLookup.class.getDeclaredMethod("decodeChar", char.class);
+        method.setAccessible(true);
 		for (char c = 0; c < 127; c++) {
 			if (('A' <= c && c <= 'N') || ('a' <= c && c <= 'z') || c == '.') continue;
 			System.out.printf("Testing invalid char '%s'\n", c);
 			final char in = c;
-			assertThrows(RuntimeException.class, () -> WindLookup.decodeChar(in));
+			assertThrows(RuntimeException.class, () -> method.invoke(null, in));
 		}
 	}
 
 	private static String printCube(double[][][] cube) {
 		var b = new StringBuilder();
-		for (int i = 0; i < cube.length; i++) {
-			for (int j = 0; j < cube[i].length; j++) {
-				b.append(Arrays.toString(cube[i][j])).append("\n");
-			}
-			b.append("\n");
-		}
+        for (double[][] aCube : cube) {
+            for (double[] anACube : aCube) {
+                b.append(Arrays.toString(anACube)).append("\n");
+            }
+            b.append("\n");
+        }
 		return b.toString();
 	}
 }
