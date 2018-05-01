@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "command.h"
 
 LinkedList *aliases;
@@ -141,7 +142,7 @@ void handleCommand(char s[], bool isSilent) {
 }
 
 
-void execFile(char *filename, bool silent) {
+void execFile(char *filename, bool isSilent) {
 	if (doesFileExist(filename)) {
 		FILE *fin = fopen(filename, "r");
 		if (fin != NULL) {
@@ -157,8 +158,8 @@ void execFile(char *filename, bool silent) {
 				for(int i = 0; i < fileContents->size; i++){
 					curr = curr->next;
 					line = curr->data;
-					if (!silent) printf("~~Executing Command: %s\n", line);
-					handleCommand(line, silent);
+					if (!isSilent) printf("~~Executing Command: %s\n", line);
+					handleCommand(line, isSilent);
 				}
 				clearList(fileContents);
 				free(fileContents);

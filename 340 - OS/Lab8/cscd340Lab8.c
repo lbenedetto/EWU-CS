@@ -1,10 +1,4 @@
 #include "./pipes/pipes.h"
-#include "./process/process.h"
-#include "utils/utils.h"
-#include "linkedlist/linkedList.h"
-#include "linkedlist/listUtils.h"
-#include "redirects/redirects.h"
-#include "command/command.h"
 
 void prompt(char *s) {
 	printf("command?: ");
@@ -18,11 +12,28 @@ int main() {
 	loadHistory();
 
 	char s[MAX];
-	prompt(s);
 
-	while (strcmp(s, "exit") != 0) {
-		handleCommand(s, false);
+	if (!isatty(fileno(stdin))) {
+		LinkedList *fileContents = linkedList();
+		while (fgets(s, MAX, stdin) != NULL) {
+			strip(s);
+			addLast(fileContents, buildNode(s, true));
+		}
+		Node *curr = fileContents->head;
+		for (int i = 0; i < fileContents->size; i++) {
+			curr = curr->next;
+			printf("~~Executing Command: %s\n", curr->data);
+			strcpy(s, curr->data);
+			handleCommand(s, false);
+		}
+		clearList(fileContents);
+		free(fileContents);
+	} else {
 		prompt(s);
+		while (strcmp(s, "exit") != 0) {
+			handleCommand(s, false);
+			prompt(s);
+		}
 	}
 
 	chdir(getStartDir());

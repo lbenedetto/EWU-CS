@@ -24,7 +24,7 @@
 
 void handleCommand(char s[], bool isSilent);
 
-void execFile(char *filename, bool silent);
+void execFile(char *filename, bool isSilent);
 
 void loadHistory();
 
@@ -36,6 +36,6 @@ void cleanUp();
 
 void init();
 
-char* getStartDir();
+char *getStartDir();
 
 #endif //LAB8_COMMAND_H
