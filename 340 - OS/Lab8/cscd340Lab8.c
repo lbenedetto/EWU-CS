@@ -30,5 +30,4 @@ int main() {
 	saveConfig();
 	cleanUp();
 	return 0;
-
 }

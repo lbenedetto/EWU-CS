@@ -2,7 +2,6 @@
 
 LinkedList *aliases;
 LinkedList *history;
-LinkedList *newHistory;
 int HISTCOUNT = 100;
 int HISTFILECOUNT = 1000;
 char *PATH;
@@ -24,7 +23,12 @@ int getCommandID(char s[]) {
 }
 
 void handleCommand(char s[], bool isSilent) {
-	if (!isSilent) addLast(newHistory, buildNode(s, true));
+	int commandID = getCommandID(s);
+	if (!isSilent
+	    && commandID != cmd_bangbang
+	    && commandID != cmd_bangN
+	    && strcmp(s, getLast(history)) != 0)
+		addLast(history, buildNode(s, true));
 	//Test if command is alias
 	Node *curr = aliases->head;
 	size_t len = strlen(s);
@@ -39,15 +43,21 @@ void handleCommand(char s[], bool isSilent) {
 		}
 	}
 
-	switch (getCommandID(s)) {
+	switch (commandID) {
 		case cmd_histcount: {
 			//10 is the size of "HISTCOUNT="
-			HISTCOUNT = atoi(s + 10);
+			int n = (int) strtol(s + 10, NULL, 10);
+			if (n < 0)
+				fprintf(stderr, "Invalid HISTCOUNT");
+			HISTCOUNT = n;
 			break;
 		}
 		case cmd_histfilecount: {
 			//14 is the size of "HISTFILECOUNT="
-			HISTFILECOUNT = atoi(s + 14);
+			int n = (int) strtol(s + 14, NULL, 10);
+			if (n < 0)
+				fprintf(stderr, "Invalid HISTFILECOUNT");
+			HISTFILECOUNT = n;
 			break;
 		}
 		case cmd_path: {
@@ -66,19 +76,19 @@ void handleCommand(char s[], bool isSilent) {
 			break;
 		}
 		case cmd_history: {
-			printList("\t", history, stdout);
+			printLastN("\t", history, HISTCOUNT);
 			break;
 		}
 		case cmd_bangbang: {
-			strcpy(s, get2ndToLast(newHistory));
+			strcpy(s, getLast(history));
 			handleCommand(s, true);
 			break;
 		}
 		case cmd_bangN: {
 			char *parseMe = calloc(strlen(s) + 1, sizeof(char));
 			strcpy(parseMe, s);
-			int n = atoi(parseMe + 1);
-			strcpy(s, getNthFromLast(newHistory, n + 1));
+			int n = (int) strtol(parseMe + 1, NULL, 10);
+			strcpy(s, getNthFromLast(history, n));
 			free(parseMe);
 			handleCommand(s, true);
 			break;
@@ -182,7 +192,7 @@ void saveConfig() {
 	if (fp != NULL) {
 		fprintf(fp, "HISTCOUNT=%d\n", HISTCOUNT);
 		fprintf(fp, "HISTFILECOUNT=%d\n\n", HISTFILECOUNT);
-		printList("alias ", aliases, fp);
+		fprintList("alias ", aliases, fp);
 		fprintf(fp, "\nPATH=$PATH%s", myPATH);
 		fclose(fp);
 	} else {
@@ -192,13 +202,12 @@ void saveConfig() {
 }
 
 void saveHistory() {
-	while (history->size + newHistory->size > HISTFILECOUNT) {
+	while (history->size > HISTFILECOUNT) {
 		removeFirst(history);
 	}
 	FILE *fp = fopen(HISTORY_FILE, "w");
 	if (fp != NULL) {
-		printList("", history, fp);
-		printList("", newHistory, fp);
+		fprintList("", history, fp);
 		fclose(fp);
 	} else {
 		fprintf(stderr, "Could not save history\n");
@@ -208,23 +217,19 @@ void saveHistory() {
 void cleanUp() {
 	clearList(aliases);
 	clearList(history);
-	clearList(newHistory);
 	free(aliases);
 	free(history);
-	free(newHistory);
 	free(PATH);
 	free(myPATH);
 	PATH = NULL;
 	aliases = NULL;
 	history = NULL;
-	newHistory = NULL;
 	myPATH = NULL;
 }
 
 
 void init() {
 	history = linkedList();
-	newHistory = linkedList();
 	aliases = linkedList();
 	PATH = getenv("PATH");
 	myPATH = "";

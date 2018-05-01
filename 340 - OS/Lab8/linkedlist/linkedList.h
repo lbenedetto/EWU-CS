@@ -31,12 +31,14 @@ void removeLast(LinkedList *theList);
 char *getNthFromLast(LinkedList *theList, int n);
 
 char *getLast(LinkedList *theList);
-char *get2ndToLast(LinkedList *theList);
+
 void removeItem(LinkedList *theList, Node *nn);
 
 void clearList(LinkedList *theList);
 
-void printList(char *prefix, const LinkedList *theList, FILE *fp);
+void fprintList(char *prefix, const LinkedList *theList, FILE *fp);
+
+void printLastN(char *prefix, const LinkedList *theList, int n);
 
 void deleteNode(Node *p, Node *d, Node *n);
 

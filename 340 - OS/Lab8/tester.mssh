@@ -16,7 +16,7 @@ unalias test
 test
 alias lsall="ls -al"
 lsall | wc -w
-ls > ls.txt
+lsall > ls.txt
 cat <ls.txt >cat.txt
 cat cat.txt
 rm ls.txt
