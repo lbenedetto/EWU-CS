@@ -8,6 +8,7 @@ void forkIt(char *PATH, char *s) {
 		int status;
 		pid_t pid = fork();
 		if (pid == 0) {
+			//TODO: Make sure PATH is actually working
 			char pathenv[strlen(PATH) + sizeof("PATH=")];
 			sprintf(pathenv, "PATH=%s", PATH);
 			char *envp[] = {pathenv, NULL};

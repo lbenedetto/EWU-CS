@@ -86,11 +86,10 @@ void handleCommand(char s[], bool isSilent) {
 			break;
 		}
 		case cmd_bangN: {
-			//TODO: This is actually Nth from beginning of history
 			char *parseMe = calloc(strlen(s) + 1, sizeof(char));
 			strcpy(parseMe, s);
 			int n = (int) strtol(parseMe + 1, NULL, 10);
-			strcpy(s, getNthFromLast(history, n));
+			strcpy(s, getNth(history, n));
 			free(parseMe);
 			handleCommand(s, true);
 			break;
@@ -147,15 +146,15 @@ void execFile(char *filename, bool isSilent) {
 		FILE *fin = fopen(filename, "r");
 		if (fin != NULL) {
 			if (!isFileEmpty(fin)) {
-				LinkedList* fileContents = linkedList();
+				LinkedList *fileContents = linkedList();
 				char *line = readLine(fin);
 				while (line != NULL) {
 					addLast(fileContents, buildNode(line, false));
 					line = readLine(fin);
 				}
 				free(line);
-				Node* curr = fileContents->head;
-				for(int i = 0; i < fileContents->size; i++){
+				Node *curr = fileContents->head;
+				for (int i = 0; i < fileContents->size; i++) {
 					curr = curr->next;
 					line = curr->data;
 					if (!isSilent) printf("~~Executing Command: %s\n", line);

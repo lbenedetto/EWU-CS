@@ -1,0 +1,3 @@
+As planned, I was able to reach 100% code coverage, though the focus ended up being mainly on integration testing. Testing the base level methods was not useful, as they were just simple math and were already known to be correct. However, integration testing every higher order method was very useful.
+
+Dependency inject did not turn out to be useful/possible in this situation

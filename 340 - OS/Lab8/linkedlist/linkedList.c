@@ -50,28 +50,11 @@ void removeFirst(LinkedList *theList) {
 	theList->size--;
 }
 
-void removeLast(LinkedList *theList) {
-	if (theList == NULL) exit(-99);
-	Node *h = theList->head;
-	deleteNode(h->prev->prev, h->prev, h);
-	theList->size--;
-}
-
-char *getNthFromLast(LinkedList *theList, int n) {
+char *getNth(LinkedList *theList, int n) {
 	if (theList == NULL || theList->size < n || n < 0) exit(-99);
-	int diff = theList->size - n;
-	int stop;
-	Node *curr = theList->head;
-	if (diff < (theList->size / 2)) {
-		//Walk from front
-		for (int i = 0; i < n; i++) {
-			curr = curr->next;
-		}
-	} else {
-		//Walk from back
-		for (int i = 0; i < n; i++) {
-			curr = curr->prev;
-		}
+	Node *curr = theList->head->next;
+	for (int i = 0; i < n; i++) {
+		curr = curr->next;
 	}
 	return curr->data;
 }
@@ -80,21 +63,6 @@ char *getLast(LinkedList *theList) {
 	if (theList->head->prev != NULL)
 		return theList->head->prev->data;
 	return "";
-}
-
-void removeItem(LinkedList *theList, Node *nn) {
-	if (theList == NULL || nn == NULL) exit(-99);
-	Node *c = theList->head;
-	for (int i = 0; i < theList->size; i++) {
-		c = c->next;
-		if (strcmp(c->data, nn->data) == 0) {
-			deleteNode(c->prev, c, c->next);
-			theList->size--;
-			break;
-		}
-	}
-	free(nn->data);
-	free(nn);
 }
 
 void clearList(LinkedList *theList) {
@@ -128,6 +96,6 @@ void printLastN(char *prefix, const LinkedList *theList, int n) {
 	}
 	for (i; i < theList->size - 1; i++) {
 		c = c->next;
-		printf("%s%s\n", prefix, c->data);
+		printf("%s%d %s\n", prefix, i, c->data);
 	}
 }
