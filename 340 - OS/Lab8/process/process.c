@@ -9,10 +9,8 @@ void forkIt(char *PATH, char *s) {
 		pid_t pid = fork();
 		if (pid == 0) {
 			//TODO: Make sure PATH is actually working
-			char pathenv[strlen(PATH) + sizeof("PATH=")];
-			sprintf(pathenv, "PATH=%s", PATH);
-			char *envp[] = {pathenv, NULL};
-			execvpe(argv[0], argv, envp);
+			setenv("PATH", PATH, 1);
+			execvp(argv[0], argv);
 			fprintf(stderr, "failed to execute %s\n", argv[0]);
 			exit(-99);
 		} else {
