@@ -97,7 +97,19 @@ void handleCommand(char s[], bool isSilent) {
 		case cmd_alias: {
 			char *alias = calloc(strlen(s) - 5, sizeof(char));
 			strncpy(alias, s + 6, strlen(s) - 6);
-			addFirst(aliases, buildNode(alias, 0));
+			curr = aliases->head;
+			bool isAlreadyAlias = false;
+			int stop = 6;
+			while(s[stop++] != '=');
+			for (int i = 0; i < aliases->size; i++) {
+				curr = curr->next;
+				if (strncmp(s + 6, curr->data, (size_t) (stop - 6)) == 0) {
+					isAlreadyAlias = true;
+					fprintf(stderr, "Alias %s already exists", s + 6);
+				}
+			}
+			if (!isAlreadyAlias)
+				addFirst(aliases, buildNode(alias, 0));
 			break;
 		}
 		case cmd_unalias: {

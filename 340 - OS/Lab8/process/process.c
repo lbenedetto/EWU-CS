@@ -8,7 +8,6 @@ void forkIt(char *PATH, char *s) {
 		int status;
 		pid_t pid = fork();
 		if (pid == 0) {
-			//TODO: Make sure PATH is actually working
 			setenv("PATH", PATH, 1);
 			execvp(argv[0], argv);
 			fprintf(stderr, "failed to execute %s\n", argv[0]);
