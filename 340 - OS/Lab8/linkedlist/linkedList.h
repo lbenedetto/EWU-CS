@@ -34,6 +34,8 @@ void clearList(LinkedList *theList);
 
 void fprintList(char *prefix, const LinkedList *theList, FILE *fp);
 
+void printList(const LinkedList *theList);
+
 void printLastN(char *prefix, const LinkedList *theList, int n);
 
 void deleteNode(Node *p, Node *d, Node *n);

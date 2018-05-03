@@ -38,7 +38,6 @@ int main() {
 
 	chdir(getStartDir());
 	saveHistory();
-	saveConfig();
 	cleanUp();
 	return 0;
 }

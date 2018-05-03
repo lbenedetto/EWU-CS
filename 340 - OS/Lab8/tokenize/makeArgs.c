@@ -37,7 +37,7 @@ int makeargss(char *s, char ***argv, char *t, int size) {
 	char *save = s;
 	int i = 0;
 
-	argv[0] = malloc((size + 1) * sizeof(char **));
+	argv[0] = calloc(((size_t) size) + 1, sizeof(char **));
 	if (!argv[0]) return -1;
 
 	/* get the first token */
@@ -46,12 +46,12 @@ int makeargss(char *s, char ***argv, char *t, int size) {
 	/* walk through other tokens */
 	while (token != NULL) {
 		token = trimWhitespace(token);
-		argv[0][i] = malloc((strlen(token) + 1) * sizeof(char));
+		argv[0][i] = calloc(strlen(token) + 1, sizeof(char));
 		strcpy(argv[0][i], token);
 		token = strtok_r(NULL, t, &save);
 		i++;
 	}
-	argv[0][i] = (char *) NULL;
+	argv[0][i] = '\0';
 	return i;
 }
 

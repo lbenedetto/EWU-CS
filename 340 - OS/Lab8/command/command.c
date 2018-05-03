@@ -13,17 +13,20 @@ int getCommandID(char s[]) {
 	if (strcmp(s, "history") == 0) return cmd_history;
 	else if (strcmp(s, "!!") == 0) return cmd_bangbang;
 	else if (strncmp("!", s, 1) == 0) return cmd_bangN;
-	else if (strncmp("alias ", s, 6) == 0) return cmd_alias;
+	else if (strncmp("alias", s, 5) == 0) return cmd_alias;
 	else if (strncmp("unalias ", s, 8) == 0) return cmd_unalias;
 	else if (strncmp("cd ", s, 3) == 0) return cmd_cd;
 	else if (strncmp("HISTCOUNT=", s, 10) == 0) return cmd_histcount;
 	else if (strncmp("HISTFILECOUNT=", s, 14) == 0) return cmd_histfilecount;
 	else if (strncmp("PATH=", s, 5) == 0) return cmd_path;
 	else if (strncmp("exec ", s, 5) == 0) return cmd_exec;
+	else if (strncmp("exit", s, 4) == 0) return cmd_exit;
 	else return -1;
 }
 
-void handleCommand(char s[], bool isSilent) {
+void handleCommand(char in[], bool isSilent) {
+	char s[MAX];
+	strcpy(s, in);
 	int commandID = getCommandID(s);
 	if (!isSilent
 	    && commandID != cmd_bangbang
@@ -95,21 +98,26 @@ void handleCommand(char s[], bool isSilent) {
 			break;
 		}
 		case cmd_alias: {
-			char *alias = calloc(strlen(s) - 5, sizeof(char));
-			strncpy(alias, s + 6, strlen(s) - 6);
-			curr = aliases->head;
-			bool isAlreadyAlias = false;
-			int stop = 6;
-			while(s[stop++] != '=');
-			for (int i = 0; i < aliases->size; i++) {
-				curr = curr->next;
-				if (strncmp(s + 6, curr->data, (size_t) (stop - 6)) == 0) {
-					isAlreadyAlias = true;
-					fprintf(stderr, "Alias %s already exists", s + 6);
+			if (strlen(s) == 5) {
+				printList(aliases);
+			} else {
+				curr = aliases->head;
+				bool isAlreadyAlias = false;
+				int stop = 6;
+				while (s[stop++] != '=');
+				for (int i = 0; i < aliases->size; i++) {
+					curr = curr->next;
+					if (strncmp(s + 6, curr->data, (size_t) (stop - 6)) == 0) {
+						isAlreadyAlias = true;
+						free(curr->data);
+						curr->data = calloc(strlen(s) - 5, sizeof(char));
+						strcpy(curr->data, s + 6);
+						break;
+					}
 				}
+				if (!isAlreadyAlias)
+					addFirst(aliases, buildNode(s + 6, 1));
 			}
-			if (!isAlreadyAlias)
-				addFirst(aliases, buildNode(alias, 0));
 			break;
 		}
 		case cmd_unalias: {
@@ -131,6 +139,12 @@ void handleCommand(char s[], bool isSilent) {
 		case cmd_exec: {
 			execFile(s + 5, false);
 			break;
+		}
+		case cmd_exit: {
+			chdir(getStartDir());
+			saveHistory();
+			cleanUp();
+			exit(0);
 		}
 		default: {
 			int commandCount = countTokens(s, "|");
@@ -207,20 +221,6 @@ void loadHistory() {
 			fprintf(stderr, "%s exists, but could not be opened\n", HISTORY_FILE);
 		}
 	}
-}
-
-void saveConfig() {
-	FILE *fp = fopen(CONFIG_FILE, "w");
-	if (fp != NULL) {
-		fprintf(fp, "HISTCOUNT=%d\n", HISTCOUNT);
-		fprintf(fp, "HISTFILECOUNT=%d\n\n", HISTFILECOUNT);
-		fprintList("alias ", aliases, fp);
-		fprintf(fp, "\nPATH=$PATH%s", myPATH);
-		fclose(fp);
-	} else {
-		fprintf(stderr, "Could not save config\n");
-	}
-
 }
 
 void saveHistory() {

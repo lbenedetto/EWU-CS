@@ -159,7 +159,7 @@ class MazeView : View {
             xCoord = 0f
             while (tileX < 14) {
                 //The second digit is number of 90degree rotations to apply to the sprite
-                val temp = maze[tileY][tileX].split("".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                val temp = maze[tileY][tileX].split("")
                 val wall = intArrayOf(Integer.valueOf(temp[1]), Integer.valueOf(temp[2]))
                 val bitmap = bitmaps[wall[0]]
                 transformer.reset()

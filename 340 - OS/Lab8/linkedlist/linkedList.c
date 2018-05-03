@@ -84,6 +84,15 @@ void fprintList(char *prefix, const LinkedList *theList, FILE *fp) {
 	}
 }
 
+void printList(const LinkedList *theList) {
+	if (theList == NULL) exit(-99);
+	Node *c = theList->head;
+	for (int i = 0; i < theList->size; i++) {
+		c = c->next;
+		printf("%s\n", c->data);
+	}
+}
+
 void printLastN(char *prefix, const LinkedList *theList, int n) {
 	if (theList == NULL) exit(-99);
 	int startIX = theList->size - n;

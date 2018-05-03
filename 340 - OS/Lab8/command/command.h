@@ -19,6 +19,7 @@
 #define cmd_histfilecount 7
 #define cmd_path 8
 #define cmd_exec 9
+#define cmd_exit 10
 #define CONFIG_FILE ".msshrc"
 #define HISTORY_FILE ".msshrc_history"
 
