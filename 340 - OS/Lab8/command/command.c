@@ -8,6 +8,7 @@ int HISTFILECOUNT = 1000;
 char *PATH;
 char *myPATH;
 char startDir[1024];
+bool pathWasAlloced = false;
 
 int getCommandID(char s[]) {
 	if (strcmp(s, "history") == 0) return cmd_history;
@@ -76,6 +77,7 @@ void handleCommand(char in[], bool isSilent) {
 				strcpy(myPATH, s + 5);
 				PATH = myPATH;
 			}
+			pathWasAlloced = true;
 			printf("PATH: %s\n", PATH);
 			break;
 		}
@@ -241,8 +243,10 @@ void cleanUp() {
 	clearList(history);
 	free(aliases);
 	free(history);
-	free(PATH);
-	free(myPATH);
+	if (pathWasAlloced) {
+		free(PATH);
+		free(myPATH);
+	}
 	PATH = NULL;
 	aliases = NULL;
 	history = NULL;
