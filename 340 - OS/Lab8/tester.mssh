@@ -3,6 +3,8 @@ ls -l
 pwd
 cd ..
 pwd
+cd ~
+pwd
 ls -l | wc -w
 ls -l | cut -c 1,2,3 | wc -w
 echo "!3"

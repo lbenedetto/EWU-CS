@@ -135,7 +135,14 @@ void handleCommand(char in[], bool isSilent) {
 			}
 		}
 		case cmd_cd: {
-			chdir(s + 3);
+			if (strncmp(s + 3, "~", 1) == 0) {
+				char *home = getenv("HOME");
+				char *new = concat(home, s + 4);
+				chdir(new);
+				free(new);
+			} else {
+				chdir(s + 3);
+			}
 			break;
 		}
 		case cmd_exec: {
