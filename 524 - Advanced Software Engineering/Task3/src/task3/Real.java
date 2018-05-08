@@ -6,20 +6,27 @@ public class Real {
 	private int valueBits;
 	private int shiftBits;
 	private int maxVal;
+	private int maxShift;
+	private boolean isNegative;
 
 	public Real(int valueBits, int shiftBits, float encodeValue) {
 		if (valueBits + shiftBits > 32) throw new RuntimeException("Invalid size (>32)");
-		var str = String.valueOf(encodeValue);
-		shift = str.indexOf('.');
-		if (shift == -1)
-			shift = str.length();
-		str = str.replace(".", "");
-		value = Integer.valueOf(str);
 		this.valueBits = valueBits;
 		this.shiftBits = shiftBits;
 		this.maxVal = (int) Math.pow(2, valueBits) - 1;
-		if (value > maxVal)
-			throw new RuntimeException("Size exceeds max size capable of being stored in this representation in this configuration");
+		this.maxShift = (int) Math.pow(2, shiftBits) - 1;
+
+		if (encodeValue < 0) {
+			encodeValue = encodeValue * -1;
+			isNegative = true;
+		}
+
+		if (encodeValue > maxVal) encodeValue = maxVal;
+		while (encodeValue != (int) encodeValue) {
+			encodeValue *= 10;
+			shift++;
+		}
+		value = (int) encodeValue;
 	}
 
 	public Real add(Real b) {
@@ -63,12 +70,12 @@ public class Real {
 	}
 
 	public float getValue() {
-		var str = String.valueOf(value);
-		str = String.format("%s.%s", str.substring(0, shift), str.substring(shift));
-		var fl = Float.valueOf(str);
-		if (fl > maxVal)
-			throw new RuntimeException("Size exceeds max size capable of being stored in this representation in this configuration");
-		return fl;
+		float temp = value;
+		int i = 0;
+		while (i < shift) {
+			temp /= 10;
+			i++;
+		}
+		return isNegative ? temp * -1 : temp;
 	}
-
 }

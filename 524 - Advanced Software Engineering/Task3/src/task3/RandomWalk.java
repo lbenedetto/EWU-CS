@@ -30,9 +30,10 @@ public class RandomWalk {
 			fx += nx;
 			fy += ny;
 			fz += nz;
-			rx.add(new Real(valueBits, shiftBits, nx));
-			ry.add(new Real(valueBits, shiftBits, ny));
-			rz.add(new Real(valueBits, shiftBits, nz));
+			rx = rx.add(new Real(valueBits, shiftBits, nx));
+			ry = ry.add(new Real(valueBits, shiftBits, ny));
+			rz = rz.add(new Real(valueBits, shiftBits, nz));
+			System.out.printf("diff: %f\n", fx - rx.getValue());
 		}
 		return (float) Math.sqrt(Math.pow(fx - rx.getValue(), 2) + Math.pow(fy - ry.getValue(), 2) + Math.pow(fz - rz.getValue(), 2));
 	}
