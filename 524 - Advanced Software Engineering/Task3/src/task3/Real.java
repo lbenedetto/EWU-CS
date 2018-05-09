@@ -17,14 +17,19 @@ public class Real {
 		this.maxShift = (int) Math.pow(2, shiftBits) - 1;
 
 		if (encodeValue < 0) {
-			encodeValue = encodeValue * -1;
+			encodeValue = encodeValue * -1f;
 			isNegative = true;
 		}
-
 		if (encodeValue > maxVal) encodeValue = maxVal;
 		while (encodeValue != (int) encodeValue) {
-			encodeValue *= 10;
+			encodeValue *= 10d;
 			shift++;
+		}
+		while (encodeValue > maxVal) {
+			encodeValue /= 10d;
+			encodeValue = (int) encodeValue;
+			shift--;
+
 		}
 		value = (int) encodeValue;
 	}
@@ -73,7 +78,7 @@ public class Real {
 		float temp = value;
 		int i = 0;
 		while (i < shift) {
-			temp /= 10;
+			temp /= 10f;
 			i++;
 		}
 		return isNegative ? temp * -1 : temp;

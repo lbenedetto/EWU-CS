@@ -33,7 +33,6 @@ public class RandomWalk {
 			rx = rx.add(new Real(valueBits, shiftBits, nx));
 			ry = ry.add(new Real(valueBits, shiftBits, ny));
 			rz = rz.add(new Real(valueBits, shiftBits, nz));
-			System.out.printf("diff: %f\n", fx - rx.getValue());
 		}
 		return (float) Math.sqrt(Math.pow(fx - rx.getValue(), 2) + Math.pow(fy - ry.getValue(), 2) + Math.pow(fz - rz.getValue(), 2));
 	}
@@ -41,6 +40,4 @@ public class RandomWalk {
 	private float getNextRandomFloat(Random random) {
 		return (random.nextFloat() - .5f) * 1000000f;
 	}
-
-
 }
