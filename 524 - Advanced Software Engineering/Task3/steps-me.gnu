@@ -3,7 +3,7 @@ set xlabel 'valueBits'
 set ylabel 'shiftBits'
 set zlabel 'mean error'
 set xyplane at 0
-splot '-' with lines title columnheader(1), '-' with lines title columnheader(1), '-' with lines title columnheader(1), '-' with lines title columnheader(1), '-' with lines title columnheader(1),
+splot '-' with points pointtype 5 pointsize 1 palette linewidth 30 title columnheader(1), '-' with points pointtype 5 pointsize 1 palette linewidth 30 title columnheader(1), '-' with points pointtype 5 pointsize 1 palette linewidth 30 title columnheader(1)
 "steps = 1"
 1 0 337385.7
 1 1 337385.7

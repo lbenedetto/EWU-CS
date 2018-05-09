@@ -3,7 +3,7 @@ set xlabel 'valueBits'
 set ylabel 'shiftBits'
 set zlabel 'stdev error'
 set xyplane at 0
-splot '-' with lines title columnheader(1), '-' with lines title columnheader(1), '-' with lines title columnheader(1), '-' with lines title columnheader(1), '-' with lines title columnheader(1),
+splot '-' with lines title columnheader(1), '-' with lines title columnheader(1), '-' with lines title columnheader(1)
 "steps = 1"
 1 0 0.34375
 1 1 0.34375
