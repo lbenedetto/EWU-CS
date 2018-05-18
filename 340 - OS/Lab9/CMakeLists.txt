@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.9.6)
+project(Lab9)
+configure_file(setup.txt setup.txt COPYONLY)
+configure_file(test.txt test.txt COPYONLY)
+add_executable(lab9 main.c)
