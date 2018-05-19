@@ -21,12 +21,37 @@ void readInt(FILE *fin, int *i) {
 	free(temp);
 }
 
+struct PTE {
+	int pageFrame;
+	int currentBit;
+};
+
+struct PF {
+	int pageNum;
+};
+
 int main() {
 	FILE *f1 = fopen("setup.txt", "r");
 	int vas, pageSize, pas;
 	readInt(f1, &vas);
 	readInt(f1, &pageSize);
 	readInt(f1, &pas);
-	int numPages = vas / pageSize;
+	fclose(f1);
+	int numVirtualPages = vas / pageSize;
+	int numPhysicalPages = pas / pageSize;
+
+	struct PTE pte[numVirtualPages];
+	struct PF pf[numPhysicalPages];
+
+	f1 = fopen("test.txt", "r");
+	char *line = readLine(f1);
+	while (line != NULL) {
+		int i;
+		sscanf(line, "%d", &i);
+		free(line);
+
+
+		line = readLine(f1);
+	}
 
 }
