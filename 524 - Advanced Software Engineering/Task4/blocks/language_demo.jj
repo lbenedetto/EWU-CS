@@ -1,0 +1,231 @@
+options
+{
+  DEBUG_PARSER = false;
+  STATIC       = false;
+}
+
+PARSER_BEGIN(BuilderParserDemo)
+
+package cs524builder.parserdemo;
+
+import java.util.*;
+import java.io.*;
+
+//=============================================================================================================================================================
+/**
+ * Defines a demo parser that reads simple function calls from a source file.  The grammar allows calls like these:
+ *
+ * <code>
+ * function();
+ * function(a);
+ * function(a,b);
+ * function(a,b,c);
+ * </code>
+ *
+ * with the output:
+ *
+ * <code>
+ * arguments: []
+ * arguments: [a]
+ * arguments: [a, b]
+ * arguments: [a, b, c]
+ * </code>
+ *
+ * It does not write anything to the output file.
+ *
+ * @author Dan Tappan [06.02.13]
+ */
+public class BuilderParserDemo{
+   /** the fully qualified output filename of the Gnuplot file */
+   private String _outputFilenameFull;
+   
+   // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+   /**
+    * Creates a parser.  Call <tt>parse()</tt> to execute it.
+    *
+    * @param inputFilenameFull - the fully qualified input filename of the tank source file
+    * @param outputFilenameFull - the fully qualified output filename of the Gnuplot file
+    *
+    * @throws IOException if there is any file error
+    */
+   public BuilderParserDemo(final String inputFilenameFull, final String outputFilenameFull) throws IOException{
+      this(new BufferedReader(new FileReader(inputFilenameFull)));
+
+      assert (outputFilenameFull != null);
+
+      _outputFilenameFull = outputFilenameFull;
+   }
+}
+
+PARSER_END(BuilderParserDemo)
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+SKIP : // whitespace
+{
+    " "
+  | "\f"
+  | "\n"
+  | "\r"
+  | "\t"
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+MORE : // comments
+{
+  "//" : IN_SINGLE_LINE_COMMENT
+|
+  "/*" : IN_MULTI_LINE_COMMENT
+}
+
+<IN_SINGLE_LINE_COMMENT>
+SPECIAL_TOKEN :
+{
+  <SINGLE_LINE_COMMENT: "\n" | "\r" | "\r\n" > : DEFAULT
+}
+
+<IN_MULTI_LINE_COMMENT>
+SPECIAL_TOKEN :
+{
+  <MULTI_LINE_COMMENT: "*/" > : DEFAULT
+}
+
+<IN_SINGLE_LINE_COMMENT, IN_MULTI_LINE_COMMENT>
+MORE :
+{
+  < ~[] >
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOKEN : // keywords
+{
+    < DAN : "dan" >
+  | < STU : "stu" >
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOKEN : // operators
+{
+    < ASSIGN : "=" >
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOKEN : // delimiters
+{
+    < COLON     : ":"  >
+  | < COMMA     : ","  >
+  | < LBRACE    : "{"  >
+  | < RBRACE    : "}"  >
+  | < LBRACKET  : "["  >
+  | < RBRACKET  : "]"  >
+  | < LPAREN    : "("  >
+  | < RPAREN    : ")"  >
+  | < SEMICOLON : ";"  >
+  | < SQUOTE    : "'"  >
+  | < DQUOTE    : "\"" >
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOKEN : // literals
+{
+    < #PATTERN_DECIMAL      : ["0"-"9"] >
+
+  | < LITERAL_NUMBER        : ( <LITERAL_INTEGER> | <LITERAL_REAL> ) >
+     
+  | < LITERAL_INTEGER       : ("+"|"-")? ( <PATTERN_DECIMAL> )+ >
+  | < LITERAL_REAL          : ("+"|"-")? ( <PATTERN_DECIMAL> )+ "." ( <PATTERN_DECIMAL> )+ >
+
+  | < LITERAL_STRING :
+    "\""
+    (
+      ( ~["\""] )
+    )*
+    "\""
+    >
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOKEN : // identifiers
+{
+    < IDENTIFIER : <LETTER> ( <LETTER> | <DIGIT> )* >
+  | < #LETTER : ["a"-"z", "A"-"Z", "_"] >
+  | < #DIGIT  : ["0"-"9"] >
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+public void parse() :
+{
+   List<String> arguments;
+}
+{
+  (  
+     arguments = Function()
+
+     <SEMICOLON>
+
+     {
+        System.out.println("arguments: "+ arguments);
+     }
+  )*
+
+  <EOF>
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+private List<String> Function() :
+{
+   List<String> arguments = new ArrayList<String>(); 
+   
+   String argument;
+}
+{
+   <IDENTIFIER>
+
+   <LPAREN>
+
+   [
+      argument = Variable()
+      {
+         arguments.add(argument);
+      }
+
+      (
+         <COMMA>
+     
+         argument = Variable()
+         {
+            arguments.add(argument);
+         }
+      )*
+   ]
+   
+   <RPAREN>
+
+   {
+      return arguments;
+   }
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+private String Variable() :
+{
+   String variable;
+}
+{
+   <IDENTIFIER>
+
+   {
+      variable = token.image;
+
+      return variable;
+   }
+}

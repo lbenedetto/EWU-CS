@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<TITLE>BNF for language.jj</TITLE>
+</HEAD>
+<BODY>
+<H1 ALIGN=CENTER>BNF for language.jj</H1>
+<H2 ALIGN=CENTER>TOKENS</H2>
+<TABLE>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; SKIP : {
+" "
+| "\f"
+| "\n"
+| "\r"
+| "\t"
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; MORE : {
+"//" : IN_SINGLE_LINE_COMMENT
+| "/*" : IN_MULTI_LINE_COMMENT
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;IN_SINGLE_LINE_COMMENT&gt; SPECIAL : {
+&lt;SINGLE_LINE_COMMENT: "\n" | "\r" | "\r\n"&gt; : DEFAULT
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;IN_MULTI_LINE_COMMENT&gt; SPECIAL : {
+&lt;MULTI_LINE_COMMENT: "*/"&gt; : DEFAULT
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;IN_SINGLE_LINE_COMMENT,IN_MULTI_LINE_COMMENT&gt; MORE : {
+&lt;~[]&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; TOKEN : {
+&lt;AT: "at"&gt;
+| &lt;COLOR: "color"&gt;
+| &lt;CONNECTS_TO: "connectsTo"&gt;
+| &lt;DEFINE: "define"&gt;
+| &lt;EXPORT_TO_GNUPLOT: "exportToGnuplot"&gt;
+| &lt;ID: "id"&gt;
+| &lt;NEW: "new"&gt;
+| &lt;PRINT_XML: "printXML"&gt;
+| &lt;SOCKET: "socket"&gt;
+| &lt;VOLUME: "volume"&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; TOKEN : {
+&lt;ASSIGN: "="&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; TOKEN : {
+&lt;COLON: ":"&gt;
+| &lt;COMMA: ","&gt;
+| &lt;LBRACE: "{"&gt;
+| &lt;RBRACE: "}"&gt;
+| &lt;LBRACKET: "["&gt;
+| &lt;RBRACKET: "]"&gt;
+| &lt;LPAREN: "("&gt;
+| &lt;RPAREN: ")"&gt;
+| &lt;SEMICOLON: ";"&gt;
+| &lt;SQUOTE: "\'"&gt;
+| &lt;DQUOTE: "\""&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; TOKEN : {
+&lt;#PATTERN_DECIMAL: ["0"-"9"]&gt;
+| &lt;LITERAL_NUMBER: &lt;LITERAL_INTEGER&gt; | &lt;LITERAL_REAL&gt;&gt;
+| &lt;LITERAL_INTEGER: ("+" | "-")? (&lt;PATTERN_DECIMAL&gt;)+&gt;
+| &lt;LITERAL_REAL: ("+" | "-")? (&lt;PATTERN_DECIMAL&gt;)+ "." (&lt;PATTERN_DECIMAL&gt;)+&gt;
+| &lt;LITERAL_STRING: "\"" (~["\""])* "\""&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; TOKEN : {
+&lt;IDENTIFIER: &lt;LETTER&gt; (&lt;LETTER&gt; | &lt;DIGIT&gt;)*&gt;
+| &lt;#LETTER: ["a"-"z","A"-"Z","_"]&gt;
+| &lt;#DIGIT: ["0"-"9"]&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+</TABLE>
+<H2 ALIGN=CENTER>NON-TERMINALS</H2>
+<TABLE>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod1">parse</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( <A HREF="#prod2">Command</A> )* &lt;EOF&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod3">Connections</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;CONNECTS_TO&gt; &lt;LPAREN&gt; ( <A HREF="#prod4">ComponentDefinition</A> &lt;AT&gt; <A HREF="#prod5">Triple</A> )+ &lt;RPAREN&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod2">Command</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( <A HREF="#prod6">Define</A> | <A HREF="#prod7">ExportToGnuplot</A> | <A HREF="#prod8">PrintXML</A> ) &lt;SEMICOLON&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod4">ComponentDefinition</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;LPAREN&gt; <A HREF="#prod9">Identifier</A> <A HREF="#prod10">Volume</A> <A HREF="#prod11">Socket</A> ( <A HREF="#prod3">Connections</A> )? &lt;RPAREN&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod6">Define</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;DEFINE&gt; <A HREF="#prod12">Variable</A> &lt;ASSIGN&gt; <A HREF="#prod4">ComponentDefinition</A></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod7">ExportToGnuplot</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;EXPORT_TO_GNUPLOT&gt; &lt;LPAREN&gt; <A HREF="#prod12">Variable</A> &lt;COMMA&gt; <A HREF="#prod5">Triple</A> &lt;RPAREN&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod9">Identifier</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;ID&gt; &lt;ASSIGN&gt; &lt;LITERAL_STRING&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod8">PrintXML</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;PRINT_XML&gt; &lt;LPAREN&gt; <A HREF="#prod12">Variable</A> &lt;RPAREN&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod11">Socket</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;SOCKET&gt; &lt;ASSIGN&gt; <A HREF="#prod5">Triple</A></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod5">Triple</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;LBRACKET&gt; &lt;LITERAL_NUMBER&gt; &lt;COMMA&gt; &lt;LITERAL_NUMBER&gt; &lt;COMMA&gt; &lt;LITERAL_NUMBER&gt; &lt;RBRACKET&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod12">Variable</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;IDENTIFIER&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod10">Volume</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;VOLUME&gt; &lt;ASSIGN&gt; <A HREF="#prod5">Triple</A></TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

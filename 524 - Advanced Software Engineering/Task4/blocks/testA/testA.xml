@@ -1,0 +1,9 @@
+<component identifier="a.myHull">
+<size>
+<triple x="6.0" y="4.0" z="4.0"/>
+</size>
+<socket>
+<triple x="0.0" y="0.0" z="0.0"/>
+</socket>
+</component>
+

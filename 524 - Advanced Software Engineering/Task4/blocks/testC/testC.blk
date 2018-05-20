@@ -1,0 +1,28 @@
+// hull with turret and gun
+
+define c = (
+            id="c.myHull"
+            volume=[6,4,3]
+            socket=[0,0,-1.5]
+            connectsTo
+            (
+             (
+              id="c.myTurret"
+              volume=[2,2,1]
+              socket=[0,0,-0.5]
+              connectsTo
+              (
+               (
+                id="c.myGun"
+                volume=[5,0.5,0.5]
+                socket=[-2.5,0,0]
+               ) at [1,0,0]
+              )
+             ) at [-1,0,1.5]
+            )
+           );
+
+printXML(c);
+
+exportToGnuplot(c,[0,0,0]);
+

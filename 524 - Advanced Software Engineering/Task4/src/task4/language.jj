@@ -1,0 +1,121 @@
+options
+{
+  DEBUG_PARSER = false;
+  STATIC       = false;
+}
+
+PARSER_BEGIN(MvcParser)
+
+package task4;
+import java.util.*;
+import java.io.*;
+
+public class MvcParser{
+   /** the fully qualified output filename of the Gnuplot file */
+   private String _outputFilenameFull;
+
+   // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+   /**
+    * Creates a parser.  Call <tt>parse()</tt> to execute it.
+    *
+    * @param inputFilenameFull - the fully qualified input filename of the tank source file
+    * @param outputFilenameFull - the fully qualified output filename of the Gnuplot file
+    *
+    * @throws IOException if there is any file error
+    */
+   public MvcParser(final String inputFilenameFull, final String outputFilenameFull) throws IOException{
+      this(new BufferedReader(new FileReader(inputFilenameFull)));
+
+      assert (outputFilenameFull != null);
+
+      _outputFilenameFull = outputFilenameFull;
+   }
+}
+
+PARSER_END(MvcParser)
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+<DEFAULT> SKIP : {
+" "
+| "\f"
+| "\n"
+| "\r"
+| "\t"
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+<DEFAULT> MORE : {
+"//" : IN_SINGLE_LINE_COMMENT
+| "/*" : IN_MULTI_LINE_COMMENT
+}
+
+
+<IN_SINGLE_LINE_COMMENT> SPECIAL : {
+<SINGLE_LINE_COMMENT: "\n" | "\r" | "\r\n"> : DEFAULT
+}
+
+
+<IN_MULTI_LINE_COMMENT> SPECIAL : {
+<MULTI_LINE_COMMENT: "*/"> : DEFAULT
+}
+
+
+<IN_SINGLE_LINE_COMMENT,IN_MULTI_LINE_COMMENT> MORE : {
+<~[]>
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+<DEFAULT> TOKEN : {
+<AT: "at">
+| <COLOR: "color">
+| <CONNECTS_TO: "connectsTo">
+| <DEFINE: "define">
+| <EXPORT_TO_GNUPLOT: "exportToGnuplot">
+| <ID: "id">
+| <NEW: "new">
+| <PRINT_XML: "printXML">
+| <SOCKET: "socket">
+| <VOLUME: "volume">
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+<DEFAULT> TOKEN : {
+<ASSIGN: "=">
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+<DEFAULT> TOKEN : {
+<COLON: ":">
+| <COMMA: ",">
+| <LBRACE: "{">
+| <RBRACE: "}">
+| <LBRACKET: "[">
+| <RBRACKET: "]">
+| <LPAREN: "(">
+| <RPAREN: ")">
+| <SEMICOLON: ";">
+| <SQUOTE: "\'">
+| <DQUOTE: "\"">
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+<DEFAULT> TOKEN : {
+<#PATTERN_DECIMAL: ["0"-"9"]>
+| <LITERAL_NUMBER: <LITERAL_INTEGER> | <LITERAL_REAL>>
+| <LITERAL_INTEGER: ("+" | "-")? (<PATTERN_DECIMAL>)+>
+| <LITERAL_REAL: ("+" | "-")? (<PATTERN_DECIMAL>)+ "." (<PATTERN_DECIMAL>)+>
+| <LITERAL_STRING: "\"" (~["\""])* "\"">
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+<DEFAULT> TOKEN : {
+<IDENTIFIER: <LETTER> (<LETTER> | <DIGIT>)*>
+| <#LETTER: ["a"-"z","A"-"Z","_"]>
+| <#DIGIT: ["0"-"9"]>
+}

@@ -1,0 +1,7 @@
+// this is a test file for BuilderParserDemo
+
+function();
+function(a);
+function(a,b);
+function(a,b,c);
+

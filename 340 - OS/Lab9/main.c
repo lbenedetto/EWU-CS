@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 char *readLine(FILE *fin) {
 	char *str = NULL;
@@ -46,10 +47,13 @@ int main() {
 	f1 = fopen("test.txt", "r");
 	char *line = readLine(f1);
 	while (line != NULL) {
-		int i;
-		sscanf(line, "%d", &i);
-		free(line);
+		uint32_t address;
+		uint32_t offset = address << (32 - pageSize);
+		offset = offset >> (32 - pageSize);
 
+		sscanf(line, "%d", &address);
+		free(line);
+		printf("Virtual Address: %d", address);
 
 		line = readLine(f1);
 	}

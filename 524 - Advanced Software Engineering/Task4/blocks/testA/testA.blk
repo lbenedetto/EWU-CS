@@ -1,0 +1,12 @@
+// hull only
+
+define a = (
+            id="a.myHull"
+            volume=[6,4,3]
+            socket=[0,0,-1.5]
+           );
+
+printXML(a);
+
+exportToGnuplot(a,[0,0,0]);
+
