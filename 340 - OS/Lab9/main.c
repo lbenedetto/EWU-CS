@@ -47,24 +47,41 @@ int main() {
 	uint32_t numVirtualPages = vas / pageSize;
 	uint32_t numPhysicalPages = pas / pageSize;
 
-	struct PTE pte[numVirtualPages];
-	struct PF pf[numPhysicalPages];
+	struct PTE *pte[numVirtualPages];
+	struct PF *pf[numPhysicalPages];
+	uint32_t frameNumber = 0;
 
 	f1 = fopen("test.txt", "r");
 	char *line = readLine(f1);
 	while (line != NULL) {
-		uint32_t address;
-		sscanf(line, "%d", &address);
+		uint32_t virtualAddress;
+		uint32_t pageNumber;
+		uint32_t pageFrame;
+		uint32_t physicalAddress;
+		sscanf(line, "%d", &virtualAddress);
 		free(line);
 
 		uint32_t numBitsPS = countBits(pageSize);
-		uint32_t offset = address << (32 - numBitsPS);
-		offset = offset >> (32 - numBitsPS);
 
-		printf("Virtual Address: %d\n", address);
-		printf("Page Number: %d\n", address >> numBitsPS);
-		printf("Page Frame Number: %d\n", 0);
-		printf("Physical Address: %d\n", 0);
+		pageNumber = virtualAddress >> numBitsPS;
+		if (pte[pageNumber] != NULL) {
+			pageFrame = pte[pageNumber]->pageFrame;
+			pf[pageFrame]->pageNum = pageNumber;
+		} else {
+			pageFrame = frameNumber;
+
+			struct PTE newPTE = {pageFrame, 0};
+			struct PF newPF = {pageNumber};
+			pte[pageNumber] = &newPTE;
+			pf[pageFrame] = &newPF;
+			frameNumber = (frameNumber + 1) % numPhysicalPages;
+		}
+
+
+		printf("Virtual Address: %d\n", virtualAddress);
+		printf("Page Number: %d\n", pageNumber);
+		printf("Page Frame Number: %d\n", pageFrame);
+		printf("Physical Address: %d\n", physicalAddress);
 		line = readLine(f1);
 	}
 
