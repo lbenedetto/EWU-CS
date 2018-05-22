@@ -32,10 +32,10 @@ struct PF {
 };
 
 uint32_t countBits(uint32_t number) {
-	uint32_t count = 32;
+	uint32_t count = 31;
 	uint32_t i;
 	for (i = (uint32_t) 1 << (uint32_t) 31; i != 0; i >>= 1, count--)
-		if ((number & i) != 0) return count - 1;
+		if ((number & i) != 0) return count;
 }
 
 int main() {
@@ -48,11 +48,14 @@ int main() {
 	uint32_t numVirtualPages = vas / pageSize;
 	uint32_t numPhysicalPages = pas / pageSize;
 
-	struct PTE *pte[numVirtualPages];
-	struct PF *pf[numPhysicalPages];
+	struct PTE pte[numVirtualPages];
+	struct PF pf[numPhysicalPages];
 	uint32_t frameNumber = 0;
 
-	f1 = fopen("test.txt", "r");
+	printf("Enter filename: ");
+	char *filename = readLine(stdin);
+	f1 = fopen(filename, "r");
+	free(filename);
 	char *line = readLine(f1);
 	while (line != NULL) {
 		uint32_t virtualAddress;
@@ -65,18 +68,14 @@ int main() {
 		uint32_t numBitsPS = countBits(pageSize);
 
 		pageNumber = virtualAddress >> numBitsPS;
-		if (pte[pageNumber] != NULL) {
-			pageFrame = pte[pageNumber]->pageFrame;
-			pf[pageFrame]->pageNum = pageNumber;
+		if (pte[pageNumber].currentBit > 0) {
+			pageFrame = pte[pageNumber].pageFrame;
+			pf[pageFrame].pageNum = pageNumber;
 		} else {
 			pageFrame = frameNumber;
-			struct PTE *newPTE = malloc(sizeof(struct PTE));
-			newPTE->pageFrame = pageFrame;
-			newPTE->currentBit = 0;
-			struct PF *newPF = malloc(sizeof(struct PF));
-			newPF->pageNum = pageNumber;
-			pte[pageNumber] = newPTE;
-			pf[pageFrame] = newPF;
+			pte[pageNumber].pageFrame = pageFrame;
+			pte[pageNumber].currentBit = 1;
+			pf[pageFrame].pageNum = pageNumber;
 			frameNumber = (frameNumber + 1) % numPhysicalPages;
 		}
 
@@ -87,7 +86,7 @@ int main() {
 		printf("Page Number: %d\n", pageNumber);
 		printf("Page Frame Number: %d\n", pageFrame);
 		printf("Physical Address: %d\n", physicalAddress);
+		printf("=========================\n");
 		line = readLine(f1);
 	}
-
 }
