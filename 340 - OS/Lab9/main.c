@@ -33,7 +33,8 @@ struct PF {
 
 uint32_t countBits(uint32_t number) {
 	uint32_t count = 32;
-	for (uint32_t i = (uint32_t) 1 << (uint32_t) 31; i != 0; i >>= 1, count--)
+	uint32_t i;
+	for (i = (uint32_t) 1 << (uint32_t) 31; i != 0; i >>= 1, count--)
 		if ((number & i) != 0) return count - 1;
 }
 
@@ -69,14 +70,18 @@ int main() {
 			pf[pageFrame]->pageNum = pageNumber;
 		} else {
 			pageFrame = frameNumber;
-
-			struct PTE newPTE = {pageFrame, 0};
-			struct PF newPF = {pageNumber};
-			pte[pageNumber] = &newPTE;
-			pf[pageFrame] = &newPF;
+			struct PTE *newPTE = malloc(sizeof(struct PTE));
+			newPTE->pageFrame = pageFrame;
+			newPTE->currentBit = 0;
+			struct PF *newPF = malloc(sizeof(struct PF));
+			newPF->pageNum = pageNumber;
+			pte[pageNumber] = newPTE;
+			pf[pageFrame] = newPF;
 			frameNumber = (frameNumber + 1) % numPhysicalPages;
 		}
 
+		physicalAddress = virtualAddress << (32 - numBitsPS) >> (32 - numBitsPS);
+		physicalAddress = physicalAddress | (pageFrame << numBitsPS);
 
 		printf("Virtual Address: %d\n", virtualAddress);
 		printf("Page Number: %d\n", pageNumber);
