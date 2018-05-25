@@ -1,7 +1,7 @@
 options
 {
   DEBUG_PARSER = false;
-  STATIC       = false;
+  STATIC	   = false;
 }
 
 PARSER_BEGIN(MvcParser)
@@ -9,6 +9,14 @@ PARSER_BEGIN(MvcParser)
 package task4;
 import java.util.*;
 import java.io.*;
+import task4.command.Command;
+import task4.command.Define;
+import task4.command.ExportToGnuplot;
+import task4.command.PrintXML;
+import task4.node.NodeComponent;
+import task4.node.NodeSocket;
+import task4.node.NodeSubcomponentMount;
+import task4.node.NodeTriple;
 
 public class MvcParser{
    /** the fully qualified output filename of the Gnuplot file */
@@ -16,19 +24,19 @@ public class MvcParser{
 
    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
    /**
-    * Creates a parser.  Call <tt>parse()</tt> to execute it.
-    *
-    * @param inputFilenameFull - the fully qualified input filename of the tank source file
-    * @param outputFilenameFull - the fully qualified output filename of the Gnuplot file
-    *
-    * @throws IOException if there is any file error
-    */
+	* Creates a parser.  Call <tt>parse()</tt> to execute it.
+	*
+	* @param inputFilenameFull - the fully qualified input filename of the tank source file
+	* @param outputFilenameFull - the fully qualified output filename of the Gnuplot file
+	*
+	* @throws IOException if there is any file error
+	*/
    public MvcParser(final String inputFilenameFull, final String outputFilenameFull) throws IOException{
-      this(new BufferedReader(new FileReader(inputFilenameFull)));
+	  this(new BufferedReader(new FileReader(inputFilenameFull)));
 
-      assert (outputFilenameFull != null);
+	  assert (outputFilenameFull != null);
 
-      _outputFilenameFull = outputFilenameFull;
+	  _outputFilenameFull = outputFilenameFull;
    }
 }
 
@@ -51,12 +59,14 @@ PARSER_END(MvcParser)
 }
 
 
-<IN_SINGLE_LINE_COMMENT> SPECIAL : {
+<IN_SINGLE_LINE_COMMENT>
+SPECIAL_TOKEN : {
 <SINGLE_LINE_COMMENT: "\n" | "\r" | "\r\n"> : DEFAULT
 }
 
 
-<IN_MULTI_LINE_COMMENT> SPECIAL : {
+<IN_MULTI_LINE_COMMENT>
+SPECIAL_TOKEN : {
 <MULTI_LINE_COMMENT: "*/"> : DEFAULT
 }
 
@@ -118,4 +128,200 @@ PARSER_END(MvcParser)
 <IDENTIFIER: <LETTER> (<LETTER> | <DIGIT>)*>
 | <#LETTER: ["a"-"z","A"-"Z","_"]>
 | <#DIGIT: ["0"-"9"]>
+}
+
+
+public void parse() :
+{
+   Command command;
+}
+{
+  (
+	 command = Command()
+	 {
+		command.execute();
+	 }
+  )*
+  <EOF>
+}
+
+private Command Command() :
+{
+	List<String> arguments = new ArrayList<String>();
+}
+{
+	(
+		arguments = Define()
+		|
+		arguments = ExportToGnuplot()
+		|
+		arguments = PrintXML()
+	)
+	<SEMICOLON>
+	{
+		return arguments;
+	}
+}
+
+private Define Define() :
+{
+	List<String> args = new ArrayList<String>();
+	String variable;
+}
+{
+	<DEFINE>
+	variable = Variable()
+	<ASSIGN>
+	args = ComponentDefinition()
+	{
+		Tree.
+	}
+}
+
+private ExportToGnuplot ExportToGnuplot() :
+{
+	String variable;
+	NodeTriple triple;
+}
+{
+	<EXPORT_TO_GNUPLOT>
+	<LPAREN>
+	variable = Variable()
+	<COMMA>
+	triple = Triple()
+	<RPAREN>
+	{
+		return new ExportToGnuplot(variable, triple);
+	}
+}
+
+private PrintXML PrintXML() :
+{
+	String variable;
+}
+{
+	<PRINT_XML>
+	<LPAREN>
+	variable = Variable()
+	<RPAREN>
+	{
+		return new PrintXML(variable);
+	}
+}
+
+private List<NodeSubcomponentMount> Connections() :
+{
+	List<NodeSubcomponentMount> connections = new ArrayList<NodeSubcomponentMount>();
+	NodeSubcomponentMount connection;
+	NodeComponent nodeComponent;
+	NodeTriple triple;
+}
+{
+	<CONNECTS_TO>
+	<LPAREN>
+	(
+		nodeComponent = ComponentDefinition()
+		<AT>
+		triple = Triple()
+		{
+			connection = new NodeSubcomponentMount(nodeComponent, triple);
+			connections.add(connection);
+		}
+	)+
+	<RPAREN>
+	{
+		return connections;
+	}
+}
+
+private NodeComponent ComponentDefinition() :
+{
+	String identifier;
+	NodeTriple size;
+	NodeTriple socket;
+	List<NodeSubcomponentMount> connections;
+}
+{
+	<LPAREN>
+	identifier = Identifier()
+	size = Volume()
+	socket = Socket()
+	[
+		connections = Connections()
+	]
+	<RPAREN>
+	{
+		NodeSocket ns = new NodeSocket(socket);
+		return new NodeComponent(identifier, size, ns, connections);
+	}
+}
+
+private String Identifier() :
+{
+	String identifier;
+}
+{
+	identifier = <ID>
+	<ASSIGN>
+	<LITERAL_STRING>
+	{
+		return identifier;
+	}
+}
+
+private NodeTriple Socket() :
+{
+	NodeTriple triple;
+}
+{
+	<SOCKET>
+	<ASSIGN>
+	triple = Triple()
+	{
+		return new NodeSocket(triple);
+	}
+}
+
+private NodeTriple Triple() :
+{
+	String x;
+	String y;
+	String z;
+}
+{
+	<LBRACKET>
+	x = <LITERAL_NUMBER>.image
+	<COMMA>
+	y = <LITERAL_NUMBER>.image
+	<COMMA>
+	z = <LITERAL_NUMBER>.image
+	<RBRACKET>
+	{
+		return new NodeTriple(x, y, z);
+	}
+}
+
+private String Variable() :
+{
+   String variable;
+}
+{
+   <IDENTIFIER>
+   {
+	  variable = token.image;
+	  return variable;
+   }
+}
+
+private NodeTriple Volume() :
+{
+	NodeTriple triple;
+}
+{
+	<VOLUME>
+	<ASSIGN>
+	triple = Triple()
+	{
+		return triple;
+	}
 }
