@@ -6,8 +6,13 @@ import java.util.HashMap;
 
 public class Tree {
 	private static HashMap<String, NodeComponent> components = new HashMap<>();
+	private static HashMap<String, NodeComponent> variables = new HashMap<>();
 
-	public void addComponent(NodeComponent nodeComponent) {
+	public static void addVariable(String variableName, NodeComponent nodeComponent) {
+		variables.put(variableName, nodeComponent);
+	}
+
+	public static void addComponent(NodeComponent nodeComponent) {
 		components.put(nodeComponent.getIdentifier(), nodeComponent);
 	}
 }
