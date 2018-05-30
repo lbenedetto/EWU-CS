@@ -6,7 +6,7 @@ options
 
 PARSER_BEGIN(MvcParser)
 
-package task4;
+package task4.parser;
 import java.util.*;
 import java.io.*;
 import task4.command.Command;
@@ -17,6 +17,7 @@ import task4.node.NodeComponent;
 import task4.node.NodeSocket;
 import task4.node.NodeSubcomponentMount;
 import task4.node.NodeTriple;
+import task4.Tree;
 
 public class MvcParser{
    /** the fully qualified output filename of the Gnuplot file */
@@ -147,7 +148,7 @@ public void parse() :
 
 private Command Command() :
 {
-	List<String> arguments = new ArrayList<String>();
+	Command arguments;
 }
 {
 	(
@@ -165,7 +166,7 @@ private Command Command() :
 
 private Define Define() :
 {
-	List<String> args = new ArrayList<String>();
+	NodeComponent args;
 	String variable;
 }
 {
@@ -174,7 +175,7 @@ private Define Define() :
 	<ASSIGN>
 	args = ComponentDefinition()
 	{
-		Tree.addVariable(variable, args);
+		return new Define(variable, args);
 	}
 }
 
@@ -238,8 +239,8 @@ private NodeComponent ComponentDefinition() :
 {
 	String identifier;
 	NodeTriple size;
-	NodeTriple socket;
-	List<NodeSubcomponentMount> connections;
+	NodeSocket socket;
+	List<NodeSubcomponentMount> connections = null;
 }
 {
 	<LPAREN>
@@ -251,8 +252,7 @@ private NodeComponent ComponentDefinition() :
 	]
 	<RPAREN>
 	{
-		NodeSocket ns = new NodeSocket(socket);
-		return new NodeComponent(identifier, size, ns, connections);
+		return new NodeComponent(identifier, size, socket, connections);
 	}
 }
 
@@ -261,7 +261,7 @@ private String Identifier() :
 	String identifier;
 }
 {
-	identifier = <ID>
+	identifier = <ID>.image
 	<ASSIGN>
 	<LITERAL_STRING>
 	{
@@ -269,7 +269,7 @@ private String Identifier() :
 	}
 }
 
-private NodeTriple Socket() :
+private NodeSocket Socket() :
 {
 	NodeTriple triple;
 }

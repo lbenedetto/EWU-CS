@@ -9,7 +9,7 @@ public class NodeComponent {
 	String identifier;
 	List<NodeSubcomponentMount> subcomponentMountList;
 
-	public NodeComponent(NodeTriple volume, NodeSocket socket, String identifier, List<NodeSubcomponentMount> subcomponentMountList) {
+	public NodeComponent(String identifier, NodeTriple volume, NodeSocket socket,  List<NodeSubcomponentMount> subcomponentMountList) {
 		this.volume = volume;
 		this.socket = socket;
 		this.identifier = identifier;
