@@ -150,7 +150,8 @@ public class MvcParser implements MvcParserConstants {
         String identifier;
     jj_consume_token(ID);
     jj_consume_token(ASSIGN);
-    identifier = jj_consume_token(LITERAL_STRING).image;
+    jj_consume_token(LITERAL_STRING);
+                identifier = token.image;
                 {if (true) return identifier;}
     throw new Error("Missing return statement in function");
   }

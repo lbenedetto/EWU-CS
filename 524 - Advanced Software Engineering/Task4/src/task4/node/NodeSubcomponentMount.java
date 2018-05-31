@@ -10,7 +10,7 @@ public class NodeSubcomponentMount {
 	}
 
 	public String exportToGnuplot() {
-		return "";
+		return nodeComponent.exportToGnuplot();
 	}
 
 	public String printXML() {
