@@ -11,11 +11,11 @@ public class NodeTriple {
 		this.z = Double.parseDouble(z);
 	}
 
-	public void exportToGnuplot() {
-
+	public String exportToGnuplot() {
+		return "";
 	}
 
-	public void printXML() {
-
+	public String printXML() {
+		return String.format("<triple x=\"%f\" y=\"%f\" z=\"%f\"/>\n", x, y, z);
 	}
 }

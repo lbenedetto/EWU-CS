@@ -1,18 +1,18 @@
 <component identifier="c.myHull">
 <size>
-<triple x="6.0" y="4.0" z="4.0"/>
+<triple x="6.0" y="4.0" z="3.0"/>
 </size>
 <socket>
-<triple x="0.0" y="0.0" z="0.0"/>
+<triple x="0.0" y="0.0" z="-1.5"/>
 </socket>
 <connections>
 <mount>
 <component identifier="c.myTurret">
 <size>
-<triple x="2.0" y="2.0" z="2.0"/>
+<triple x="2.0" y="2.0" z="1.0"/>
 </size>
 <socket>
-<triple x="0.0" y="0.0" z="0.0"/>
+<triple x="0.0" y="0.0" z="-0.5"/>
 </socket>
 <connections>
 <mount>
@@ -31,10 +31,8 @@
 </connections>
 </component>
 <ball>
-<triple x="-1.0" y="0.0" z="0.0"/>
+<triple x="-1.0" y="0.0" z="1.5"/>
 </ball>
 </mount>
 </connections>
 </component>
-
-

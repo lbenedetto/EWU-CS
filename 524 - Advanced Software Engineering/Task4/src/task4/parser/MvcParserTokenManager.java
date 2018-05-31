@@ -3,7 +3,6 @@ package task4.parser;
 import java.util.*;
 import java.io.*;
 import task4.node.NodeComponent;
-import task4.node.NodeSocket;
 import task4.node.NodeSubcomponentMount;
 import task4.node.NodeTriple;
 import task4.ParserManager;

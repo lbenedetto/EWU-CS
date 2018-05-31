@@ -9,11 +9,16 @@ public class NodeSubcomponentMount {
 		this.nodeTriple = nodeTriple;
 	}
 
-	public void exportToGnuplot(){
-
+	public String exportToGnuplot() {
+		return "";
 	}
 
-	public void printXML(){
-
+	public String printXML() {
+		return "<mount>\n" +
+				nodeComponent.printXML() +
+				"<ball>\n" +
+				nodeTriple.printXML() +
+				"</ball>\n" +
+				"</mount>\n";
 	}
 }

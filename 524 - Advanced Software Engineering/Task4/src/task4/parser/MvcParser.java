@@ -3,7 +3,6 @@ package task4.parser;
 import java.util.*;
 import java.io.*;
 import task4.node.NodeComponent;
-import task4.node.NodeSocket;
 import task4.node.NodeSubcomponentMount;
 import task4.node.NodeTriple;
 import task4.ParserManager;
@@ -128,7 +127,7 @@ public class MvcParser implements MvcParserConstants {
   final private NodeComponent ComponentDefinition() throws ParseException {
         String identifier;
         NodeTriple size;
-        NodeSocket socket;
+        NodeTriple socket;
         List<NodeSubcomponentMount> connections = null;
     jj_consume_token(LPAREN);
     identifier = Identifier();
@@ -149,19 +148,19 @@ public class MvcParser implements MvcParserConstants {
 
   final private String Identifier() throws ParseException {
         String identifier;
-    identifier = jj_consume_token(ID).image;
+    jj_consume_token(ID);
     jj_consume_token(ASSIGN);
-    jj_consume_token(LITERAL_STRING);
+    identifier = jj_consume_token(LITERAL_STRING).image;
                 {if (true) return identifier;}
     throw new Error("Missing return statement in function");
   }
 
-  final private NodeSocket Socket() throws ParseException {
+  final private NodeTriple Socket() throws ParseException {
         NodeTriple triple;
     jj_consume_token(SOCKET);
     jj_consume_token(ASSIGN);
     triple = Triple();
-                {if (true) return new NodeSocket(triple);}
+                {if (true) return triple;}
     throw new Error("Missing return statement in function");
   }
 

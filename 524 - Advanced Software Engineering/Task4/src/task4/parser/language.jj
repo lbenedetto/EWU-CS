@@ -10,7 +10,6 @@ package task4.parser;
 import java.util.*;
 import java.io.*;
 import task4.node.NodeComponent;
-import task4.node.NodeSocket;
 import task4.node.NodeSubcomponentMount;
 import task4.node.NodeTriple;
 import task4.ParserManager;
@@ -227,7 +226,7 @@ private NodeComponent ComponentDefinition() :
 {
 	String identifier;
 	NodeTriple size;
-	NodeSocket socket;
+	NodeTriple socket;
 	List<NodeSubcomponentMount> connections = null;
 }
 {
@@ -249,15 +248,15 @@ private String Identifier() :
 	String identifier;
 }
 {
-	identifier = <ID>.image
+	<ID>
 	<ASSIGN>
-	<LITERAL_STRING>
+	identifier = <LITERAL_STRING>.image
 	{
 		return identifier;
 	}
 }
 
-private NodeSocket Socket() :
+private NodeTriple Socket() :
 {
 	NodeTriple triple;
 }
@@ -266,7 +265,7 @@ private NodeSocket Socket() :
 	<ASSIGN>
 	triple = Triple()
 	{
-		return new NodeSocket(triple);
+		return triple;
 	}
 }
 
