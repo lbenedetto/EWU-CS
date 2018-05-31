@@ -2,15 +2,11 @@
 package task4.parser;
 import java.util.*;
 import java.io.*;
-import task4.command.Command;
-import task4.command.Define;
-import task4.command.ExportToGnuplot;
-import task4.command.PrintXML;
 import task4.node.NodeComponent;
 import task4.node.NodeSocket;
 import task4.node.NodeSubcomponentMount;
 import task4.node.NodeTriple;
-import task4.Tree;
+import task4.ParserManager;
 
 /** Token Manager. */
 public class MvcParserTokenManager implements MvcParserConstants

@@ -8,4 +8,12 @@ public class NodeSubcomponentMount {
 		this.nodeComponent = nodeComponent;
 		this.nodeTriple = nodeTriple;
 	}
+
+	public void exportToGnuplot(){
+
+	}
+
+	public void printXML(){
+
+	}
 }

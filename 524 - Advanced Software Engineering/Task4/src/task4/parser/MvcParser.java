@@ -2,15 +2,11 @@
 package task4.parser;
 import java.util.*;
 import java.io.*;
-import task4.command.Command;
-import task4.command.Define;
-import task4.command.ExportToGnuplot;
-import task4.command.PrintXML;
 import task4.node.NodeComponent;
 import task4.node.NodeSocket;
 import task4.node.NodeSubcomponentMount;
 import task4.node.NodeTriple;
-import task4.Tree;
+import task4.ParserManager;
 
 public class MvcParser implements MvcParserConstants {
    /** the fully qualified output filename of the Gnuplot file */
@@ -34,7 +30,6 @@ public class MvcParser implements MvcParserConstants {
    }
 
   final public void parse() throws ParseException {
-   Command command;
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -47,23 +42,21 @@ public class MvcParser implements MvcParserConstants {
         jj_la1[0] = jj_gen;
         break label_1;
       }
-      command = Command();
-                command.execute();
+      Command();
     }
     jj_consume_token(0);
   }
 
-  final private Command Command() throws ParseException {
-        Command arguments;
+  final private void Command() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case DEFINE:
-      arguments = Define();
+      Define();
       break;
     case EXPORT_TO_GNUPLOT:
-      arguments = ExportToGnuplot();
+      ExportToGnuplot();
       break;
     case PRINT_XML:
-      arguments = PrintXML();
+      PrintXML();
       break;
     default:
       jj_la1[1] = jj_gen;
@@ -71,22 +64,19 @@ public class MvcParser implements MvcParserConstants {
       throw new ParseException();
     }
     jj_consume_token(SEMICOLON);
-                {if (true) return arguments;}
-    throw new Error("Missing return statement in function");
   }
 
-  final private Define Define() throws ParseException {
+  final private void Define() throws ParseException {
         NodeComponent args;
         String variable;
     jj_consume_token(DEFINE);
     variable = Variable();
     jj_consume_token(ASSIGN);
     args = ComponentDefinition();
-                {if (true) return new Define(variable, args);}
-    throw new Error("Missing return statement in function");
+                ParserManager.defineVariable(variable, args);
   }
 
-  final private ExportToGnuplot ExportToGnuplot() throws ParseException {
+  final private void ExportToGnuplot() throws ParseException {
         String variable;
         NodeTriple triple;
     jj_consume_token(EXPORT_TO_GNUPLOT);
@@ -95,18 +85,16 @@ public class MvcParser implements MvcParserConstants {
     jj_consume_token(COMMA);
     triple = Triple();
     jj_consume_token(RPAREN);
-                {if (true) return new ExportToGnuplot(variable, triple);}
-    throw new Error("Missing return statement in function");
+                ParserManager.exportToGnuplot(variable, triple);
   }
 
-  final private PrintXML PrintXML() throws ParseException {
+  final private void PrintXML() throws ParseException {
         String variable;
     jj_consume_token(PRINT_XML);
     jj_consume_token(LPAREN);
     variable = Variable();
     jj_consume_token(RPAREN);
-                {if (true) return new PrintXML(variable);}
-    throw new Error("Missing return statement in function");
+                ParserManager.printXML(variable);
   }
 
   final private List<NodeSubcomponentMount> Connections() throws ParseException {

@@ -9,15 +9,11 @@ PARSER_BEGIN(MvcParser)
 package task4.parser;
 import java.util.*;
 import java.io.*;
-import task4.command.Command;
-import task4.command.Define;
-import task4.command.ExportToGnuplot;
-import task4.command.PrintXML;
 import task4.node.NodeComponent;
 import task4.node.NodeSocket;
 import task4.node.NodeSubcomponentMount;
 import task4.node.NodeTriple;
-import task4.Tree;
+import task4.ParserManager;
 
 public class MvcParser{
    /** the fully qualified output filename of the Gnuplot file */
@@ -134,37 +130,29 @@ SPECIAL_TOKEN : {
 
 public void parse() :
 {
-   Command command;
 }
 {
   (
-	 command = Command()
-	 {
-		command.execute();
-	 }
+	 Command()
   )*
   <EOF>
 }
 
-private Command Command() :
+private void Command() :
 {
-	Command arguments;
 }
 {
 	(
-		arguments = Define()
+		Define()
 		|
-		arguments = ExportToGnuplot()
+		ExportToGnuplot()
 		|
-		arguments = PrintXML()
+		PrintXML()
 	)
 	<SEMICOLON>
-	{
-		return arguments;
-	}
 }
 
-private Define Define() :
+private void Define() :
 {
 	NodeComponent args;
 	String variable;
@@ -175,11 +163,11 @@ private Define Define() :
 	<ASSIGN>
 	args = ComponentDefinition()
 	{
-		return new Define(variable, args);
+		ParserManager.defineVariable(variable, args);
 	}
 }
 
-private ExportToGnuplot ExportToGnuplot() :
+private void ExportToGnuplot() :
 {
 	String variable;
 	NodeTriple triple;
@@ -192,11 +180,11 @@ private ExportToGnuplot ExportToGnuplot() :
 	triple = Triple()
 	<RPAREN>
 	{
-		return new ExportToGnuplot(variable, triple);
+		ParserManager.exportToGnuplot(variable, triple);
 	}
 }
 
-private PrintXML PrintXML() :
+private void PrintXML() :
 {
 	String variable;
 }
@@ -206,7 +194,7 @@ private PrintXML PrintXML() :
 	variable = Variable()
 	<RPAREN>
 	{
-		return new PrintXML(variable);
+		ParserManager.printXML(variable);
 	}
 }
 

@@ -6,4 +6,12 @@ public class NodeSocket {
 	public NodeSocket(NodeTriple triple) {
 		this.triple = triple;
 	}
+
+	public void exportToGnuplot(){
+
+	}
+
+	public void printXML(){
+
+	}
 }

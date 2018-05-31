@@ -11,27 +11,11 @@ public class NodeTriple {
 		this.z = Double.parseDouble(z);
 	}
 
-	public double getX() {
-		return x;
+	public void exportToGnuplot() {
+
 	}
 
-	public void setX(double x) {
-		this.x = x;
-	}
+	public void printXML() {
 
-	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) {
-		this.y = y;
-	}
-
-	public double getZ() {
-		return z;
-	}
-
-	public void setZ(double z) {
-		this.z = z;
 	}
 }
