@@ -39,10 +39,8 @@ public class ParserManager {
 		NodeComponent node = variables.get(variable);
 		if(node == null) throw new RuntimeException("Invalid identifier");
 		try {
-			String s = node.exportToGnuplot();
-			FileWriter fw = new FileWriter(new File(outFile));
-			fw.write(s);
-			fw.close();
+			String gnuPlot = node.exportToGnuplot(triple);
+			System.out.print(gnuPlot);
 		}catch (Exception e){
 
 		}

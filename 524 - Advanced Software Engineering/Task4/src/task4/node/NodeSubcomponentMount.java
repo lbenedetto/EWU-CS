@@ -9,8 +9,9 @@ public class NodeSubcomponentMount {
 		this.nodeTriple = nodeTriple;
 	}
 
-	public String exportToGnuplot() {
-		return nodeComponent.exportToGnuplot();
+	public String exportToGnuplot(NodeTriple origin) {
+		NodeTriple shifted = nodeTriple.add(origin);
+		return nodeComponent.exportToGnuplot(shifted);
 	}
 
 	public String printXML() {

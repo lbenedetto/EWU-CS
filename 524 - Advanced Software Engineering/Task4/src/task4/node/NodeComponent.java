@@ -21,31 +21,37 @@ public class NodeComponent {
 		return identifier;
 	}
 
-	public String exportToGnuplot() {
-		double halfX = volume.x / 2;
-		double halfY = volume.y / 2;
-		double halfZ = volume.z / 2;
+	public String exportToGnuplot(NodeTriple origin) {
+		NodeTriple half = volume.divide(2);
+		NodeTriple shifted = origin.subtract(socket);
+		double uX = shifted.x + half.x;
+		double dX = shifted.x - half.x;
+		double uY = shifted.y + half.y;
+		double dY = shifted.y - half.y;
+		double uZ = shifted.z + half.z;
+		double dZ = shifted.z - half.z;
+
 		StringBuilder s = new StringBuilder();
-		s.append(String.format("# component [%s] {\n#top\n", identifier));
-		s.append(String.format("%f %f %f\n", socket.x - halfX, socket.y - halfY, socket.z + halfZ));
-		s.append(String.format("%f %f %f\n", socket.x + halfX, socket.y - halfY, socket.z + halfZ));
-		s.append(String.format("%f %f %f\n", socket.x + halfX, socket.y + halfY, socket.z + halfZ));
-		s.append(String.format("%f %f %f\n", socket.x - halfX, socket.y + halfY, socket.z + halfZ));
-		s.append(String.format("%f %f %f\n", socket.x - halfX, socket.y - halfY, socket.z + halfZ));
+		s.append(String.format("# component [%s] {\n# top\n", identifier));
+		s.append(String.format("%f %f %f\n", dX, dY, uZ));
+		s.append(String.format("%f %f %f\n", uX, dY, uZ));
+		s.append(String.format("%f %f %f\n", uX, uY, uZ));
+		s.append(String.format("%f %f %f\n", dX, uY, uZ));
+		s.append(String.format("%f %f %f\n", dX, dY, uZ));
 		s.append("# bottom\n");
-		s.append(String.format("%f %f %f\n", socket.x - halfX, socket.y - halfY, socket.z - halfZ));
-		s.append(String.format("%f %f %f\n", socket.x + halfX, socket.y - halfY, socket.z - halfZ));
-		s.append(String.format("%f %f %f\n", socket.x + halfX, socket.y + halfY, socket.z - halfZ));
-		s.append(String.format("%f %f %f\n", socket.x - halfX, socket.y + halfY, socket.z - halfZ));
-		s.append(String.format("%f %f %f\n", socket.x - halfX, socket.y - halfY, socket.z - halfZ));
+		s.append(String.format("%f %f %f\n", dX, dY, dZ));
+		s.append(String.format("%f %f %f\n", uX, dY, dZ));
+		s.append(String.format("%f %f %f\n", uX, uY, dZ));
+		s.append(String.format("%f %f %f\n", dX, uY, dZ));
+		s.append(String.format("%f %f %f\n", dX, dY, dZ));
 
 		if (subcomponentMountList != null && !subcomponentMountList.isEmpty()) {
 			s.append("# subcomponents {\n");
-			subcomponentMountList.forEach(node -> s.append(node.exportToGnuplot()));
+			subcomponentMountList.forEach(node -> s.append(node.exportToGnuplot(shifted)));
 			s.append("# } subcomponents\n");
 		}
-		s.append(String.format("# } component [%s]", identifier));
-		return "";
+		s.append(String.format("# } component [%s]\n", identifier));
+		return s.toString();
 	}
 
 	public String printXML() {
