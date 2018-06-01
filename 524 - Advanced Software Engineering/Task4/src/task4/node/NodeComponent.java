@@ -37,13 +37,13 @@ public class NodeComponent {
 		s.append(String.format("%f %f %f\n", uX, dY, uZ));
 		s.append(String.format("%f %f %f\n", uX, uY, uZ));
 		s.append(String.format("%f %f %f\n", dX, uY, uZ));
-		s.append(String.format("%f %f %f\n", dX, dY, uZ));
+		s.append(String.format("%f %f %f\n\n", dX, dY, uZ));
 		s.append("# bottom\n");
 		s.append(String.format("%f %f %f\n", dX, dY, dZ));
 		s.append(String.format("%f %f %f\n", uX, dY, dZ));
 		s.append(String.format("%f %f %f\n", uX, uY, dZ));
 		s.append(String.format("%f %f %f\n", dX, uY, dZ));
-		s.append(String.format("%f %f %f\n", dX, dY, dZ));
+		s.append(String.format("%f %f %f\n\n\n", dX, dY, dZ));
 
 		if (subcomponentMountList != null && !subcomponentMountList.isEmpty()) {
 			s.append("# subcomponents {\n");
