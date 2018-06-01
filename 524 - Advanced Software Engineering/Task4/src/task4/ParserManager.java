@@ -6,24 +6,22 @@ import task4.parser.MvcParser;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.text.ParseException;
 import java.util.HashMap;
 
 public class ParserManager {
-	private static HashMap<String, NodeComponent> components = new HashMap<>();
 	private static HashMap<String, NodeComponent> variables = new HashMap<>();
-	private static String outFile;
+	private static String outFileName;
 
 	public static void main(String[] args) {
 		if (args.length != 2) {
 			throw new RuntimeException("usage: input_filename output_filename ");
 		}
 		try {
-			outFile = args[1];
+			outFileName = args[1];
 			MvcParser mvcParser = new MvcParser(args[0], args[1]);
 			mvcParser.parse();
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 
@@ -31,25 +29,31 @@ public class ParserManager {
 		variables.put(variableName, nodeComponent);
 	}
 
-	public static void addComponent(NodeComponent nodeComponent) {
-		components.put(nodeComponent.getIdentifier(), nodeComponent);
-	}
-
 	public static void exportToGnuplot(String variable, NodeTriple triple) {
 		NodeComponent node = variables.get(variable);
-		if(node == null) throw new RuntimeException("Invalid identifier");
+		if (node == null) throw new RuntimeException("Invalid identifier");
 		try {
 			String gnuPlot = node.exportToGnuplot(triple);
+			var fw = new FileWriter(new File(outFileName + ".gnu"));
+			fw.write(gnuPlot);
+			fw.close();
 			System.out.print(gnuPlot);
-		}catch (Exception e){
-
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
-	public static void printXML(String variable){
+	public static void printXML(String variable) {
 		NodeComponent node = variables.get(variable);
-		if(node == null) throw new RuntimeException("Invalid identifier");
-		String xml = node.printXML();
-		System.out.print(xml);
+		if (node == null) throw new RuntimeException("Invalid identifier");
+		try {
+			String xml = node.printXML();
+			var fw = new FileWriter(new File(outFileName + ".xml"));
+			fw.write(xml);
+			fw.close();
+			System.out.print(xml);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

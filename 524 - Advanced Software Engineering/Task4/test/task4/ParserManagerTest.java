@@ -10,7 +10,7 @@ class ParserManagerTest {
 	void testA() {
 		var interceptor = new PrintStreamInterceptor();
 		System.setOut(interceptor);
-		ParserManager.main(new String[]{"blocks/testA/testA.blk", "output.txt"});
+		ParserManager.main(new String[]{"blocks/testA/testA.blk", "testA"});
 		String actual = interceptor.getString();
 		String expected = "<component identifier=\"a.myHull\">\n" +
 				"<size>\n" +
@@ -41,7 +41,7 @@ class ParserManagerTest {
 	void testB() {
 		var interceptor = new PrintStreamInterceptor();
 		System.setOut(interceptor);
-		ParserManager.main(new String[]{"blocks/testB/testB.blk", "output.txt"});
+		ParserManager.main(new String[]{"blocks/testB/testB.blk", "testB"});
 		String actual = interceptor.getString();
 		String expected = "<component identifier=\"b.myHull\">\n" +
 				"<size>\n" +
@@ -103,7 +103,7 @@ class ParserManagerTest {
 	void testC() {
 		var interceptor = new PrintStreamInterceptor();
 		System.setOut(interceptor);
-		ParserManager.main(new String[]{"blocks/testC/testC.blk", "output.txt"});
+		ParserManager.main(new String[]{"blocks/testC/testC.blk", "testC"});
 		String actual = interceptor.getString();
 		String expected = "<component identifier=\"c.myHull\">\n" +
 				"<size>\n" +
@@ -196,7 +196,7 @@ class ParserManagerTest {
 	void testD() {
 		var interceptor = new PrintStreamInterceptor();
 		System.setOut(interceptor);
-		ParserManager.main(new String[]{"blocks/testD/testD.blk", "output.txt"});
+		ParserManager.main(new String[]{"blocks/testD/testD.blk", "testD"});
 		String actual = interceptor.getString();
 		String expected = "<component identifier=\"d.myHull\">\n" +
 				"<size>\n" +
