@@ -11,7 +11,7 @@ public class NodeTriple {
 		this.z = Double.parseDouble(z);
 	}
 
-	public NodeTriple(double x, double y, double z) {
+	private NodeTriple(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -21,7 +21,7 @@ public class NodeTriple {
 		return String.format("<triple x=\"%f\" y=\"%f\" z=\"%f\"/>\n", x, y, z);
 	}
 
-	public NodeTriple add(NodeTriple other) {
+	NodeTriple add(NodeTriple other) {
 		return new NodeTriple(
 				x + other.x,
 				y + other.y,
@@ -29,7 +29,7 @@ public class NodeTriple {
 		);
 	}
 
-	public NodeTriple subtract(NodeTriple other) {
+	NodeTriple subtract(NodeTriple other) {
 		return new NodeTriple(
 				x - other.x,
 				y - other.y,
@@ -37,11 +37,11 @@ public class NodeTriple {
 		);
 	}
 
-	public NodeTriple divide(double d) {
+	NodeTriple half() {
 		return new NodeTriple(
-				x / d,
-				y / d,
-				z / d
+				x / 2.0,
+				y / 2.0,
+				z / 2.0
 		);
 	}
 }

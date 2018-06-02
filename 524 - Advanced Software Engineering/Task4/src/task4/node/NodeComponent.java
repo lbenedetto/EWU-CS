@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NodeComponent {
-	NodeTriple volume;
-	NodeTriple socket;
-	String identifier;
-	List<NodeSubcomponentMount> subcomponentMountList;
+	private NodeTriple volume;
+	private NodeTriple socket;
+	private String identifier;
+	private List<NodeSubcomponentMount> subcomponentMountList;
 
 	public NodeComponent(String identifier, NodeTriple volume, NodeTriple socket, List<NodeSubcomponentMount> subcomponentMountList) {
 		this.volume = volume;
@@ -22,7 +22,7 @@ public class NodeComponent {
 	}
 
 	public String exportToGnuplot(NodeTriple origin) {
-		NodeTriple half = volume.divide(2);
+		NodeTriple half = volume.half();
 		NodeTriple shifted = origin.subtract(socket);
 		double uX = shifted.x + half.x;
 		double dX = shifted.x - half.x;
